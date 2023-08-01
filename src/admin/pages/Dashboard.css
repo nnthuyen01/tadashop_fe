@@ -1,0 +1,18 @@
+.site-layout-background {
+    background-color: #fff !important;
+}
+.ant-layout {
+    min-height: 100vh;
+}
+.logoAdmin h2 {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.content-panel {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 16px;
+    min-height: 80vh;
+}

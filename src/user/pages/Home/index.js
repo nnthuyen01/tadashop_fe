@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ProductItem from '~/user/components/ProductItem';
 import ModalProduct from '~/user/components/ModalProduct';
 import Banners from '~/user/components/Banners';
@@ -9,6 +9,17 @@ import Sidebar from '~/user/components/Sidebar';
 import CartAside from '~/user/components/CartAside';
 
 function Home() {
+    const navigate = useNavigate();
+    const currentUser = !!localStorage.getItem('auth_token');
+    const handleLogout = (e) => {
+        e.preventDefault();
+
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_name');
+        navigate('/');
+    };
+
+    ////////////////////////////////////////////////////////////////
     useEffect(() => {
         // Scroll to the top of the page when the component is mounted
         window.scrollTo(0, 0);
@@ -81,9 +92,9 @@ function Home() {
                     <div className="wrap-menu-desktop">
                         <nav className="limiter-menu-desktop p-l-45">
                             {/* <!-- Logo desktop -->		 */}
-                            <a href="#" className="logo">
+                            <Link to="/" className="logo">
                                 <img src="assets\images\icons\logo-02.png" alt="IMG-LOGO" />
-                            </a>
+                            </Link>
 
                             {/* <!-- Menu desktop --> */}
                             <div className="menu-desktop">
@@ -127,16 +138,65 @@ function Home() {
 
                             {/* <!-- Icon header --> */}
                             <div className="wrap-icon-header flex-w flex-r-m h-full">
-                                <div className="flex-c-m h-full p-r-25 bor6">
-                                    <div
-                                        className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart "
-                                        onClick={handleShowHeaderCart}
-                                        data-notify="2"
-                                    >
-                                        <i className="zmdi zmdi-shopping-cart"></i>
-                                    </div>
-                                </div>
-
+                                {currentUser ? (
+                                    <>
+                                        <div className="flex-c-m h-full p-r-25 bor6">
+                                            <div
+                                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart "
+                                                onClick={handleShowHeaderCart}
+                                                data-notify="2"
+                                            >
+                                                <i className="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                        </div>
+                                        <div className="flex-c-m h-full p-l-20 p-r-20 bor6" onClick={handleLogout}>
+                                            <div
+                                                // className="hov-cl1 trans-04"
+                                                // to="/login"
+                                                style={{
+                                                    display: 'flex',
+                                                    cursor: 'pointer',
+                                                    alignItems: 'center',
+                                                    color: 'white',
+                                                }}
+                                            >
+                                                <div className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-cart ">
+                                                    <i className="zmdi zmdi-account-circle"></i>
+                                                </div>
+                                                Đăng Xuất
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* <div className="flex-c-m h-full p-r-25 bor6">
+                                            <div
+                                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart "
+                                                onClick={handleShowHeaderCart}
+                                                data-notify="2"
+                                            >
+                                                <i className="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                        </div> */}
+                                        <div className="flex-c-m h-full p-l-20 p-r-20 bor6">
+                                            <Link
+                                                className="hov-cl1 trans-04"
+                                                to="/login"
+                                                style={{
+                                                    display: 'flex',
+                                                    cursor: 'pointer',
+                                                    alignItems: 'center',
+                                                    color: 'white',
+                                                }}
+                                            >
+                                                <div className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-cart ">
+                                                    <i className="zmdi zmdi-account-circle"></i>
+                                                </div>
+                                                Đăng nhập/ đăng ký
+                                            </Link>
+                                        </div>
+                                    </>
+                                )}
                                 <div className="flex-c-m h-full p-lr-19">
                                     <div
                                         className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-sidebar"

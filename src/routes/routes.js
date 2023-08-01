@@ -11,6 +11,9 @@ import Shop from '~/user/pages/Shop';
 import Blog from '~/user/pages/Blog';
 import Cart from '~/user/pages/Cart';
 import ProductDetail from '~/user/pages/ProductDetail';
+import HomeAdmin from '~/admin/components/HomeAdmin';
+import AddOrEditClub from '~/admin/components/club/AddOrEditClub';
+import ListClubs from '~/admin/components/club/ListClubs';
 
 // Public routes
 const publicRoutes = [
@@ -24,5 +27,10 @@ const publicRoutes = [
 ];
 
 // Private routes
-const privateRoutes = [];
+const privateRoutes = [
+    { path: config.routesAdmin.dashboard, component: HomeAdmin },
+    { path: config.routesAdmin.addClub, component: AddOrEditClub },
+    { path: config.routesAdmin.updateClub, component: AddOrEditClub },
+    { path: config.routesAdmin.listClubs, component: ListClubs },
+];
 export { publicRoutes, privateRoutes };
