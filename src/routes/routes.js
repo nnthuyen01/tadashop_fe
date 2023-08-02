@@ -14,6 +14,7 @@ import ProductDetail from '~/user/pages/ProductDetail';
 import HomeAdmin from '~/admin/components/HomeAdmin';
 import AddOrEditClub from '~/admin/components/club/AddOrEditClub';
 import ListClubs from '~/admin/components/club/ListClubs';
+import ListBrands from '~/admin/components/brand/ListBrands';
 
 // Public routes
 const publicRoutes = [
@@ -32,5 +33,8 @@ const privateRoutes = [
     { path: config.routesAdmin.addClub, component: AddOrEditClub },
     { path: config.routesAdmin.updateClub, component: AddOrEditClub },
     { path: config.routesAdmin.listClubs, component: ListClubs },
+    { path: config.routesAdmin.listBrands, component: ListBrands },
+    { path: config.routesAdmin.listVouchers, component: ListBrands },
+    { path: config.routesAdmin.listPayments, component: ListBrands },
 ];
 export { publicRoutes, privateRoutes };

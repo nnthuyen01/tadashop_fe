@@ -13,8 +13,10 @@ import {
     MdOutlineHome,
     MdOutlineInventory2,
     MdOutlineShoppingBag,
+    MdOutlineViewList,
     MdRequestPage,
     MdSupervisorAccount,
+    MdViewList,
 } from 'react-icons/md';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,8 +26,11 @@ const { Header, Sider, Content } = Layout;
 const Dashboard = () => {
     const navigate = useNavigate();
     const handleLogout = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
+        if (e) {
+            e.preventDefault();
+        }
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
         navigate('/');
@@ -94,26 +99,26 @@ const Dashboard = () => {
                         },
                         {
                             key: '210',
-                            icon: <MdCategory />,
+                            icon: <MdViewList />,
                             label: 'Others',
                             children: [
                                 {
                                     key: '211',
-                                    icon: <MdAddCircleOutline />,
-                                    label: 'List Manufacturers',
-                                    onClick: () => navigate('/dashboard/test'),
+                                    icon: <MdOutlineViewList />,
+                                    label: 'List Brands',
+                                    onClick: () => navigate('/dashboard/brand'),
                                 },
                                 {
                                     key: '221',
-                                    icon: <MdFormatListBulleted />,
-                                    label: 'List Countries',
-                                    onClick: () => navigate('/countries/list'),
+                                    icon: <MdOutlineViewList />,
+                                    label: 'List Vouchers',
+                                    onClick: () => navigate('/dashboard/voucher'),
                                 },
                                 {
                                     key: '223',
-                                    icon: <MdFormatListBulleted />,
-                                    label: 'List Provinces',
-                                    onClick: () => navigate('/provinces/list'),
+                                    icon: <MdOutlineViewList />,
+                                    label: 'List Payments',
+                                    onClick: () => navigate('/dashboard/payment'),
                                 },
                             ],
                         },
@@ -126,19 +131,19 @@ const Dashboard = () => {
                                     key: 'P3-01',
                                     icon: <MdAddCircleOutline />,
                                     label: 'Upload Images',
-                                    onClick: () => navigate('/products/upload'),
+                                    onClick: () => navigate('/dashboard/products/upload'),
                                 },
                                 {
                                     key: 'P3-02',
                                     icon: <MdAddCircleOutline />,
                                     label: 'Add Products',
-                                    onClick: () => navigate('/products/add'),
+                                    onClick: () => navigate('/dashboard/products/add'),
                                 },
                                 {
                                     key: 'P3-03',
                                     icon: <MdFormatListBulleted />,
                                     label: 'List Products',
-                                    onClick: () => navigate('/products/list'),
+                                    onClick: () => navigate('/dashboard/products/list'),
                                 },
                             ],
                         },
@@ -171,6 +176,9 @@ const Dashboard = () => {
                             key: '9',
                             icon: <MdLogout />,
                             label: 'Logout',
+                            onClick: () => {
+                                handleLogout();
+                            },
                         },
                     ]}
                 />
@@ -218,13 +226,6 @@ const Dashboard = () => {
                     }}
                 >
                     <div className="content-panel">
-                        {/* <Routes>
-              <Route path="/dashboard/home" element={<Home1 />}></Route>
-              <Route path="/dashboard/club/add" element={<AddOrEditClub key="a" />}></Route>
-              <Route path="/dashboard/club/update/:id" element={<AddOrEditClub key="u" />}></Route>
-              <Route path="/dashboard/club/list" element={<ListClubs />}></Route>
-            </Routes> */}
-
                         <Outlet />
                     </div>
                 </Content>
