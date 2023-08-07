@@ -14,3 +14,8 @@ export const BRAND_DELETE = 'BRAND_DELETE';
 export const BRAND_UPDATE = 'BRAND_UPDATE';
 export const BRAND_SET_PAGEABLE = 'BRAND_SET_PAGEABLE';
 export const BRAND_STATE_CLEAR = 'BRAND_STATE_CLEAR';
+
+//Products
+export const PRODUCT_SET = 'PRODUCT_SET';
+export const PRODUCTS_SET = 'PRODUCTS_SET';
+export const PRODUCT_APPEND = 'PRODUCT_APPEND';

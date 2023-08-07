@@ -11,5 +11,6 @@ const routesAdmin = {
     uploadImages: '/dashboard/products/upload',
     addProducts: '/dashboard/products/add',
     listProducts: '/dashboard/products/list',
+    productDetailAdmin: '/dashboard/products/view/:id',
 };
 export default routesAdmin;
