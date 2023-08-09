@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ProductList from './ProductList';
-import { Button, Col, Form, Input, Row } from 'antd';
+import { Button, Col, Form, Input, Row, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ContentHeader from '../common/ContentHeader';
 import withRouter from '../../helpers/withRouter';
 import { connect } from 'react-redux';
-import { getProducts } from '../../redux/actions/productAction';
+import { getProducts, deleteProduct } from '../../redux/actions/productAction';
 class ListProducts extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,25 @@ class ListProducts extends Component {
 
     handleNewProduct = () => {
         this.props.router.navigate('/dashboard/products/add');
+    };
+
+    deleteProduct = () => {
+        this.props.deleteProduct(this.state.product.id);
+
+        console.log('Delete Product');
+    };
+
+    onDeleteConfirm = (value) => {
+        this.setState({ ...this.state, product: value });
+        const message = 'Do you want to delete the image of the product ' + value.name + ' ?';
+        Modal.confirm({
+            title: 'Confirm Delete',
+            icon: <ExclamationCircleOutlined />,
+            content: message,
+            onOk: this.deleteProduct,
+            okText: 'Delete',
+            cancelText: 'Cancel',
+        });
     };
 
     render() {
@@ -55,7 +75,7 @@ class ListProducts extends Component {
                     </Col>
                 </Row>
 
-                <ProductList products={products} />
+                <ProductList onDeleteConfirm={this.onDeleteConfirm} products={products} />
 
                 {/* <Row style={{ marginTop: 8 }}>
                 <Col md={24} style={{ textAlign: 'right' }}>
@@ -80,6 +100,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getProducts,
+    deleteProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListProducts));

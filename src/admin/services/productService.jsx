@@ -22,20 +22,21 @@ export default class ProductService {
     };
 
     updateProduct = async (id, product) => {
-        let formData = new FormData();
-        formData.append('name', product.name);
-        if (product.logoFile[0].originFileObj) {
-            formData.append('logoFile', product.logoFile[0].originFileObj);
-        }
+        // let formData = new FormData();
+        // formData.append('name', product.name);
+        // if (product.logoFile[0].originFileObj) {
+        //     formData.append('logoFile', product.logoFile[0].originFileObj);
+        // }
 
-        return await axios.patch(API_URL + 'admin/product/' + id, formData);
+        // return await axios.patch(API_URL + 'admin/product/' + id, formData);
+        return await axios.patch(API_URL + 'admin/product/' + id, product);
     };
     // static để gọi nhanh đến phương thức
     static deleteProductImage = async (fileName) => {
         await axios.delete(API_URL + 'product/images/' + fileName);
     };
-    static getProductImageUrl = (filename) => {
-        return API_URL + 'products/images/' + filename;
+    static getProductImageUrl = (fileName) => {
+        return API_URL + 'products/images/' + fileName;
     };
     static getProductImageUploadUrl = (filename) => {
         return API_URL + 'products/images/one';

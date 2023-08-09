@@ -44,7 +44,8 @@ const privateRoutes = [
     { path: config.routesAdmin.listPayments, component: ListBrands },
 
     { path: config.routesAdmin.uploadImages, component: UploadImage },
-    { path: config.routesAdmin.addProducts, component: AddOrEditProduct },
+    { path: config.routesAdmin.addProduct, component: AddOrEditProduct },
+    { path: config.routesAdmin.updateProduct, component: AddOrEditProduct },
 
     { path: config.routesAdmin.listProducts, component: ListProducts },
     { path: config.routesAdmin.productDetailAdmin, component: ProductDetailAdmin },

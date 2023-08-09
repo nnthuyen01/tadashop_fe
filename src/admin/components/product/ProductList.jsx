@@ -7,7 +7,7 @@ import withRouter from '../../helpers/withRouter';
 
 class ProductList extends Component {
     render() {
-        const { products } = this.props;
+        const { products, onDeleteConfirm } = this.props;
         const { navigate } = this.props.router;
         return (
             <Table dataSource={products} size="small" rowKey="id" pagination={false}>
@@ -68,13 +68,19 @@ class ProductList extends Component {
                                     key={record.key}
                                     type="link"
                                     size="small"
-                                    onClick={() => navigate('products/edit/' + record.id)}
+                                    onClick={() => navigate('/dashboard/products/update/' + record.id)}
                                 >
                                     <MdEdit color="blue" size={24} />
                                 </Button>
                             </Tooltip>
                             <Tooltip placement="top" title="Delete Product" color="red">
-                                <Button key={record.key} type="link" danger size="small" onClick={() => navigate('/')}>
+                                <Button
+                                    key={record.key}
+                                    type="link"
+                                    danger
+                                    size="small"
+                                    onClick={() => onDeleteConfirm(record)}
+                                >
                                     <MdDelete color="red" size={24} />
                                 </Button>
                             </Tooltip>

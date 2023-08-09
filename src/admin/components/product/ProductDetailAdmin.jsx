@@ -1,8 +1,5 @@
 import { Button, Checkbox, Col, Divider, Form, Image, Input, Row, Skeleton, Space } from 'antd';
 import React, { Component } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import BrandService from '../../services/brandService';
 import ProductService from '../../services/productService';
@@ -165,7 +162,7 @@ class ProductDetailAdmin extends Component {
                                               /* <Image src={BrandService.getBrandLogoUrl(product.brand)} height={90}></Image> */
                                               <Image
                                                   key={index}
-                                                  src={ProductService.getProductImageUrl(product.image.fileName)}
+                                                  src={ProductService.getProductImageUrl(image.fileName)}
                                                   height={90}
                                               ></Image>
                                           ))

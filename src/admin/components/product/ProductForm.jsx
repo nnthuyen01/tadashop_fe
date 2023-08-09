@@ -2,7 +2,6 @@ import {
     Button,
     Checkbox,
     Col,
-    DatePicker,
     Divider,
     Form,
     Image,
@@ -47,6 +46,7 @@ class ProductForm extends Component {
                 descriptionCkData: nextProps.product.description,
             };
         }
+
         return null;
     }
 
@@ -58,7 +58,7 @@ class ProductForm extends Component {
                 const newValues = {
                     ...values,
                     description: this.state.descriptionCkData,
-                    // brandDate: values.brandDate.format('YYYY-MM-DD'),
+
                     image: values.image[0].fileName ? values.image[0] : values.image[0].response,
                 };
 
@@ -72,9 +72,13 @@ class ProductForm extends Component {
     };
     handleImageRemoved = (info) => {
         console.log('removed image');
-        if (info.fileName) {
+        const { id } = this.props.product;
+        if (id) {
+            console.log(info);
+        }
+        if (info.fileName && !id) {
             ProductService.deleteProductImage(info.fileName);
-        } else if (info.response && info.response.fileName) {
+        } else if (info.response && info.response.fileName & !id) {
             ProductService.deleteProductImage(info.response.fileName);
         }
     };
@@ -94,7 +98,7 @@ class ProductForm extends Component {
 
         return (
             <>
-                <Form layout="vertical" className="form" size="middle" ref={this.form}>
+                <Form layout="vertical" className="form" size="middle" ref={this.form} key={product.id}>
                     <Row>
                         <Col md={12}>
                             <Form.Item label="Product ID" name="id" initialValue={product.id}>
@@ -103,20 +107,6 @@ class ProductForm extends Component {
                             <Form.Item label="Name" name="name" initialValue={product.name} required hasFeedback>
                                 <Input></Input>
                             </Form.Item>
-                            {/* <Form.Item
-                                label="Quantity"
-                                name="quantity"
-                                initialValue={product.quantity}
-                                rules={[{ required: true }]}
-                                hasFeedback
-                            >
-                                <InputNumber
-                                    min={0}
-                                    formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    parser={(value) => value.replace(/$\s?|(,*)/g, '')}
-                                    style={{ width: '100%' }}
-                                ></InputNumber>
-                            </Form.Item> */}
                             <Form.Item
                                 label="Price"
                                 name="price"
@@ -184,14 +174,14 @@ class ProductForm extends Component {
                             <Form.Item
                                 label="Club"
                                 name="clubId"
-                                initialValue={product.clubId}
+                                initialValue={product.club.id}
                                 rules={[{ required: true }]}
                                 hasFeedback
                             >
                                 <Select placeholder="Select Club" suffixIcon={<MdOutlineCategory />}>
                                     {clubs &&
                                         clubs.map((item) => (
-                                            <Select.Option value={item.id} key={'cate' + item.id}>
+                                            <Select.Option value={item.id} key={'club' + item.id}>
                                                 {item.name}
                                             </Select.Option>
                                         ))}
@@ -200,14 +190,14 @@ class ProductForm extends Component {
                             <Form.Item
                                 label="Brand"
                                 name="brandId"
-                                initialValue={product.brandId}
+                                initialValue={product.brand.id}
                                 rules={[{ required: true }]}
                                 hasFeedback
                             >
                                 <Select placeholder="Select brand" suffixIcon={<MdOutlinePrecisionManufacturing />}>
                                     {brands &&
                                         brands.map((item) => (
-                                            <Select.Option value={item.id} key={'manu' + item.id}>
+                                            <Select.Option value={item.id} key={'brand' + item.id}>
                                                 <Space>
                                                     <Image
                                                         src={BrandService.getBrandLogoUrl(item.logo)}
@@ -220,15 +210,6 @@ class ProductForm extends Component {
                                         ))}
                                 </Select>
                             </Form.Item>
-                            {/* <Form.Item
-                  label="Brand Date"
-                  name="brandDate"
-                  initialValue={product.brandDate}
-                  rules={[{ required: true }]}
-                  hasFeedback
-                >
-                  <DatePicker></DatePicker>
-                </Form.Item> */}
                             <Form.Item
                                 label="Main Image"
                                 name="image"

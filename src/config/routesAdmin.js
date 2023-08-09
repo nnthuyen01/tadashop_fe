@@ -9,7 +9,8 @@ const routesAdmin = {
     listPayments: '/dashboard/payment',
 
     uploadImages: '/dashboard/products/upload',
-    addProducts: '/dashboard/products/add',
+    addProduct: '/dashboard/products/add',
+    updateProduct: '/dashboard/products/update/:id',
     listProducts: '/dashboard/products/list',
     productDetailAdmin: '/dashboard/products/view/:id',
 };

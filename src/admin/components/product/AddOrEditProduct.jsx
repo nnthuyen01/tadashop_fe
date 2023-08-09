@@ -5,12 +5,12 @@ import { Row, Col, Steps, Divider, Space, Button, message, notification } from '
 import { SaveOutlined } from '@ant-design/icons';
 import ProductForm from './ProductForm';
 import UploadImage from './UploadImage';
-// import ClubService from './../../services/clubService';
+
 import ClubService from '~/admin/services/clubServices';
 import BrandService from './../../services/brandService';
 import { connect } from 'react-redux';
 import ProductService from '../../services/productService';
-import { insertProduct } from '../../redux/actions/productAction';
+import { insertProduct, updateProduct, getProductById } from '../../redux/actions/productAction';
 // const { Step } = Steps;
 class AddOrEditProduct extends Component {
     constructor(props) {
@@ -102,12 +102,56 @@ class AddOrEditProduct extends Component {
 
         const { navigate } = this.props.router;
         this.setState({ ...this.state, product: {}, productImages: [] });
-        this.props.insertProduct(newProduct, navigate);
-    };
+        // this.props.insertProduct(newProduct, navigate);
+        const { id } = this.state.product;
 
-    componentDidMount = () => {
-        this.loadData();
+        if (!id) {
+            this.props.insertProduct(newProduct, navigate);
+        } else {
+            this.props.updateProduct(id, newProduct, navigate);
+        }
     };
+    async componentDidMount() {
+        const { id } = this.props.router.params;
+
+        if (id) {
+            await this.props.getProductById(id);
+            const { product } = this.props;
+            // console.log(product);
+            const newProduct = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                discount: product.discount,
+                isFeatured: product.isFeatured,
+                status: product.status,
+                club: product.club,
+                brand: product.brand,
+                image: product.image,
+                brief: product.brief,
+                description: product.description,
+            };
+            this.setState({ ...this.state, product: newProduct });
+        } else {
+            // const { product } = this.props;
+            const newProduct = {
+                id: '',
+                name: '',
+                price: 0,
+                discount: 0,
+                isFeatured: false,
+                status: 'InStock',
+                club: '',
+                brand: '',
+                image: '',
+                brief: '',
+                description: '',
+            };
+            this.setState({ ...this.state, product: newProduct });
+        }
+
+        this.loadData();
+    }
 
     loadData = async () => {
         try {
@@ -131,7 +175,12 @@ class AddOrEditProduct extends Component {
     render() {
         const { navigate } = this.props.router;
         const { step, clubs, brands, productImages } = this.state;
-        const { product } = this.props;
+        // const { product } = this.props;
+        const { product } = this.state;
+        if (product.name === undefined) {
+            // If product name is not available, render a loading state or return null
+            return <div>Loading...</div>;
+        }
         const title = 'Add Products';
 
         return (
@@ -152,10 +201,7 @@ class AddOrEditProduct extends Component {
                                     description: 'Choose the list of Images',
                                 },
                             ]}
-                        >
-                            {/* <Step title="Basic Information" description="Fill basic Information"></Step>
-              <Step title="Images" description="Choose the list of Images"></Step> */}
-                        </Steps>
+                        ></Steps>
                     </Col>
                 </Row>
 
@@ -164,7 +210,8 @@ class AddOrEditProduct extends Component {
                         {step === 0 && (
                             <>
                                 <Divider></Divider>
-                                <ProductForm product={{}} goNext={this.goNext} clubs={clubs} brands={brands} />
+                                {/* <ProductForm product={{}} goNext={this.goNext} clubs={clubs} brands={brands} /> */}
+                                <ProductForm product={product} goNext={this.goNext} clubs={clubs} brands={brands} />
                             </>
                         )}
                         {step === 1 && (
@@ -174,7 +221,7 @@ class AddOrEditProduct extends Component {
                                     <Col md={24}>
                                         <UploadImage
                                             onUpdateFileList={this.onUpdateFileList}
-                                            fileList={productImages}
+                                            fileList={product && product.id ? productImages : []}
                                         />
                                         <Divider></Divider>
                                         <dir>
@@ -203,5 +250,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     insertProduct,
+    getProductById,
+
+    updateProduct,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddOrEditProduct));
