@@ -65,7 +65,7 @@ const Dashboard = () => {
                 style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, right: 0, bottom: 0 }}
             >
                 <div className="logoAdmin">
-                    <h2>{collapsed ? 'SS' : 'SpringShop'}</h2>
+                    <h2>{collapsed ? 'SS' : 'Tada Shop'}</h2>
                 </div>
                 <Menu
                     theme="dark"

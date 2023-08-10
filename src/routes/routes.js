@@ -19,6 +19,8 @@ import UploadImage from '~/admin/components/product/UploadImage';
 import AddOrEditProduct from '~/admin/components/product/AddOrEditProduct';
 import ListProducts from '~/admin/components/product/ListProducts';
 import ProductDetailAdmin from '~/admin/components/product/ProductDetailAdmin';
+import ListVouchers from '~/admin/components/voucher/ListVouchers';
+import ListPayments from '~/admin/components/payment/ListPayments';
 
 // Public routes
 const publicRoutes = [
@@ -40,8 +42,8 @@ const privateRoutes = [
 
     { path: config.routesAdmin.listBrands, component: ListBrands },
 
-    { path: config.routesAdmin.listVouchers, component: ListBrands },
-    { path: config.routesAdmin.listPayments, component: ListBrands },
+    { path: config.routesAdmin.listVouchers, component: ListVouchers },
+    { path: config.routesAdmin.listPayments, component: ListPayments },
 
     { path: config.routesAdmin.uploadImages, component: UploadImage },
     { path: config.routesAdmin.addProduct, component: AddOrEditProduct },
