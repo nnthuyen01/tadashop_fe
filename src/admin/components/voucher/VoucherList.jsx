@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, Space, Table, Tag } from 'antd';
+import { Button, Space, Table, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import Column from 'antd/lib/table/Column';
 

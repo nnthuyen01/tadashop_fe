@@ -9,6 +9,8 @@ import PrivateRoute from './admin/auth/PrivateRoute';
 import store from './admin/redux/store';
 
 import axios from 'axios';
+import VerifyEmailUser from './user/pages/Auth/Login/VerifyEmailUser';
+
 axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('auth_token');
@@ -48,6 +50,9 @@ function App() {
                             );
                         })}
                         <Route path="/login" element={<Login />} />
+                        <Route path="/VerifyRegister" element={<VerifyEmailUser />} />
+                        <Route path="/forgotPassword" element={<VerifyEmailUser />} />
+
                         {/* PrivateRoute */}
                         <Route
                             path="/dashboard"
