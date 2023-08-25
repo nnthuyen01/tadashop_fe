@@ -21,6 +21,7 @@ import ListProducts from '~/admin/components/product/ListProducts';
 import ProductDetailAdmin from '~/admin/components/product/ProductDetailAdmin';
 import ListVouchers from '~/admin/components/voucher/ListVouchers';
 import ListPayments from '~/admin/components/payment/ListPayments';
+import ListSizes from '~/admin/components/size/ListSizes';
 
 // Public routes
 const publicRoutes = [
@@ -51,5 +52,7 @@ const privateRoutes = [
 
     { path: config.routesAdmin.listProducts, component: ListProducts },
     { path: config.routesAdmin.productDetailAdmin, component: ProductDetailAdmin },
+
+    { path: config.routesAdmin.sizeProduct, component: ListSizes },
 ];
 export { publicRoutes, privateRoutes };

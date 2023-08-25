@@ -17,6 +17,7 @@ import {
     MdRequestPage,
     MdSupervisorAccount,
     MdViewList,
+    MdOutlineFormatSize,
 } from 'react-icons/md';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -144,6 +145,12 @@ const Dashboard = () => {
                                     icon: <MdFormatListBulleted />,
                                     label: 'List Products',
                                     onClick: () => navigate('/dashboard/products/list'),
+                                },
+                                {
+                                    key: 'P3-04',
+                                    icon: <MdOutlineFormatSize />,
+                                    label: 'Size Products',
+                                    onClick: () => navigate('/dashboard/products/size'),
                                 },
                             ],
                         },

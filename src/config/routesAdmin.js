@@ -13,5 +13,7 @@ const routesAdmin = {
     updateProduct: '/dashboard/products/update/:id',
     listProducts: '/dashboard/products/list',
     productDetailAdmin: '/dashboard/products/view/:id',
+
+    sizeProduct: '/dashboard/products/size',
 };
 export default routesAdmin;

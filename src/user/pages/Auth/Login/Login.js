@@ -54,6 +54,14 @@ const Login = () => {
         confirmPassword: '',
     });
 
+    const [isWarning1, setIsWarning1] = useState(false);
+    const [isWarning2, setIsWarning2] = useState(false);
+    const [isWarning3, setIsWarning3] = useState(false);
+    const [isWarning4, setIsWarning4] = useState(false);
+    const [isWarning5, setIsWarning5] = useState(false);
+    const [isWarning6, setIsWarning6] = useState(false);
+    const [isWarning7, setIsWarning7] = useState(false);
+
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const [isTooltipVisible2, setIsTooltipVisible2] = useState(false);
@@ -89,9 +97,10 @@ const Login = () => {
             ...prevData,
             [name]: value,
         }));
-        if (handleIsPasswordValid(value)) {
-            setIsTooltipVisible(true);
-        }
+        // if (handleIsPasswordValid(value)) {
+        //     setIsTooltipVisible(true);
+        // }
+        handleIsPasswordValid(value);
         if (formData.password !== value) {
             setIsCheckPasswordCf(false);
         }
@@ -151,12 +160,33 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
 
+        if (formData.firstName === '') {
+            setIsWarning1(true);
+        }
+        if (formData.lastName === '') {
+            setIsWarning2(true);
+        }
+        if (formData.email === '') {
+            setIsWarning3(true);
+        }
+        if (formData.phone === '') {
+            setIsWarning4(true);
+        }
+        if (formData.username === '') {
+            setIsWarning5(true);
+        }
+        if (formData.password === '') {
+            setIsWarning6(true);
+        }
         if (formData.confirmPassword === '' || formData.confirmPassword !== formData.password) {
-            swal('Confirm password không được trống và phải giống với password ở trên !', {
-                title: 'Warning',
-                icon: 'warning',
-            });
-            return;
+            // swal('Confirm password không được trống và phải giống với password ở trên !', {
+            //     title: 'Warning',
+            //     icon: 'warning',
+            // });
+            setIsWarning7(true);
+
+            // setLoading(false);
+            // return;
         }
 
         const data = {
@@ -189,6 +219,7 @@ const Login = () => {
                         title: 'Warning',
                         icon: 'warning',
                     });
+                    setIsWarning1(true);
                     return;
                 }
                 if (errorData.lastname) {
@@ -308,11 +339,14 @@ const Login = () => {
                                         placeholder="First name"
                                         id="firstName"
                                         value={formData.firstName}
-                                        onChange={handleInputChange}
+                                        onChange={(event) => {
+                                            handleInputChange(event);
+                                            setIsWarning1(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                        }}
                                     />
                                 </div>
                             </div>
-                            {formData.firstName === '' ? (
+                            {isWarning1 ? (
                                 <div className="fieldType">First name là bắt buộc</div>
                             ) : (
                                 <div className="spaceField"></div>
@@ -326,10 +360,13 @@ const Login = () => {
                                         placeholder="Last Name"
                                         id="lastName"
                                         value={formData.lastName}
-                                        onChange={handleInputChange}
+                                        onChange={(event) => {
+                                            handleInputChange(event);
+                                            setIsWarning2(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                        }}
                                     />
                                 </div>
-                                {formData.lastName === '' ? (
+                                {isWarning2 ? (
                                     <div className="fieldType">Last name là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
@@ -344,10 +381,13 @@ const Login = () => {
                                         placeholder="Email"
                                         id="email"
                                         value={formData.email}
-                                        onChange={handleInputChange}
+                                        onChange={(event) => {
+                                            handleInputChange(event);
+                                            setIsWarning3(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                        }}
                                     />
                                 </div>
-                                {formData.email === '' ? (
+                                {isWarning3 ? (
                                     <div className="fieldType">Email là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
@@ -361,10 +401,14 @@ const Login = () => {
                                         name="phone"
                                         placeholder="Phone"
                                         id="phone"
-                                        onChange={handleInputNumber}
+                                        // onChange={handleInputNumber}
+                                        onChange={(event) => {
+                                            handleInputNumber(event);
+                                            setIsWarning4(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                        }}
                                     />
                                 </div>
-                                {formData.phone === '' ? (
+                                {isWarning4 ? (
                                     <div className="fieldType">Phone là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
@@ -379,10 +423,13 @@ const Login = () => {
                                         placeholder="username"
                                         id="username"
                                         value={formData.username}
-                                        onChange={handleInputChange}
+                                        onChange={(event) => {
+                                            handleInputChange(event);
+                                            setIsWarning5(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                        }}
                                     />
                                 </div>
-                                {formData.username === '' ? (
+                                {isWarning5 ? (
                                     <div className="fieldType">Username là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
@@ -408,7 +455,11 @@ const Login = () => {
                                             placeholder="Password"
                                             id="password"
                                             value={formData.password}
-                                            onChange={handlePasswordChange}
+                                            // onChange={handlePasswordChange}
+                                            onChange={(event) => {
+                                                handlePasswordChange(event);
+                                                setIsWarning6(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                            }}
                                             onBlur={handleInputBlur}
                                             onFocus={() => {
                                                 setIsTooltipVisible(true);
@@ -419,7 +470,7 @@ const Login = () => {
                                     {/* {isPasswordValid && <FontAwesomeIcon className="check" icon={faCheckCircle} />} */}
                                     {isCheckPassword && <FontAwesomeIcon className="check" icon={faCheckCircle} />}
                                 </div>
-                                {formData.password === '' ? (
+                                {isWarning6 ? (
                                     <div className="fieldType">Password là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
@@ -444,7 +495,11 @@ const Login = () => {
                                             placeholder="Confirm Password"
                                             id="confirmPassword"
                                             value={formData.confirmPassword}
-                                            onChange={handleConfirmPasswordChange}
+                                            // onChange={handleConfirmPasswordChange}
+                                            onChange={(event) => {
+                                                handleConfirmPasswordChange(event);
+                                                setIsWarning7(false); // Đặt giá trị isWarning1 thành false khi người dùng thay đổi input
+                                            }}
                                             onBlur={handleInputBlur}
                                             onFocus={() => {
                                                 setIsTooltipVisible2(true);
@@ -453,7 +508,7 @@ const Login = () => {
                                     </Tooltip>
                                     {isCheckPasswordCf && <FontAwesomeIcon className="check" icon={faCheckCircle} />}
                                 </div>
-                                {formData.confirmPassword === '' ? (
+                                {isWarning7 ? (
                                     <div className="fieldType">Confirm Password là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>

@@ -66,9 +66,41 @@ class ProductDetailAdmin extends Component {
                             <Form.Item label="Price" name="price" initialValue={product.price}>
                                 <Input readOnly></Input>
                             </Form.Item>
-                            <Form.Item label="Discount" name="discount" initialValue={product.discount}>
-                                <Input readOnly></Input>
-                            </Form.Item>{' '}
+                            <Row>
+                                <Col md={12}>
+                                    <Form.Item label="Sizes" name="sizes" initialValue={product.sizes?.size}>
+                                        <Space direction="horizontal">
+                                            {product.sizes && Array.isArray(product.sizes)
+                                                ? product.sizes.map((size, index) => (
+                                                      <div
+                                                          key={index}
+                                                          style={{
+                                                              display: 'flex',
+                                                              alignItems: 'center',
+                                                              margin: '0px 10px',
+                                                              border: '2px solid rgb(217, 217, 217)',
+                                                              borderRadius: '5px',
+                                                          }}
+                                                      >
+                                                          {/* <Input readOnly value={size.size}></Input>
+                                                          <Input readOnly value={size.quantity}></Input> */}
+                                                          <div
+                                                              style={{
+                                                                  padding: ' 0px 10px',
+                                                                  borderRight: '2px solid  rgb(217, 217, 217)',
+                                                                  fontWeight: '650',
+                                                              }}
+                                                          >
+                                                              {size.size}
+                                                          </div>
+                                                          <div style={{ padding: ' 0px 10px' }}>{size.quantity}</div>
+                                                      </div>
+                                                  ))
+                                                : null}
+                                        </Space>
+                                    </Form.Item>
+                                </Col>
+                            </Row>{' '}
                         </Col>
                         <Col md={1}>
                             <Divider type="vertical" style={{ height: '100%' }}></Divider>
@@ -77,6 +109,9 @@ class ProductDetailAdmin extends Component {
                             <Row>
                                 <Col md={12}>
                                     {' '}
+                                    <Form.Item label="Discount" name="discount" initialValue={product.discount}>
+                                        <Input readOnly></Input>
+                                    </Form.Item>
                                     <Form.Item
                                         label="Featured"
                                         name="isFeatured"
@@ -115,19 +150,6 @@ class ProductDetailAdmin extends Component {
                                                 <Input value={product.brand?.name} readOnly></Input>
                                             </Col>
                                         </Row>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <Form.Item label="Sizes" name="sizes" initialValue={product.sizes?.size}>
-                                        <Space direction="horizontal">
-                                            {product.sizes && Array.isArray(product.sizes)
-                                                ? product.sizes.map((size, index) => (
-                                                      <Input key={index} readOnly value={size.size}></Input>
-                                                  ))
-                                                : null}
-                                        </Space>
                                     </Form.Item>
                                 </Col>
                             </Row>

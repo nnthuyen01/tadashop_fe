@@ -10,6 +10,8 @@ import store from './admin/redux/store';
 
 import axios from 'axios';
 import VerifyEmailUser from './user/pages/Auth/Login/VerifyEmailUser';
+import ForgotPassword from './user/pages/Auth/ForgotPassword';
+import VerifyForgotPassword from './user/pages/Auth/VerifyForgotPassword';
 
 axios.interceptors.request.use(
     (config) => {
@@ -51,7 +53,8 @@ function App() {
                         })}
                         <Route path="/login" element={<Login />} />
                         <Route path="/VerifyRegister" element={<VerifyEmailUser />} />
-                        <Route path="/forgotPassword" element={<VerifyEmailUser />} />
+                        <Route path="/forgotPassword" element={<ForgotPassword />} />
+                        <Route path="/verifyForgotPassword" element={<VerifyForgotPassword />} />
 
                         {/* PrivateRoute */}
                         <Route
