@@ -22,6 +22,9 @@ import ProductDetailAdmin from '~/admin/components/product/ProductDetailAdmin';
 import ListVouchers from '~/admin/components/voucher/ListVouchers';
 import ListPayments from '~/admin/components/payment/ListPayments';
 import ListSizes from '~/admin/components/size/ListSizes';
+import BlogDetail from '~/user/pages/BlogDetail';
+import Contact from '~/user/pages/Contact';
+import ChangePassword from '~/user/pages/Profile/changePassword';
 
 // Public routes
 const publicRoutes = [
@@ -29,9 +32,12 @@ const publicRoutes = [
     { path: config.routes.shop, component: Shop },
     { path: config.routes.about, component: About },
     { path: config.routes.blog, component: Blog },
+    { path: config.routes.blogDetail, component: BlogDetail },
     { path: config.routes.cart, component: Cart },
     { path: config.routes.profile, component: Profile },
+    { path: config.routes.changePassword, component: ChangePassword },
     { path: config.routes.productDetail, component: ProductDetail },
+    { path: config.routes.contact, component: Contact },
 ];
 
 // Private routes

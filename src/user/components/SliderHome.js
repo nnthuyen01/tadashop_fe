@@ -31,21 +31,21 @@ function SliderHome() {
 
     const slidesData = [
         {
-            imgSilder: 'assets/images/slide-05.jpg',
-            thumb: 'assets/images/thumb-01.jpg',
+            imgSilder: 'assets/images/bg1.jpg',
+            thumb: 'assets/images/bg1.jpg',
             caption: 'Women’s Wear',
             titleTiny: 'Women Collection 2018',
             titleBig: 'New arrivals',
         },
         {
-            imgSilder: 'assets/images/slide-06.jpg',
+            imgSilder: 'assets/images/bg2.jpg',
             thumb: 'assets/images/thumb-02.jpg',
             caption: 'Men’s Wear',
             titleTiny: 'Men New-Season',
             titleBig: 'Jackets & Coats',
         },
         {
-            imgSilder: 'assets/images/slide-07.jpg',
+            imgSilder: 'assets/images/bg3.jpg',
             thumb: 'assets/images/thumb-03.jpg',
             caption: 'Men’s Wear',
             titleTiny: 'Men Collection 2018',
@@ -60,7 +60,7 @@ function SliderHome() {
         customPaging: function (i) {
             return (
                 <div className="caption-dots">
-                    <img src={`assets/images/thumb-0${i + 1}.jpg`} alt={`$i`} />
+                    <img src={`assets/images/thumb${i + 1}.jpg`} alt={`$i`} />
                     <span className="caption-dots-slick1">{slidesData[i].caption}</span>
                 </div>
             );

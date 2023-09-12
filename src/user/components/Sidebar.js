@@ -55,16 +55,16 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                         </ul>
 
                         <div className="sidebar-gallery w-full p-tb-30">
-                            <span className="mtext-101 cl5">@ CozaStore</span>
+                            <span className="mtext-101 cl5">@ TadaStore</span>
 
                             <div className="flex-w flex-sb p-t-36 gallery-lb">
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-01.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-01.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -72,9 +72,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-02.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-02.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -82,9 +82,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-03.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-03.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -92,9 +92,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-04.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-04.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -102,9 +102,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-05.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-05.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -112,9 +112,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-06.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-06.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -122,9 +122,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-07.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-07.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -132,9 +132,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-08.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-08.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
 
@@ -142,9 +142,9 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                 <div className="wrap-item-gallery m-b-10">
                                     <a
                                         className="item-gallery bg-img1"
-                                        href="images/gallery-09.jpg"
+                                        href="images/AoMu3.jpg"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/gallery-09.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
                                     ></a>
                                 </div>
                             </div>

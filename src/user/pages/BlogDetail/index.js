@@ -1,182 +1,158 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import HeaderPages from '~/user/components/HeaderPages';
 
-function Blog() {
+function BlogDetail() {
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
-            {/* <!-- Title page --> */}
-            <section
-                className="bg-img1 txt-center p-lr-15 p-tb-92"
-                style={{ backgroundImage: "url('assets/images/bg-02.jpg')" }}
-            >
-                <h2 className="ltext-105 cl0 txt-center">Blog</h2>
-            </section>
+
+            {/* <!-- breadcrumb --> */}
+            <div className="container">
+                <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+                    <a href="index.html" className="stext-109 cl8 hov-cl1 trans-04">
+                        Home
+                        <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="blog.html" className="stext-109 cl8 hov-cl1 trans-04">
+                        Blog
+                        <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </a>
+
+                    <span className="stext-109 cl4">8 Inspiring Ways to Wear Dresses in the Winter</span>
+                </div>
+            </div>
 
             {/* <!-- Content page --> */}
-            <section className="bg0 p-t-62 p-b-60">
+            <section className="bg0 p-t-52 p-b-20">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-9 p-b-80">
                             <div className="p-r-45 p-r-0-lg">
-                                {/* <!-- item blog --> */}
-                                <div className="p-b-63">
-                                    <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-04.jpg" alt="IMG-BLOG" />
+                                {/* <!--  --> */}
+                                <div className="wrap-pic-w how-pos5-parent">
+                                    <img src="assets/images/blog-04.jpg" alt="IMG-BLOG" />
 
-                                        <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">22</span>
+                                    <div className="flex-col-c-m size-123 bg9 how-pos5">
+                                        <span className="ltext-107 cl2 txt-center">22</span>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
-                                        </div>
-                                    </Link>
-
-                                    <div className="p-t-32">
-                                        <h4 className="p-b-15">
-                                            <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                8 Inspiring Ways to Wear Dresses in the Winter
-                                            </Link>
-                                        </h4>
-
-                                        <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
-                                        </p>
-
-                                        <div className="flex-w flex-sb-m p-t-18">
-                                            <span className="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-                                                <span>
-                                                    <span className="cl4">By</span> Admin
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
-
-                                                <span>
-                                                    StreetStyle, Fashion, Couple
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
-
-                                                <span>8 Comments</span>
-                                            </span>
-
-                                            <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
-                                                <i className="fa fa-long-arrow-right m-l-9"></i>
-                                            </Link>
-                                        </div>
+                                        <span className="stext-109 cl3 txt-center">Jan 2018</span>
                                     </div>
                                 </div>
 
-                                {/* <!-- item blog --> */}
-                                <div className="p-b-63">
-                                    <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-05.jpg" alt="IMG-BLOG" />
+                                <div className="p-t-32">
+                                    <span className="flex-w flex-m stext-111 cl2 p-b-19">
+                                        <span>
+                                            <span className="cl4">By</span> Admin
+                                            <span className="cl12 m-l-4 m-r-6">|</span>
+                                        </span>
 
-                                        <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">18</span>
+                                        <span>
+                                            22 Jan, 2018
+                                            <span className="cl12 m-l-4 m-r-6">|</span>
+                                        </span>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
-                                        </div>
-                                    </Link>
+                                        <span>
+                                            StreetStyle, Fashion, Couple
+                                            <span className="cl12 m-l-4 m-r-6">|</span>
+                                        </span>
 
-                                    <div className="p-t-32">
-                                        <h4 className="p-b-15">
-                                            <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                The Great Big List of Men’s Gifts for the Holidays
-                                            </Link>
-                                        </h4>
+                                        <span>8 Comments</span>
+                                    </span>
 
-                                        <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
-                                        </p>
+                                    <h4 className="ltext-109 cl2 p-b-28">
+                                        8 Inspiring Ways to Wear Dresses in the Winter
+                                    </h4>
 
-                                        <div className="flex-w flex-sb-m p-t-18">
-                                            <span className="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-                                                <span>
-                                                    <span className="cl4">By</span> Admin
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
+                                    <p className="stext-117 cl6 p-b-26">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel
+                                        orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus
+                                        condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam,
+                                        vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec
+                                        a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet
+                                        imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla
+                                        in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet.
+                                        Donec ac purus id sapien condimentum feugiat.
+                                    </p>
 
-                                                <span>
-                                                    StreetStyle, Fashion, Couple
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
+                                    <p className="stext-117 cl6 p-b-26">
+                                        Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex,
+                                        tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec
+                                        velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue
+                                        auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat
+                                        orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum.
+                                        Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+                                    </p>
+                                </div>
 
-                                                <span>8 Comments</span>
-                                            </span>
+                                <div className="flex-w flex-t p-t-16">
+                                    <span className="size-216 stext-116 cl8 p-t-4">Tags</span>
 
-                                            <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
-                                                <i className="fa fa-long-arrow-right m-l-9"></i>
-                                            </Link>
-                                        </div>
+                                    <div className="flex-w size-217">
+                                        <a
+                                            href="#"
+                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
+                                        >
+                                            Streetstyle
+                                        </a>
+
+                                        <a
+                                            href="#"
+                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
+                                        >
+                                            Crafts
+                                        </a>
                                     </div>
                                 </div>
 
-                                {/* <!-- item blog --> */}
-                                <div className="p-b-63">
-                                    <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-06.jpg" alt="IMG-BLOG" />
+                                {/* <!--  --> */}
+                                <div className="p-t-40">
+                                    <h5 className="mtext-113 cl2 p-b-12">Leave a Comment</h5>
 
-                                        <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">16</span>
+                                    <p className="stext-107 cl6 p-b-40">
+                                        Your email address will not be published. Required fields are marked *
+                                    </p>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
+                                    <form>
+                                        <div className="bor19 m-b-20">
+                                            <textarea
+                                                className="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15"
+                                                name="cmt"
+                                                placeholder="Comment..."
+                                            ></textarea>
                                         </div>
-                                    </Link>
 
-                                    <div className="p-t-32">
-                                        <h4 className="p-b-15">
-                                            <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                5 Winter-to-Spring Fashion Trends to Try Now
-                                            </Link>
-                                        </h4>
-
-                                        <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
-                                        </p>
-
-                                        <div className="flex-w flex-sb-m p-t-18">
-                                            <span className="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-                                                <span>
-                                                    <span className="cl4">By</span> Admin
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
-
-                                                <span>
-                                                    StreetStyle, Fashion, Couple
-                                                    <span className="cl12 m-l-4 m-r-6">|</span>
-                                                </span>
-
-                                                <span>8 Comments</span>
-                                            </span>
-
-                                            <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
-                                                <i className="fa fa-long-arrow-right m-l-9"></i>
-                                            </Link>
+                                        <div className="bor19 size-218 m-b-20">
+                                            <input
+                                                className="stext-111 cl2 plh3 size-116 p-lr-18"
+                                                type="text"
+                                                name="name"
+                                                placeholder="Name *"
+                                            />
                                         </div>
-                                    </div>
+
+                                        <div className="bor19 size-218 m-b-20">
+                                            <input
+                                                className="stext-111 cl2 plh3 size-116 p-lr-18"
+                                                type="text"
+                                                name="email"
+                                                placeholder="Email *"
+                                            />
+                                        </div>
+
+                                        <div className="bor19 size-218 m-b-30">
+                                            <input
+                                                className="stext-111 cl2 plh3 size-116 p-lr-18"
+                                                type="text"
+                                                name="web"
+                                                placeholder="Website"
+                                            />
+                                        </div>
+
+                                        <button className="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+                                            Post Comment
+                                        </button>
+                                    </form>
                                 </div>
-
-                                {/* <!-- Pagination --> */}
-                                {/* <div className="flex-l-m flex-w w-full p-t-10 m-lr--7">
-                                    <a
-                                        href="#"
-                                        className="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"
-                                    >
-                                        1
-                                    </a>
-
-                                    <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7">
-                                        2
-                                    </a>
-                                </div> */}
                             </div>
                         </div>
 
@@ -252,7 +228,7 @@ function Blog() {
                                     <ul>
                                         <li className="flex-w flex-t p-b-30">
                                             <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                                <img src="assets/images/product-min-01.jpg" alt="PRODUCT" />
                                             </a>
 
                                             <div className="size-215 flex-col-t p-t-8">
@@ -266,7 +242,7 @@ function Blog() {
 
                                         <li className="flex-w flex-t p-b-30">
                                             <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                                <img src="assets/images/product-min-02.jpg" alt="PRODUCT" />
                                             </a>
 
                                             <div className="size-215 flex-col-t p-t-8">
@@ -280,7 +256,7 @@ function Blog() {
 
                                         <li className="flex-w flex-t p-b-30">
                                             <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                                <img src="assets/images/product-min-03.jpg" alt="PRODUCT" />
                                             </a>
 
                                             <div className="size-215 flex-col-t p-t-8">
@@ -437,4 +413,4 @@ function Blog() {
     );
 }
 
-export default Blog;
+export default BlogDetail;

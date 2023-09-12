@@ -82,7 +82,7 @@ function HeaderPages() {
                         <nav className="limiter-menu-desktop container">
                             {/* <!-- Logo desktop -->		 */}
                             <Link to="/" className="logo">
-                                <img src="../assets/images/icons/logo-01.png" alt="IMG-LOGO" />
+                                <img src="../assets/images/icons/Logo.png" alt="IMG-LOGO" />
                             </Link>
 
                             {/* <!-- Menu desktop --> */}
@@ -94,17 +94,6 @@ function HeaderPages() {
 
                                     <li className="label1" data-label1="hot">
                                         <Link to="/shop">Shop</Link>
-                                        <ul className="sub-menu">
-                                            <li>
-                                                <a href="index.html">Homepage 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="home-02.html">Homepage 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="home-03.html">Homepage 3</a>
-                                            </li>
-                                        </ul>
                                     </li>
 
                                     <li>
@@ -128,7 +117,7 @@ function HeaderPages() {
                             {/* <!-- Icon header --> */}
                             <div className="wrap-icon-header flex-w flex-r-m">
                                 <div
-                                    className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
+                                    className="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
                                     onClick={showModalSearch}
                                     style={{ opacity: showModalS ? 0 : 1 }}
                                 >
@@ -136,7 +125,7 @@ function HeaderPages() {
                                 </div>
 
                                 <div
-                                    className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                                    className="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
                                     data-notify="2"
                                     onClick={handleShowHeaderCart}
                                 >
@@ -145,7 +134,7 @@ function HeaderPages() {
 
                                 <a
                                     href="#"
-                                    className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                                    className="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                                     data-notify="0"
                                 >
                                     <i className="zmdi zmdi-favorite-outline"></i>
@@ -160,18 +149,18 @@ function HeaderPages() {
                     {/* <!-- Logo moblie -->		 */}
                     <div className="logo-mobile">
                         <Link to="/">
-                            <img src="../assets/images/icons/logo-01.png" alt="IMG-LOGO" />
+                            <img src="../assets/images/icons/Logo.png" alt="IMG-LOGO" />
                         </Link>
                     </div>
 
                     {/* <!-- Icon header --> */}
                     <div className="wrap-icon-header flex-w flex-r-m m-r-15">
-                        <div className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+                        <div className="icon-header-item cl0 hov-cl1 trans-04 p-r-11 js-show-modal-search">
                             <i className="zmdi zmdi-search"></i>
                         </div>
 
                         <div
-                            className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            className="icon-header-item cl0 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
                             onClick={handleShowHeaderCart}
                             data-notify="2"
                         >
@@ -287,7 +276,7 @@ function HeaderPages() {
                         <ul className="header-cart-wrapitem w-full">
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="../assets/images/item-cart-01.jpg" alt="IMG" />
+                                    <img src="../assets/images/AoMu1.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">
@@ -301,7 +290,7 @@ function HeaderPages() {
 
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="../assets/images/item-cart-02.jpg" alt="IMG" />
+                                    <img src="../assets/images/AoMu1_2.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">
@@ -315,7 +304,7 @@ function HeaderPages() {
 
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="../assets/images/item-cart-03.jpg" alt="IMG" />
+                                    <img src="../assets/images/AoMu1_1.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">

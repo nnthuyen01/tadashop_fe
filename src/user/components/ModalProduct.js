@@ -21,13 +21,13 @@ function ModalProduct({ handleHideModal }) {
 
     const data = [
         {
-            img: 'assets/images/product-detail-01.jpg',
+            img: 'assets/images/AoMu1.jpg',
         },
         {
-            img: 'assets/images/product-detail-02.jpg',
+            img: 'assets/images/AoMu1_1.jpg',
         },
         {
-            img: 'assets/images/product-detail-03.jpg',
+            img: 'assets/images/AoMu1_2.jpg',
         },
     ];
     const PrevArrowMD = ({ onClick, currentSlide, slideCount, ...props }) => (

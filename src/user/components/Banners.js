@@ -8,7 +8,8 @@ function Banners() {
                         <div className="col-md-6 p-b-30 m-lr-auto">
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
-                                <img src="assets/images/banner-04.jpg" alt="IMG-BANNER" />
+                                <img src="assets/images/banner1.jpg" alt="IMG-BANNER" />
+                                {/* <img src="assets/images/banner-04.jpg" alt="IMG-BANNER" /> */}
 
                                 <a
                                     href="product.html"
@@ -30,7 +31,7 @@ function Banners() {
                         <div className="col-md-6 p-b-30 m-lr-auto">
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
-                                <img src="assets/images/banner-05.jpg" alt="IMG-BANNER" />
+                                <img src="assets/images/banner2.jpg" alt="IMG-BANNER" />
 
                                 <a
                                     href="product.html"
@@ -52,7 +53,7 @@ function Banners() {
                         <div className="col-md-6 col-lg-4 p-b-30 m-lr-auto">
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
-                                <img src="assets/images/banner-07.jpg" alt="IMG-BANNER" />
+                                <img src="assets/images/banner3.jpg" alt="IMG-BANNER" />
 
                                 <a
                                     href="product.html"
@@ -74,7 +75,7 @@ function Banners() {
                         <div className="col-md-6 col-lg-4 p-b-30 m-lr-auto">
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
-                                <img src="assets/images/banner-08.jpg" alt="IMG-BANNER" />
+                                <img src="assets/images/banner4.jpg" alt="IMG-BANNER" />
 
                                 <a
                                     href="product.html"
@@ -96,7 +97,7 @@ function Banners() {
                         <div className="col-md-6 col-lg-4 p-b-30 m-lr-auto">
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
-                                <img src="assets/images/banner-09.jpg" alt="IMG-BANNER" />
+                                <img src="assets/images/banner5.jpg" alt="IMG-BANNER" />
 
                                 <a
                                     href="product.html"

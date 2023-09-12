@@ -14,112 +14,112 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
         {
             dataFilter: 'women',
             tag: 'New',
-            img: 'assets/images/product-01.jpg',
+            img: 'assets/images/AoMu1.jpg',
             name: 'Esprit Ruffle Shirt',
             price: '$16.64',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-02.jpg',
+            img: 'assets/images/AoMu2.jpg',
             name: 'Herschel supply',
             price: '$35.31',
         },
         {
             dataFilter: 'men',
             tag: '',
-            img: 'assets/images/product-03.jpg',
+            img: 'assets/images/AoMu3.jpg',
             name: 'Only Check Trouser',
             price: '$25.50',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-04.jpg',
+            img: 'assets/images/AoAC1.jpg',
             name: 'Classic Trench Coat',
             price: '$75.00',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-05.jpg',
+            img: 'assets/images/AoAC2.jpg',
             name: 'Front Pocket Jumper',
             price: '$34.75',
         },
         {
             dataFilter: 'watches',
             tag: '',
-            img: 'assets/images/product-06.jpg',
+            img: 'assets/images/AoAtletico1.jpg',
             name: 'Vintage Inspired Classic',
             price: '$93.20',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-07.jpg',
+            img: 'assets/images/AoArs1.jpg',
             name: 'Shirt in Stretch Cotton',
             price: '$52.66',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-08.jpg',
+            img: 'assets/images/AoArs2.jpg',
             name: 'Pieces Metallic Printed',
             price: '$18.96',
         },
         {
             dataFilter: 'shoes',
             tag: '',
-            img: 'assets/images/product-09.jpg',
+            img: 'assets/images/AoArs3.jpg',
             name: 'Converse All Star Hi Plimsolls',
             price: '$75.00',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-10.jpg',
+            img: 'assets/images/AoAston1.jpg',
             name: 'Femme T-Shirt In Stripe',
             price: '$25.85',
         },
         {
             dataFilter: 'men',
             tag: '',
-            img: 'assets/images/product-11.jpg',
+            img: 'assets/images/AoAston2.jpg',
             name: 'Herschel supply',
             price: '$63.16',
         },
         {
             dataFilter: 'men',
             tag: '',
-            img: 'assets/images/product-12.jpg',
+            img: 'assets/images/AoBarce1.jpg',
             name: 'Herschel supply',
             price: '$63.15',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-13.jpg',
+            img: 'assets/images/AoBarce2.jpg',
             name: 'T-Shirt with Sleeve',
             price: '$18.49',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-14.jpg',
+            img: 'assets/images/AoBayern1.jpg',
             name: 'Pretty Little Thing',
             price: '$54.79',
         },
         {
             dataFilter: 'watches',
             tag: '',
-            img: 'assets/images/product-15.jpg',
+            img: 'assets/images/AoBayern2.jpg',
             name: 'Mini Silver Mesh Watch',
             price: '$86.85',
         },
         {
             dataFilter: 'women',
             tag: '',
-            img: 'assets/images/product-16.jpg',
+            img: 'assets/images/AoBayern3.jpg',
             name: 'Square Neck Back',
             price: '$29.64',
         },
@@ -187,7 +187,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     return (
         <>
             {/* <!-- Product --> */}
-            <section className="bg0 p-t-23 p-b-140">
+            <section className="bg0 p-t-23 p-b-100">
                 <div className="container">
                     {/* title product */}
                     {title === true && (
@@ -492,7 +492,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
 
                                         <a
                                             href="#"
-                                            className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+                                            className="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                                             onClick={handleShowModal}
                                         >
                                             Quick View

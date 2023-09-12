@@ -93,7 +93,7 @@ function Home() {
                         <nav className="limiter-menu-desktop p-l-45">
                             {/* <!-- Logo desktop -->		 */}
                             <Link to="/" className="logo">
-                                <img src="assets\images\icons\logo-02.png" alt="IMG-LOGO" />
+                                <img src="assets\images\icons\Logo.png" alt="IMG-LOGO" />
                             </Link>
 
                             {/* <!-- Menu desktop --> */}
@@ -105,17 +105,6 @@ function Home() {
 
                                     <li className="label1" data-label1="hot">
                                         <Link to="/shop">Shop</Link>
-                                        <ul className="sub-menu">
-                                            <li>
-                                                <a href="index.html">Homepage 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="home-02.html">Homepage 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="home-03.html">Homepage 3</a>
-                                            </li>
-                                        </ul>
                                     </li>
 
                                     <li>
@@ -133,12 +122,15 @@ function Home() {
                                     <li>
                                         <Link to="/profile">Profile</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/contact">Contact</Link>
+                                    </li>
                                 </ul>
                             </div>
 
                             {/* <!-- Icon header --> */}
                             <div className="wrap-icon-header flex-w flex-r-m h-full">
-                                {currentUser ? (
+                                {!currentUser ? (
                                     <>
                                         <div className="flex-c-m h-full p-r-25 bor6">
                                             <div
@@ -149,10 +141,8 @@ function Home() {
                                                 <i className="zmdi zmdi-shopping-cart"></i>
                                             </div>
                                         </div>
-                                        <div className="flex-c-m h-full p-l-20 p-r-20 bor6" onClick={handleLogout}>
+                                        <div className="flex-c-m h-full p-l-20 p-r-20 bor6">
                                             <div
-                                                // className="hov-cl1 trans-04"
-                                                // to="/login"
                                                 style={{
                                                     display: 'flex',
                                                     cursor: 'pointer',
@@ -160,24 +150,30 @@ function Home() {
                                                     color: 'white',
                                                 }}
                                             >
-                                                <div className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-cart ">
-                                                    <i className="zmdi zmdi-account-circle"></i>
+                                                <div className="account-menu">
+                                                    <div className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11">
+                                                        <i className="zmdi zmdi-account-circle"></i>
+                                                    </div>
+                                                    <ul className="sub-account-menu">
+                                                        <li className="header-sub-account-menu">
+                                                            <a href="index.html">Nguyễn Ngọc Thuyên</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="index.html">Thông tin chung</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="home-02.html">Đổi mật khẩu</a>
+                                                        </li>
+                                                        <li className="footer-sub-account-menu" onClick={handleLogout}>
+                                                            <a href="home-03.html">Đăng xuất</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                Đăng Xuất
                                             </div>
                                         </div>
                                     </>
                                 ) : (
                                     <>
-                                        {/* <div className="flex-c-m h-full p-r-25 bor6">
-                                            <div
-                                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart "
-                                                onClick={handleShowHeaderCart}
-                                                data-notify="2"
-                                            >
-                                                <i className="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                        </div> */}
                                         <div className="flex-c-m h-full p-l-20 p-r-20 bor6">
                                             <Link
                                                 className="hov-cl1 trans-04"
@@ -215,7 +211,7 @@ function Home() {
                     {/* <!-- Logo moblie -->		 */}
                     <div className="logo-mobile">
                         <a href="index.html">
-                            <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO" />
+                            <img src="assets/images/icons/Logo.png" alt="IMG-LOGO" />
                         </a>
                     </div>
 
@@ -223,7 +219,7 @@ function Home() {
                     <div className="wrap-icon-header flex-w flex-r-m h-full m-r-15">
                         <div className="flex-c-m h-full p-r-5">
                             <div
-                                className="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
                                 onClick={handleShowHeaderCart}
                                 data-notify="2"
                             >
@@ -322,6 +318,49 @@ function Home() {
 
             {/* <!-- Modal1 --> */}
             {showModal && <ModalProduct handleHideModal={handleHideModal} />}
+
+            <section className="hero-section">
+                <div className="container">
+                    <div className="card-container">
+                        <div className="card">
+                            <div
+                                className="card-background"
+                                style={{ backgroundImage: "url('assets/images/blur1.jpg')" }}
+                            ></div>
+                            <div className="content-card">
+                                <h3 className="card-heading">Miễn Phí thiết kế</h3>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div
+                                className="card-background"
+                                style={{ backgroundImage: "url('assets/images/blur2.jpg')" }}
+                            ></div>
+                            <div className="content-card">
+                                <h3 className="card-heading">Miễn Phí In Tên Số</h3>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div
+                                className="card-background"
+                                style={{ backgroundImage: "url('assets/images/blur3.jpg')" }}
+                            ></div>
+                            <div className="content-card">
+                                <h3 className="card-heading">Miễn Phí Giao Hàng</h3>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div
+                                className="card-background"
+                                style={{ backgroundImage: "url('assets/images/blur4.jpg')" }}
+                            ></div>
+                            <div className="content-card">
+                                <h3 className="card-heading">Đa dạng chất vãi</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* <!-- Footer --> */}
 

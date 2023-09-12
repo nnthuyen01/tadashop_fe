@@ -6,14 +6,14 @@ import 'select2';
 function Cart() {
     const cartProducts = [
         {
-            img: 'assets/images/item-cart-04.jpg',
+            img: 'assets/images/AoMu2.jpg',
             name: 'Fresh Strawberries',
             price: '$ 36.00',
             quantity: 1,
             total: '$ 36.00',
         },
         {
-            img: 'assets/images/item-cart-05.jpg',
+            img: 'assets/images/AoMu3.jpg',
             name: 'Lightweight Jacket',
             price: '$ 16.00',
             quantity: 1,

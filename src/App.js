@@ -70,10 +70,6 @@ function App() {
 
                                 return <Route key={index} path={route.path} element={<Page />} />;
                             })}
-                            {/* <Route path="/dashboard" element={<HomeAdmin />}></Route>
-                            <Route path="/dashboard/club/add" element={<AddOrEditClub key="a" />}></Route>
-                            <Route path="/dashboard/club/update/:id" element={<AddOrEditClub key="u" />}></Route>
-                            <Route path="/dashboard/club/list" element={<ListClubs />}></Route> */}
                         </Route>
                     </Routes>
                 </div>

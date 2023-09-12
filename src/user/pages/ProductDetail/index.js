@@ -27,13 +27,13 @@ function ProductDetail() {
 
     const data = [
         {
-            img: 'assets/images/product-detail-01.jpg',
+            img: 'assets/images/AoMu1.jpg',
         },
         {
-            img: 'assets/images/product-detail-02.jpg',
+            img: 'assets/images/AoMu1_1.jpg',
         },
         {
-            img: 'assets/images/product-detail-03.jpg',
+            img: 'assets/images/AoMu1_2.jpg',
         },
     ];
     const PrevArrowMD = ({ onClick, currentSlide, slideCount, ...props }) => (
@@ -137,42 +137,42 @@ function ProductDetail() {
 
     const RelateProducts = [
         {
-            img: 'assets/images/product-01.jpg',
+            img: 'assets/images/AoMu1.jpg',
             name: 'Esprit Ruffle Shirt',
             price: '$16.64',
         },
         {
-            img: 'assets/images/product-02.jpg',
+            img: 'assets/images/AoAC1.jpg',
             name: 'Herschel supply',
             price: '$35.31',
         },
         {
-            img: 'assets/images/product-03.jpg',
+            img: 'assets/images/AoAC2.jpg',
             name: 'Only Check Trouser',
             price: '$25.50',
         },
         {
-            img: 'assets/images/product-04.jpg',
+            img: 'assets/images/AoArs1.jpg',
             name: 'Classic Trench Coat',
             price: '$75.00',
         },
         {
-            img: 'assets/images/product-05.jpg',
+            img: 'assets/images/AoArs2.jpg',
             name: 'Front Pocket Jumper',
             price: '$34.75',
         },
         {
-            img: 'assets/images/product-06.jpg',
+            img: 'assets/images/AoArs3.jpg',
             name: 'Vintage Inspired Classic',
             price: '$93.20',
         },
         {
-            img: 'assets/images/product-07.jpg',
+            img: 'assets/images/AoAston1.jpg',
             name: 'Shirt in Stretch Cotton',
             price: '$52.66',
         },
         {
-            img: 'assets/images/product-08.jpg',
+            img: 'assets/images/AoAtletico1.jpg',
             name: 'Pieces Metallic Printed',
             price: '$18.96',
         },
@@ -606,7 +606,7 @@ function ProductDetail() {
                                                 {/* <!-- Review --> */}
                                                 <div className="flex-w flex-t p-b-68">
                                                     <div className="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                        <img src="images/avatar-01.jpg" alt="AVATAR" />
+                                                        <img src="assets/images/avatar-01.jpg" alt="AVATAR" />
                                                     </div>
 
                                                     <div className="size-207">

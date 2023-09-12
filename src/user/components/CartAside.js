@@ -23,7 +23,7 @@ function CartAside({ handleHideHeaderCart, showHeaderCart }) {
                         <ul className="header-cart-wrapitem w-full">
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="assets/images/item-cart-01.jpg" alt="IMG" />
+                                    <img src="assets/images/AoMu1.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">
@@ -37,7 +37,7 @@ function CartAside({ handleHideHeaderCart, showHeaderCart }) {
 
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="assets/images/item-cart-02.jpg" alt="IMG" />
+                                    <img src="assets/images/AoMu1_1.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">
@@ -51,7 +51,7 @@ function CartAside({ handleHideHeaderCart, showHeaderCart }) {
 
                             <li className="header-cart-item flex-w flex-t m-b-12">
                                 <div className="header-cart-item-img">
-                                    <img src="assets/images/item-cart-03.jpg" alt="IMG" />
+                                    <img src="assets/images/AoMu1_2.jpg" alt="IMG" />
                                 </div>
 
                                 <div className="header-cart-item-txt p-t-8">
