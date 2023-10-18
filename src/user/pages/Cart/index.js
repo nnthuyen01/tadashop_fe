@@ -7,14 +7,14 @@ function Cart() {
     const cartProducts = [
         {
             img: 'assets/images/AoMu2.jpg',
-            name: 'Fresh Strawberries',
+            name: 'Áo Manchester United sân nhà',
             price: '$ 36.00',
             quantity: 1,
             total: '$ 36.00',
         },
         {
             img: 'assets/images/AoMu3.jpg',
-            name: 'Lightweight Jacket',
+            name: 'Áo Manchester United sân khách',
             price: '$ 16.00',
             quantity: 1,
             total: '$ 16.00',

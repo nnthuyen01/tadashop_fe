@@ -1266,7 +1266,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .arrow-slick1:hover {
-    color: #7280e0;
+    color: #c70101;
 }
 
 .next-slick1 {
@@ -1295,7 +1295,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .rs2-slick1 .arrow-slick1:hover {
-    color: #7280e0;
+    /* color: #7280e0; */
+    color: #c70101;
 }
 
 .wrap-slick1-dots {

@@ -6,60 +6,63 @@ import ContentHeader from '../common/ContentHeader';
 import Column from 'antd/lib/table/Column';
 import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { getClubs, clearClubState, deleteClub } from '../../redux/actions/clubAction';
+import { getLeagues, clearLeagueState, deleteLeague } from '../../redux/actions/leagueAction';
 
-class ListClubs extends Component {
+class ListLeagues extends Component {
     constructor() {
         super();
 
         this.state = {
-            club: {},
+            league: {},
         };
     }
     componentDidMount = () => {
-        this.props.getClubs();
+        this.props.getLeagues();
         console.log('did mount');
     };
     componentWillUnmount = () => {
-        this.props.clearClubState();
+        this.props.clearLeagueState();
         console.log('will unmount');
     };
 
-    editClub = (club) => {
-        console.log(club);
+    editLeague = (league) => {
+        console.log(league);
 
         const { navigate } = this.props.router;
-        navigate('/dashboard/club/update/' + club.id);
+        navigate('/dashboard/league/update/' + league.id);
     };
 
-    deleteClub = () => {
-        console.log(this.state.club);
-        this.props.deleteClub(this.state.club.id);
+    deleteLeague = () => {
+        console.log(this.state.league);
+        this.props.deleteLeague(this.state.league.id);
     };
-    openDeleteConfirmModal = (club) => {
-        this.setState({ ...this.state, club: club });
+    openDeleteConfirmModal = (league) => {
+        this.setState({ ...this.state, league: league });
 
-        console.log(club);
+        console.log(league);
 
-        const message = 'Do you want to delete the club ' + club.name;
+        const message = 'Do you want to delete the league ' + league.name;
 
         Modal.confirm({
             title: 'Confirm',
             icon: <ExclamationCircleOutlined />,
             content: message,
-            onOk: this.deleteClub,
+            onOk: this.deleteLeague,
             okText: 'Delete',
             cancelText: 'Cancel',
         });
     };
     render() {
         const { navigate } = this.props.router;
-        const { clubs, isLoading } = this.props;
-        console.log(clubs);
+        const { leagues, isLoading } = this.props;
         if (isLoading) {
             return (
                 <>
-                    <ContentHeader navigate={navigate} title="List Clubs" className="site-page-header"></ContentHeader>
+                    <ContentHeader
+                        navigate={navigate}
+                        title="List Leagues"
+                        className="site-page-header"
+                    ></ContentHeader>
 
                     <Skeleton active />
                 </>
@@ -67,22 +70,11 @@ class ListClubs extends Component {
         }
         return (
             <>
-                <ContentHeader navigate={navigate} title="List Clubs" className="site-page-header"></ContentHeader>
+                <ContentHeader navigate={navigate} title="List Leagues" className="site-page-header"></ContentHeader>
 
-                <Table dataSource={clubs} size="small" rowKey="id">
-                    <Column title="Club ID" key="id" dataIndex="id" width={40} align="center"></Column>
-                    <Column title="Name" key="name" dataIndex="name" width={600}></Column>
-                    <Column
-                        title="League"
-                        key="league"
-                        // dataIndex={(record) => record.league.name}
-                        width={400}
-                        render={(_, record) => {
-                            let name = record.league.name;
-                            console.log(name);
-                            return <Tag style={{ fontWeight: '-moz-initial', color: 'navy' }}> {name}</Tag>;
-                        }}
-                    ></Column>
+                <Table dataSource={leagues} size="small" rowKey="id">
+                    <Column title="League ID" key="id" dataIndex="id" width={40} align="center"></Column>
+                    <Column title="Name" key="name" dataIndex="name"></Column>
                     <Column
                         title="Action"
                         key="action"
@@ -94,7 +86,7 @@ class ListClubs extends Component {
                                     key={record.key}
                                     type="primary"
                                     size="small"
-                                    onClick={() => this.editClub(record)}
+                                    onClick={() => this.editLeague(record)}
                                 >
                                     <EditOutlined style={{ marginRight: 8 }} /> Edit
                                 </Button>
@@ -117,12 +109,12 @@ class ListClubs extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    clubs: state.clubReducer.clubs,
+    leagues: state.leagueReducer.leagues,
     isLoading: state.commonReducer.isLoading,
 });
 const mapDispatchToProps = {
-    getClubs,
-    clearClubState,
-    deleteClub,
+    getLeagues,
+    clearLeagueState,
+    deleteLeague,
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListClubs));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListLeagues));

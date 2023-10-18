@@ -1,8 +1,79 @@
+import React, { useState } from 'react';
+
 import HeaderPages from '~/user/components/HeaderPages';
 import { NavLink } from 'react-router-dom';
+import { Tooltip } from 'react-tippy';
+import 'react-tippy/dist/tippy.css'; // Import CSS của Tippy
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faCircleXmark, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import './profile.scss';
 function ChangePassword() {
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [isCheckPassword, setIsCheckPassword] = useState(false);
+    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+    const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
+    const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
+
+    const [formData, setFormData] = useState({
+        oldPassword: '',
+        newPassword: '',
+    });
+
+    const handleInputBlur = () => {
+        setIsTooltipVisible(false);
+        setIsPasswordValid(true);
+    };
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handlePasswordChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+        handleIsPasswordValid(value);
+        // console.log('formData.newPassword:', formData.newPassword);
+    };
+    const handleIsPasswordValid = (password) => {
+        // Kiểm tra chiều dài mật khẩu
+        if (password.length < 6 || password.length > 26) {
+            setIsPasswordValid(false);
+            setIsCheckPassword(false);
+            return;
+        }
+
+        // Kiểm tra chứa ít nhất một chữ thường, một chữ hoa, một số và một kí tự đặc biệt
+        const lowercaseRegex = /[a-z]/;
+        const uppercaseRegex = /[A-Z]/;
+        const digitRegex = /[0-9]/;
+        const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\-\\/]/;
+
+        if (
+            !lowercaseRegex.test(password) ||
+            !uppercaseRegex.test(password) ||
+            !digitRegex.test(password) ||
+            !specialCharacterRegex.test(password)
+        ) {
+            // return setIsPasswordValid(false);
+            setIsPasswordValid(false);
+            setIsCheckPassword(false);
+            return;
+        }
+
+        // return setIsPasswordValid(true);
+        setIsPasswordValid(true);
+        setIsCheckPassword(true);
+        return;
+    };
+
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
@@ -72,29 +143,103 @@ function ChangePassword() {
                                                     <p className="width_common tit_edit">Nhập mật khẩu hiện tại</p>
                                                     <div style={{ position: 'relative' }}>
                                                         <input
-                                                            type="password"
+                                                            type={isOldPasswordVisible ? 'text' : 'password'}
                                                             id="pass_old"
+                                                            name="oldPassword"
                                                             className="input_form"
                                                             placeholder="Nhập mật khẩu hiện tại"
+                                                            value={formData.oldPassword}
+                                                            onChange={(event) => {
+                                                                handleInputChange(event);
+                                                            }}
                                                         />
                                                         <span className="icon_input ">
-                                                            {/* <svg className="icon eye-show"></svg> */}
+                                                            <div style={{ padding: '0 10px' }}>
+                                                                <FontAwesomeIcon
+                                                                    style={{ color: '#f70000' }}
+                                                                    icon={faCircleXmark}
+                                                                />
+                                                            </div>
+                                                            {isOldPasswordVisible ? (
+                                                                <div
+                                                                    style={{ padding: '0 10px' }}
+                                                                    onClick={() => setIsOldPasswordVisible(false)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                                                </div>
+                                                            ) : (
+                                                                <div
+                                                                    style={{ padding: '0 10px' }}
+                                                                    onClick={() => setIsOldPasswordVisible(true)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faEye} />
+                                                                </div>
+                                                            )}
                                                         </span>
                                                     </div>
                                                 </div>
 
                                                 <div className="item_input_log">
                                                     <p className="width_common tit_edit">Nhập mật khẩu mới</p>
-                                                    <div style={{ position: 'relative' }}>
-                                                        <input
-                                                            type="password"
-                                                            id="pass_old"
-                                                            className="input_form"
-                                                            placeholder="Nhập mật khẩu hiện tại"
-                                                        />
-                                                        <span className="icon_input ">
-                                                            {/* <svg className="icon eye-show"></svg> */}
-                                                        </span>
+                                                    <div style={{ position: 'relative', display: 'flex' }}>
+                                                        <Tooltip
+                                                            title="Password must be 6-26 characters long and include at least one lowercase letter, 
+                                        one uppercase letter, one digit, and one special character."
+                                                            open={!isPasswordValid && isTooltipVisible}
+                                                            position="bottom"
+                                                            arrow={true}
+                                                            trigger="manual"
+                                                            animation="scale"
+                                                            style={{ flex: 1 }}
+                                                        >
+                                                            <input
+                                                                type={isNewPasswordVisible ? 'text' : 'password'}
+                                                                id="pass_new"
+                                                                name="newPassword"
+                                                                className="input_form"
+                                                                placeholder="Nhập mật khẩu mới"
+                                                                value={formData.newPassword}
+                                                                onChange={(event) => {
+                                                                    handlePasswordChange(event);
+                                                                }}
+                                                                onBlur={handleInputBlur}
+                                                                onFocus={() => {
+                                                                    setIsTooltipVisible(true);
+                                                                    setIsPasswordValid(false);
+                                                                }}
+                                                            />
+                                                            <span className="icon_input ">
+                                                                <div style={{ padding: '0 10px' }}>
+                                                                    {isCheckPassword ? (
+                                                                        <FontAwesomeIcon
+                                                                            className="checkChangePassword"
+                                                                            icon={faCheckCircle}
+                                                                        />
+                                                                    ) : (
+                                                                        <FontAwesomeIcon
+                                                                            className="checkChangePassword"
+                                                                            style={{ color: '#fff' }}
+                                                                            icon={faCheckCircle}
+                                                                        />
+                                                                    )}
+                                                                </div>
+                                                                {isNewPasswordVisible ? (
+                                                                    <div
+                                                                        style={{ padding: '0 10px' }}
+                                                                        onClick={() => setIsNewPasswordVisible(false)}
+                                                                    >
+                                                                        <FontAwesomeIcon icon={faEyeSlash} />
+                                                                    </div>
+                                                                ) : (
+                                                                    <div
+                                                                        style={{ padding: '0 10px' }}
+                                                                        onClick={() => setIsNewPasswordVisible(true)}
+                                                                    >
+                                                                        <FontAwesomeIcon icon={faEye} />
+                                                                    </div>
+                                                                )}
+                                                            </span>
+                                                        </Tooltip>
                                                     </div>
                                                 </div>
                                                 <div className="item_input_log">

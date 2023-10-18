@@ -8,7 +8,7 @@ function About() {
             {/* <!-- Title page --> */}
             <section
                 className="bg-img1 txt-center p-lr-15 p-tb-92"
-                style={{ backgroundImage: "url('assets/images/bg-01.jpg')" }}
+                style={{ backgroundImage: "url('assets/images/bg-01.png')" }}
             >
                 <h2 className="ltext-105 cl0 txt-center">About</h2>
             </section>

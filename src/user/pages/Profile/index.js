@@ -88,24 +88,21 @@ function Profile() {
                                                     className="width_common upload_complete"
                                                     style={{ display: 'flex' }}
                                                 >
-                                                    <span class="img_upload_c">
-                                                        <img
-                                                            src="https://s1.vnecdn.net/myvne/i/v1/graphics/img_60x60.gif"
-                                                            alt="anh"
-                                                        />
+                                                    <span className="img_upload_c">
+                                                        <img src="assets/images/avatartrong.png" alt="anh" />
                                                     </span>
                                                     <div className="item_input_log item_button_act">
                                                         <button
                                                             id="btn_select_avatar"
-                                                            class="pri_button btn_lv2 has_transition"
+                                                            className="pri_button btn_lv2 has_transition"
                                                         >
                                                             Chọn lại ảnh
                                                         </button>
                                                         <button
                                                             id="btn_save_avatar"
-                                                            class="pri_button btn_log has_transition"
+                                                            className="pri_button btn_log has_transition"
                                                         >
-                                                            Lưu thanh đổi
+                                                            Lưu thay đổi
                                                         </button>
                                                     </div>
                                                 </div>
@@ -113,7 +110,7 @@ function Profile() {
                                         )}
                                         {openUpdateAvatar ? (
                                             <div className="click_edit" onClick={() => setOpenUpdateAvatar(false)}>
-                                                Thay anhr đại diện
+                                                Thay ảnh đại diện
                                             </div>
                                         ) : (
                                             <div className="click_edit" onClick={() => setOpenUpdateAvatar(true)}>

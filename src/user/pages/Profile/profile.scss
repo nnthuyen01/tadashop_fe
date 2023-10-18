@@ -174,17 +174,20 @@
 }
 .form_log .item_input_log .icon_input {
     position: absolute;
-    top: 1px;
+    top: 0px;
     right: 1px;
     cursor: pointer;
-    width: 54px;
-    height: 46px;
-    line-height: 46px;
+    width: 80px;
+    height: 47px;
+    line-height: 47px;
     text-align: center;
     text-transform: capitalize;
     font-size: 14px;
     color: #757575;
-    background-color: #000;
+    // background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 .form_log .item_input_log .input_form {
     width: 100%;
@@ -272,4 +275,8 @@
     background: #ffffff;
     border: 1px solid #bdbdbd;
     color: #4f4f4f;
+}
+
+.checkChangePassword {
+    color: #2b8c04;
 }

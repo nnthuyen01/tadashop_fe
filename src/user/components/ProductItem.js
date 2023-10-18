@@ -12,63 +12,63 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
 
     const products = [
         {
-            dataFilter: 'women',
+            dataFilter: 'mu',
             tag: 'New',
             img: 'assets/images/AoMu1.jpg',
             name: 'Esprit Ruffle Shirt',
             price: '$16.64',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'mu',
             tag: '',
             img: 'assets/images/AoMu2.jpg',
             name: 'Herschel supply',
             price: '$35.31',
         },
         {
-            dataFilter: 'men',
+            dataFilter: 'mu',
             tag: '',
             img: 'assets/images/AoMu3.jpg',
             name: 'Only Check Trouser',
             price: '$25.50',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'ac',
             tag: '',
             img: 'assets/images/AoAC1.jpg',
             name: 'Classic Trench Coat',
             price: '$75.00',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'ac',
             tag: '',
             img: 'assets/images/AoAC2.jpg',
             name: 'Front Pocket Jumper',
             price: '$34.75',
         },
         {
-            dataFilter: 'watches',
+            dataFilter: 'atletico',
             tag: '',
             img: 'assets/images/AoAtletico1.jpg',
             name: 'Vintage Inspired Classic',
             price: '$93.20',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs1.jpg',
             name: 'Shirt in Stretch Cotton',
             price: '$52.66',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs2.jpg',
             name: 'Pieces Metallic Printed',
             price: '$18.96',
         },
         {
-            dataFilter: 'shoes',
+            dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs3.jpg',
             name: 'Converse All Star Hi Plimsolls',
@@ -89,14 +89,14 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
             price: '$63.16',
         },
         {
-            dataFilter: 'men',
+            dataFilter: 'barcelona',
             tag: '',
             img: 'assets/images/AoBarce1.jpg',
             name: 'Herschel supply',
             price: '$63.15',
         },
         {
-            dataFilter: 'women',
+            dataFilter: 'barcelona',
             tag: '',
             img: 'assets/images/AoBarce2.jpg',
             name: 'T-Shirt with Sleeve',
@@ -206,27 +206,33 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                     All Products
                                 </button>
 
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                                    Women
+                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".mu">
+                                    Manchester United
                                 </button>
 
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-                                    Men
-                                </button>
-
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-                                    Bag
-                                </button>
-
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-                                    Shoes
+                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".ac">
+                                    AC Milan
                                 </button>
 
                                 <button
                                     className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                                    data-filter=".watches"
+                                    data-filter=".atletico"
                                 >
-                                    Watches
+                                    Atletico Madrid
+                                </button>
+
+                                <button
+                                    className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+                                    data-filter=".arsenal"
+                                >
+                                    Arsenal
+                                </button>
+
+                                <button
+                                    className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+                                    data-filter=".barcelona"
+                                >
+                                    Barcelona
                                 </button>
                             </div>
                         </div>

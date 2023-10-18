@@ -3,6 +3,11 @@ export const CLUBS_SET = 'CLUBS_SET';
 export const CLUB_DELETE = 'CLUB_DELETE';
 export const CLUB_STATE_CLEAR = 'CLUB_STATE_CLEAR';
 
+export const LEAGUE_SET = 'LEAGUE_SET';
+export const LEAGUES_SET = 'LEAGUES_SET';
+export const LEAGUE_DELETE = 'LEAGUE_DELETE';
+export const LEAGUE_STATE_CLEAR = 'LEAGUE_STATE_CLEAR';
+
 export const COMMON_ERROR_SET = 'COMMON_ERROR_SET';
 export const COMMON_MESSAGE_SET = 'COMMON_MESSAGE_SET';
 export const COMMON_LOADING_SET = 'COMMON_LOADING_SET';

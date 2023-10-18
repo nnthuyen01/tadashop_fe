@@ -9,7 +9,7 @@ function Blog() {
             {/* <!-- Title page --> */}
             <section
                 className="bg-img1 txt-center p-lr-15 p-tb-92"
-                style={{ backgroundImage: "url('assets/images/bg-02.jpg')" }}
+                style={{ backgroundImage: "url('assets/images/bg-02.png')" }}
             >
                 <h2 className="ltext-105 cl0 txt-center">Blog</h2>
             </section>

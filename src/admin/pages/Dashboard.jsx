@@ -18,6 +18,7 @@ import {
     MdSupervisorAccount,
     MdViewList,
     MdOutlineFormatSize,
+    MdSportsSoccer,
 } from 'react-icons/md';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,7 +67,19 @@ const Dashboard = () => {
                 style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, right: 0, bottom: 0 }}
             >
                 <div className="logoAdmin">
-                    <h2>{collapsed ? 'SS' : 'Tada Shop'}</h2>
+                    {!collapsed ? (
+                        <img
+                            src="assets\images\icons\Logo.png"
+                            alt="IMG-LOGO"
+                            style={{ width: '195px', marginTop: '10px' }}
+                        />
+                    ) : (
+                        <img
+                            src="assets\images\icons\tadashop.png"
+                            alt="IMG-LOGO-cl"
+                            style={{ marginLeft: '25%', height: '39.98px', marginTop: '10px' }}
+                        />
+                    )}
                 </div>
                 <Menu
                     theme="dark"
@@ -99,24 +112,43 @@ const Dashboard = () => {
                             ],
                         },
                         {
-                            key: '210',
+                            key: '3',
+                            icon: <MdSportsSoccer />,
+                            label: 'League',
+                            children: [
+                                {
+                                    key: '31',
+                                    icon: <MdAddCircleOutline />,
+                                    label: 'Add League',
+                                    onClick: () => navigate('/dashboard/league/add'),
+                                },
+                                {
+                                    key: '32',
+                                    icon: <MdFormatListBulleted />,
+                                    label: 'List Leagues',
+                                    onClick: () => navigate('/dashboard/league/list'),
+                                },
+                            ],
+                        },
+                        {
+                            key: '4',
                             icon: <MdViewList />,
                             label: 'Others',
                             children: [
                                 {
-                                    key: '211',
+                                    key: '41',
                                     icon: <MdOutlineViewList />,
                                     label: 'List Brands',
                                     onClick: () => navigate('/dashboard/brand'),
                                 },
                                 {
-                                    key: '221',
+                                    key: '42',
                                     icon: <MdOutlineViewList />,
                                     label: 'List Vouchers',
                                     onClick: () => navigate('/dashboard/voucher'),
                                 },
                                 {
-                                    key: '223',
+                                    key: '43',
                                     icon: <MdOutlineViewList />,
                                     label: 'List Payments',
                                     onClick: () => navigate('/dashboard/payment'),
@@ -124,30 +156,30 @@ const Dashboard = () => {
                             ],
                         },
                         {
-                            key: '3',
+                            key: '5',
                             icon: <MdOutlineInventory2 />,
                             label: 'Products',
                             children: [
                                 {
-                                    key: 'P3-01',
+                                    key: 'P5-01',
                                     icon: <MdAddCircleOutline />,
                                     label: 'Upload Images',
                                     onClick: () => navigate('/dashboard/products/upload'),
                                 },
                                 {
-                                    key: 'P3-02',
+                                    key: 'P5-02',
                                     icon: <MdAddCircleOutline />,
                                     label: 'Add Products',
                                     onClick: () => navigate('/dashboard/products/add'),
                                 },
                                 {
-                                    key: 'P3-03',
+                                    key: 'P5-03',
                                     icon: <MdFormatListBulleted />,
                                     label: 'List Products',
                                     onClick: () => navigate('/dashboard/products/list'),
                                 },
                                 {
-                                    key: 'P3-04',
+                                    key: 'P5-04',
                                     icon: <MdOutlineFormatSize />,
                                     label: 'Size Products',
                                     onClick: () => navigate('/dashboard/products/size'),
@@ -155,32 +187,32 @@ const Dashboard = () => {
                             ],
                         },
                         {
-                            key: '4',
+                            key: '6',
                             icon: <MdOutlineShoppingBag />,
                             label: 'Orders',
                         },
                         {
-                            key: '5',
+                            key: '7',
                             icon: <MdRequestPage />,
                             label: 'Invoices',
                         },
                         {
-                            key: '6',
+                            key: '8',
                             icon: <MdInsertChartOutlined />,
                             label: 'Statistics',
                         },
                         {
-                            key: '7',
+                            key: '9',
                             icon: <MdManageAccounts />,
                             label: 'Profiles',
                         },
                         {
-                            key: '8',
+                            key: '10',
                             icon: <MdSupervisorAccount />,
                             label: 'Accounts',
                         },
                         {
-                            key: '9',
+                            key: '11',
                             icon: <MdLogout />,
                             label: 'Logout',
                             onClick: () => {

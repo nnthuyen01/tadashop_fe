@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import withRouter from './../../helpers/withRouter';
-
-import { Col, Divider, Row, Form, Input, Select, Button, Popconfirm } from 'antd';
+import { MdSportsSoccer } from 'react-icons/md';
+import { Col, Divider, Row, Form, Input, Button, Popconfirm, Select, message } from 'antd';
 import ContentHeader from '../common/ContentHeader';
 import { insertClub, getClub, clearClub, updateClub } from '../../redux/actions/clubAction';
 import { connect } from 'react-redux';
+import LeagueService from '~/admin/services/leagueService';
 
 class AddOrEditClub extends Component {
     formRef = React.createRef();
@@ -15,6 +16,7 @@ class AddOrEditClub extends Component {
         this.state = {
             // club: { id: '', name: '', status: 'Visible' },
             club: { id: '', name: '' },
+            leagues: [],
         };
     }
 
@@ -22,8 +24,31 @@ class AddOrEditClub extends Component {
         const { id } = this.props.router.params;
         if (id) {
             this.props.getClub(id);
+            const { club } = this.props;
+            const newClub = {
+                id: club.id,
+                name: club.name,
+                league: club.league,
+            };
+            this.setState({ ...this.state, club: newClub });
         } else {
             this.props.clearClub();
+        }
+        this.loadData();
+    };
+
+    loadData = async () => {
+        try {
+            const leagueService = new LeagueService();
+            const leagueListResponse = await leagueService.getLeagues();
+
+            this.setState({
+                ...this.state,
+                leagues: leagueListResponse.data,
+            });
+        } catch (error) {
+            console.log(error);
+            message.error('Error: ' + error);
         }
     };
 
@@ -36,8 +61,9 @@ class AddOrEditClub extends Component {
         } else if (!nextProps.club) {
             return {
                 ...prevState,
-                // club: { id: '', name: '', status: 'Visible' },
+
                 club: { id: '', name: '' },
+                leagues: [],
             };
         }
         return null;
@@ -65,8 +91,9 @@ class AddOrEditClub extends Component {
     render() {
         const { navigate } = this.props.router;
         const { isLoading } = this.props;
-        const { club } = this.state;
+        const { club, leagues } = this.state;
         let title = 'Add New Club';
+        console.log(club);
 
         if (club.id) {
             title = 'Update Club';
@@ -101,12 +128,23 @@ class AddOrEditClub extends Component {
                             >
                                 <Input></Input>
                             </Form.Item>
-                            {/* <Form.Item label="Status" name="status" initialValue={club.status === 'Visible' ? '0' : '1'}>
-                <Select>
-                  <Select.Option value="0">Visible</Select.Option>
-                  <Select.Option value="1">In-Visible</Select.Option>
-                </Select>
-              </Form.Item> */}
+
+                            <Form.Item
+                                label="League"
+                                name="leagueId"
+                                initialValue={club.league ? club.league.id : undefined}
+                                rules={[{ required: true }]}
+                                hasFeedback
+                            >
+                                <Select placeholder="Select league" suffixIcon={<MdSportsSoccer />}>
+                                    {leagues &&
+                                        leagues.map((item) => (
+                                            <Select.Option value={item.id} key={'league' + item.id}>
+                                                {item.name}
+                                            </Select.Option>
+                                        ))}
+                                </Select>
+                            </Form.Item>
                             <Divider></Divider>
                             {!club.id && (
                                 <Button htmlType="submit" type="primary" style={{ float: 'right' }} loading={isLoading}>

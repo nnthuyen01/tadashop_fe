@@ -25,6 +25,8 @@ import ListSizes from '~/admin/components/size/ListSizes';
 import BlogDetail from '~/user/pages/BlogDetail';
 import Contact from '~/user/pages/Contact';
 import ChangePassword from '~/user/pages/Profile/changePassword';
+import AddOrEditLeague from '~/admin/components/league/AddOrEditLeague';
+import ListLeagues from '~/admin/components/league/ListLeagues';
 
 // Public routes
 const publicRoutes = [
@@ -43,12 +45,16 @@ const publicRoutes = [
 // Private routes
 const privateRoutes = [
     { path: config.routesAdmin.dashboard, component: HomeAdmin },
+
     { path: config.routesAdmin.addClub, component: AddOrEditClub },
     { path: config.routesAdmin.updateClub, component: AddOrEditClub },
     { path: config.routesAdmin.listClubs, component: ListClubs },
 
-    { path: config.routesAdmin.listBrands, component: ListBrands },
+    { path: config.routesAdmin.addLeague, component: AddOrEditLeague },
+    { path: config.routesAdmin.updateLeague, component: AddOrEditLeague },
+    { path: config.routesAdmin.listLeagues, component: ListLeagues },
 
+    { path: config.routesAdmin.listBrands, component: ListBrands },
     { path: config.routesAdmin.listVouchers, component: ListVouchers },
     { path: config.routesAdmin.listPayments, component: ListPayments },
 

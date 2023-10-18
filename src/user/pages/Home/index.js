@@ -108,20 +108,15 @@ function Home() {
                                     </li>
 
                                     <li>
-                                        <Link to="/about">About</Link>
+                                        <Link to="/cart">Cart</Link>
                                     </li>
-
                                     <li>
                                         <Link to="/blog">Blog</Link>
                                     </li>
-
                                     <li>
-                                        <Link to="/cart">Cart</Link>
+                                        <Link to="/about">About</Link>
                                     </li>
 
-                                    <li>
-                                        <Link to="/profile">Profile</Link>
-                                    </li>
                                     <li>
                                         <Link to="/contact">Contact</Link>
                                     </li>
@@ -130,7 +125,7 @@ function Home() {
 
                             {/* <!-- Icon header --> */}
                             <div className="wrap-icon-header flex-w flex-r-m h-full">
-                                {!currentUser ? (
+                                {currentUser ? (
                                     <>
                                         <div className="flex-c-m h-full p-r-25 bor6">
                                             <div
@@ -156,16 +151,16 @@ function Home() {
                                                     </div>
                                                     <ul className="sub-account-menu">
                                                         <li className="header-sub-account-menu">
-                                                            <a href="index.html">Nguyễn Ngọc Thuyên</a>
+                                                            <Link to="#">Nguyễn Ngọc Thuyên</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="index.html">Thông tin chung</a>
+                                                            <Link to="/profile">Thông tin chung</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="home-02.html">Đổi mật khẩu</a>
+                                                            <Link to="/changePassword">Đổi mật khẩu</Link>
                                                         </li>
                                                         <li className="footer-sub-account-menu" onClick={handleLogout}>
-                                                            <a href="home-03.html">Đăng xuất</a>
+                                                            <Link to="/">Đăng xuất</Link>
                                                         </li>
                                                     </ul>
                                                 </div>

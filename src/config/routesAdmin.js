@@ -1,8 +1,13 @@
 const routesAdmin = {
     dashboard: '/dashboard',
+
     addClub: '/dashboard/club/add',
     updateClub: '/dashboard/club/update/:id',
     listClubs: '/dashboard/club/list',
+
+    addLeague: '/dashboard/league/add',
+    updateLeague: '/dashboard/league/update/:id',
+    listLeagues: '/dashboard/league/list',
 
     listBrands: '/dashboard/brand',
     listVouchers: '/dashboard/voucher',
