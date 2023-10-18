@@ -26,20 +26,20 @@ class ListClubs extends Component {
     };
 
     editClub = (club) => {
-        console.log(club);
+        // console.log(club);
 
         const { navigate } = this.props.router;
         navigate('/dashboard/club/update/' + club.id);
     };
 
     deleteClub = () => {
-        console.log(this.state.club);
+        // console.log(this.state.club);
         this.props.deleteClub(this.state.club.id);
     };
     openDeleteConfirmModal = (club) => {
         this.setState({ ...this.state, club: club });
 
-        console.log(club);
+        // console.log(club);
 
         const message = 'Do you want to delete the club ' + club.name;
 
@@ -55,7 +55,7 @@ class ListClubs extends Component {
     render() {
         const { navigate } = this.props.router;
         const { clubs, isLoading } = this.props;
-        console.log(clubs);
+
         if (isLoading) {
             return (
                 <>
@@ -79,7 +79,7 @@ class ListClubs extends Component {
                         width={400}
                         render={(_, record) => {
                             let name = record.league.name;
-                            console.log(name);
+
                             return <Tag style={{ fontWeight: '-moz-initial', color: 'navy' }}> {name}</Tag>;
                         }}
                     ></Column>

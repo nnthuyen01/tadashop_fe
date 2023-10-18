@@ -23,6 +23,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setError, setMessage } from '../redux/actions/commonAction';
+import logo from '~/admin/logo';
 
 const { Header, Sider, Content } = Layout;
 const Dashboard = () => {
@@ -68,14 +69,10 @@ const Dashboard = () => {
             >
                 <div className="logoAdmin">
                     {!collapsed ? (
-                        <img
-                            src="assets\images\icons\Logo.png"
-                            alt="IMG-LOGO"
-                            style={{ width: '195px', marginTop: '10px' }}
-                        />
+                        <img src={logo.Logo} alt="IMG-LOGO" style={{ width: '195px', marginTop: '10px' }} />
                     ) : (
                         <img
-                            src="assets\images\icons\tadashop.png"
+                            src={logo.Tadashop}
                             alt="IMG-LOGO-cl"
                             style={{ marginLeft: '25%', height: '39.98px', marginTop: '10px' }}
                         />
