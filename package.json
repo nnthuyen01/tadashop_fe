@@ -19,6 +19,7 @@
         "imagesloaded": "^5.0.0",
         "isotope-layout": "^3.0.6",
         "jquery": "^3.7.0",
+        "jwt-decode": "^3.1.2",
         "magnific-popup": "^1.1.0",
         "moment": "^2.29.4",
         "normalize.css": "^8.0.1",

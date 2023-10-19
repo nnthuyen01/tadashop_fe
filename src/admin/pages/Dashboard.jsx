@@ -29,8 +29,6 @@ const { Header, Sider, Content } = Layout;
 const Dashboard = () => {
     const navigate = useNavigate();
     const handleLogout = (e) => {
-        // e.preventDefault();
-
         if (e) {
             e.preventDefault();
         }
