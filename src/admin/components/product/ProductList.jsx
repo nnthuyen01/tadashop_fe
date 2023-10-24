@@ -25,7 +25,7 @@ class ProductList extends Component {
 
                 <Column title="Name" key="name" dataIndex="name"></Column>
                 <Column title="Total Quantity" key="totalQuantity" dataIndex="totalQuantity" width={60}></Column>
-                <Column title="Price" key="price" dataIndex="price" width={60}></Column>
+                <Column title="Price" key="price" dataIndex="priceAfterDiscount" width={60}></Column>
                 <Column title="Discount" key="discount" dataIndex="discount" width={60}></Column>
                 <Column
                     title="Is Featured"
@@ -42,7 +42,7 @@ class ProductList extends Component {
                     key="status"
                     dataIndex="status"
                     width={60}
-                    render={(_, record) => <h1>{record.status}</h1>}
+                    render={(_, record) => <h3>{record.status}</h3>}
                 ></Column>
 
                 <Column

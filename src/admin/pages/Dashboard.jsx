@@ -196,18 +196,14 @@ const Dashboard = () => {
                             icon: <MdInsertChartOutlined />,
                             label: 'Statistics',
                         },
+
                         {
                             key: '9',
-                            icon: <MdManageAccounts />,
-                            label: 'Profiles',
-                        },
-                        {
-                            key: '10',
                             icon: <MdSupervisorAccount />,
                             label: 'Accounts',
                         },
                         {
-                            key: '11',
+                            key: '10',
                             icon: <MdLogout />,
                             label: 'Logout',
                             onClick: () => {

@@ -25,13 +25,7 @@ class ProductDetailAdmin extends Component {
 
         console.log('this mount');
     };
-    // preventEditing = (editor) => {
-    //     editor.editing.view.document.on('keydown', (event, data) => {
-    //         if (!editor.isReadOnly) {
-    //             data.preventDefault();
-    //         }
-    //     });
-    // };
+
     render() {
         const { product, isLoading } = this.props;
         const { navigate } = this.props.router;
@@ -60,11 +54,14 @@ class ProductDetailAdmin extends Component {
                             <Form.Item label="Name" name="name" initialValue={product.name}>
                                 <Input readOnly></Input>
                             </Form.Item>
+                            <Form.Item label="Season" name="season" initialValue={product.season}>
+                                <Input readOnly></Input>
+                            </Form.Item>
                             <Form.Item label="Total quantity" name="totalQuantity" initialValue={product.totalQuantity}>
                                 <Input readOnly></Input>
                             </Form.Item>
-                            <Form.Item label="Price" name="price" initialValue={product.price}>
-                                <Input readOnly></Input>
+                            <Form.Item label="Price" name="price" initialValue={product.priceAfterDiscount}>
+                                <Input addonAfter={'₫'} readOnly></Input>
                             </Form.Item>
                             <Row>
                                 <Col md={12}>
@@ -106,12 +103,17 @@ class ProductDetailAdmin extends Component {
                             <Divider type="vertical" style={{ height: '100%' }}></Divider>
                         </Col>
                         <Col md={11}>
-                            <Row>
-                                <Col md={12}>
-                                    {' '}
+                            <Form.Item label="Original Price" name="originalPrice" initialValue={product.originalPrice}>
+                                <Input addonAfter={'₫'} readOnly></Input>
+                            </Form.Item>
+                            <Row gutter={16}>
+                                <Col md={6}>
                                     <Form.Item label="Discount" name="discount" initialValue={product.discount}>
-                                        <Input readOnly></Input>
+                                        <Input addonAfter={'%'} readOnly></Input>
                                     </Form.Item>
+                                </Col>
+
+                                <Col md={6}>
                                     <Form.Item
                                         label="Featured"
                                         name="isFeatured"
@@ -119,6 +121,19 @@ class ProductDetailAdmin extends Component {
                                         valuePropName="checked"
                                     >
                                         <Checkbox />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            <Row gutter={16}>
+                                <Col md={6}>
+                                    <Form.Item label="Gender" name="gender" initialValue={product.gender}>
+                                        <Input readOnly></Input>
+                                    </Form.Item>
+                                </Col>
+
+                                <Col md={6}>
+                                    <Form.Item label="Kit Type" name="kitType" initialValue={product.kitType}>
+                                        <Input readOnly></Input>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -133,10 +148,6 @@ class ProductDetailAdmin extends Component {
                                     <Form.Item label="Brand" name="brand" initialValue={product.brand?.name}>
                                         <Row>
                                             <Col md={6}>
-                                                {/* <Image
-                                                    src="https://ssl.gstatic.com/onebox/media/sports/logos/udQ6ns69PctCv143h-GeYw_96x96.png"
-                                                    height={32}
-                                                ></Image> */}
                                                 {product.brand ? (
                                                     <Image
                                                         src={BrandService.getBrandLogoUrl(product.brand?.logo)}
@@ -168,10 +179,6 @@ class ProductDetailAdmin extends Component {
                                     ) : (
                                         ''
                                     )}
-                                    {/* <Image
-                                        src="https://ssl.gstatic.com/onebox/media/sports/logos/udQ6ns69PctCv143h-GeYw_96x96.png"
-                                        height={90}
-                                    ></Image> */}
                                 </Space>
                             </Form.Item>
                         </Col>
@@ -181,7 +188,6 @@ class ProductDetailAdmin extends Component {
                                 <Space>
                                     {product.images && Array.isArray(product.images)
                                         ? product.images.map((image, index) => (
-                                              /* <Image src={BrandService.getBrandLogoUrl(product.brand)} height={90}></Image> */
                                               <Image
                                                   key={index}
                                                   src={ProductService.getProductImageUrl(image.fileName)}
@@ -194,16 +200,20 @@ class ProductDetailAdmin extends Component {
                         </Col>
                     </Row>
 
-                    <Row>
+                    {/* <Row>
                         <Col md={24}>
-                            {' '}
-                            <Form.Item label="Brief" name="brief" initialValue={convert(product.brief)}>
-                                {/* <ReactQuill theme="snow" readOnly></ReactQuill> */}
+                            <Form.Item label="Brief" name="brief" initialValue={convert(product.brief)}>                             
                                 <Input readOnly></Input>
                             </Form.Item>
                         </Col>
+                    </Row> */}
+                    <Row>
+                        <Col md={24}>
+                            <div style={{ fontWeight: 'bold' }}>Brief:</div>
+                            <div dangerouslySetInnerHTML={{ __html: convert(product.brief) }} />
+                        </Col>
                     </Row>
-
+                    {/* 
                     <Row>
                         <Col md={24}>
                             {' '}
@@ -215,12 +225,19 @@ class ProductDetailAdmin extends Component {
                                 <Input readOnly></Input>
                             </Form.Item>
                         </Col>
-                    </Row>
-
+                    </Row> */}
+                    <Col md={24}>
+                        <div style={{ fontWeight: 'bold' }}>Description:</div>
+                        <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                    </Col>
                     <Row>
                         <Col md={24}>
                             <Divider></Divider>
-                            <Button type="primary" onClick={this.goNext} style={{ float: 'right' }}>
+                            <Button
+                                type="primary"
+                                onClick={() => navigate('/dashboard/products/update/' + product.id)}
+                                style={{ float: 'right' }}
+                            >
                                 Edit
                             </Button>
                         </Col>

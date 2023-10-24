@@ -30,9 +30,36 @@ class ProductForm extends Component {
         super(props);
 
         this.state = {
+            brief: '',
+            hasBriefError: false,
             descriptionCkData: '',
         };
     }
+
+    handlePriceChange = (price) => {
+        const { discount } = this.form.current.getFieldsValue(['discount']);
+
+        const priceAfterDiscount = Math.ceil((price * (100 - discount)) / 100 / 1000) * 1000; // Làm tròn lên đến hàng ngàn
+        this.form.current.setFieldsValue({ priceAfterDiscount });
+    };
+
+    handleDiscountChange = (discount) => {
+        const { originalPrice } = this.form.current.getFieldsValue(['originalPrice']);
+
+        const priceAfterDiscount = Math.ceil((originalPrice * (100 - discount)) / 100 / 1000) * 1000; // Làm tròn lên đến hàng ngàn
+        this.form.current.setFieldsValue({ priceAfterDiscount });
+    };
+
+    handleBriefChange = (value) => {
+        this.setState({ brief: value });
+
+        // Kiểm tra và cập nhật state hasBriefError
+        if (value.length > 500) {
+            this.setState({ hasBriefError: true });
+        } else {
+            this.setState({ hasBriefError: false });
+        }
+    };
 
     componentDidMount = () => {
         this.setState({ ...this.state, descriptionCkData: this.props.product.description });
@@ -54,16 +81,22 @@ class ProductForm extends Component {
         this.form.current
             .validateFields()
             .then((values) => {
-                console.log(values);
-                const newValues = {
-                    ...values,
-                    description: this.state.descriptionCkData,
-
-                    image: values.image[0].fileName ? values.image[0] : values.image[0].response,
-                };
-
-                console.log(newValues);
-                this.props.goNext(newValues);
+                console.log(this.state.hasBriefError);
+                if (this.state.hasBriefError) {
+                    message.error('Brief cannot exceed 500 characters.');
+                } else if (this.state.descriptionCkData.length > 2000) {
+                    message.error('Description cannot exceed 2000 characters.');
+                } else {
+                    // Tiến hành submit nếu không có lỗi brief
+                    console.log(values);
+                    const newValues = {
+                        ...values,
+                        description: this.state.descriptionCkData,
+                        image: values.image[0].fileName ? values.image[0] : values.image[0].response,
+                    };
+                    console.log(newValues);
+                    this.props.goNext(newValues);
+                }
             })
             .catch((info) => {
                 console.log(info);
@@ -107,10 +140,13 @@ class ProductForm extends Component {
                             <Form.Item label="Name" name="name" initialValue={product.name} required hasFeedback>
                                 <Input></Input>
                             </Form.Item>
+                            <Form.Item label="Season" name="season" initialValue={product.season} required hasFeedback>
+                                <Input></Input>
+                            </Form.Item>
                             <Form.Item
-                                label="Price"
-                                name="price"
-                                initialValue={product.price}
+                                label="Original Price"
+                                name="originalPrice"
+                                initialValue={product.originalPrice}
                                 rules={[{ required: true }]}
                                 hasFeedback
                             >
@@ -120,6 +156,7 @@ class ProductForm extends Component {
                                     formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     parser={(value) => value.replace(/$\s?|(,*)/g, '')}
                                     style={{ width: '100%' }}
+                                    onChange={this.handlePriceChange}
                                 ></InputNumber>
                             </Form.Item>
                             <Form.Item
@@ -136,6 +173,22 @@ class ProductForm extends Component {
                                     formatter={(value) => `${value}`}
                                     parser={(value) => value.replace('%', '')}
                                     style={{ width: '100%' }}
+                                    onChange={this.handleDiscountChange}
+                                ></InputNumber>
+                            </Form.Item>
+                            <Form.Item
+                                label="Price After Discount"
+                                name="priceAfterDiscount"
+                                initialValue={product.priceAfterDiscount}
+                                hasFeedback
+                            >
+                                <InputNumber
+                                    min={0}
+                                    addonAfter={'₫'}
+                                    formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    parser={(value) => value.replace(/$\s?|(,*)/g, '')}
+                                    style={{ width: '100%' }}
+                                    readOnly
                                 ></InputNumber>
                             </Form.Item>
                             <Row>
@@ -211,6 +264,32 @@ class ProductForm extends Component {
                                 </Select>
                             </Form.Item>
                             <Form.Item
+                                label="Gender"
+                                name="gender"
+                                initialValue={product.gender}
+                                rules={[{ required: true }]}
+                                hasFeedback
+                            >
+                                <Select placeholder="Select Gender">
+                                    <Select.Option value="Men">Men</Select.Option>
+                                    <Select.Option value="Women">Women</Select.Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item
+                                label="Kit Type"
+                                name="kitType"
+                                initialValue={product.kitType}
+                                rules={[{ required: true }]}
+                                hasFeedback
+                            >
+                                <Select placeholder="Select Kit Type">
+                                    <Select.Option value="Home">Home</Select.Option>
+                                    <Select.Option value="Away">Away</Select.Option>
+                                    <Select.Option value="Third">Third</Select.Option>
+                                    <Select.Option value="Goalkeeper">Goalkeeper</Select.Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item
                                 label="Main Image"
                                 name="image"
                                 rules={[{ required: true }]}
@@ -249,8 +328,10 @@ class ProductForm extends Component {
                                 initialValue={product.brief}
                                 rules={[{ required: true }]}
                                 hasFeedback
+                                validateStatus={this.state.hasBriefError ? 'error' : ''}
+                                help={this.state.hasBriefError ? 'Maximum 500 characters allowed.' : ''}
                             >
-                                <ReactQuill theme="snow"></ReactQuill>
+                                <ReactQuill theme="snow" value={this.state.brief} onChange={this.handleBriefChange} />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -263,6 +344,10 @@ class ProductForm extends Component {
                                 initialValue={descriptionCkData}
                                 rules={[{ required: true }]}
                                 hasFeedback
+                                validateStatus={this.state.descriptionCkData.length > 2000 ? 'error' : ''}
+                                help={
+                                    this.state.descriptionCkData.length > 2000 ? 'Maximum 2000 characters allowed.' : ''
+                                }
                             >
                                 <CKEditor
                                     editor={ClassicEditor}

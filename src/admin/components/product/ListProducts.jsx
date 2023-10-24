@@ -44,11 +44,6 @@ class ListProducts extends Component {
     };
 
     render() {
-        // const products = [
-        //     { id: 1, name: 'Hat', price: 100, discount: 100, totalQuantity: 10, isFeatured: 0, status: 'inStock' },
-        //     { id: 2, name: 'Mouse', price: 100, discount: 100, totalQuantity: 10, isFeatured: 1, status: 'inStock' },
-        // ];
-
         const { products } = this.props;
         const { navigate } = this.props.router;
 

@@ -93,7 +93,7 @@ class AddOrEditClub extends Component {
         const { isLoading } = this.props;
         const { club, leagues } = this.state;
         let title = 'Add New Club';
-        console.log(club);
+        // console.log(club);
 
         if (club.id) {
             title = 'Update Club';
