@@ -336,3 +336,37 @@ body {
     display: block;
     height: 16.8px;
 }
+
+//when have logged in
+
+.container-btn-login {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-exit {
+    background-color: #ee0000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    height: 43px;
+    width: 85px;
+    margin-right: 10px;
+}
+
+.btn-exit:hover {
+    background-color: #990000;
+}
+
+.btn-deny {
+    background-color: white;
+    color: #ee0000;
+    border: 2px solid #ee0000;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    height: 43px;
+    width: 85px;
+}

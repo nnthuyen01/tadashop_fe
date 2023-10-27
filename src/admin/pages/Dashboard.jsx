@@ -201,6 +201,7 @@ const Dashboard = () => {
                             key: '9',
                             icon: <MdSupervisorAccount />,
                             label: 'Accounts',
+                            onClick: () => navigate('/dashboard/accounts'),
                         },
                         {
                             key: '10',

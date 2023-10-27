@@ -33,23 +33,23 @@ function SliderHome() {
         {
             imgSilder: 'assets/images/bg1.jpg',
             thumb: 'assets/images/bg1.jpg',
-            caption: 'Women’s Wear',
-            titleTiny: 'Women Collection 2018',
-            titleBig: 'New arrivals',
+            caption: 'ManU’s Away',
+            titleTiny: 'Manchester United',
+            titleBig: 'Spooky Season',
         },
         {
             imgSilder: 'assets/images/bg2.jpg',
             thumb: 'assets/images/thumb-02.jpg',
-            caption: 'Men’s Wear',
-            titleTiny: 'Men New-Season',
-            titleBig: 'Jackets & Coats',
+            caption: 'ManU’s Home',
+            titleTiny: 'Manchester United',
+            titleBig: 'Home Kit 23/24',
         },
         {
             imgSilder: 'assets/images/bg3.jpg',
             thumb: 'assets/images/thumb-03.jpg',
-            caption: 'Men’s Wear',
-            titleTiny: 'Men Collection 2018',
-            titleBig: 'NEW SEASON',
+            caption: 'Arsenal’s Home',
+            titleTiny: 'Arsenal',
+            titleBig: "Men's Team Away",
         },
         // Add more slide data as needed...
     ];

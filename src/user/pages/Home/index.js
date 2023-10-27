@@ -100,25 +100,25 @@ function Home() {
                             <div className="menu-desktop">
                                 <ul className="main-menu">
                                     <li>
-                                        <Link to="/">Home</Link>
+                                        <Link to="/">Trang Chủ</Link>
                                     </li>
 
                                     <li className="label1" data-label1="hot">
-                                        <Link to="/shop">Shop</Link>
+                                        <Link to="/shop">Cửa hàng</Link>
                                     </li>
 
                                     <li>
-                                        <Link to="/cart">Cart</Link>
+                                        <Link to="/cart">Giỏ hàng</Link>
                                     </li>
                                     <li>
-                                        <Link to="/blog">Blog</Link>
+                                        <Link to="/blog">Bài viết</Link>
                                     </li>
                                     <li>
-                                        <Link to="/about">About</Link>
+                                        <Link to="/about">Giới thiệu</Link>
                                     </li>
 
                                     <li>
-                                        <Link to="/contact">Contact</Link>
+                                        <Link to="/contact">Liên hệ</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -236,12 +236,12 @@ function Home() {
                     <div className="menu-mobile">
                         <ul className="main-menu-m">
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/">Trang chủ</Link>
                             </li>
 
                             <li>
                                 <Link to="/shop" className="label1 rs1" data-label1="hot">
-                                    Shop
+                                    Cửa hàng
                                 </Link>
                                 <ul className="sub-menu-m">
                                     <li>
@@ -260,15 +260,15 @@ function Home() {
                             </li>
 
                             <li>
-                                <Link to="/about">About</Link>
+                                <Link to="/about">Giới thiệu</Link>
                             </li>
 
                             <li>
-                                <Link to="/blog">Blog</Link>
+                                <Link to="/blog">Bài viết</Link>
                             </li>
 
                             <li>
-                                <Link to="/cart">Cart</Link>
+                                <Link to="/cart">Giỏ hàng</Link>
                             </li>
 
                             <li>

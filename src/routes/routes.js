@@ -27,6 +27,8 @@ import Contact from '~/user/pages/Contact';
 import ChangePassword from '~/user/pages/Profile/changePassword';
 import AddOrEditLeague from '~/admin/components/league/AddOrEditLeague';
 import ListLeagues from '~/admin/components/league/ListLeagues';
+import ListAccounts from '~/admin/components/accounts/ListAccounts';
+import AccountDetailAdmin from '~/admin/components/accounts/AccountDetailAdmin';
 
 // Public routes
 const publicRoutes = [
@@ -66,5 +68,8 @@ const privateRoutes = [
     { path: config.routesAdmin.productDetailAdmin, component: ProductDetailAdmin },
 
     { path: config.routesAdmin.sizeProduct, component: ListSizes },
+
+    { path: config.routesAdmin.accounts, component: ListAccounts },
+    { path: config.routesAdmin.accountDetailAdmin, component: AccountDetailAdmin },
 ];
 export { publicRoutes, privateRoutes };

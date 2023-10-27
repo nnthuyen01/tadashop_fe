@@ -99,25 +99,25 @@ function HeaderPages() {
                             <div className="menu-desktop">
                                 <ul className="main-menu">
                                     <li>
-                                        <Link to="/">Home</Link>
+                                        <Link to="/">Liên hệ</Link>
                                     </li>
 
                                     <li className="label1" data-label1="hot">
-                                        <Link to="/shop">Shop</Link>
+                                        <Link to="/shop">Cửa hàng</Link>
                                     </li>
                                     <li>
-                                        <Link to="/cart">Cart</Link>
-                                    </li>
-
-                                    <li>
-                                        <Link to="/blog">Blog</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/about">About</Link>
+                                        <Link to="/cart">Giỏ hàng</Link>
                                     </li>
 
                                     <li>
-                                        <Link to="/contact">Contact</Link>
+                                        <Link to="/blog">Bài viết</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/about">Giới thiệu</Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="/contact">Liên hệ</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -251,7 +251,7 @@ function HeaderPages() {
                     <div className="menu-mobile">
                         <ul className="main-menu-m">
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/">Liên hệ</Link>
                             </li>
 
                             <li>
@@ -275,15 +275,15 @@ function HeaderPages() {
                             </li>
 
                             <li>
-                                <Link to="/about">About</Link>
+                                <Link to="/about">Giới thiệu</Link>
                             </li>
 
                             <li>
-                                <Link to="/blog">Blog</Link>
+                                <Link to="/blog">Bài viết</Link>
                             </li>
 
                             <li>
-                                <Link to="/cart">Cart</Link>
+                                <Link to="/cart">Giỏ hàng</Link>
                             </li>
 
                             <li>

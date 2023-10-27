@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link, createRoutesFromElements, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.scss';
@@ -6,11 +6,21 @@ import './Login.scss';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'; // Import CSS của Tippy
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faHourglass2 } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert';
 import Loading from '../../Loading/loading';
 const Login = () => {
     const navigate = useNavigate();
+
+    const isAuthenticated = localStorage.getItem('auth_token') !== null;
+    const handleLogout = (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_name');
+        navigate('/login');
+    };
     const [loading, setLoading] = useState(false);
 
     //Login the user
@@ -279,7 +289,31 @@ const Login = () => {
             setLoading(false); // Ẩn hiệu ứng loading sau khi xử lý xong
         }
     };
-    return (
+    return isAuthenticated ? (
+        <div className="fullScreen">
+            <div className="verify-email-container">
+                <div className="verify-email-card">
+                    <h2 className="verify-email-heading">Xác nhận</h2>
+                    <p className="verify-email-text">
+                        Bạn đã đăng nhập với username{' '}
+                        <span style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                            {localStorage.getItem('auth_name')}
+                        </span>
+                        , cần đăng xuất trước khi đăng nhập làm người dùng khác.
+                    </p>
+
+                    <div className="container-btn-login">
+                        <button className="btn-exit" onClick={handleLogout}>
+                            Thoát
+                        </button>
+                        <button className="btn-deny" onClick={() => navigate('/')}>
+                            Hủy bỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ) : (
         <div className="fullScreen">
             {loading && <Loading />}
 
