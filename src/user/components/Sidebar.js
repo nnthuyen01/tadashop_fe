@@ -19,37 +19,31 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                         <ul className="sidebar-link w-full">
                             <li className="p-b-13">
                                 <a href="index.html" className="stext-102 cl2 hov-cl1 trans-04">
-                                    Home
+                                    Trang Chủ
                                 </a>
                             </li>
 
                             <li className="p-b-13">
                                 <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
-                                    My Wishlist
+                                    Giỏ hàng
                                 </a>
                             </li>
 
                             <li className="p-b-13">
                                 <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
-                                    My Account
+                                    Tài khoản
                                 </a>
                             </li>
 
                             <li className="p-b-13">
                                 <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
-                                    Track Oder
+                                    Đơn hàng
                                 </a>
                             </li>
 
                             <li className="p-b-13">
                                 <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
-                                    Refunds
-                                </a>
-                            </li>
-
-                            <li className="p-b-13">
-                                <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
-                                    Help & FAQs
+                                    Hỏi đáp
                                 </a>
                             </li>
                         </ul>
@@ -151,7 +145,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                         </div>
 
                         <div className="sidebar-gallery w-full">
-                            <span className="mtext-101 cl5">About Us</span>
+                            <span className="mtext-101 cl5">Về chúng tôi</span>
 
                             <p className="stext-108 cl6 p-t-27">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus vulputate

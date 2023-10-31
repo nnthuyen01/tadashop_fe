@@ -345,9 +345,11 @@ function ProductDetail() {
 
                         <div className="col-md-6 col-lg-5 p-b-30">
                             <div className="p-r-50 p-t-5 p-lr-0-lg">
-                                <h4 className="mtext-105 cl2 js-name-detail p-b-14">Lightweight Jacket</h4>
+                                <h4 className="mtext-105 cl2 js-name-detail p-b-14">
+                                    ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024
+                                </h4>
 
-                                <span className="mtext-106 cl2"> $58.79 </span>
+                                <span className="mtext-106 cl2"> 300,000₫ </span>
 
                                 <p className="stext-102 cl3 p-t-23">
                                     Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris
@@ -374,23 +376,7 @@ function ProductDetail() {
                                     </div>
 
                                     <div className="flex-w flex-r-m p-b-10">
-                                        <div className="size-203 flex-c-m respon6">Color</div>
-
-                                        <div className="size-204 respon6-next">
-                                            <div className="rs1-select2 bor8 bg0">
-                                                <select ref={selectColorRef} className="js-select2" name="time">
-                                                    <option>Choose an option</option>
-                                                    <option>Red</option>
-                                                    <option>Blue</option>
-                                                    <option>White</option>
-                                                    <option>Grey</option>
-                                                </select>
-                                                <div className="dropDownSelect2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex-w flex-r-m p-b-10">
+                                        <div className="size-203 flex-c-m respon6">Số lượng</div>
                                         <div className="size-204 flex-w flex-m respon6-next">
                                             <div className="wrap-num-product flex-w m-r-20 m-tb-10">
                                                 <div
@@ -415,12 +401,15 @@ function ProductDetail() {
                                                     <i className="fs-16 zmdi zmdi-plus"></i>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                    </div>
+                                    <div className="flex-w flex-r-m p-b-10">
+                                        <div className="size-204 flex-w flex-m respon6-next">
                                             <button
                                                 className="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
                                                 onClick={() => handleAddToCart('Lightweight Jacket')}
                                             >
-                                                Add to cart
+                                                Thêm vào giỏ hàng
                                             </button>
                                         </div>
                                     </div>
@@ -455,9 +444,9 @@ function ProductDetail() {
                                         target="_blank"
                                         rel="noreferrer"
                                         className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                        data-tooltip="Twitter"
+                                        data-tooltip="Instagram"
                                     >
-                                        <i className="fa fa-twitter"></i>
+                                        <i className="fa fa-instagram"></i>
                                     </a>
 
                                     <a
@@ -465,9 +454,9 @@ function ProductDetail() {
                                         target="_blank"
                                         rel="noreferrer"
                                         className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                        data-tooltip="Google Plus"
+                                        data-tooltip="Youtube"
                                     >
-                                        <i className="fa fa-google-plus"></i>
+                                        <i className="fa fa-youtube-play"></i>
                                     </a>
                                 </div>
                             </div>
@@ -737,7 +726,7 @@ function ProductDetail() {
             <section className="sec-relate-product bg0 p-t-45 p-b-105">
                 <div className="container">
                     <div className="p-b-45">
-                        <h3 className="ltext-106 cl5 txt-center">Related Products</h3>
+                        <h3 className="ltext-106 cl5 txt-center">Sản phẩm liên quan</h3>
                     </div>
 
                     {/* <!-- Slide2 --> */}

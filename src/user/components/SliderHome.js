@@ -33,23 +33,23 @@ function SliderHome() {
         {
             imgSilder: 'assets/images/bg1.jpg',
             thumb: 'assets/images/bg1.jpg',
-            caption: 'ManU’s Away',
+            caption: 'Thời Trang',
             titleTiny: 'Manchester United',
-            titleBig: 'Spooky Season',
+            titleBig: 'Phong cách Thời Thượng',
         },
         {
             imgSilder: 'assets/images/bg2.jpg',
             thumb: 'assets/images/thumb-02.jpg',
-            caption: 'ManU’s Home',
+            caption: 'Mạnh Mẽ',
             titleTiny: 'Manchester United',
-            titleBig: 'Home Kit 23/24',
+            titleBig: 'Mùa giải 23/24',
         },
         {
             imgSilder: 'assets/images/bg3.jpg',
             thumb: 'assets/images/thumb-03.jpg',
-            caption: 'Arsenal’s Home',
+            caption: 'Năng Động',
             titleTiny: 'Arsenal',
-            titleBig: "Men's Team Away",
+            titleBig: 'Bóng đá đam mê',
         },
         // Add more slide data as needed...
     ];
@@ -113,7 +113,7 @@ function SliderHome() {
                                                 href="product.html"
                                                 className="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04"
                                             >
-                                                Shop Now
+                                                Mua Ngay
                                             </a>
                                         </div>
                                     </div>

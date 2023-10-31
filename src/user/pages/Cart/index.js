@@ -7,17 +7,17 @@ function Cart() {
     const cartProducts = [
         {
             img: 'assets/images/AoMu2.jpg',
-            name: 'Áo Manchester United sân nhà',
-            price: '$ 36.00',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
             quantity: 1,
-            total: '$ 36.00',
+            total: '300,000₫',
         },
         {
             img: 'assets/images/AoMu3.jpg',
-            name: 'Áo Manchester United sân khách',
-            price: '$ 16.00',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
             quantity: 1,
-            total: '$ 16.00',
+            total: '300,000₫',
         },
     ];
 
@@ -80,11 +80,11 @@ function Cart() {
                                     <table className="table-shopping-cart">
                                         <thead>
                                             <tr className="table_head">
-                                                <th className="column-1">Product</th>
-                                                <th className="column-2">Name</th>
-                                                <th className="column-3">Price</th>
-                                                <th className="column-4">Quantity</th>
-                                                <th className="column-5">Total</th>
+                                                <th className="column-1">Hình ảnh</th>
+                                                <th className="column-2">Tên sản phâm</th>
+                                                <th className="column-3">Giá</th>
+                                                <th className="column-4">Số lượng</th>
+                                                <th className="column-5">Tổng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -135,16 +135,16 @@ function Cart() {
                                             className="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5"
                                             type="text"
                                             name="coupon"
-                                            placeholder="Coupon Code"
+                                            placeholder="Nhập mã Voucher"
                                         />
 
                                         <div className="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                                            Apply coupon
+                                            Áp dụng voucher
                                         </div>
                                     </div>
 
                                     <div className="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                                        Update Cart
+                                        Cập nhật Giỏ
                                     </div>
                                 </div>
                             </div>
@@ -152,11 +152,11 @@ function Cart() {
 
                         <div className="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                             <div className="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-                                <h4 className="mtext-109 cl2 p-b-30">Cart Totals</h4>
+                                <h4 className="mtext-109 cl2 p-b-30">TỔNG GIỎ HÀNG</h4>
 
                                 <div className="flex-w flex-t bor12 p-b-13">
                                     <div className="size-208">
-                                        <span className="stext-110 cl2">Subtotal:</span>
+                                        <span className="stext-110 cl2">Tổng tiền:</span>
                                     </div>
 
                                     <div className="size-209">
@@ -166,21 +166,21 @@ function Cart() {
 
                                 <div className="flex-w flex-t bor12 p-t-15 p-b-30">
                                     <div className="size-208 w-full-ssm">
-                                        <span className="stext-110 cl2">Shipping:</span>
+                                        <span className="stext-110 cl2">Giao hàng:</span>
                                     </div>
 
                                     <div className="size-209 p-r-18 p-r-0-sm w-full-ssm">
                                         <p className="stext-111 cl6 p-t-2">
-                                            There are no shipping methods available. Please double check your address,
-                                            or contact us if you need any help.
+                                            Không có phương thức vận chuyển có sẵn. Vui lòng kiểm tra lại địa chỉ của
+                                            bạn hoặc liên hệ với chúng tôi nếu bạn cần bất kỳ trợ giúp nào.
                                         </p>
 
                                         <div className="p-t-15">
-                                            <span className="stext-112 cl8">Calculate Shipping</span>
+                                            <span className="stext-112 cl8">Vận chuyển</span>
 
                                             <div className="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
                                                 <select ref={selectAddressRef} className="js-select2" name="time">
-                                                    <option>Select a country...</option>
+                                                    <option>Chọn thành phố...</option>
                                                     <option>USA</option>
                                                     <option>UK</option>
                                                 </select>
@@ -205,18 +205,18 @@ function Cart() {
                                                 />
                                             </div>
 
-                                            <div className="flex-w">
+                                            {/* <div className="flex-w">
                                                 <div className="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                                    Update Totals
+                                                   Cập Nhật
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="flex-w flex-t p-t-27 p-b-33">
                                     <div className="size-208">
-                                        <span className="mtext-101 cl2">Total:</span>
+                                        <span className="mtext-101 cl2">Tổng cộng:</span>
                                     </div>
 
                                     <div className="size-209 p-t-1">
@@ -225,7 +225,7 @@ function Cart() {
                                 </div>
 
                                 <button className="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                                    Proceed to Checkout
+                                    Tiến hành Thanh Toán
                                 </button>
                             </div>
                         </div>

@@ -321,28 +321,28 @@ const Login = () => {
                 <div className="box">
                     <div className="form sign_in">
                         <div className="headingForm">
-                            <h3>Sign In</h3>
-                            <span>or use your account</span>
+                            <h3>Đăng nhập</h3>
+                            {/* <span>or use your account</span> */}
                         </div>
 
                         <form action="#" id="form_input1" onSubmit={handleLogin}>
                             <div className="groupField">
-                                <span className="head">USERNAME</span>
+                                <span className="head">TÀI KHOẢN</span>
                                 <div className="type">
                                     <input
                                         type="text"
-                                        placeholder="Username"
+                                        placeholder="Tài khoản"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                             </div>
                             <div className="groupField">
-                                <span className="head">PASSWORD</span>
+                                <span className="head">MẬT KHẨU</span>
                                 <div className="type">
                                     <input
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Mật khẩu"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -350,27 +350,27 @@ const Login = () => {
                             </div>
 
                             <div className="forgot">
-                                <Link to="/forgotPassword">Forgot your password?</Link>
+                                <Link to="/forgotPassword">Quên mật khẩu?</Link>
                             </div>
 
                             <div className="btnCenter">
-                                <button className="btn bkg">Sign In</button>
+                                <button className="btn bkg">Đăng nhập</button>
                             </div>
                         </form>
                     </div>
 
                     <div className="form sign_up">
-                        <h3>Sign Up</h3>
-                        <span>or use your email for register</span>
+                        <h3>Đăng ký</h3>
+                        {/* <span>or use your email for register</span> */}
 
                         <form action="#" id="form_input2" onSubmit={handleRegister}>
                             <div className="groupField">
-                                <span className="head">FIRST NAME</span>
+                                <span className="head">TÊN</span>
                                 <div className="type">
                                     <input
                                         type="text"
                                         name="firstName"
-                                        placeholder="First name"
+                                        placeholder="Tên của bạn"
                                         id="firstName"
                                         value={formData.firstName}
                                         onChange={(event) => {
@@ -381,17 +381,17 @@ const Login = () => {
                                 </div>
                             </div>
                             {isWarning1 ? (
-                                <div className="fieldType">First name là bắt buộc</div>
+                                <div className="fieldType">Tên là bắt buộc</div>
                             ) : (
                                 <div className="spaceField"></div>
                             )}
                             <div className="groupField">
-                                <span className="head">LAST NAME</span>
+                                <span className="head">HỌ</span>
                                 <div className="type">
                                     <input
                                         type="text"
                                         name="lastName"
-                                        placeholder="Last Name"
+                                        placeholder="Họ của bạn"
                                         id="lastName"
                                         value={formData.lastName}
                                         onChange={(event) => {
@@ -401,7 +401,7 @@ const Login = () => {
                                     />
                                 </div>
                                 {isWarning2 ? (
-                                    <div className="fieldType">Last name là bắt buộc</div>
+                                    <div className="fieldType">Họ là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
                                 )}
@@ -428,12 +428,12 @@ const Login = () => {
                                 )}
                             </div>
                             <div className="groupField">
-                                <span className="head">PHONE</span>
+                                <span className="head">SỐ ĐIỆN THOẠI </span>
                                 <div className="type">
                                     <input
                                         type="text"
                                         name="phone"
-                                        placeholder="Phone"
+                                        placeholder="Số điện thoại"
                                         id="phone"
                                         // onChange={handleInputNumber}
                                         onChange={(event) => {
@@ -443,18 +443,18 @@ const Login = () => {
                                     />
                                 </div>
                                 {isWarning4 ? (
-                                    <div className="fieldType">Phone là bắt buộc</div>
+                                    <div className="fieldType">Số điện thoại là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
                                 )}
                             </div>
                             <div className="groupField">
-                                <span className="head">USERNAME</span>
+                                <span className="head">TÀI KHOẢN</span>
                                 <div className="type">
                                     <input
                                         type="text"
                                         name="username"
-                                        placeholder="username"
+                                        placeholder="Tài Khoản"
                                         id="username"
                                         value={formData.username}
                                         onChange={(event) => {
@@ -464,14 +464,14 @@ const Login = () => {
                                     />
                                 </div>
                                 {isWarning5 ? (
-                                    <div className="fieldType">Username là bắt buộc</div>
+                                    <div className="fieldType">Tài khoản là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
                                 )}
                             </div>
 
                             <div className="groupField">
-                                <span className="head">PASSWORD</span>
+                                <span className="head">MẬT KHẨU</span>
                                 <div className="type">
                                     <Tooltip
                                         title="Password must be 6-26 characters long and include at least one lowercase letter, 
@@ -486,7 +486,7 @@ const Login = () => {
                                         <input
                                             type="password"
                                             name="password"
-                                            placeholder="Password"
+                                            placeholder="Mật khẩu"
                                             id="password"
                                             value={formData.password}
                                             // onChange={handlePasswordChange}
@@ -505,14 +505,14 @@ const Login = () => {
                                     {isCheckPassword && <FontAwesomeIcon className="check" icon={faCheckCircle} />}
                                 </div>
                                 {isWarning6 ? (
-                                    <div className="fieldType">Password là bắt buộc</div>
+                                    <div className="fieldType">Mật khẩu là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
                                 )}
                             </div>
 
                             <div className="groupField">
-                                <span className="head">CONFIRM PASSWORD</span>
+                                <span className="head">NHẬP LẠI MẬT KHẨU</span>
                                 <div className="type">
                                     <Tooltip
                                         title="Passwords do not match. Please enter matching passwords."
@@ -526,7 +526,7 @@ const Login = () => {
                                         <input
                                             type="password"
                                             name="confirmPassword"
-                                            placeholder="Confirm Password"
+                                            placeholder="Nhập lại mật khẩu"
                                             id="confirmPassword"
                                             value={formData.confirmPassword}
                                             // onChange={handleConfirmPasswordChange}
@@ -543,13 +543,13 @@ const Login = () => {
                                     {isCheckPasswordCf && <FontAwesomeIcon className="check" icon={faCheckCircle} />}
                                 </div>
                                 {isWarning7 ? (
-                                    <div className="fieldType">Confirm Password là bắt buộc</div>
+                                    <div className="fieldType">Xác nhận mật khẩu là bắt buộc</div>
                                 ) : (
                                     <div className="spaceField"></div>
                                 )}
                             </div>
                             <div className="btnCenter">
-                                <button className="btn bkg">Sign Up</button>
+                                <button className="btn bkg">Đăng Ký</button>
                             </div>
                         </form>
                     </div>
@@ -557,20 +557,20 @@ const Login = () => {
 
                 <div className="overlay">
                     <div className="page page_signIn">
-                        <h3>Welcome Back!</h3>
-                        <p>To keep with us please login with your personal info</p>
+                        <h3>Chào mừng bạn!</h3>
+                        <p>Vui lòng đăng nhập thông tin của bạn để đến với cửa hàng cửa chúng tôi</p>
 
                         <button className="btn btnSign-in" onClick={handleToggleForm}>
-                            Sign Up <i className="bi bi-arrow-right"></i>
+                            Đăng Ký <i className="bi bi-arrow-right"></i>
                         </button>
                     </div>
 
                     <div className="page page_signUp">
-                        <h3>Hello Friend!</h3>
-                        <p>Enter your personal details and start journey with us</p>
+                        <h3>Xin chào bạn!</h3>
+                        <p>Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi</p>
 
                         <button className="btn btnSign-up" onClick={handleToggleForm}>
-                            <i className="bi bi-arrow-left"></i> Sign In
+                            <i className="bi bi-arrow-left"></i> Đăng Nhập
                         </button>
                     </div>
                 </div>

@@ -15,113 +15,113 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
             dataFilter: 'mu',
             tag: 'New',
             img: 'assets/images/AoMu1.jpg',
-            name: 'Esprit Ruffle Shirt',
-            price: '$16.64',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'mu',
             tag: '',
             img: 'assets/images/AoMu2.jpg',
-            name: 'Herschel supply',
-            price: '$35.31',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'mu',
             tag: '',
             img: 'assets/images/AoMu3.jpg',
-            name: 'Only Check Trouser',
-            price: '$25.50',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'ac',
             tag: '',
             img: 'assets/images/AoAC1.jpg',
-            name: 'Classic Trench Coat',
-            price: '$75.00',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'ac',
             tag: '',
             img: 'assets/images/AoAC2.jpg',
-            name: 'Front Pocket Jumper',
-            price: '$34.75',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'atletico',
             tag: '',
             img: 'assets/images/AoAtletico1.jpg',
-            name: 'Vintage Inspired Classic',
-            price: '$93.20',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs1.jpg',
-            name: 'Shirt in Stretch Cotton',
-            price: '$52.66',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs2.jpg',
-            name: 'Pieces Metallic Printed',
-            price: '$18.96',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'arsenal',
             tag: '',
             img: 'assets/images/AoArs3.jpg',
-            name: 'Converse All Star Hi Plimsolls',
-            price: '$75.00',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'women',
             tag: '',
             img: 'assets/images/AoAston1.jpg',
-            name: 'Femme T-Shirt In Stripe',
-            price: '$25.85',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'men',
             tag: '',
             img: 'assets/images/AoAston2.jpg',
-            name: 'Herschel supply',
-            price: '$63.16',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'barcelona',
             tag: '',
             img: 'assets/images/AoBarce1.jpg',
-            name: 'Herschel supply',
-            price: '$63.15',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'barcelona',
             tag: '',
             img: 'assets/images/AoBarce2.jpg',
-            name: 'T-Shirt with Sleeve',
-            price: '$18.49',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'women',
             tag: '',
             img: 'assets/images/AoBayern1.jpg',
-            name: 'Pretty Little Thing',
-            price: '$54.79',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'watches',
             tag: '',
             img: 'assets/images/AoBayern2.jpg',
-            name: 'Mini Silver Mesh Watch',
-            price: '$86.85',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
         {
             dataFilter: 'women',
             tag: '',
             img: 'assets/images/AoBayern3.jpg',
-            name: 'Square Neck Back',
-            price: '$29.64',
+            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+            price: '300,000₫',
         },
     ];
 
@@ -192,7 +192,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                     {/* title product */}
                     {title === true && (
                         <div className="p-b-10">
-                            <h3 className="ltext-103 cl5">Product Overview</h3>
+                            <h3 className="ltext-103 cl5">Danh Mục Sản Phẩm</h3>
                         </div>
                     )}
                     {/* header filter product */}
@@ -203,7 +203,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                     className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
                                     data-filter="*"
                                 >
-                                    All Products
+                                    Tất cả sản phẩm
                                 </button>
 
                                 <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".mu">
@@ -246,7 +246,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                             >
                                 <i className="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                                 <i className="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                                Filter
+                                Bộ Lọc
                             </div>
 
                             <div
@@ -257,7 +257,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                             >
                                 <i className="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                                 <i className="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                                Search
+                                Tìm Kiếm
                             </div>
                         </div>
 
@@ -286,49 +286,49 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                         >
                             <div className="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                                 <div className="filter-col1 p-r-15 p-b-27">
-                                    <div className="mtext-102 cl2 p-b-15">Sort By</div>
+                                    <div className="mtext-102 cl2 p-b-15">Sắp Xếp</div>
 
                                     <ul>
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Default
+                                                Mạc định
                                             </a>
                                         </li>
 
-                                        <li className="p-b-6">
+                                        {/* <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
                                                 Popularity
                                             </a>
-                                        </li>
+                                        </li> */}
 
-                                        <li className="p-b-6">
+                                        {/* <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
                                                 Average rating
                                             </a>
-                                        </li>
+                                        </li> */}
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04 filter-link-active">
-                                                Newness
+                                                Mới nhất
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Price: Low to High
+                                                Giá: cao đên thấp
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Price: High to Low
+                                                Giá: thấp đến cao
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="filter-col2 p-r-15 p-b-27">
-                                    <div className="mtext-102 cl2 p-b-15">Price</div>
+                                    <div className="mtext-102 cl2 p-b-15">Giá</div>
 
                                     <ul>
                                         <li className="p-b-6">
@@ -339,38 +339,38 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                $0.00 - $50.00
+                                                0 vnđ - 100,000 vnđ
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                $50.00 - $100.00
+                                                100,000 vnđ - 200,000 vnđ
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                $100.00 - $150.00
+                                                200,000 vnđ - 300,000 vnđ
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                $150.00 - $200.00
+                                                300,000 vnđ - 500,000 vnđ
                                             </a>
                                         </li>
 
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                $200.00+
+                                                500,000 vnđ+
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="filter-col3 p-r-15 p-b-27">
-                                    <div className="mtext-102 cl2 p-b-15">Color</div>
+                                    <div className="mtext-102 cl2 p-b-15">Size</div>
 
                                     <ul>
                                         <li className="p-b-6">
@@ -379,7 +379,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Black
+                                                S
                                             </a>
                                         </li>
 
@@ -389,7 +389,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04 filter-link-active">
-                                                Blue
+                                                M
                                             </a>
                                         </li>
 
@@ -399,7 +399,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Grey
+                                                L
                                             </a>
                                         </li>
 
@@ -409,7 +409,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Green
+                                                XL
                                             </a>
                                         </li>
 
@@ -419,7 +419,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Red
+                                                XXL
                                             </a>
                                         </li>
 
@@ -429,49 +429,49 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </span>
 
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                White
+                                                XXXL
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="filter-col4 p-b-27">
-                                    <div className="mtext-102 cl2 p-b-15">Tags</div>
+                                    <div className="mtext-102 cl2 p-b-15">Giải đấu</div>
 
                                     <div className="flex-w p-t-4 m-r--5">
                                         <a
                                             href="#"
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
-                                            Fashion
+                                            Ngoại Hạng Anh (ANH)
                                         </a>
 
                                         <a
                                             href="#"
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
-                                            Lifestyle
+                                            La Liga (TÂY BAN NHA)
                                         </a>
 
                                         <a
                                             href="#"
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
-                                            Denim
+                                            Bundesliga (ĐỨC)
                                         </a>
 
                                         <a
                                             href="#"
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
-                                            Streetstyle
+                                            Ligue 1 (Pháp)
                                         </a>
 
                                         <a
                                             href="#"
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
-                                            Crafts
+                                            Serie A (Ý)
                                         </a>
                                     </div>
                                 </div>
@@ -501,7 +501,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             className="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                                             onClick={handleShowModal}
                                         >
-                                            Quick View
+                                            Xem Nhanh
                                         </a>
                                     </div>
 
@@ -510,7 +510,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             <div
                                                 // to="product-detail"
                                                 onClick={handleRedirect}
-                                                className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
+                                                className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 product-name"
                                                 style={{ cursor: 'pointer' }}
                                             >
                                                 {item.name}
@@ -557,7 +557,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                         <div className="flex-c-m flex-w w-full p-t-45">
                             <a href="#" className="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                                 {' '}
-                                Load More{' '}
+                                Tải thêm{' '}
                             </a>
                         </div>
                     )}

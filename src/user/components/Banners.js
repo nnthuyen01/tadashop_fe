@@ -9,20 +9,18 @@ function Banners() {
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner1.jpg" alt="IMG-BANNER" />
-                                {/* <img src="assets/images/banner-04.jpg" alt="IMG-BANNER" /> */}
-
                                 <a
                                     href="product.html"
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                 >
                                     <div className="block1-txt-child1 flex-col-l">
-                                        <span className="block1-name ltext-102 trans-04 p-b-8">Away</span>
+                                        <span className="block1-name ltext-102 trans-04 p-b-8">Sân Khách</span>
 
                                         <span className="block1-info stext-102 trans-04">Manchester United</span>
                                     </div>
 
                                     <div className="block1-txt-child2 p-b-4 trans-05">
-                                        <div className="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                                        <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
                                 </a>
                             </div>
@@ -38,13 +36,13 @@ function Banners() {
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                 >
                                     <div className="block1-txt-child1 flex-col-l">
-                                        <span className="block1-name ltext-102 trans-04 p-b-8">Home</span>
+                                        <span className="block1-name ltext-102 trans-04 p-b-8">Sân Nhà</span>
 
                                         <span className="block1-info stext-102 trans-04">Manchester United</span>
                                     </div>
 
                                     <div className="block1-txt-child2 p-b-4 trans-05">
-                                        <div className="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                                        <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
                                 </a>
                             </div>
@@ -60,13 +58,13 @@ function Banners() {
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                 >
                                     <div className="block1-txt-child1 flex-col-l">
-                                        <span className="block1-name ltext-102 trans-04 p-b-8">Champion</span>
+                                        <span className="block1-name ltext-102 trans-04 p-b-8">Nhà Vua</span>
 
                                         <span className="block1-info stext-102 trans-04">PSG</span>
                                     </div>
 
                                     <div className="block1-txt-child2 p-b-4 trans-05">
-                                        <div className="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                                        <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
                                 </a>
                             </div>
@@ -82,13 +80,13 @@ function Banners() {
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                 >
                                     <div className="block1-txt-child1 flex-col-l">
-                                        <span className="block1-name ltext-102 trans-04 p-b-8">Women</span>
+                                        <span className="block1-name ltext-102 trans-04 p-b-8">Cá Tính</span>
 
                                         <span className="block1-info stext-102 trans-04">Barcelona</span>
                                     </div>
 
                                     <div className="block1-txt-child2 p-b-4 trans-05">
-                                        <div className="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                                        <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
                                 </a>
                             </div>
@@ -104,13 +102,13 @@ function Banners() {
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                 >
                                     <div className="block1-txt-child1 flex-col-l">
-                                        <span className="block1-name ltext-102 trans-04 p-b-8">Outstanding</span>
+                                        <span className="block1-name ltext-102 trans-04 p-b-8">Nổi Bật</span>
 
                                         <span className="block1-info stext-102 trans-04">Arsenal</span>
                                     </div>
 
                                     <div className="block1-txt-child2 p-b-4 trans-05">
-                                        <div className="block1-link stext-101 cl0 trans-09">Shop Now</div>
+                                        <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
                                 </a>
                             </div>
