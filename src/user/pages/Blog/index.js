@@ -23,26 +23,28 @@ function Blog() {
                                 {/* <!-- item blog --> */}
                                 <div className="p-b-63">
                                     <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-04.jpg" alt="IMG-BLOG" />
+                                        <img src="assets/images/thumbBlog1.png" alt="IMG-BLOG" />
 
                                         <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">22</span>
+                                            <span className="ltext-107 cl2 txt-center">31</span>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
+                                            <span className="stext-109 cl3 txt-center">Oct 2023</span>
                                         </div>
                                     </Link>
 
                                     <div className="p-t-32">
                                         <h4 className="p-b-15">
                                             <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                8 Inspiring Ways to Wear Dresses in the Winter
+                                                Top 10 Cầu Thủ Mặc Áo Bóng Đá Đẹp Nhất Năm
                                             </Link>
                                         </h4>
 
                                         <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
+                                            Bạn có bao giờ tự hỏi ai là những cầu thủ mặc áo bóng đá đẹp nhất năm? Áo
+                                            bóng đá không chỉ là một bộ trang phục thể thao, mà còn là biểu tượng của sự
+                                            đam mê và niềm tự hào của mỗi cầu thủ. Trong bài viết này, chúng ta sẽ khám
+                                            phá về những cầu thủ có phong cách mặc áo bóng đá độc đáo và ấn tượng nhất.
+                                            Hãy cùng tìm hiểu nhé!
                                         </p>
 
                                         <div className="flex-w flex-sb-m p-t-18">
@@ -53,15 +55,15 @@ function Blog() {
                                                 </span>
 
                                                 <span>
-                                                    StreetStyle, Fashion, Couple
+                                                    FootballStyle
                                                     <span className="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
 
-                                                <span>8 Comments</span>
+                                                {/* <span>8 Comments</span> */}
                                             </span>
 
                                             <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
+                                                Tiếp tục đọc
                                                 <i className="fa fa-long-arrow-right m-l-9"></i>
                                             </Link>
                                         </div>
@@ -71,12 +73,12 @@ function Blog() {
                                 {/* <!-- item blog --> */}
                                 <div className="p-b-63">
                                     <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-05.jpg" alt="IMG-BLOG" />
+                                        <img src="assets/images/thumbBlog2.png" alt="IMG-BLOG" />
 
                                         <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">18</span>
+                                            <span className="ltext-107 cl2 txt-center">31</span>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
+                                            <span className="stext-109 cl3 txt-center">Oct 2023</span>
                                         </div>
                                     </Link>
 
@@ -101,15 +103,15 @@ function Blog() {
                                                 </span>
 
                                                 <span>
-                                                    StreetStyle, Fashion, Couple
+                                                    Champion
                                                     <span className="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
 
-                                                <span>8 Comments</span>
+                                                {/* <span>8 Comments</span> */}
                                             </span>
 
                                             <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
+                                                Tiếp tục đọc
                                                 <i className="fa fa-long-arrow-right m-l-9"></i>
                                             </Link>
                                         </div>
@@ -119,12 +121,12 @@ function Blog() {
                                 {/* <!-- item blog --> */}
                                 <div className="p-b-63">
                                     <Link to="/blogDetail" className="hov-img0 how-pos5-parent">
-                                        <img src="assets/images/blog-06.jpg" alt="IMG-BLOG" />
+                                        <img src="assets/images/thumbBlog3.png" alt="IMG-BLOG" />
 
                                         <div className="flex-col-c-m size-123 bg9 how-pos5">
-                                            <span className="ltext-107 cl2 txt-center">16</span>
+                                            <span className="ltext-107 cl2 txt-center">31</span>
 
-                                            <span className="stext-109 cl3 txt-center">Jan 2018</span>
+                                            <span className="stext-109 cl3 txt-center">Oct 2023</span>
                                         </div>
                                     </Link>
 
@@ -149,15 +151,13 @@ function Blog() {
                                                 </span>
 
                                                 <span>
-                                                    StreetStyle, Fashion, Couple
+                                                    Fashion, Couple
                                                     <span className="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
-
-                                                <span>8 Comments</span>
                                             </span>
 
                                             <Link to="/blogDetail" className="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                                Continue Reading
+                                                Tiếp tục đọc
                                                 <i className="fa fa-long-arrow-right m-l-9"></i>
                                             </Link>
                                         </div>
