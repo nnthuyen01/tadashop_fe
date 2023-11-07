@@ -1,24 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import HeaderPages from '~/user/components/HeaderPages';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'; // Import CSS của Tippy
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faCircleXmark, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
 
 import './profile.scss';
 function ChangePassword() {
+    const navigate = useNavigate();
+
     const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [isCheckOldPassword, setIsCheckOldPassword] = useState(false);
     const [isCheckPassword, setIsCheckPassword] = useState(false);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const [isOldPasswordVisible, setIsOldPasswordVisible] = useState(false);
     const [isNewPasswordVisible, setIsNewPasswordVisible] = useState(false);
-
+    const newPasswordInputRef = useRef(null);
     const [formData, setFormData] = useState({
+        email: '',
         oldPassword: '',
         newPassword: '',
     });
+
+    useEffect(() => {
+        axios
+            .get(API_URL + 'user')
+            .then((response) => {
+                if (response.status === 200) {
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        email: response.data.email,
+                    }));
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, []); // [] nghĩa là useEffect chỉ chạy một lần khi thành phần được tạo
+
+    // console.log(formData);
 
     const handleInputBlur = () => {
         setIsTooltipVisible(false);
@@ -74,12 +99,82 @@ function ChangePassword() {
         return;
     };
 
+    const handleLogout = (e) => {
+        e.preventDefault();
+
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_name');
+        navigate('/');
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (isCheckPassword === false) {
+            swal('Mật khẩu mới không đúng định dạng.', {
+                title: 'Lỗi',
+                icon: 'warning',
+            }).then(() => {
+                newPasswordInputRef.current.focus();
+            });
+            return; // Ngừng xử lý tiếp
+        }
+
+        console.log(formData);
+        const data = {
+            email: formData.email,
+            oldPassword: formData.oldPassword,
+            newPassword: formData.newPassword,
+        };
+        console.log('Data', data);
+        try {
+            const response = await axios.put(API_URL + 'auth/changePassword', data);
+
+            if (response.status === 200) {
+                swal('Bạn đã thay đổi mật khẩu thành công !!!', {
+                    title: 'Thành công',
+                    icon: 'success',
+                }).then(() => {
+                    setIsCheckOldPassword(false);
+                    // Chuyển hướng đến trang chủ sau khi người dùng nhấn "oke"
+                    navigate('/');
+                });
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400 && error.response.data === 'Invalid Old Password') {
+                swal('Mật khẩu cũ không chính xác', {
+                    title: 'Mật khẩu cũ không chính xác',
+                    icon: 'error',
+                });
+                setIsCheckOldPassword(true);
+            } else if (
+                error.response &&
+                error.response.status === 400 &&
+                error.response.data === 'The new password is the same as the old password'
+            ) {
+                swal('Mật khẩu mới trùng với mật khẩu cũ', {
+                    title: 'Mật khẩu mới trùng với mật khẩu cũ',
+                    icon: 'warning',
+                });
+                setIsCheckOldPassword(false);
+            } else {
+                swal('Có lỗi xảy ra !!!', {
+                    title: 'Lỗi',
+                    icon: 'error',
+                }).then(() => {
+                    // Chuyển hướng đến trang đăng nhập sau khi người dùng nhấn "oke"
+                    navigate('/');
+                });
+            }
+        }
+    };
+
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
             <section
                 className="bg-img1 txt-center p-lr-15 p-tb-92"
-                style={{ backgroundImage: "url('assets/images/bg-03.jpg')" }}
+                style={{ backgroundImage: "url('../assets/images/bg-03.jpg')" }}
             >
                 <h2 className="ltext-105 cl0 txt-center">Thông tin tài khoản</h2>
             </section>
@@ -90,17 +185,23 @@ function ChangePassword() {
                             <div className="box_navigatetionuser">
                                 <ul className="myvne_user_link">
                                     <li>
-                                        <NavLink to="/profile" className="nav-link ">
+                                        <NavLink
+                                            to={`/profile/${localStorage.getItem('auth_name')}`}
+                                            className="nav-link "
+                                        >
                                             Thông tin chung
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/changePassword" className="nav-link activeNavLink">
+                                        <NavLink
+                                            to={`/changePassword/${localStorage.getItem('auth_name')}`}
+                                            className="nav-link activeNavLink"
+                                        >
                                             Thay đổi mật khẩu
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/" className="nav-link">
+                                        <NavLink to="/" className="nav-link" onClick={handleLogout}>
                                             Thoát
                                             <svg
                                                 style={{
@@ -134,9 +235,6 @@ function ChangePassword() {
                             <div className="user-info">
                                 <div className="item_fill_user">
                                     <div className="ctn_fill">
-                                        {/* <div className="label_fill">Mật khẩu</div> */}
-                                        <div className="main_txt" style={{ display: 'none' }}></div>
-
                                         <div id="form_update_password" className="width_common .box_edit_password_form">
                                             <div className="form_edit form_log">
                                                 <div className="item_input_log">
@@ -155,10 +253,17 @@ function ChangePassword() {
                                                         />
                                                         <span className="icon_input ">
                                                             <div style={{ padding: '0 10px' }}>
-                                                                <FontAwesomeIcon
-                                                                    style={{ color: '#f70000' }}
-                                                                    icon={faCircleXmark}
-                                                                />
+                                                                {isCheckOldPassword ? (
+                                                                    <FontAwesomeIcon
+                                                                        style={{ color: '#f70000' }}
+                                                                        icon={faCircleXmark}
+                                                                    />
+                                                                ) : (
+                                                                    <FontAwesomeIcon
+                                                                        style={{ color: '#fff' }}
+                                                                        icon={faCircleXmark}
+                                                                    />
+                                                                )}
                                                             </div>
                                                             {isOldPasswordVisible ? (
                                                                 <div
@@ -207,6 +312,7 @@ function ChangePassword() {
                                                                     setIsTooltipVisible(true);
                                                                     setIsPasswordValid(false);
                                                                 }}
+                                                                ref={newPasswordInputRef}
                                                             />
                                                             <span className="icon_input ">
                                                                 <div style={{ padding: '0 10px' }}>
@@ -243,7 +349,11 @@ function ChangePassword() {
                                                     </div>
                                                 </div>
                                                 <div className="item_input_log">
-                                                    <button id="btn_save_password" className="pri_button btn_log ">
+                                                    <button
+                                                        id="btn_save_password"
+                                                        className="pri_button btn_log "
+                                                        onClick={handleSubmit}
+                                                    >
                                                         Đổi mật khẩu
                                                     </button>
                                                 </div>

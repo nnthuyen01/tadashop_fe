@@ -8,6 +8,9 @@ import SliderHome from '~/user/components/SliderHome';
 import Sidebar from '~/user/components/Sidebar';
 import CartAside from '~/user/components/CartAside';
 
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
+
 function Home() {
     const navigate = useNavigate();
     const currentUser = !!localStorage.getItem('auth_token');
@@ -72,9 +75,11 @@ function Home() {
     // Show Modal1 Product
     const [showModal, setShowModal] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [selectedProductId, setSelectedProductId] = useState(null);
 
-    const handleShowModal = () => {
+    const handleShowModal = (productId) => {
         setScrollPosition(window.scrollY);
+        setSelectedProductId(productId);
         setShowModal(true);
     };
 
@@ -154,10 +159,18 @@ function Home() {
                                                             <Link to="#">Nguyễn Ngọc Thuyên</Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="/profile">Thông tin chung</Link>
+                                                            <Link to={`/profile/${localStorage.getItem('auth_name')}`}>
+                                                                Thông tin chung
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="/changePassword">Đổi mật khẩu</Link>
+                                                            <Link
+                                                                to={`/changePassword/${localStorage.getItem(
+                                                                    'auth_name',
+                                                                )}`}
+                                                            >
+                                                                Đổi mật khẩu
+                                                            </Link>
                                                         </li>
                                                         <li className="footer-sub-account-menu" onClick={handleLogout}>
                                                             <Link to="/">Đăng xuất</Link>
@@ -312,7 +325,7 @@ function Home() {
             <ProductItem handleShowModal={handleShowModal} title={true} pagination={true} />
 
             {/* <!-- Modal1 --> */}
-            {showModal && <ModalProduct handleHideModal={handleHideModal} />}
+            {showModal && <ModalProduct handleHideModal={handleHideModal} productId={selectedProductId} />}
 
             <section className="hero-section">
                 <div className="container">

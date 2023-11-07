@@ -1,129 +1,43 @@
-import React, { useLayoutEffect, useState, useEffect, Fragment, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Isotope from 'isotope-layout';
 import imagesLoaded from 'imagesloaded';
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
 
 function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        axios
+            .get(API_URL + 'products/list')
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    setProducts(response.data);
+                    setLoading(false);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, []); // [] nghĩa là useEffect chỉ chạy một lần khi thành phần được tạo
 
-    const handleRedirect = () => {
-        navigate('/product-detail');
+    const handleRedirect = (name, id) => {
+        // navigate(`/product-detail/${product}/${id}`);
+        navigate(`/product-detail/${name}/${id}`);
     };
 
-    const products = [
-        {
-            dataFilter: 'mu',
-            tag: 'New',
-            img: 'assets/images/AoMu1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'mu',
-            tag: '',
-            img: 'assets/images/AoMu2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'mu',
-            tag: '',
-            img: 'assets/images/AoMu3.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'ac',
-            tag: '',
-            img: 'assets/images/AoAC1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'ac',
-            tag: '',
-            img: 'assets/images/AoAC2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'atletico',
-            tag: '',
-            img: 'assets/images/AoAtletico1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'arsenal',
-            tag: '',
-            img: 'assets/images/AoArs1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'arsenal',
-            tag: '',
-            img: 'assets/images/AoArs2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'arsenal',
-            tag: '',
-            img: 'assets/images/AoArs3.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'women',
-            tag: '',
-            img: 'assets/images/AoAston1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'men',
-            tag: '',
-            img: 'assets/images/AoAston2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'barcelona',
-            tag: '',
-            img: 'assets/images/AoBarce1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'barcelona',
-            tag: '',
-            img: 'assets/images/AoBarce2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'women',
-            tag: '',
-            img: 'assets/images/AoBayern1.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'watches',
-            tag: '',
-            img: 'assets/images/AoBayern2.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-        {
-            dataFilter: 'women',
-            tag: '',
-            img: 'assets/images/AoBayern3.jpg',
-            name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-            price: '300,000₫',
-        },
-    ];
+    // const products = [
+    //     {
+    //         dataFilter: 'mu',
+    //         tag: 'New',
+    //         img: 'assets/images/AoMu1.jpg',
+    //         name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
+    //         price: '300,000₫',
+    //     },
+    // ];
 
     // Product
     // filter
@@ -133,42 +47,44 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const isotopeButtonRef = useRef(null);
 
     useEffect(() => {
-        const $topeContainer = topeContainerRef.current;
-        const $filter = filterRef.current;
-        const $isotopeButton = isotopeButtonRef.current;
+        if (!loading) {
+            const $topeContainer = topeContainerRef.current;
+            const $filter = filterRef.current;
+            const $isotopeButton = isotopeButtonRef.current;
 
-        // Wait for all images inside $topeContainer to be loaded
-        imagesLoaded($topeContainer, () => {
-            // Init Isotope
-            const isotope = new Isotope($topeContainer, {
-                itemSelector: '.isotope-item',
-                layoutMode: 'fitRows',
-                percentPosition: true,
-                animationEngine: 'best-available',
-                masonry: {
-                    columnWidth: '.isotope-item',
-                },
-            });
+            // Wait for all images inside $topeContainer to be loaded
+            imagesLoaded($topeContainer, () => {
+                // Init Isotope
+                const isotope = new Isotope($topeContainer, {
+                    itemSelector: '.isotope-item',
+                    layoutMode: 'fitRows',
+                    percentPosition: true,
+                    animationEngine: 'best-available',
+                    masonry: {
+                        columnWidth: '.isotope-item',
+                    },
+                });
 
-            // Filter items on button click
-            $filter.addEventListener('click', (event) => {
-                if (event.target.tagName === 'BUTTON') {
-                    const filterValue = event.target.getAttribute('data-filter');
-                    isotope.arrange({ filter: filterValue });
-                }
-            });
+                // Filter items on button click
+                $filter.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'BUTTON') {
+                        const filterValue = event.target.getAttribute('data-filter');
+                        isotope.arrange({ filter: filterValue });
+                    }
+                });
 
-            // Add click event listener to each isotope button
-            $isotopeButton.querySelectorAll('button').forEach((button) => {
-                button.addEventListener('click', () => {
-                    $isotopeButton.querySelectorAll('button').forEach((btn) => {
-                        btn.classList.remove('how-active1');
+                // Add click event listener to each isotope button
+                $isotopeButton.querySelectorAll('button').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        $isotopeButton.querySelectorAll('button').forEach((btn) => {
+                            btn.classList.remove('how-active1');
+                        });
+                        button.classList.add('how-active1');
                     });
-                    button.classList.add('how-active1');
                 });
             });
-        });
-    }, []);
+        }
+    }, [loading]);
 
     // [ Filter / Search product ]
     const [showFilter, setShowFilter] = useState(false);
@@ -183,6 +99,10 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
         setShowSearch(!showSearch);
         setShowFilter(false);
     };
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
 
     return (
         <>
@@ -291,7 +211,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                     <ul>
                                         <li className="p-b-6">
                                             <a href="#" className="filter-link stext-106 trans-04">
-                                                Mạc định
+                                                Mặc định
                                             </a>
                                         </li>
 
@@ -478,66 +398,109 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                             </div>
                         </div>
                     </div>
+
                     {/* grid Product */}
 
-                    <div className="row isotope-grid" ref={topeContainerRef}>
-                        {products.map((item, index) => (
-                            <div
-                                key={index}
-                                className={`col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${
-                                    item.dataFilter ? item.dataFilter : undefined
-                                }`}
-                            >
-                                {/* <!-- Block2 --> */}
-                                <div className="block2">
-                                    <div
-                                        className={`block2-pic hov-img0 ${item.tag ? 'label-new' : ''}`}
-                                        data-label={item.tag ? item.tag : undefined}
-                                    >
-                                        <img src={item.img} alt="IMG-PRODUCT" />
-
-                                        <a
-                                            href="#"
-                                            className="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-                                            onClick={handleShowModal}
+                    {loading ? (
+                        <div className="loading-indicator">Đang tải dữ liệu...</div>
+                    ) : (
+                        <div className="row isotope-grid" ref={topeContainerRef}>
+                            {products.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={`col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${
+                                        item.dataFilter ? item.dataFilter : undefined
+                                    }`}
+                                >
+                                    {/* <!-- Block --> */}
+                                    <div className="block2">
+                                        <div
+                                            className={`block2-pic hov-img0  ${item.discount ? 'label-discount' : ''}`}
+                                            discount-label={item.discount ? `-${item.discount}%` : undefined}
                                         >
-                                            Xem Nhanh
-                                        </a>
-                                    </div>
-
-                                    <div className="block2-txt flex-w flex-t p-t-14">
-                                        <div className="block2-txt-child1 flex-col-l ">
+                                            {/* <img src={item.img} alt="IMG-PRODUCT" /> */}
                                             <div
-                                                // to="product-detail"
-                                                onClick={handleRedirect}
-                                                className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 product-name"
-                                                style={{ cursor: 'pointer' }}
+                                                className={`${item.isFeatured === true ? 'label-new' : ''}`}
+                                                data-label={item.isFeatured === true ? 'HOT' : undefined}
                                             >
-                                                {item.name}
-                                            </div>
+                                                <img
+                                                    src={API_URL + 'products/images/' + item.imageFileName}
+                                                    loading="lazy"
+                                                    alt="IMG-PRODUCT"
+                                                ></img>
 
-                                            <span className="stext-105 cl3">{item.price}</span>
+                                                <Link
+                                                    href="#"
+                                                    className="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+                                                    onClick={() => handleShowModal(item.id)}
+                                                >
+                                                    Xem Nhanh
+                                                </Link>
+                                            </div>
                                         </div>
 
-                                        <div className="block2-txt-child2 flex-r p-t-3">
-                                            <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                <img
-                                                    className="icon-heart1 dis-block trans-04"
-                                                    src="assets/images/icons/icon-heart-01.png"
-                                                    alt="ICON"
-                                                />
-                                                <img
-                                                    className="icon-heart2 dis-block trans-04 ab-t-l"
-                                                    src="assets/images/icons/icon-heart-02.png"
-                                                    alt="ICON"
-                                                />
-                                            </a>
+                                        <div className="block2-txt flex-w flex-t p-t-14">
+                                            <div className="block2-txt-child1 flex-col-l ">
+                                                <div
+                                                    onClick={() => handleRedirect(item.name, item.id)}
+                                                    // onClick={handleRedirect}
+                                                    className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 product-name"
+                                                    style={{ cursor: 'pointer', fontSize: '16px' }}
+                                                >
+                                                    {item.name}
+                                                </div>
+                                                <div style={{ display: 'flex', gap: '10px' }}>
+                                                    <span
+                                                        className="stext-105 cl3"
+                                                        style={{
+                                                            textDecoration: 'line-through',
+                                                            verticalAlign: 'middle',
+                                                            lineHeight: '20px',
+                                                            color: '#12a700',
+                                                        }}
+                                                    >
+                                                        {formatNumberWithCommas(item.originalPrice)}₫
+                                                    </span>
+                                                    <span
+                                                        className="stext-103 cl3"
+                                                        style={{
+                                                            fontWeight: '600',
+                                                            verticalAlign: 'middle',
+                                                            lineHeight: '20px',
+                                                            color: '#12a700',
+                                                        }}
+                                                    >
+                                                        {formatNumberWithCommas(item.priceAfterDiscount)}
+                                                        <span style={{ verticalAlign: 'middle', fontSize: '20px' }}>
+                                                            ₫
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div className="block2-txt-child2 flex-r p-t-3">
+                                                <a
+                                                    href="#"
+                                                    className="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
+                                                >
+                                                    <img
+                                                        className="icon-heart1 dis-block trans-04"
+                                                        src="assets/images/icons/icon-heart-01.png"
+                                                        alt="ICON"
+                                                    />
+                                                    <img
+                                                        className="icon-heart2 dis-block trans-04 ab-t-l"
+                                                        src="assets/images/icons/icon-heart-02.png"
+                                                        alt="ICON"
+                                                    />
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
 
                     {/* <!-- Pagination --> */}
                     {pagination === true && (

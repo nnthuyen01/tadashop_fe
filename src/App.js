@@ -27,25 +27,6 @@ axios.interceptors.request.use(
 );
 
 function App() {
-    // useEffect(() => {
-    //     // Kiểm tra xem access_token có trong localStorage hay không
-    //     const token = localStorage.getItem('auth_token');
-
-    //     if (token) {
-    //         // Decode token để truy cập thông tin thời gian hết hạn
-    //         const decodedToken = jwtDecode(token);
-    //         const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
-
-    //         // Kiểm tra xem thời gian hiện tại có lớn hơn thời gian hết hạn không
-    //         if (Date.now() >= expirationTime) {
-    //             // Token đã hết hạn, xóa nó và quay lại trang chủ
-    //             localStorage.removeItem('auth_token');
-    //             localStorage.removeItem('auth_name');
-    //             window.location.href = '/';
-    //         }
-    //     }
-    // }, []);
-
     return (
         <Provider store={store}>
             <Router>

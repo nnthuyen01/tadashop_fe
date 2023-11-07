@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import images from '~/assets/images';
 function HeaderPages() {
     // header
     const navigate = useNavigate();
@@ -63,36 +63,11 @@ function HeaderPages() {
             <header className="header-v4">
                 {/* <!-- Header desktop --> */}
                 <div className={`container-menu-desktop ${isFixed ? 'fix-menu-desktop' : ''}`}>
-                    {/* <!-- Topbar --> */}
-                    {/* <div className="top-bar">
-                        <div className="content-topbar flex-sb-m h-full container">
-                            <div className="left-top-bar">Free shipping for standard order over $100</div>
-
-                            <div className="right-top-bar flex-w h-full">
-                                <a href="#" className="flex-c-m trans-04 p-lr-25">
-                                    Help & FAQs
-                                </a>
-
-                                <a href="#" className="flex-c-m trans-04 p-lr-25">
-                                    My Account
-                                </a>
-
-                                <a href="#" className="flex-c-m trans-04 p-lr-25">
-                                    EN
-                                </a>
-
-                                <a href="#" className="flex-c-m trans-04 p-lr-25">
-                                    USD
-                                </a>
-                            </div>
-                        </div>
-                    </div> */}
-
                     <div className="wrap-menu-desktop how-shadow1">
                         <nav className="limiter-menu-desktop container">
                             {/* <!-- Logo desktop -->		 */}
                             <Link to="/" className="logo">
-                                <img src="../assets/images/icons/Logo.png" alt="IMG-LOGO" />
+                                <img src={images.logo} alt="IMG-LOGO" />
                             </Link>
 
                             {/* <!-- Menu desktop --> */}
@@ -159,10 +134,18 @@ function HeaderPages() {
                                                             <Link to="#">Nguyễn Ngọc Thuyên</Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="/profile">Thông tin chung</Link>
+                                                            <Link to={`/profile/${localStorage.getItem('auth_name')}`}>
+                                                                Thông tin chung
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <Link to="/changePassword">Đổi mật khẩu</Link>
+                                                            <Link
+                                                                to={`/changePassword/${localStorage.getItem(
+                                                                    'auth_name',
+                                                                )}`}
+                                                            >
+                                                                Đổi mật khẩu
+                                                            </Link>
                                                         </li>
                                                         <li className="footer-sub-account-menu" onClick={handleLogout}>
                                                             <Link to="/">Đăng xuất</Link>
@@ -211,7 +194,7 @@ function HeaderPages() {
                     {/* <!-- Logo moblie -->		 */}
                     <div className="logo-mobile">
                         <Link to="/">
-                            <img src="../assets/images/icons/Logo.png" alt="IMG-LOGO" />
+                            <img src={images.logo} alt="IMG-LOGO" />
                         </Link>
                     </div>
 

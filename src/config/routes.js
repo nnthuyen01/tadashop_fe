@@ -5,9 +5,9 @@ const routes = {
     blog: '/blog',
     blogDetail: '/blogDetail',
     cart: '/cart',
-    profile: '/profile',
-    changePassword: '/changePassword',
-    productDetail: '/product-detail',
+    profile: '/profile/:username',
+    changePassword: '/changePassword/:username',
+    productDetail: '/product-detail/:product/:id',
     contact: '/contact',
 };
 export default routes;

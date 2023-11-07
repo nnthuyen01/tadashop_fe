@@ -2203,9 +2203,39 @@ input.num-product::-webkit-inner-spin-button {
     height: 22px;
     border-radius: 11px;
     padding: 0 6px;
-    background-color: #66a8a6;
-    top: 42px;
+    background-color: #f74877;
+    top: 10px;
     left: 12px;
+}
+
+.label-discount {
+    position: relative;
+}
+
+.label-discount::after {
+    content: attr(discount-label);
+    font-family: Montserrat-Regular;
+    font-size: 16px;
+    color: #66a8a6;
+    line-height: 1.2;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    border: 2px solid #66a8a6;
+    padding: 0 6px;
+    background-color: #fff;
+    top: 0px;
+    right: 0px;
+    left: auto;
 }
 
 /*==================================================================
@@ -2397,6 +2427,7 @@ input.num-product::-webkit-inner-spin-button {
     font-family: Dosis-Regular;
     font-size: 24px;
     line-height: 1.5;
+    font-weight: bold;
 }
 
 .mtext-106 {
