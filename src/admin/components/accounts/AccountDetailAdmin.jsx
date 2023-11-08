@@ -64,24 +64,28 @@ class AccountDetailAdmin extends Component {
 
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{
+                                            fontStyle: 'italic',
+                                        }}
                                         label="Main Image"
                                         name="image"
-                                        initialValue={account.image?.fileName}
+                                        initialValue={account?.avatar}
                                     >
-                                        <Space>
-                                            {/* {account.image ? (
+                                        <Space
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {account.avatar ? (
                                                 <Image
-                                                    src={AccountService.getAccountImageUrl(account.image.fileName)}
                                                     height={90}
+                                                    src={AccountService.getAvatarUserUrl(account.avatar)}
                                                 ></Image>
                                             ) : (
-                                                ''
-                                            )} */}
-                                            <Image
-                                                src="https://ssl.gstatic.com/onebox/media/sports/logos/udQ6ns69PctCv143h-GeYw_96x96.png"
-                                                height={90}
-                                            ></Image>
+                                                <Image height={90} src="../../../assets/images/avatartrong.png"></Image>
+                                            )}
                                         </Space>
                                     </Form.Item>
                                 </Col>

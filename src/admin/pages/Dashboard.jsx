@@ -237,12 +237,22 @@ const Dashboard = () => {
                             />
                         </Col>
                         <Col md={4}>
-                            <div>
-                                <Avatar size="default" icon={<UserOutlined />}></Avatar> Nguyen Ngoc Thuyen
+                            <div
+                                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem' }}
+                            >
+                                <Avatar size="default" icon={<UserOutlined />}></Avatar>
+                                <p style={{ textTransform: 'uppercase', fontWeight: '600', margin: '0' }}>
+                                    {' '}
+                                    {localStorage.getItem('auth_name')}{' '}
+                                </p>
                             </div>
                         </Col>
                         <Col md={2}>
-                            <Link to="/" onClick={handleLogout}>
+                            <Link
+                                to="/"
+                                onClick={handleLogout}
+                                style={{ textTransform: 'uppercase', fontWeight: '600' }}
+                            >
                                 Logout
                             </Link>
                         </Col>

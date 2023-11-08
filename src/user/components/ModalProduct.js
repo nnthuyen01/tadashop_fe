@@ -142,11 +142,39 @@ function ModalProduct({ handleHideModal, productId }) {
     }, [loading]);
     // add cart
     const handleAddToCart = (nameProduct) => {
-        swal('is added to cart !', {
-            title: `${nameProduct}`,
-            icon: 'success',
-        });
+        const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
+        if (!selectedSize) {
+            swal('Lỗi', 'Vui lòng chọn size trước khi thêm vào giỏ hàng', 'error');
+            return;
+        }
+        if (numProduct === 0) {
+            swal('Lỗi', 'Vui lòng chọn số lượng trước khi thêm vào giỏ hàng', 'error');
+            return;
+        }
+        console.log('quantity ' + numProduct);
+        console.log('idSize ' + selectedSize);
+
+        axios
+            .post(API_URL + `cart/add?productSizeId=${selectedSize}&quantity=${numProduct}`)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    swal('đã được thêm vào giỏ hàng của bạn!', {
+                        title: `${nameProduct}`,
+                        icon: 'success',
+                    });
+                } else {
+                    // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                    swal('Lỗi', response.data.message, 'error');
+                }
+            })
+            .catch((error) => {
+                // Xử lý lỗi khi gửi yêu cầu
+                console.error('Lỗi khi thực hiện yêu cầu:', error);
+                swal('Lỗi', 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng', 'error');
+            });
     };
+
     return (
         <Fragment>
             {/* <div className={`wrap-modal1 js-modal1 p-t-60 p-b-20 ${showModal ? 'show-modal1' : ''}`}> */}
@@ -178,16 +206,6 @@ function ModalProduct({ handleHideModal, productId }) {
                                                     </div>
                                                 ))}
                                             </Slider>
-
-                                            {/* {product.images.map((img, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                    onClick={() => console.log(index)}
-                                                >
-                                                    <i className="fa fa-expand"></i>
-                                                </div>
-                                            ))} */}
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +239,7 @@ function ModalProduct({ handleHideModal, productId }) {
                                                                 Chọn Size
                                                             </option>
                                                             {product.sizes.map((size, index) => (
-                                                                <option key={index} value={size.size}>
+                                                                <option key={index} value={size.id}>
                                                                     Size {size.size}
                                                                 </option>
                                                             ))}
@@ -263,7 +281,7 @@ function ModalProduct({ handleHideModal, productId }) {
                                                 <div className="size-204 flex-w flex-m respon6-next">
                                                     <button
                                                         className="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
-                                                        onClick={() => handleAddToCart('Lightweight Jacket')}
+                                                        onClick={() => handleAddToCart(product.name)}
                                                     >
                                                         Thêm vào giỏ hàng
                                                     </button>

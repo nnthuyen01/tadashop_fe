@@ -17,4 +17,8 @@ export default class AccountService {
     disableAccountById = async (id) => {
         return await axios.put(API_URL + 'admin/users/disable/' + id);
     };
+    // static để gọi nhanh đến phương thức
+    static getAvatarUserUrl = (filename) => {
+        return API_URL + 'user/avatar/' + filename;
+    };
 }

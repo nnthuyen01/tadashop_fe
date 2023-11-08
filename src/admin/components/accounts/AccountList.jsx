@@ -12,18 +12,22 @@ class AccountList extends Component {
         const { dataSource, onDisabledConfirm, onEnabledConfirm } = this.props;
         return (
             <Table dataSource={dataSource} size="small" rowKey="id" pagination={false}>
-                {/* <Column
-                    title="Logo"
-                    key="logo"
-                    dataIndex="logo"
+                <Column
+                    title="Avatar"
+                    key="avatar"
+                    dataIndex="avatar"
                     width={90}
                     align="center"
                     render={(_, record) => (
                         <Space size="middle">
-                            <Image width="100%" src={AccountService.getAccountLogoUrl(record.logo)}></Image>
+                            {record.avatar !== null ? (
+                                <Image width="100%" src={AccountService.getAvatarUserUrl(record.avatar)}></Image>
+                            ) : (
+                                <Image width="100%" src="../assets/images/avatartrong.png"></Image>
+                            )}
                         </Space>
                     )}
-                ></Column> */}
+                ></Column>
                 <Column title="ID" key="id" dataIndex="id" width={40} align="center"></Column>
                 <Column title="Name" key="firstname" dataIndex="firstname"></Column>
                 <Column title="Username" key="username" dataIndex="username"></Column>

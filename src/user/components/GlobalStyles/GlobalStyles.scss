@@ -409,13 +409,25 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .main-menu > li > a {
     font-family: Dosis-Medium;
-    font-size: 14px;
+    font-size: 20px;
     color: #fff;
     padding: 5px 0px;
     transition: all 0.4s;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
+}
+@media (max-width: 1200px) {
+    .main-menu > li > a {
+        font-family: Dosis-Medium;
+        font-size: 14px;
+        color: #fff;
+        padding: 5px 0px;
+        transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+    }
 }
 
 .header-v3 .main-menu > li > a {
@@ -545,7 +557,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     min-width: 15px;
     height: 15px;
     padding: 0 3px;
-    background-color: #717fe0;
+    background-color: #1a1a1a;
 }
 
 /*---------------------------------------------*/
@@ -650,7 +662,13 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 /*==================================================================
+
 [ Fixed menu desktop ]*/
+.nonfix-menu-desktop .wrap-menu-desktop .main-menu > li:hover > a {
+    font-family: Dosis-Medium;
+    font-size: 20px;
+    color: rgb(255, 165, 0);
+}
 
 .fix-menu-desktop .wrap-menu-desktop {
     height: 70px;

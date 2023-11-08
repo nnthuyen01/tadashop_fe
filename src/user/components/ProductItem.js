@@ -13,7 +13,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
         axios
             .get(API_URL + 'products/list')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.status === 200) {
                     setProducts(response.data);
                     setLoading(false);

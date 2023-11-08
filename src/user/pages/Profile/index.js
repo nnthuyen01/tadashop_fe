@@ -265,9 +265,6 @@ function Profile() {
                                                     >
                                                         <span className="img_upload_c">
                                                             <img
-                                                                // src={
-                                                                //     selectedImage || '../assets/images/avatartrong.png'
-                                                                // }
                                                                 src={
                                                                     selectedImage && selectedImage.length === 40
                                                                         ? API_URL + 'user/avatar/' + selectedImage
@@ -316,7 +313,9 @@ function Profile() {
                                                 <div
                                                     className="click_edit"
                                                     onClick={() => {
-                                                        if (
+                                                        if (selectedImage === null) {
+                                                            setOpenUpdateAvatar(true);
+                                                        } else if (
                                                             selectedImage !== user.avatar &&
                                                             selectedImage.length !== 40
                                                         ) {

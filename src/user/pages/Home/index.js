@@ -8,9 +8,6 @@ import SliderHome from '~/user/components/SliderHome';
 import Sidebar from '~/user/components/Sidebar';
 import CartAside from '~/user/components/CartAside';
 
-import axios from 'axios';
-import { API_URL } from '~/config/constant';
-
 function Home() {
     const navigate = useNavigate();
     const currentUser = !!localStorage.getItem('auth_token');
@@ -88,12 +85,21 @@ function Home() {
         setShowModal(false);
     };
 
+    const [totalItem, setTotalItem] = useState(0);
+    const quantityItem = (quantity) => {
+        setTotalItem(quantity);
+    };
+
     return (
         <Fragment>
             {/* Header */}
             <header className="header-v3">
                 {/* <!-- Header desktop --> */}
-                <div className={`container-menu-desktop trans-03 ${isFixed ? 'fix-menu-desktop' : ''}`}>
+                <div
+                    className={`container-menu-desktop trans-03 ${
+                        isFixed ? 'fix-menu-desktop' : 'nonfix-menu-desktop'
+                    }`}
+                >
                     <div className="wrap-menu-desktop">
                         <nav className="limiter-menu-desktop p-l-45">
                             {/* <!-- Logo desktop -->		 */}
@@ -103,7 +109,7 @@ function Home() {
 
                             {/* <!-- Menu desktop --> */}
                             <div className="menu-desktop">
-                                <ul className="main-menu">
+                                <ul className="main-menu ">
                                     <li>
                                         <Link to="/">Trang Chủ</Link>
                                     </li>
@@ -134,9 +140,11 @@ function Home() {
                                     <>
                                         <div className="flex-c-m h-full p-r-25 bor6">
                                             <div
-                                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart "
+                                                className={`icon-header-item cl0 hov-cl1 trans-04 p-lr-11 ${
+                                                    totalItem > 0 ? 'icon-header-noti' : ''
+                                                } js-show-cart`}
+                                                data-notify={totalItem}
                                                 onClick={handleShowHeaderCart}
-                                                data-notify="2"
                                             >
                                                 <i className="zmdi zmdi-shopping-cart"></i>
                                             </div>
@@ -313,7 +321,11 @@ function Home() {
             {/* {showSidebar && <Sidebar handleHideSidebar={handleHideSidebar} />} */}
 
             {/* <!--  aside Cart --> */}
-            <CartAside handleHideHeaderCart={handleHideHeaderCart} showHeaderCart={showHeaderCart} />
+            <CartAside
+                handleHideHeaderCart={handleHideHeaderCart}
+                showHeaderCart={showHeaderCart}
+                quantityItem={quantityItem}
+            />
 
             {/* <!-- Slider --> */}
             <SliderHome />
