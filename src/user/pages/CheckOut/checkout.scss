@@ -1,0 +1,138 @@
+.main-checkout {
+    padding-top: 20px;
+    padding-right: 66px;
+}
+
+.step-section .section-header {
+    margin-bottom: 1.5em;
+    font-size: 18px;
+    font-weight: 700;
+}
+.fieldset {
+    margin: -0.45em;
+    zoom: 1;
+}
+.fieldset .field {
+    width: 100%;
+    float: left;
+    padding: 0.45em;
+    box-sizing: border-box;
+}
+.fieldset .field .field-input-wrapper {
+    position: relative;
+}
+
+.fieldset .field .field-input-wrapper .field-label {
+    font-size: 0.85714em;
+    font-weight: normal;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 0 0.93333em;
+    z-index: 1;
+    user-select: none;
+    transform: translateY(3px);
+    pointer-events: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    opacity: 0;
+    color: #999999;
+    transition: all 0.2s ease-out;
+    margin: 0.5em 0;
+    margin-top: 0.3em;
+    display: block;
+}
+.fieldset .field .field-input-wrapper .field-input {
+    box-shadow: 0 0 0 1px #d9d9d9;
+    transition: all 0.2s ease-out;
+    background-color: white;
+    color: #333333;
+    border-radius: 4px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.94em 2.8em 0.94em 0.8em;
+    word-break: normal;
+}
+
+label input {
+    margin-right: 5px;
+}
+
+// /* Tùy chỉnh kiểu dáng nút radio (sử dụng pseudo-elements để tạo kiểu) */
+label input[type='radio'] {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #3498db;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+label input[type='radio']:checked {
+    background-color: #3498db;
+    border: 2px solid #3498db;
+}
+
+// /* Tùy chỉnh văn bản liên quan */
+label span {
+    vertical-align: middle;
+}
+
+.container-card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    margin: auto;
+}
+
+.container-card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.container-card p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.container-card .highlight {
+    font-weight: bold;
+    color: #3498db;
+}
+
+.sidebar-checkout {
+    padding-top: 20px;
+    padding-left: 44px;
+    border-left: #424242 1px solid;
+    height: 100%;
+}
+.table-payment {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.th-payment,
+.td-payment {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.th-payment {
+    background-color: #f2f2f2;
+}
+
+.image-checkout {
+    max-width: 50px;
+    max-height: 50px;
+}

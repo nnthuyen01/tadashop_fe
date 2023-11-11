@@ -13,7 +13,7 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
         axios
             .get(API_URL + 'cart')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.status === 200) {
                     setItem(response.data);
                     const total = response.data.reduce((total, item) => {
@@ -49,60 +49,6 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
                             <i className="zmdi zmdi-close"></i>
                         </div>
                     </div>
-                    {/* {loading ? (
-                        <div className="loading-indicator">Đang tải dữ liệu...</div>
-                    ) : (
-                        <div className="header-cart-content flex-w js-pscroll">
-                            <ul className="header-cart-wrapitem w-full">
-                                {item.map((item, index) => (
-                                    <li key={index} className="header-cart-item flex-w flex-t m-b-12">
-                                        <div className="header-cart-item-img">
-                                            <img
-                                                src={API_URL + 'products/images/' + item.item.image.fileName}
-                                                loading="lazy"
-                                                alt="IMG-PRODUCT"
-                                            ></img>
-                                        </div>
-
-                                        <div className="header-cart-item-txt p-t-8">
-                                            <Link
-                                                to={`/product-detail/${item.item.productName}/${item.item.idProduct}`}
-                                                className="header-cart-item-name m-b-18 hov-cl1 trans-04"
-                                            >
-                                                {item.item.productName}
-                                            </Link>
-
-                                            <span className="header-cart-item-info">
-                                                {item.quantity} x {formatNumberWithCommas(item.item.price)}₫
-                                            </span>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <div className="w-full">
-                                <div className="header-cart-total w-full p-tb-40">
-                                    Tổng cộng: {formatNumberWithCommas(totalPrice)}₫
-                                </div>
-
-                                <div className="header-cart-buttons flex-w w-full">
-                                    <a
-                                        href="shoping-cart.html"
-                                        className="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"
-                                    >
-                                        Xem Giỏ
-                                    </a>
-
-                                    <a
-                                        href="shoping-cart.html"
-                                        className="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
-                                    >
-                                        Thanh Toán
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    )} */}
 
                     {!loading && item.length === 0 ? (
                         <div style={{ marginTop: '50%' }}>
@@ -144,12 +90,12 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
                                     </div>
 
                                     <div className="header-cart-buttons flex-w w-full">
-                                        <a
-                                            href="shoping-cart.html"
+                                        <Link
+                                            to="/cart"
                                             className="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"
                                         >
                                             Xem Giỏ
-                                        </a>
+                                        </Link>
 
                                         <a
                                             href="shoping-cart.html"

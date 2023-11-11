@@ -19,6 +19,7 @@ function ProductDetail() {
 
     const [ProductDetail, setProductDetail] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [headerKey, setHeaderKey] = useState(0);
     useEffect(() => {
         axios
             .get(API_URL + 'product/detail/' + id)
@@ -168,6 +169,7 @@ function ProductDetail() {
             .then((response) => {
                 console.log(response);
                 if (response.status === 200) {
+                    setHeaderKey(headerKey + 1);
                     swal('đã được thêm vào giỏ hàng của bạn!', {
                         title: `${nameProduct}`,
                         icon: 'success',
@@ -348,7 +350,7 @@ function ProductDetail() {
     };
     return (
         <div style={{ backgroundColor: '#fff' }}>
-            <HeaderPages />
+            <HeaderPages key={headerKey} />
             {loading ? (
                 <div className="loading-indicator">Đang tải dữ liệu...</div>
             ) : (
@@ -356,17 +358,17 @@ function ProductDetail() {
                     {/* <!-- breadcrumb --> */}
                     <div className="container">
                         <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-23 p-lr-0-lg ">
-                            <Link to="/" className="stext-109 cl8 hov-cl1 trans-04">
+                            <Link to="/" className="stext-107 cl8 hov-cl1 trans-04">
                                 Trang chủ
                                 <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                             </Link>
 
-                            <Link to="/shop" className="stext-109 cl8 hov-cl1 trans-04">
+                            <Link to="/shop" className="stext-107 cl8 hov-cl1 trans-04">
                                 Cửa hàng
                                 <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                             </Link>
 
-                            <span className="stext-109 cl4">{ProductDetail.name}</span>
+                            <span className="stext-107 cl4">{ProductDetail.name}</span>
                         </div>
                     </div>
 

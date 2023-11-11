@@ -29,6 +29,7 @@ import AddOrEditLeague from '~/admin/components/league/AddOrEditLeague';
 import ListLeagues from '~/admin/components/league/ListLeagues';
 import ListAccounts from '~/admin/components/accounts/ListAccounts';
 import AccountDetailAdmin from '~/admin/components/accounts/AccountDetailAdmin';
+import Checkout from '~/user/pages/CheckOut';
 
 // Public routes
 const publicRoutes = [
@@ -38,6 +39,7 @@ const publicRoutes = [
     { path: config.routes.blog, component: Blog },
     { path: config.routes.blogDetail, component: BlogDetail },
     { path: config.routes.cart, component: Cart },
+    { path: config.routes.checkout, component: Checkout },
     { path: config.routes.profile, component: Profile },
     { path: config.routes.changePassword, component: ChangePassword },
     { path: config.routes.productDetail, component: ProductDetail },

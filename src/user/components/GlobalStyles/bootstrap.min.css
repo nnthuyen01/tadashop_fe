@@ -93,7 +93,7 @@ section {
 }
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; */
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -180,14 +180,16 @@ sup {
     top: -0.5em;
 }
 a {
-    color: #007bff;
+    /* color: #007bff; */
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
 a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    /* color: #0056b3;
+    text-decoration: underline; */
+
+    text-decoration: none;
 }
 a:not([href]):not([tabindex]) {
     color: inherit;
@@ -253,8 +255,9 @@ label {
     margin-bottom: 0.5rem;
 }
 button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+    /* outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color; */
+    outline: none;
 }
 button,
 input,
@@ -1832,7 +1835,7 @@ select.form-control-lg:not([size]):not([multiple]) {
         top: 0;
     }
 }
-.btn {
+/* .btn {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -1865,7 +1868,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 .btn.active,
 .btn:active {
     background-image: none;
-}
+} */
 a.btn.disabled,
 fieldset[disabled] a.btn {
     pointer-events: none;

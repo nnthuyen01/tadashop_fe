@@ -18,17 +18,17 @@ function BlogDetail() {
             {/* <!-- breadcrumb --> */}
             <div className="container">
                 <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-                    <a href="index.html" className="stext-109 cl8 hov-cl1 trans-04">
+                    <a href="index.html" className="stext-107 cl8 hov-cl1 trans-04">
                         Trang Chủ
                         <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                     </a>
 
-                    <a href="blog.html" className="stext-109 cl8 hov-cl1 trans-04">
+                    <a href="blog.html" className="stext-107 cl8 hov-cl1 trans-04">
                         Bài Viết
                         <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
                     </a>
 
-                    <span className="stext-109 cl4">Top 10 Cầu Thủ Mặc Áo Bóng Đá Đẹp Nhất Năm</span>
+                    <span className="stext-107 cl4">Top 10 Cầu Thủ Mặc Áo Bóng Đá Đẹp Nhất Năm</span>
                 </div>
             </div>
 
