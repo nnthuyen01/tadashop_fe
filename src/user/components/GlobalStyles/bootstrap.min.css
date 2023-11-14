@@ -3359,7 +3359,7 @@ tbody.collapse.show {
 .navbar-dark .navbar-text {
     color: rgba(255, 255, 255, 0.5);
 }
-.card {
+.card1 {
     position: relative;
     display: -ms-flexbox;
     display: flex;
@@ -3404,7 +3404,7 @@ tbody.collapse.show {
 .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: #2a2a2a;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 .card-header:first-child {

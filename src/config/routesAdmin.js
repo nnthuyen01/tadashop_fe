@@ -23,5 +23,10 @@ const routesAdmin = {
 
     accounts: '/dashboard/accounts',
     accountDetailAdmin: '/dashboard/accounts/view/:id',
+
+    order: '/dashboard/order',
+    orderDetailAdmin: '/dashboard/order/view/:id',
+
+    statistics: '/dashboard/statistics',
 };
 export default routesAdmin;

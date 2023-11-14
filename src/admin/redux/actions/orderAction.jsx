@@ -1,31 +1,33 @@
-import AccountService from '../../services/accountService';
+import OrderService from '../../services/orderService';
 import {
     COMMON_ERROR_SET,
     COMMON_LOADING_SET,
     COMMON_MESSAGE_SET,
-    ACCOUNTS_SET,
-    ACCOUNT_APPEND,
-    ACCOUNT_DELETE,
-    ACCOUNT_SET,
-    ACCOUNT_SET_PAGEABLE,
-    ACCOUNT_UPDATE,
+    ORDERS_SET,
+    ORDER_APPEND,
+    ORDER_DELETE,
+    ORDER_SET,
+    ORDER_SET_PAGEABLE,
+    ORDER_STATE_CLEAR,
+    ORDER_UPDATE,
 } from './actionTypes';
-export const getAccounts = () => async (dispatch) => {
-    const service = new AccountService();
+
+export const getOrders = () => async (dispatch) => {
+    const service = new OrderService();
 
     try {
-        console.log('Get Accounts');
+        console.log('Get Orders');
         dispatch({
             type: COMMON_LOADING_SET,
             payload: true,
         });
 
-        const response = await service.getAccounts();
+        const response = await service.getOrders();
 
         console.log(response);
         if (response.status === 200) {
             dispatch({
-                type: ACCOUNTS_SET,
+                type: ORDERS_SET,
                 payload: response.data,
             });
         } else {
@@ -46,22 +48,22 @@ export const getAccounts = () => async (dispatch) => {
     });
 };
 
-export const getAccountsPageable = (params) => async (dispatch) => {
-    const service = new AccountService();
+export const getOrdersPageable = (params) => async (dispatch) => {
+    const service = new OrderService();
 
     try {
-        console.log('Get Accounts Pageable');
+        console.log('Get Orders Pageable');
         dispatch({
             type: COMMON_LOADING_SET,
             payload: true,
         });
 
-        const response = await service.getAccountsPageable(params);
+        const response = await service.getOrdersPageable(params);
 
         console.log(response);
         if (response.status === 200) {
             dispatch({
-                type: ACCOUNTS_SET,
+                type: ORDERS_SET,
                 payload: response.data.content,
             });
 
@@ -74,7 +76,7 @@ export const getAccountsPageable = (params) => async (dispatch) => {
                 totalElements: totalElements,
             };
             dispatch({
-                type: ACCOUNT_SET_PAGEABLE,
+                type: ORDER_SET_PAGEABLE,
                 payload: pagination,
             });
         } else {
@@ -94,69 +96,23 @@ export const getAccountsPageable = (params) => async (dispatch) => {
         payload: false,
     });
 };
-export const getAccountsByName = (params) => async (dispatch) => {
-    const service = new AccountService();
+
+export const getOrderById = (id) => async (dispatch) => {
+    const service = new OrderService();
 
     try {
-        console.log('Get Accounts by name');
+        console.log('Get Order');
         dispatch({
             type: COMMON_LOADING_SET,
             payload: true,
         });
 
-        const response = await service.getAccountsByName(params);
+        const response = await service.getOrder(id);
 
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
             dispatch({
-                type: ACCOUNTS_SET,
-                payload: response.data.content,
-            });
-            const { size, totalPages, totalElements, pageable } = response.data;
-            const pagination = {
-                size: size,
-                page: pageable.pageNumber,
-                query: params.query,
-                totalPages: totalPages,
-                totalElements: totalElements,
-            };
-            dispatch({
-                type: ACCOUNT_SET_PAGEABLE,
-                payload: pagination,
-            });
-        } else {
-            dispatch({
-                type: COMMON_ERROR_SET,
-                payload: response.message,
-            });
-        }
-    } catch (error) {
-        dispatch({
-            type: COMMON_ERROR_SET,
-            payload: error.response.data ? error.response.data.message : error.message,
-        });
-    }
-    dispatch({
-        type: COMMON_LOADING_SET,
-        payload: false,
-    });
-};
-export const getAccountById = (id) => async (dispatch) => {
-    const service = new AccountService();
-
-    try {
-        console.log('Get Account');
-        dispatch({
-            type: COMMON_LOADING_SET,
-            payload: true,
-        });
-
-        const response = await service.getAccount(id);
-
-        console.log(response);
-        if (response.status === 200) {
-            dispatch({
-                type: ACCOUNT_SET,
+                type: ORDER_SET,
                 payload: response.data,
             });
         } else {
@@ -177,35 +133,53 @@ export const getAccountById = (id) => async (dispatch) => {
     });
 };
 
-export const disabledAccountById = (id) => async (dispatch) => {
-    const service = new AccountService();
+export const updateOrder = (order) => async (dispatch) => {
+    const service = new OrderService();
 
     try {
-        console.log('Update account');
+        console.log('Update order');
 
         dispatch({
             type: COMMON_LOADING_SET,
             payload: true,
         });
 
-        const response = await service.disableAccountById(id);
+        const { id } = order;
+        const response = await service.updateOrder(id, order);
         const params = {
-            page: 0,
             size: 5,
         };
+        const response1 = await service.getOrdersPageable(params);
+        const response2 = await service.getOrder(id);
 
-        if (response.status === 201) {
+        if (response.status === 200) {
             dispatch({
-                type: ACCOUNT_SET,
-                payload: response.data,
+                type: ORDER_STATE_CLEAR,
             });
             dispatch({
-                type: ACCOUNT_UPDATE,
-                payload: response.data,
+                type: ORDER_SET,
+                payload: response2.data,
+            });
+            dispatch({
+                type: ORDERS_SET,
+                payload: response1.data.content,
+            });
+
+            const { size, totalPages, totalElements, pageable } = response1.data;
+            const pagination = {
+                size: size,
+                page: pageable.pageNumber,
+                query: params.query,
+                totalPages: totalPages,
+                totalElements: totalElements,
+            };
+            dispatch({
+                type: ORDER_SET_PAGEABLE,
+                payload: pagination,
             });
             dispatch({
                 type: COMMON_MESSAGE_SET,
-                payload: 'Account is updated',
+                payload: 'Order is updated',
             });
         } else {
             dispatch({
@@ -213,11 +187,6 @@ export const disabledAccountById = (id) => async (dispatch) => {
                 payload: response.message,
             });
         }
-        const response1 = await service.getAccountsPageable(params);
-        dispatch({
-            type: ACCOUNTS_SET,
-            payload: response1.data.content,
-        });
         console.log(response);
     } catch (error) {
         dispatch({
@@ -226,6 +195,42 @@ export const disabledAccountById = (id) => async (dispatch) => {
         });
     }
 
+    dispatch({
+        type: COMMON_LOADING_SET,
+        payload: false,
+    });
+};
+
+export const getOrdersByStatus = (params) => async (dispatch) => {
+    const service = new OrderService();
+
+    try {
+        console.log('Get Orders by status');
+        dispatch({
+            type: COMMON_LOADING_SET,
+            payload: true,
+        });
+
+        const response = await service.getOrderByStatus(params);
+
+        console.log(response);
+        if (response.status === 200) {
+            dispatch({
+                type: ORDERS_SET,
+                payload: response.data,
+            });
+        } else {
+            dispatch({
+                type: COMMON_ERROR_SET,
+                payload: response.message,
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: COMMON_ERROR_SET,
+            payload: error.response.data ? error.response.data.message : error.message,
+        });
+    }
     dispatch({
         type: COMMON_LOADING_SET,
         payload: false,

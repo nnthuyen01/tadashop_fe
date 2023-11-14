@@ -17,9 +17,10 @@ function Shop() {
     // Show Modal1 Product
     const [showModal, setShowModal] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
-
-    const handleShowModal = () => {
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const handleShowModal = (productId) => {
         setScrollPosition(window.scrollY);
+        setSelectedProductId(productId);
         setShowModal(true);
     };
 
@@ -27,17 +28,28 @@ function Shop() {
         window.scrollTo(0, scrollPosition);
         setShowModal(false);
     };
+    const [cartItemCount, setCartItemCount] = useState(0);
 
+    const handleAddToCartSuccess = () => {
+        // Update the cart item count or perform any other actions needed
+        setCartItemCount((prevCount) => prevCount + 1);
+    };
     return (
         <div style={{ backgroundColor: '#fff' }}>
-            <HeaderPages />
+            <HeaderPages key={cartItemCount} />
 
             {/* <!-- Product --> */}
             <ProductItem handleShowModal={handleShowModal} loadmore={true} />
 
             {/* <!-- Modal1 --> */}
 
-            {showModal && <ModalProduct handleHideModal={handleHideModal} />}
+            {showModal && (
+                <ModalProduct
+                    handleHideModal={handleHideModal}
+                    productId={selectedProductId}
+                    onAddToCartSuccess={handleAddToCartSuccess}
+                />
+            )}
         </div>
     );
 }

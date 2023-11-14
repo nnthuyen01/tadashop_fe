@@ -8,6 +8,7 @@ import voucherReducer from './reducers/voucherReducer';
 import paymentReducer from './reducers/paymentReducer';
 import sizeReducer from './reducers/sizeReducer';
 import accountReducer from './reducers/accountReducer';
+import orderReducer from './reducers/orderReducer';
 const rootReducer = combineReducers({
     clubReducer,
     leagueReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     paymentReducer,
     sizeReducer,
     accountReducer,
+    orderReducer,
 });
 
 export default rootReducer;

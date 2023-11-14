@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import { Link, useNavigate } from 'react-router-dom';
 import images from '~/assets/images';
-
+import swal from 'sweetalert';
 function Cart() {
     const navigate = useNavigate();
     const [cartProducts, setCartProducts] = useState([]);
@@ -54,18 +54,23 @@ function Cart() {
 
                             // Sau khi cập nhật thông qua API, cập nhật lại state nếu cần
                             // Điều này giúp đảm bảo state và dữ liệu từ API phù hợp
-                            setCartProducts((updatedProducts) => {
-                                return updatedProducts.map((updatedProduct, updatedIndex) => {
-                                    if (updatedIndex === index) {
-                                        // Cập nhật lại số lượng sản phẩm
+                            if (response.status === 200) {
+                                setCartProducts((updatedProducts) => {
+                                    return updatedProducts.map((updatedProduct, updatedIndex) => {
+                                        if (updatedIndex === index) {
+                                            // Cập nhật lại số lượng sản phẩm
 
-                                        setHeaderKey(headerKey + 1);
-                                        return { ...updatedProduct, quantity: newQuantity };
-                                    } else {
-                                        return updatedProduct;
-                                    }
+                                            setHeaderKey(headerKey + 1);
+                                            return { ...updatedProduct, quantity: newQuantity };
+                                        } else {
+                                            return updatedProduct;
+                                        }
+                                    });
                                 });
-                            });
+                            } else {
+                                // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                                swal('Lỗi', response.data.message, 'error');
+                            }
                         })
                         .catch((error) => {
                             // Xử lý lỗi từ API
@@ -92,26 +97,48 @@ function Cart() {
                         .put(API_URL + `cart/update?productSizeId=${product.item.size.id}&quantity=${newQuantity}`)
                         .then((response) => {
                             // Handle the API response if needed
-                            // console.log('API response: ', response.data);
+                            console.log('API response: ', response);
 
                             // Sau khi cập nhật thông qua API, cập nhật lại state nếu cần
                             // Điều này giúp đảm bảo state và dữ liệu từ API phù hợp
-                            setCartProducts((updatedProducts) => {
-                                return updatedProducts.map((updatedProduct, updatedIndex) => {
-                                    if (updatedIndex === index) {
-                                        // Cập nhật lại số lượng của sản phẩm
-                                        setHeaderKey(headerKey + 1);
+                            if (response.status === 200) {
+                                setCartProducts((updatedProducts) => {
+                                    return updatedProducts.map((updatedProduct, updatedIndex) => {
+                                        if (updatedIndex === index) {
+                                            // Cập nhật lại số lượng của sản phẩm
+                                            setHeaderKey(headerKey + 1);
 
-                                        return { ...updatedProduct, quantity: newQuantity };
-                                    } else {
-                                        return updatedProduct;
-                                    }
+                                            return { ...updatedProduct, quantity: newQuantity };
+                                        } else {
+                                            return updatedProduct;
+                                        }
+                                    });
                                 });
-                            });
+                            } else {
+                                // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                                swal('Lỗi', response.data.message, 'error');
+                            }
                         })
                         .catch((error) => {
                             // Handle API error
-                            console.error('API error: ', error);
+                            // console.error('API error: ', error);
+                            if (error.response.data.message === 'Số lượng vượt quá số lượng sản phẩm.') {
+                                swal('Lỗi', error.response.data.message, 'error');
+                                setCartProducts((updatedProducts) => {
+                                    return updatedProducts.map((updatedProduct, updatedIndex) => {
+                                        if (updatedIndex === index) {
+                                            // Cập nhật lại số lượng của sản phẩm
+                                            setHeaderKey(headerKey + 1);
+
+                                            return { ...updatedProduct, quantity: newQuantity - 1 };
+                                        } else {
+                                            return updatedProduct;
+                                        }
+                                    });
+                                });
+                            } else {
+                                console.error('API error: ', error);
+                            }
                         });
 
                     return { ...product, quantity: newQuantity };

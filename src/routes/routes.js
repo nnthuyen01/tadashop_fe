@@ -30,6 +30,9 @@ import ListLeagues from '~/admin/components/league/ListLeagues';
 import ListAccounts from '~/admin/components/accounts/ListAccounts';
 import AccountDetailAdmin from '~/admin/components/accounts/AccountDetailAdmin';
 import Checkout from '~/user/pages/CheckOut';
+import Statistics from '~/admin/components/statistic/Statistics';
+import ListOrders from '~/admin/components/order/ListOrders';
+import OrderDetailAdmin from '~/admin/components/order/OrderDetailAdmin';
 
 // Public routes
 const publicRoutes = [
@@ -73,5 +76,10 @@ const privateRoutes = [
 
     { path: config.routesAdmin.accounts, component: ListAccounts },
     { path: config.routesAdmin.accountDetailAdmin, component: AccountDetailAdmin },
+
+    { path: config.routesAdmin.order, component: ListOrders },
+    { path: config.routesAdmin.orderDetailAdmin, component: OrderDetailAdmin },
+
+    { path: config.routesAdmin.statistics, component: Statistics },
 ];
 export { publicRoutes, privateRoutes };

@@ -12,7 +12,7 @@ import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import { Link } from 'react-router-dom';
 
-function ModalProduct({ handleHideModal, productId }) {
+function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -110,16 +110,18 @@ function ModalProduct({ handleHideModal, productId }) {
     };
 
     useEffect(() => {
-        // Initialize Magnific Popup when the component mounts
-        $('.gallery-lb').magnificPopup({
-            delegate: 'a',
-            type: 'image',
-            gallery: {
-                enabled: true,
-            },
-            mainClass: 'mfp-fade',
-        });
-    }, []);
+        if (!loading) {
+            // Initialize Magnific Popup when the component mounts
+            $('.gallery-lb').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                },
+                mainClass: 'mfp-fade',
+            });
+        }
+    }, [loading]);
 
     // select2
     const selectSizeRef = useRef();
@@ -163,15 +165,21 @@ function ModalProduct({ handleHideModal, productId }) {
                         title: `${nameProduct}`,
                         icon: 'success',
                     });
+                    onAddToCartSuccess();
                 } else {
                     // Nếu có lỗi từ API, hiển thị thông báo lỗi
                     swal('Lỗi', response.data.message, 'error');
                 }
             })
+
             .catch((error) => {
                 // Xử lý lỗi khi gửi yêu cầu
-                console.error('Lỗi khi thực hiện yêu cầu:', error);
-                swal('Lỗi', 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng', 'error');
+                if (error.response.data.message === 'Số lượng vượt quá số lượng sản phẩm.') {
+                    swal('Lỗi', error.response.data.message, 'error');
+                } else {
+                    console.error('Lỗi khi thực hiện yêu cầu:', error);
+                    swal('Lỗi', 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng', 'error');
+                }
             });
     };
 

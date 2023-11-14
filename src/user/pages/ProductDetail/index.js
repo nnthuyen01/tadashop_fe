@@ -180,9 +180,12 @@ function ProductDetail() {
                 }
             })
             .catch((error) => {
-                // Xử lý lỗi khi gửi yêu cầu
-                console.error('Lỗi khi thực hiện yêu cầu:', error);
-                swal('Lỗi', 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng', 'error');
+                if (error.response.data.message === 'Số lượng vượt quá số lượng sản phẩm.') {
+                    swal('Lỗi', error.response.data.message, 'error');
+                } else {
+                    console.error('Lỗi khi thực hiện yêu cầu:', error);
+                    swal('Lỗi', 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng', 'error');
+                }
             });
     };
 

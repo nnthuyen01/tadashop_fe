@@ -185,6 +185,7 @@ const Dashboard = () => {
                             key: '6',
                             icon: <MdOutlineShoppingBag />,
                             label: 'Orders',
+                            onClick: () => navigate('/dashboard/order'),
                         },
                         {
                             key: '7',
@@ -195,6 +196,7 @@ const Dashboard = () => {
                             key: '8',
                             icon: <MdInsertChartOutlined />,
                             label: 'Statistics',
+                            onClick: () => navigate('/dashboard/statistics'),
                         },
 
                         {

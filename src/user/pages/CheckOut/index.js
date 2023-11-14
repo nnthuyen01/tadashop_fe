@@ -5,21 +5,43 @@ import './checkout.scss';
 import images from '~/assets/images';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
+import swal from 'sweetalert';
 
 function Checkout() {
-    const [deliveryOption, setDeliveryOption] = useState('direct'); // 'direct' or 'store'
-    const [address, setAddress] = useState('');
+    const [deliveryOption, setDeliveryOption] = useState('direct');
+
     const [paymentOption, setPaymentOption] = useState('card');
 
     const handleDeliveryOptionChange = (event) => {
         setDeliveryOption(event.target.value);
+        if (event.target.value === 'store') {
+            setCheckout((prevCheckout) => ({
+                ...prevCheckout,
+                deliveryAddress: 'Nhận tại cửa hàng',
+            }));
+        }
+        if (event.target.value === 'direct') {
+            setCheckout((prevCheckout) => ({
+                ...prevCheckout,
+                deliveryAddress: '',
+            }));
+        }
     };
 
-    const handleAddressChange = (event) => {
-        setAddress(event.target.value);
-    };
     const handlePaymentOptionChange = (event) => {
         setPaymentOption(event.target.value);
+        if (event.target.value === 'card') {
+            setCheckout((prevCheckout) => ({
+                ...prevCheckout,
+                paymentMethod: 'CardATM',
+            }));
+        }
+        if (event.target.value === 'cod') {
+            setCheckout((prevCheckout) => ({
+                ...prevCheckout,
+                paymentMethod: 'COD',
+            }));
+        }
     };
 
     const navigate = useNavigate();
@@ -47,6 +69,69 @@ function Checkout() {
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+
+    const [checkout, setCheckout] = useState({
+        deliveryAddress: '',
+        note: '',
+        differentReceiverName: '',
+        differentReceiverPhone: '',
+        discountCode: '',
+        paymentMethod: 'CardATM',
+    });
+
+    const handleInputChange = (field, value) => {
+        setCheckout((prevCheckout) => ({
+            ...prevCheckout,
+            [field]: value,
+        }));
+    };
+    const [voucherValue, setVoucherValue] = useState('');
+    const [applyVoucher, setApplyVoucher] = useState(false);
+
+    const handleVoucherChange = (event) => {
+        setVoucherValue(event.target.value);
+    };
+    const handleApplyVoucher = () => {
+        setCheckout((prevCheckout) => ({
+            ...prevCheckout,
+            discountCode: voucherValue,
+        }));
+        setApplyVoucher(true);
+    };
+
+    const handleCheckout = (info) => {
+        // const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
+        // if (!selectedSize) {
+        //     swal('Lỗi', 'Vui lòng chọn size trước khi thêm vào giỏ hàng', 'error');
+        //     return;
+        // }
+        // if (numProduct === 0) {
+        //     swal('Lỗi', 'Vui lòng chọn số lượng trước khi thêm vào giỏ hàng', 'error');
+        //     return;
+        // }
+        // console.log('quantity ' + numProduct);
+        // console.log('idSize ' + selectedSize);
+        console.log(info);
+        axios
+            .post(API_URL + 'order', info)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    swal('Đặt hàng thành công!', {
+                        title: 'bạn đã thanh toán thành công',
+                        icon: 'success',
+                    });
+                } else {
+                    // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                    swal('Lỗi', response.data.message, 'error');
+                }
+            })
+            .catch((error) => {
+                // Xử lý lỗi khi gửi yêu cầu
+                console.error('Lỗi khi thực hiện yêu cầu:', error);
+                swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
+            });
+    };
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
@@ -83,6 +168,13 @@ function Checkout() {
                                                             className="field-input"
                                                             size="30"
                                                             type="text"
+                                                            value={checkout.differentReceiverName}
+                                                            onChange={(e) =>
+                                                                handleInputChange(
+                                                                    'differentReceiverName',
+                                                                    e.target.value,
+                                                                )
+                                                            }
                                                         ></input>
                                                     </div>
                                                 </div>
@@ -94,6 +186,13 @@ function Checkout() {
                                                             className="field-input"
                                                             size="30"
                                                             type="text"
+                                                            value={checkout.differentReceiverPhone}
+                                                            onChange={(e) =>
+                                                                handleInputChange(
+                                                                    'differentReceiverPhone',
+                                                                    e.target.value,
+                                                                )
+                                                            }
                                                         ></input>
                                                     </div>
                                                 </div>
@@ -135,8 +234,13 @@ function Checkout() {
                                                                         className="field-input"
                                                                         size="30"
                                                                         type="text"
-                                                                        value={address}
-                                                                        onChange={handleAddressChange}
+                                                                        value={checkout.deliveryAddress}
+                                                                        onChange={(e) =>
+                                                                            handleInputChange(
+                                                                                'deliveryAddress',
+                                                                                e.target.value,
+                                                                            )
+                                                                        }
                                                                     ></input>
                                                                 </div>
                                                             </div>
@@ -176,13 +280,13 @@ function Checkout() {
                                                         <div className="container-card">
                                                             <h3>Thông tin thẻ</h3>
                                                             <p>
-                                                                <span class="highlight">TK NH:</span> 4706205185346
+                                                                <span className="highlight">TK NH:</span> 4706205185346
                                                             </p>
                                                             <p>
-                                                                <span class="highlight">Nguyễn Ngọc Thuyên</span>
+                                                                <span className="highlight">Nguyễn Ngọc Thuyên</span>
                                                             </p>
                                                             <p>
-                                                                <span class="highlight">NH Agribank</span>
+                                                                <span className="highlight">NH Agribank</span>
                                                             </p>
                                                             <p>Nội dung: Tên + SĐT đặt hàng</p>
                                                         </div>
@@ -216,6 +320,10 @@ function Checkout() {
                                                                 className="field-input"
                                                                 size="30"
                                                                 type="text"
+                                                                value={checkout.note}
+                                                                onChange={(e) =>
+                                                                    handleInputChange('note', e.target.value)
+                                                                }
                                                             ></input>
                                                         </div>
                                                     </div>
@@ -231,10 +339,17 @@ function Checkout() {
                                                     width: '100%',
                                                 }}
                                             >
-                                                <div className="flex-c-m stext-101 cl2 size-119  bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                                                <div
+                                                    className="flex-c-m stext-101 cl2 size-119  bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                                                    onClick={() => navigate('/cart')}
+                                                >
                                                     Giỏ hàng
                                                 </div>
-                                                <div className="flex-c-m stext-101 cl0 size-119 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                                                <div
+                                                    className="flex-c-m stext-101 cl0 size-119 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                                                    // onClick={() => console.log(checkout)}
+                                                    onClick={() => handleCheckout(checkout)}
+                                                >
                                                     Thanh toán
                                                 </div>
                                             </div>
@@ -253,13 +368,15 @@ function Checkout() {
                                 </div>
 
                                 <table className="table-payment">
-                                    <tr>
-                                        <th className="th-payment">Hình ảnh</th>
-                                        <th className="th-payment">Mô tả</th>
-                                        <th className="th-payment">Size</th>
-                                        <th className="th-payment">Số lượng</th>
-                                        <th className="th-payment">Giá</th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th className="th-payment">Hình ảnh</th>
+                                            <th className="th-payment">Mô tả</th>
+                                            <th className="th-payment">Size</th>
+                                            <th className="th-payment">Số lượng</th>
+                                            <th className="th-payment">Giá</th>
+                                        </tr>
+                                    </thead>
                                     {loading ? (
                                         <tbody>
                                             <tr>
@@ -300,13 +417,23 @@ function Checkout() {
                                         type="text"
                                         name="coupon"
                                         placeholder="Nhập mã Voucher"
+                                        value={voucherValue}
+                                        onChange={handleVoucherChange}
                                     />
 
-                                    <div className="flex-c-m stext-101 cl2 size-118 bg8 hov-btn3 bor20 p-lr-15 trans-04 pointer m-tb-5">
+                                    <div
+                                        className="flex-c-m stext-101 cl2 size-118 bg8 hov-btn3 bor20 p-lr-15 trans-04 pointer m-tb-5"
+                                        onClick={handleApplyVoucher}
+                                    >
                                         Áp dụng voucher
                                     </div>
                                 </div>
-                                <div className="bor10 p-lr-40 p-t-30 p-b-40  m-lr-0-xl p-lr-15-sm">
+                                {applyVoucher && (
+                                    <div className="mtext-101" style={{ color: '#12a700' }}>
+                                        Bạn đã áp dụng voucher: {voucherValue.toUpperCase()}
+                                    </div>
+                                )}
+                                <div className="bor10 p-lr-40 p-t-30 p-b-40 m-t-20 m-lr-0-xl p-lr-15-sm">
                                     <h4 className="mtext-109 cl2 p-b-30">ĐƠN HÀNG</h4>
 
                                     <div className="flex-w flex-t p-b-13">
@@ -315,7 +442,7 @@ function Checkout() {
                                         </div>
 
                                         <div style={{ width: '60%' }}>
-                                            <span className="mtext-110 ">520,000₫</span>
+                                            <span className="mtext-110 ">{formatNumberWithCommas(totalPrice)}</span>
                                         </div>
                                     </div>
                                     <div className="flex-w flex-t bor12 p-b-13">

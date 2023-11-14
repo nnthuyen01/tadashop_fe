@@ -97,12 +97,12 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
                                             Xem Giỏ
                                         </Link>
 
-                                        <a
-                                            href="shoping-cart.html"
+                                        <Link
+                                            to="/checkout"
                                             className="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
                                         >
                                             Thanh Toán
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
