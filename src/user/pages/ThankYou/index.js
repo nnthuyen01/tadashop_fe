@@ -10,7 +10,7 @@ function Thankyou() {
     const { idOrder } = useParams();
     const [order, setOrder] = useState();
     const [cartProducts, setCartProducts] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+
     useEffect(() => {
         axios
             .get(API_URL + `orderDetail/${idOrder}`)
@@ -20,10 +20,7 @@ function Thankyou() {
                     setOrder(response.data.order);
 
                     setCartProducts(response.data.items);
-                    const total = response.data.items.reduce((total, item) => {
-                        return total + item.quantity * item.totalPrice;
-                    }, 0);
-                    setTotalPrice(total);
+
                     setLoading(false);
                 }
             })
@@ -32,7 +29,12 @@ function Thankyou() {
             });
     }, []);
     function formatNumberWithCommas(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        if (number !== undefined && number !== null) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        } else {
+            // Handle the case when number is undefined or null
+            return '';
+        }
     }
     console.log(order);
     return (
@@ -168,7 +170,7 @@ function Thankyou() {
                                                     <td className="td-payment">{item.quantity}</td>
                                                     <td className="td-payment">
                                                         {' '}
-                                                        {formatNumberWithCommas(item.totalPrice)}₫
+                                                        {formatNumberWithCommas(item?.totalPrice)}₫
                                                     </td>
                                                 </tr>
                                             ))}
@@ -185,7 +187,9 @@ function Thankyou() {
                                         </div>
 
                                         <div style={{ width: '60%' }}>
-                                            <span className="mtext-110 ">{formatNumberWithCommas(totalPrice)}</span>
+                                            <span className="mtext-110 ">
+                                                {formatNumberWithCommas(order?.totalPrice)}
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="flex-w flex-t bor12 p-b-13">
@@ -205,7 +209,7 @@ function Thankyou() {
 
                                         <div className="p-t-1" style={{ width: '60%' }}>
                                             <span className="mtext-109 " style={{ color: '#e32124' }}>
-                                                {formatNumberWithCommas(totalPrice)}
+                                                {formatNumberWithCommas(order?.totalPrice)}
                                             </span>
                                         </div>
                                     </div>

@@ -52,7 +52,7 @@ function Checkout() {
         axios
             .get(API_URL + 'cart')
             .then((response) => {
-                // console.log(response);
+                console.log(response);
                 if (response.status === 200) {
                     setCartProducts(response.data);
                     const total = response.data.reduce((total, item) => {
@@ -145,28 +145,93 @@ function Checkout() {
             return;
         }
         console.log(info);
+        if (info.paymentMethod === 'CardATM') {
+            axios
+                .post(API_URL + 'order', info)
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        const { totalPrice, id } = response.data;
 
-        axios
-            .post(API_URL + 'order', info)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    swal('Đặt hàng thành công!', {
-                        title: 'bạn đã thanh toán thành công',
-                        icon: 'success',
-                    });
-                    setPaymentSuccess(true);
-                    navigate(`/checkout/${response.data.id}/thankyou`, { replace: true });
-                } else {
-                    // Nếu có lỗi từ API, hiển thị thông báo lỗi
-                    swal('Lỗi', response.data.message, 'error');
-                }
-            })
-            .catch((error) => {
-                // Xử lý lỗi khi gửi yêu cầu
-                console.error('Lỗi khi thực hiện yêu cầu:', error);
-                swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
-            });
+                        // Thực hiện cuộc gọi POST đến điểm cuối Java API của bạn với các giá trị đã trích xuất
+                        axios
+                            .get(API_URL + 'pay', {
+                                params: {
+                                    price: totalPrice,
+                                    id: id,
+                                },
+                            })
+                            .then((payResponse) => {
+                                console.log(payResponse);
+                                if (payResponse.status === 200) {
+                                    // Nếu yêu cầu thành công, chuyển hướng người dùng đến URL thanh toán
+                                    window.location.href = payResponse.data;
+                                } else {
+                                    // Xử lý lỗi phản hồi API cho cuộc gọi thứ hai
+                                    swal('Lỗi', payResponse.data.message, 'error');
+                                }
+                            })
+                            .catch((payError) => {
+                                // Xử lý lỗi cho cuộc gọi HTTP thứ hai
+                                console.error('Lỗi khi thực hiện yêu cầu thanh toán:', payError);
+                                swal('Lỗi', 'Có lỗi xảy ra khi thanh toán', 'error');
+                            });
+                    } else {
+                        // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                        swal('Lỗi', response.data.message, 'error');
+                    }
+                })
+                .catch((error) => {
+                    // Xử lý lỗi khi gửi yêu cầu
+                    console.error('Lỗi khi thực hiện yêu cầu:', error);
+                    swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
+                });
+        }
+        if (info.paymentMethod === 'COD') {
+            axios
+                .post(API_URL + 'order', info)
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        swal('Đặt hàng thành công!', {
+                            title: 'bạn đã thanh toán thành công',
+                            icon: 'success',
+                        });
+                        setPaymentSuccess(true);
+                        navigate(`/checkout/${response.data.id}/thankyou`, { replace: true });
+                    } else {
+                        // Nếu có lỗi từ API, hiển thị thông báo lỗi
+                        swal('Lỗi', response.data.message, 'error');
+                    }
+                })
+                .catch((error) => {
+                    // Xử lý lỗi khi gửi yêu cầu
+                    console.error('Lỗi khi thực hiện yêu cầu:', error);
+                    swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
+                });
+        }
+
+        // axios
+        //     .post(API_URL + 'order', info)
+        //     .then((response) => {
+        //         console.log(response);
+        //         if (response.status === 200) {
+        //             swal('Đặt hàng thành công!', {
+        //                 title: 'bạn đã thanh toán thành công',
+        //                 icon: 'success',
+        //             });
+        //             setPaymentSuccess(true);
+        //             navigate(`/checkout/${response.data.id}/thankyou`, { replace: true });
+        //         } else {
+        //             // Nếu có lỗi từ API, hiển thị thông báo lỗi
+        //             swal('Lỗi', response.data.message, 'error');
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         // Xử lý lỗi khi gửi yêu cầu
+        //         console.error('Lỗi khi thực hiện yêu cầu:', error);
+        //         swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
+        //     });
     };
 
     return (
@@ -548,7 +613,7 @@ function Checkout() {
 
                                         <div className="p-t-1" style={{ width: '60%' }}>
                                             <span className="mtext-109 " style={{ color: '#e32124' }}>
-                                                520,000₫
+                                                {formatNumberWithCommas(totalPrice)}đ
                                             </span>
                                         </div>
                                     </div>

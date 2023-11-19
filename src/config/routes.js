@@ -12,5 +12,6 @@ const routes = {
     contact: '/contact',
     order: '/order',
     thankyou: '/checkout/:idOrder/thankyou',
+    paymentFail: '/payment-fail',
 };
 export default routes;
