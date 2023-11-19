@@ -71,18 +71,23 @@ class OrderDetailAdmin extends Component {
                                 <div className="col-lg-10 col-xl-8">
                                     <div className="card1" style={{ borderRadius: '10px' }}>
                                         <div className="card-header px-4 py-5">
-                                            <h5 className="mtext-102" style={{ color: '#fff', textAlign: 'center' }}>
+                                            <h5 className="mtext-109" style={{ color: '#fff', textAlign: 'center' }}>
                                                 Order Detail
                                             </h5>
                                         </div>
                                         <div className="card-body p-4">
                                             <div className="d-flex justify-content-between align-items-center mb-4">
-                                                <p className="mtext-105 mb-0" style={{ color: '#001529' }}>
-                                                    {/* {order.order?.state === 0
-                                                        ? 'Unconfirm'
-                                                        : order.status === 1
-                                                        ? 'Unpaid'
-                                                        : 'Paid'}  */}
+                                                {/* <p className="mtext-105 mb-0" style={{ color: '#001529' }}> */}
+                                                <p
+                                                    className="mtext-105 mb-0"
+                                                    style={{
+                                                        color: order.order?.state === 'Paid' ? 'green' : '#001529',
+                                                        backgroundColor: order.order?.state === 'Paid' ? 'yellow' : '',
+                                                        padding: order.order?.state === 'Paid' ? '10px' : '',
+                                                        border:
+                                                            order.order?.state === 'Paid' ? '1px solid #000000' : '',
+                                                    }}
+                                                >
                                                     {order.order?.state}
                                                 </p>
                                                 <button className="btn btn-success btn-sm" onClick={this.onEdit}>
@@ -93,13 +98,13 @@ class OrderDetailAdmin extends Component {
                                                 <p className="mtext-102 mb-0">
                                                     Receiver:{' '}
                                                     <span style={{ color: '#6c757d' }}>
-                                                        {order.order?.orderdetail?.receiverName}
+                                                        {order.order?.receiverName}
                                                     </span>
                                                 </p>
                                                 <p className="mtext-102 mb-0">
                                                     Phone:{' '}
                                                     <span style={{ color: '#6c757d' }}>
-                                                        {order.order?.orderdetail?.receiverPhone}
+                                                        {order.order?.receiverPhone}
                                                     </span>
                                                 </p>
                                                 <p className="mtext-102 mb-0">
@@ -113,7 +118,7 @@ class OrderDetailAdmin extends Component {
                                                 <p className="mtext-102 mb-0">
                                                     Address:{' '}
                                                     <span style={{ color: '#6c757d' }}>
-                                                        {order.order?.orderdetail?.deliveryAddress}
+                                                        {order.order?.deliveryAddress}
                                                     </span>
                                                 </p>
                                             </div>
@@ -165,13 +170,10 @@ class OrderDetailAdmin extends Component {
                                                 <p className="mtext-102 mb-0">Invoice information</p>
                                                 <p className="stext-115 mb-0">
                                                     <span className="mtext-102 me-4">
-                                                        {order.order?.orderdetail?.totalPrice !== undefined && (
+                                                        {order.order?.totalPrice !== undefined && (
                                                             <>
                                                                 Total amount:{' '}
-                                                                {this.formatNumberWithCommas(
-                                                                    order.order.orderdetail.totalPrice,
-                                                                )}
-                                                                đ
+                                                                {this.formatNumberWithCommas(order.order.totalPrice)}đ
                                                             </>
                                                         )}
                                                     </span>
@@ -182,13 +184,10 @@ class OrderDetailAdmin extends Component {
                                                 <p className="stext-115 mb-0">ID: {order.order?.id}</p>
                                                 <p className="stext-115 mb-0">
                                                     <span className="mtext-102 me-4">
-                                                        {order.order?.orderdetail?.totalPrice !== undefined && (
+                                                        {order.order?.totalPrice !== undefined && (
                                                             <>
                                                                 Discount:{' '}
-                                                                {this.formatNumberWithCommas(
-                                                                    order.order.orderdetail.priceOff,
-                                                                )}
-                                                                đ
+                                                                {this.formatNumberWithCommas(order.order.priceOff)}đ
                                                             </>
                                                         )}
                                                     </span>
@@ -208,14 +207,10 @@ class OrderDetailAdmin extends Component {
                                             }}
                                         >
                                             <h5 className="d-flex align-items-center justify-content-end text-white  mb-0">
-                                                Total payment:{' '}
+                                                Total payment:
                                                 <span className="text-uppercase">
-                                                    {order.order?.orderdetail?.totalPrice !== undefined && (
-                                                        <>
-                                                            {this.formatNumberWithCommas(
-                                                                order.order.orderdetail.totalPrice,
-                                                            )}
-                                                        </>
+                                                    {order.order?.totalPrice !== undefined && (
+                                                        <>{this.formatNumberWithCommas(order.order.totalPrice)}</>
                                                     )}
                                                 </span>
                                                 đ<span className="h2 mb-0 ms-2"></span>

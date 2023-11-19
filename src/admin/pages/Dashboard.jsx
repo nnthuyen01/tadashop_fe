@@ -155,26 +155,26 @@ const Dashboard = () => {
                             icon: <MdOutlineInventory2 />,
                             label: 'Products',
                             children: [
+                                // {
+                                //     key: 'P5-01',
+                                //     icon: <MdAddCircleOutline />,
+                                //     label: 'Upload Images',
+                                //     onClick: () => navigate('/dashboard/products/upload'),
+                                // },
                                 {
                                     key: 'P5-01',
-                                    icon: <MdAddCircleOutline />,
-                                    label: 'Upload Images',
-                                    onClick: () => navigate('/dashboard/products/upload'),
-                                },
-                                {
-                                    key: 'P5-02',
                                     icon: <MdAddCircleOutline />,
                                     label: 'Add Products',
                                     onClick: () => navigate('/dashboard/products/add'),
                                 },
                                 {
-                                    key: 'P5-03',
+                                    key: 'P5-02',
                                     icon: <MdFormatListBulleted />,
                                     label: 'List Products',
                                     onClick: () => navigate('/dashboard/products/list'),
                                 },
                                 {
-                                    key: 'P5-04',
+                                    key: 'P5-03',
                                     icon: <MdOutlineFormatSize />,
                                     label: 'Size Products',
                                     onClick: () => navigate('/dashboard/products/size'),
@@ -219,7 +219,15 @@ const Dashboard = () => {
             <Layout className="site-layout" style={siteLayoutStyle}>
                 <Header
                     className="site-layout-background"
-                    style={{ padding: 0, right: 16, left: marginLeft + 16, top: 0, position: 'fixed', height: 70 }}
+                    style={{
+                        padding: 0,
+                        right: 16,
+                        left: marginLeft + 16,
+                        top: 0,
+                        position: 'fixed',
+                        height: 70,
+                        zIndex: 999,
+                    }}
                 >
                     <Row>
                         <Col md={18}>

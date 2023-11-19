@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Sidebar({ handleHideSidebar, showSidebar }) {
     return (
         <>
@@ -18,33 +20,36 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                     <div className="sidebar-content flex-w w-full p-lr-65 js-pscroll">
                         <ul className="sidebar-link w-full">
                             <li className="p-b-13">
-                                <a href="index.html" className="stext-102 cl2 hov-cl1 trans-04">
+                                <Link to="/" className="stext-102 cl2 hov-cl1 trans-04">
                                     Trang Chủ
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="p-b-13">
-                                <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
+                                <Link to="/cart" className="stext-102 cl2 hov-cl1 trans-04">
                                     Giỏ hàng
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="p-b-13">
-                                <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
+                                <Link
+                                    to={`/profile/${localStorage.getItem('auth_name')}`}
+                                    className="stext-102 cl2 hov-cl1 trans-04"
+                                >
                                     Tài khoản
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="p-b-13">
-                                <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
+                                <Link to="/order" className="stext-102 cl2 hov-cl1 trans-04">
                                     Đơn hàng
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="p-b-13">
-                                <a href="#" className="stext-102 cl2 hov-cl1 trans-04">
+                                <Link to="/contact" className="stext-102 cl2 hov-cl1 trans-04">
                                     Hỏi đáp
-                                </a>
+                                </Link>
                             </li>
                         </ul>
 
@@ -54,92 +59,92 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                             <div className="flex-w flex-sb p-t-36 gallery-lb">
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
 
                                 {/* <!-- item gallery sidebar --> */}
                                 <div className="wrap-item-gallery m-b-10">
-                                    <a
+                                    <Link
                                         className="item-gallery bg-img1"
-                                        href="images/AoMu3.jpg"
+                                        to="/"
                                         data-lightbox="gallery"
                                         style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></a>
+                                    ></Link>
                                 </div>
                             </div>
                         </div>
@@ -147,11 +152,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                         <div className="sidebar-gallery w-full">
                             <span className="mtext-101 cl5">Về chúng tôi</span>
 
-                            <p className="stext-108 cl6 p-t-27">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus vulputate
-                                hendrerit. Praesent faucibus erat vitae rutrum gravida. Vestibulum tempus mi enim, in
-                                molestie sem fermentum quis.
-                            </p>
+                            <p className="stext-108 cl6 ">TADA STORE 💕 Dress Like A Pro, Play Like A Champion!</p>
                         </div>
                     </div>
                 </div>

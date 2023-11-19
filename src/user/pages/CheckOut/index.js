@@ -60,12 +60,17 @@ function Checkout() {
                     }, 0);
                     setTotalPrice(total);
                     setLoading(false);
+
+                    if (response.data.length === 0) {
+                        navigate('/');
+                    }
                 }
             })
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
-    }, []);
+    }, [navigate]);
+
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
@@ -78,12 +83,17 @@ function Checkout() {
         discountCode: '',
         paymentMethod: 'CardATM',
     });
-
+    const [isCheckName, setIsCheckName] = useState(false);
+    const [isCheckPhone, setIsCheckPhone] = useState(false);
+    const [isCheckAddress, setIsCheckAddress] = useState(false);
     const handleInputChange = (field, value) => {
         setCheckout((prevCheckout) => ({
             ...prevCheckout,
             [field]: value,
         }));
+        if (field === 'differentReceiverPhone') setIsCheckPhone(false);
+        if (field === 'differentReceiverName') setIsCheckName(false);
+        if (field === 'deliveryAddress') setIsCheckAddress(false);
     };
     const [voucherValue, setVoucherValue] = useState('');
     const [applyVoucher, setApplyVoucher] = useState(false);
@@ -98,20 +108,44 @@ function Checkout() {
         }));
         setApplyVoucher(true);
     };
-
+    const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const handleCheckout = (info) => {
-        // const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
-        // if (!selectedSize) {
-        //     swal('Lỗi', 'Vui lòng chọn size trước khi thêm vào giỏ hàng', 'error');
-        //     return;
-        // }
-        // if (numProduct === 0) {
-        //     swal('Lỗi', 'Vui lòng chọn số lượng trước khi thêm vào giỏ hàng', 'error');
-        //     return;
-        // }
-        // console.log('quantity ' + numProduct);
-        // console.log('idSize ' + selectedSize);
+        if (info.differentReceiverName === '' && info.differentReceiverPhone === '' && info.deliveryAddress === '') {
+            setIsCheckName(true);
+            setIsCheckPhone(true);
+            setIsCheckAddress(true);
+            return;
+        }
+        if (info.differentReceiverName === '' && info.differentReceiverPhone === '') {
+            setIsCheckName(true);
+            setIsCheckPhone(true);
+
+            return;
+        }
+        if (info.differentReceiverPhone === '' && info.deliveryAddress === '') {
+            setIsCheckPhone(true);
+            setIsCheckAddress(true);
+            return;
+        }
+        if (info.differentReceiverName === '' && info.deliveryAddress === '') {
+            setIsCheckName(true);
+            setIsCheckAddress(true);
+            return;
+        }
+        if (info.differentReceiverName === '') {
+            setIsCheckName(true);
+            return;
+        }
+        if (info.differentReceiverPhone === '') {
+            setIsCheckPhone(true);
+            return;
+        }
+        if (info.deliveryAddress === '') {
+            setIsCheckAddress(true);
+            return;
+        }
         console.log(info);
+
         axios
             .post(API_URL + 'order', info)
             .then((response) => {
@@ -121,6 +155,8 @@ function Checkout() {
                         title: 'bạn đã thanh toán thành công',
                         icon: 'success',
                     });
+                    setPaymentSuccess(true);
+                    navigate(`/checkout/${response.data.id}/thankyou`, { replace: true });
                 } else {
                     // Nếu có lỗi từ API, hiển thị thông báo lỗi
                     swal('Lỗi', response.data.message, 'error');
@@ -132,10 +168,13 @@ function Checkout() {
                 swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
             });
     };
+
     return (
         <div style={{ backgroundColor: '#fff' }}>
+            {isPaymentSuccess && navigate('/checkout/thankyou', { replace: true })}
             <HeaderPages />
             {/* <!-- breadcrumb --> */}
+
             <div className="container">
                 <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
                     <Link to="/" className="stext-107 cl8 hov-cl1 trans-04">
@@ -175,7 +214,22 @@ function Checkout() {
                                                                     e.target.value,
                                                                 )
                                                             }
+                                                            style={{
+                                                                boxShadow: isCheckName ? '0 0 0 2px #ff6d6d' : '',
+                                                            }}
                                                         ></input>
+                                                        {isCheckName && (
+                                                            <p
+                                                                style={{
+                                                                    margin: '0.75em 0 0.25em',
+                                                                    transition: 'all 0.3s ease-out',
+                                                                    lineHeight: '1.3em',
+                                                                    color: '#ff6d6d',
+                                                                }}
+                                                            >
+                                                                Tên không được trống
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <div className="field">
@@ -193,7 +247,22 @@ function Checkout() {
                                                                     e.target.value,
                                                                 )
                                                             }
+                                                            style={{
+                                                                boxShadow: isCheckPhone ? '0 0 0 2px #ff6d6d' : '',
+                                                            }}
                                                         ></input>
+                                                        {isCheckPhone && (
+                                                            <p
+                                                                style={{
+                                                                    margin: '0.75em 0 0.25em',
+                                                                    transition: 'all 0.3s ease-out',
+                                                                    lineHeight: '1.3em',
+                                                                    color: '#ff6d6d',
+                                                                }}
+                                                            >
+                                                                Số điện thoại không được trống
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +310,24 @@ function Checkout() {
                                                                                 e.target.value,
                                                                             )
                                                                         }
+                                                                        style={{
+                                                                            boxShadow: isCheckAddress
+                                                                                ? '0 0 0 2px #ff6d6d'
+                                                                                : '',
+                                                                        }}
                                                                     ></input>
+                                                                    {isCheckAddress && (
+                                                                        <p
+                                                                            style={{
+                                                                                margin: '0.75em 0 0.25em',
+                                                                                transition: 'all 0.3s ease-out',
+                                                                                lineHeight: '1.3em',
+                                                                                color: '#ff6d6d',
+                                                                            }}
+                                                                        >
+                                                                            Vui lòng nhập địa chỉ giao hàng
+                                                                        </p>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                         </div>

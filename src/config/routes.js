@@ -10,5 +10,7 @@ const routes = {
     changePassword: '/changePassword/:username',
     productDetail: '/product-detail/:product/:id',
     contact: '/contact',
+    order: '/order',
+    thankyou: '/checkout/:idOrder/thankyou',
 };
 export default routes;

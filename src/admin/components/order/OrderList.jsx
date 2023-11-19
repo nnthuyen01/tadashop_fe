@@ -97,7 +97,18 @@ class OrderList extends Component {
                         </div>
                     }
                     filterIcon={<DownOutlined />}
-                    render={(_, record) => <Tag style={{ fontWeight: '700', color: 'navy' }}> {record.state}</Tag>}
+                    render={(_, record) => (
+                        <Tag
+                            style={{
+                                fontWeight: '700',
+                                color: record.state === 'Paid' ? 'green' : 'navy',
+                                backgroundColor: record.state === 'Paid' ? 'yellow' : '',
+                            }}
+                        >
+                            {' '}
+                            {record.state}
+                        </Tag>
+                    )}
                 ></Column>
 
                 <Column

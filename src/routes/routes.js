@@ -33,6 +33,8 @@ import Checkout from '~/user/pages/CheckOut';
 import Statistics from '~/admin/components/statistic/Statistics';
 import ListOrders from '~/admin/components/order/ListOrders';
 import OrderDetailAdmin from '~/admin/components/order/OrderDetailAdmin';
+import Order from '~/user/pages/Order';
+import Thankyou from '~/user/pages/ThankYou';
 
 // Public routes
 const publicRoutes = [
@@ -47,6 +49,8 @@ const publicRoutes = [
     { path: config.routes.changePassword, component: ChangePassword },
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.contact, component: Contact },
+    { path: config.routes.order, component: Order },
+    { path: config.routes.thankyou, component: Thankyou },
 ];
 
 // Private routes
