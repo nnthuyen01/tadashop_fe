@@ -36,6 +36,7 @@ import OrderDetailAdmin from '~/admin/components/order/OrderDetailAdmin';
 import Order from '~/user/pages/Order';
 import Thankyou from '~/user/pages/ThankYou';
 import PaymentFail from '~/user/pages/PaymentFail';
+import OrderDetail from '~/user/pages/OrderDetail';
 
 // Public routes
 const publicRoutes = [
@@ -51,6 +52,7 @@ const publicRoutes = [
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.contact, component: Contact },
     { path: config.routes.order, component: Order },
+    { path: config.routes.orderDetail, component: OrderDetail },
     { path: config.routes.thankyou, component: Thankyou },
     { path: config.routes.paymentFail, component: PaymentFail },
 ];

@@ -11,6 +11,7 @@ const routes = {
     productDetail: '/product-detail/:product/:id',
     contact: '/contact',
     order: '/order',
+    orderDetail: '/order-detail/:id',
     thankyou: '/checkout/:idOrder/thankyou',
     paymentFail: '/payment-fail',
 };

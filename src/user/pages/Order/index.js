@@ -1,111 +1,149 @@
+import React, { useEffect, useState } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
+
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Table, Tag } from 'antd';
+
+import Column from 'antd/lib/table/Column';
+
 function Order() {
+    const navigate = useNavigate();
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios
+            .get(API_URL + 'orderUser/orders')
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    setOrders(response.data);
+
+                    setLoading(false);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, []);
+    function formatNumberWithCommas(number) {
+        if (number !== undefined && number !== null) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        } else {
+            // Handle the case when number is undefined or null
+            return '';
+        }
+    }
+    const handleRowClick = (record) => {
+        // Implement the logic you want to execute on row click
+        console.log('Clicked on row:', record);
+
+        navigate(`/order-detail/${record.id}`);
+    };
+
+    const rowProps = (record, index) => {
+        return {
+            onClick: () => handleRowClick(record),
+        };
+    };
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
-            {/* <!-- Title page --> */}
-            <section
-                className="bg-img1 txt-center p-lr-15 p-tb-92"
-                style={{ backgroundImage: "url('assets/images/bg-01.png')" }}
-            >
-                <h2 className="ltext-105 cl0 txt-center">Order</h2>
-            </section>
-
-            {/* <!-- Content page --> */}
-            <section className="bg0 p-t-104 p-b-116">
-                <div className="container">
-                    <div className="flex-w flex-tr">
-                        <div className="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                            <form>
-                                <h4 className="mtext-105 cl2 txt-center p-b-30">Gửi tin nhắn cho chúng tôi</h4>
-
-                                <div className="bor8 m-b-20 how-pos4-parent">
-                                    <input
-                                        className="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"
-                                        type="text"
-                                        name="email"
-                                        placeholder="Email của bạn"
-                                    />
-                                    <img
-                                        className="how-pos4 pointer-none"
-                                        src="assets/images/icons/icon-email.png"
-                                        alt="ICON"
-                                    />
-                                </div>
-
-                                <div className="bor8 m-b-30">
-                                    <textarea
-                                        className="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25"
-                                        name="msg"
-                                        placeholder="Chúng tôi có thể giúp gì cho bạn?"
-                                    ></textarea>
-                                </div>
-
-                                <button className="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                                    Gửi
-                                </button>
-                            </form>
-                        </div>
-
-                        <div className="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-                            <div className="flex-w w-full p-b-42">
-                                <span className="fs-18 cl5 txt-center size-211">
-                                    <span className="lnr lnr-map-marker"></span>
-                                </span>
-
-                                <div className="size-212 p-t-2">
-                                    <span className="mtext-110 cl2">Địa chỉ</span>
-
-                                    <p className="stext-115 cl6 size-213 p-t-18">
-                                        01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex-w w-full p-b-42">
-                                <span className="fs-18 cl5 txt-center size-211">
-                                    <span className="lnr lnr-phone-handset"></span>
-                                </span>
-
-                                <div className="size-212 p-t-2">
-                                    <span className="mtext-110 cl2">Số điện thoại</span>
-
-                                    <p className="stext-115 cl1 size-213 p-t-18">+84 389 834 867</p>
-                                </div>
-                            </div>
-
-                            <div className="flex-w w-full">
-                                <span className="fs-18 cl5 txt-center size-211">
-                                    <span className="lnr lnr-envelope"></span>
-                                </span>
-
-                                <div className="size-212 p-t-2">
-                                    <span className="mtext-110 cl2">Hỗ trợ</span>
-
-                                    <p className="stext-115 cl1 size-213 p-t-18">tadashopasia@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            {/* <!-- breadcrumb --> */}
+            <div className="container">
+                <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+                    <Link to="/" className="stext-107 cl8 hov-cl1 trans-04">
+                        Trang chủ
+                        <i className="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </Link>
+                    <span className="stext-107 cl4">Đơn hàng</span>
                 </div>
-            </section>
+            </div>
+            <div className="container" style={{ paddingBottom: '20px', backgroundColor: '#fff' }}>
+                <div
+                    style={{
+                        backgroundColor: '#f1eded',
+                        borderRadius: '20px',
+                        border: '2px solid #c70101',
+                    }}
+                >
+                    <div
+                        className="ltext-105"
+                        style={{
+                            paddingTop: '30px',
+                            paddingBottom: '10px',
+                            textAlign: 'center',
+                            color: 'white',
+                            backgroundColor: '#2a2a2a',
+                            borderTopLeftRadius: '20px',
+                            borderTopRightRadius: '20px',
+                        }}
+                    >
+                        Đơn hàng của bạn
+                    </div>
+                    <div
+                        style={{
+                            paddingTop: '30px',
+                            paddingBottom: '30px',
+                            minHeight: '60vh',
+                            borderTop: '2px solid #c70101',
+                        }}
+                    >
+                        {loading ? (
+                            <div style={{ textAlign: 'center' }}>Đang tải dữ liệu...</div>
+                        ) : (
+                            <Table
+                                dataSource={orders}
+                                size="small"
+                                rowKey="id"
+                                pagination={false}
+                                style={{ margin: 'auto', maxWidth: '96%' }}
+                                onRow={rowProps}
+                            >
+                                <Column title="ID" key="id" dataIndex="id" width={40} align="center"></Column>
 
-            {/* <!-- Map --> */}
-            <div className="map">
-                <div className="size-303">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4853986110975!2d106.76933817486974!3d10.850637657820828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIEvhu7kgdGh14bqtdCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1694685235900!5m2!1svi!2s"
-                        width="600"
-                        height="450"
-                        title="address"
-                        style={{ border: '0', width: '100%' }}
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                    ></iframe>
+                                <Column
+                                    title="Username"
+                                    key="username"
+                                    render={(_, record) => <span>{record.orderUser?.username}</span>}
+                                ></Column>
+                                <Column title="Người nhận" key="receiverName" dataIndex="receiverName"></Column>
+                                <Column title="Số điện thoại" key="receiverPhone" dataIndex="receiverPhone"></Column>
+                                <Column title="Địa chỉ" key="deliveryAddress" dataIndex="deliveryAddress"></Column>
+
+                                <Column title="Create Time" key="createTime" dataIndex="createTime"></Column>
+                                <Column
+                                    title="Tổng tiền"
+                                    key="totalPrice"
+                                    render={(_, record) => <span>{formatNumberWithCommas(record.totalPrice)}đ</span>}
+                                ></Column>
+
+                                <Column
+                                    title="State"
+                                    key="state"
+                                    render={(_, record) => (
+                                        <Tag
+                                            style={{
+                                                fontWeight: '700',
+                                                color: record.state === 'Paid' ? 'green' : 'navy',
+                                                backgroundColor: record.state === 'Paid' ? 'yellow' : '',
+                                            }}
+                                        >
+                                            {' '}
+                                            {record.state}
+                                        </Tag>
+                                    )}
+                                ></Column>
+                            </Table>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
+
 export default Order;

@@ -27,22 +27,51 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [isWarningUsername, setIsWarningUsername] = useState(false);
+    const [isWarningPassword, setIsWarningPassword] = useState(false);
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
             const response = await axios.post('http://localhost:8080/api/auth/authenticate', { username, password });
-            console.log(response.data.access_token);
-            localStorage.setItem('auth_token', response.data.access_token);
-            localStorage.setItem('auth_name', response.data.username);
-            if (response.data.role === 'ADMIN') {
-                navigate('/dashboard');
-            } else {
-                navigate('/');
+            console.log(response);
+            if (response.status === 200) {
+                localStorage.setItem('auth_token', response.data.access_token);
+                localStorage.setItem('auth_name', response.data.username);
+                if (response.data.role === 'ADMIN') {
+                    navigate('/dashboard');
+                } else {
+                    navigate('/');
+                }
             }
         } catch (error) {
-            console.error(error);
+            if (error.response) {
+                const errorData = error.response.data;
+
+                if (errorData.message === 'Username not found') {
+                    console.error(errorData.message);
+                    setIsWarningUsername(true);
+                    return;
+                }
+
+                if (errorData.message === 'Username not enable') {
+                    console.error(errorData.message);
+                    swal('Tài khoản đã bị vô hiệu hóa', {
+                        title: 'Warning',
+                        icon: 'warning',
+                    });
+                    return;
+                }
+                if (errorData.message === 'Incorrect password') {
+                    console.error(errorData.message);
+                    setIsWarningPassword(true);
+                    return;
+                }
+            } else {
+                console.error('An error occurred:', error.message);
+                // Xử lý lỗi không phải từ server response
+            }
         } finally {
             setLoading(false); // Ẩn hiệu ứng loading sau khi xử lý xong
         }
@@ -333,10 +362,15 @@ const Login = () => {
                                         type="text"
                                         placeholder="Tài khoản"
                                         value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
+                                        onChange={(e) => (setUsername(e.target.value), setIsWarningUsername(false))}
                                     />
                                 </div>
                             </div>
+                            {isWarningUsername ? (
+                                <div className="fieldType">Tài khoản không chính xác</div>
+                            ) : (
+                                <div className="spaceField"></div>
+                            )}
                             <div className="groupField">
                                 <span className="head">MẬT KHẨU</span>
                                 <div className="type">
@@ -344,9 +378,14 @@ const Login = () => {
                                         type="password"
                                         placeholder="Mật khẩu"
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => (setPassword(e.target.value), setIsWarningPassword(false))}
                                     />
                                 </div>
+                                {isWarningPassword ? (
+                                    <div className="fieldType">Mật khẩu không chính xác</div>
+                                ) : (
+                                    <div className="spaceField"></div>
+                                )}
                             </div>
 
                             <div className="forgot">
