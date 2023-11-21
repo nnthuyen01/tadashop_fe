@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
 function Contact() {
+    useEffect(() => {
+        // Scroll to the top of the page when the component is mounted
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />

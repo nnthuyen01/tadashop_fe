@@ -13,7 +13,10 @@ import { API_URL } from '~/config/constant';
 import './profile.scss';
 function ChangePassword() {
     const navigate = useNavigate();
-
+    useEffect(() => {
+        // Scroll to the top of the page when the component is mounted
+        window.scrollTo(0, 0);
+    }, []);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [isCheckOldPassword, setIsCheckOldPassword] = useState(false);
     const [isCheckPassword, setIsCheckPassword] = useState(false);

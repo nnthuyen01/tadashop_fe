@@ -14,6 +14,10 @@ function Cart() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [headerKey, setHeaderKey] = useState(0); // Biến trạng thái để cập nhật HeaderPages
     useEffect(() => {
+        // Scroll to the top of the page when the component is mounted
+        window.scrollTo(0, 0);
+    }, []);
+    useEffect(() => {
         axios
             .get(API_URL + 'cart')
             .then((response) => {

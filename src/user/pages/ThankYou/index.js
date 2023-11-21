@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import HeaderPages from '~/user/components/HeaderPages';
 import { API_URL } from '~/config/constant';
 import { useState, useEffect } from 'react';
@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function Thankyou() {
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
     const { idOrder } = useParams();
     const [order, setOrder] = useState();
     const [cartProducts, setCartProducts] = useState([]);
@@ -111,10 +111,9 @@ function Thankyou() {
                                             >
                                                 <div
                                                     className="flex-c-m stext-101 cl0 size-119 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
-                                                    // onClick={() => console.log(checkout)}
-                                                    // onClick={() => handleCheckout(checkout)}
+                                                    onClick={() => navigate('/order')}
                                                 >
-                                                    Thanh toán
+                                                    Đơn hàng
                                                 </div>
                                             </div>
                                         </div>

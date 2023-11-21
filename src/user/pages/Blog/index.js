@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderPages from '~/user/components/HeaderPages';
 
 function Blog() {
+    useEffect(() => {
+        // Scroll to the top of the page when the component is mounted
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />

@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 function Checkout() {
     const [deliveryOption, setDeliveryOption] = useState('direct');
 
-    const [paymentOption, setPaymentOption] = useState('card');
+    const [paymentOption, setPaymentOption] = useState('vnpay');
 
     const handleDeliveryOptionChange = (event) => {
         setDeliveryOption(event.target.value);
@@ -30,16 +30,24 @@ function Checkout() {
 
     const handlePaymentOptionChange = (event) => {
         setPaymentOption(event.target.value);
-        if (event.target.value === 'card') {
+        if (event.target.value === 'vnpay') {
             setCheckout((prevCheckout) => ({
                 ...prevCheckout,
-                paymentMethod: 'CardATM',
+                paymentMethod: 'VNPAY',
             }));
         }
+
         if (event.target.value === 'cod') {
             setCheckout((prevCheckout) => ({
                 ...prevCheckout,
                 paymentMethod: 'COD',
+            }));
+        }
+
+        if (event.target.value === 'card') {
+            setCheckout((prevCheckout) => ({
+                ...prevCheckout,
+                paymentMethod: 'CardATM',
             }));
         }
     };
@@ -81,7 +89,7 @@ function Checkout() {
         differentReceiverName: '',
         differentReceiverPhone: '',
         discountCode: '',
-        paymentMethod: 'CardATM',
+        paymentMethod: 'VNPAY',
     });
     const [isCheckName, setIsCheckName] = useState(false);
     const [isCheckPhone, setIsCheckPhone] = useState(false);
@@ -145,7 +153,7 @@ function Checkout() {
             return;
         }
         console.log(info);
-        if (info.paymentMethod === 'CardATM') {
+        if (info.paymentMethod === 'VNPAY') {
             axios
                 .post(API_URL + 'order', info)
                 .then((response) => {
@@ -187,7 +195,7 @@ function Checkout() {
                     swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
                 });
         }
-        if (info.paymentMethod === 'COD') {
+        if (info.paymentMethod === 'COD' || info.paymentMethod === 'CardATM') {
             axios
                 .post(API_URL + 'order', info)
                 .then((response) => {
@@ -411,6 +419,38 @@ function Checkout() {
                                                 <label className="m-t-15" style={{ fontStyle: 'italic' }}>
                                                     Phương thức thanh toán:
                                                 </label>
+                                                <div>
+                                                    <label style={{ display: 'flex', alignItems: 'center' }}>
+                                                        <input
+                                                            type="radio"
+                                                            value="vnpay"
+                                                            checked={paymentOption === 'vnpay'}
+                                                            onChange={handlePaymentOptionChange}
+                                                        />
+                                                        <img
+                                                            src={images.vnpayIcon}
+                                                            alt="card-icon"
+                                                            style={{ height: '40px' }}
+                                                        />
+                                                        Thanh toán qua ví VN PAY
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label style={{ display: 'flex', alignItems: 'center' }}>
+                                                        <input
+                                                            type="radio"
+                                                            value="cod"
+                                                            checked={paymentOption === 'cod'}
+                                                            onChange={handlePaymentOptionChange}
+                                                        />
+                                                        <img
+                                                            src={images.codIcon}
+                                                            alt="card-icon"
+                                                            style={{ height: '40px' }}
+                                                        />
+                                                        Thanh toán khi giao hàng (COD)
+                                                    </label>
+                                                </div>
 
                                                 <div>
                                                     <label style={{ display: 'flex', alignItems: 'center' }}>
@@ -442,22 +482,6 @@ function Checkout() {
                                                             <p>Nội dung: Tên + SĐT đặt hàng</p>
                                                         </div>
                                                     )}
-                                                </div>
-                                                <div>
-                                                    <label style={{ display: 'flex', alignItems: 'center' }}>
-                                                        <input
-                                                            type="radio"
-                                                            value="cod"
-                                                            checked={paymentOption === 'cod'}
-                                                            onChange={handlePaymentOptionChange}
-                                                        />
-                                                        <img
-                                                            src={images.codIcon}
-                                                            alt="card-icon"
-                                                            style={{ height: '40px' }}
-                                                        />
-                                                        Thanh toán khi giao hàng (COD)
-                                                    </label>
                                                 </div>
                                             </div>
                                             <div>

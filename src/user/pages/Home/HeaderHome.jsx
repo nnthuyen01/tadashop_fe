@@ -158,7 +158,7 @@ function HeaderHome() {
                                                     </div>
                                                     <ul className="sub-account-menu">
                                                         <li className="header-sub-account-menu">
-                                                            <Link to="#">Nguyễn Ngọc Thuyên</Link>
+                                                            <Link to="#">#{localStorage.getItem('auth_name')}</Link>
                                                         </li>
                                                         <li>
                                                             <Link to={`/profile/${localStorage.getItem('auth_name')}`}>

@@ -22,7 +22,10 @@ function Profile() {
         localStorage.removeItem('auth_name');
         navigate('/');
     };
-
+    useEffect(() => {
+        // Scroll to the top of the page when the component is mounted
+        window.scrollTo(0, 0);
+    }, []);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState([]);
 
