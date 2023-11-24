@@ -3,6 +3,7 @@ import HeaderPages from '~/user/components/HeaderPages';
 import { API_URL } from '~/config/constant';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import images from '~/assets/images';
 
 function Thankyou() {
     const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ function Thankyou() {
     const { idOrder } = useParams();
     const [order, setOrder] = useState();
     const [cartProducts, setCartProducts] = useState([]);
-
+    const [isVoucher, setIsVoucher] = useState(false);
     useEffect(() => {
         axios
             .get(API_URL + `orderDetail/${idOrder}`)
@@ -27,6 +28,17 @@ function Thankyou() {
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
+        axios
+            .get(API_URL + 'vouchers/user')
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200 && response.data.length > 0) {
+                    setIsVoucher(true);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
     }, []);
     function formatNumberWithCommas(number) {
         if (number !== undefined && number !== null) {
@@ -37,10 +49,43 @@ function Thankyou() {
         }
     }
     console.log(order);
+
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages />
-
+            {isVoucher && (
+                <div className="blocks">
+                    <div
+                        className="popup"
+                        style={{
+                            backgroundColor: '#43e8d8',
+                        }}
+                    >
+                        <h2
+                            style={{
+                                animation: 'blinking 1s infinite',
+                                color: '#ff4500',
+                                fontSize: '50px',
+                                marginTop: '12%',
+                            }}
+                        >
+                            <img src={images.voucher} alt="voucher" style={{ height: '40px' }} />
+                            Bạn được tặng mã giảm giá
+                            <img src={images.voucher} alt="voucher" style={{ height: '40px' }} />
+                        </h2>
+                        <div
+                            className="flex-c-m stext-101 cl0 size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5"
+                            style={{ height: '20%', width: '50%', margin: 'auto' }}
+                            onClick={() => navigate(`/voucher/${localStorage.getItem('auth_name')}`)}
+                        >
+                            Mã giảm giá của bạn
+                        </div>
+                        <span className="close">
+                            <i className="zmdi zmdi-close" onClick={() => setIsVoucher(false)}></i>
+                        </span>
+                    </div>
+                </div>
+            )}
             <section className="bg0 p-t-20 p-b-60">
                 <div className="container">
                     <div className="grid__row">
@@ -180,7 +225,7 @@ function Thankyou() {
                                 <div className="bor10 p-lr-40 p-t-30 p-b-40 m-t-20 m-lr-0-xl p-lr-15-sm">
                                     <h4 className="mtext-109 cl2 p-b-30">ĐƠN HÀNG</h4>
 
-                                    <div className="flex-w flex-t p-b-13">
+                                    {/* <div className="flex-w flex-t p-b-13">
                                         <div style={{ width: '40%' }}>
                                             <span className="stext-110 cl2">Tạm tính:</span>
                                         </div>
@@ -190,14 +235,17 @@ function Thankyou() {
                                                 {formatNumberWithCommas(order?.totalPrice)}
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="flex-w flex-t bor12 p-b-13">
                                         <div style={{ width: '40%' }}>
-                                            <span className="stext-110 cl2">Phí vận chuyển:</span>
+                                            <span className="stext-110 cl2">Giá giảm:</span>
                                         </div>
 
                                         <div style={{ width: '60%' }}>
-                                            <span className="mtext-110 ">-</span>
+                                            <span className="mtext-110 ">
+                                                {' '}
+                                                {formatNumberWithCommas(order?.priceOff)}
+                                            </span>
                                         </div>
                                     </div>
 

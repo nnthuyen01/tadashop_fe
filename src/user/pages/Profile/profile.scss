@@ -288,3 +288,32 @@
 .checkChangePassword {
     color: #2b8c04;
 }
+
+.voucher {
+    background-color: #43e8d8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.voucher .voucher-name {
+    color: #333;
+    font-size: 40px;
+}
+
+.voucher .voucher-status {
+    color: #2b8c04;
+}
+
+.voucher .voucher-code {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4500;
+    margin: 10px 0;
+}
+
+.voucher .voucher-expires {
+    color: #8b4513;
+    margin: 0px;
+}

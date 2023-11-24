@@ -3966,3 +3966,17 @@ input.num-product::-webkit-inner-spin-button {
     -webkit-line-clamp: 2; /* Số dòng tối đa, thay đổi thành số lượng dòng bạn muốn */
     -webkit-box-orient: vertical;
 }
+
+// voucher
+
+@keyframes blinking {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

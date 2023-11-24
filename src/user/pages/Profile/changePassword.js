@@ -204,6 +204,14 @@ function ChangePassword() {
                                         </NavLink>
                                     </li>
                                     <li>
+                                        <NavLink
+                                            to={`/voucher/${localStorage.getItem('auth_name')}`}
+                                            className="nav-link"
+                                        >
+                                            Mã giảm giá
+                                        </NavLink>
+                                    </li>
+                                    <li>
                                         <NavLink to="/" className="nav-link" onClick={handleLogout}>
                                             Thoát
                                             <svg

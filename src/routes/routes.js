@@ -37,6 +37,7 @@ import Order from '~/user/pages/Order';
 import Thankyou from '~/user/pages/ThankYou';
 import PaymentFail from '~/user/pages/PaymentFail';
 import OrderDetail from '~/user/pages/OrderDetail';
+import Voucher from '~/user/pages/Profile/voucher';
 
 // Public routes
 const publicRoutes = [
@@ -49,6 +50,7 @@ const publicRoutes = [
     { path: config.routes.checkout, component: Checkout },
     { path: config.routes.profile, component: Profile },
     { path: config.routes.changePassword, component: ChangePassword },
+    { path: config.routes.voucher, component: Voucher },
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.contact, component: Contact },
     { path: config.routes.order, component: Order },

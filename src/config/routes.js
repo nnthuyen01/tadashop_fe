@@ -8,6 +8,7 @@ const routes = {
     checkout: '/checkout',
     profile: '/profile/:username',
     changePassword: '/changePassword/:username',
+    voucher: '/voucher/:username',
     productDetail: '/product-detail/:product/:id',
     contact: '/contact',
     order: '/order',

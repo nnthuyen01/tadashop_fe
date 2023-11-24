@@ -8,7 +8,7 @@ class VoucherForm extends Component {
         super(props);
 
         this.state = {
-            voucher: { id: '', code: '', price: 0, status: 0 },
+            voucher: { id: '', userId: '', priceOffPercent: 0, status: 0 },
         };
     }
 
@@ -46,12 +46,12 @@ class VoucherForm extends Component {
                     layout="vertical"
                     name="form_in_modal"
                     initialValues={{ modifier: 'public' }}
-                    key={'f' + voucher.id + voucher.code + voucher.price}
+                    key={'f' + voucher.id + voucher.code + voucher.priceOffPercent}
                 >
                     <Form.Item label="Voucher ID" name="id" initialValue={voucher.id}>
                         <Input readOnly></Input>
                     </Form.Item>
-                    <Form.Item
+                    {/* <Form.Item
                         label="Code"
                         name="code"
                         initialValue={voucher.code}
@@ -59,17 +59,39 @@ class VoucherForm extends Component {
                         hasFeedback
                     >
                         <Input></Input>
-                    </Form.Item>
+                    </Form.Item> */}
+
+                    {voucher.id ? (
+                        <Form.Item
+                            label="ID"
+                            name="Id"
+                            initialValue={voucher.id}
+                            rules={[{ required: true }]}
+                            hasFeedback
+                        >
+                            <Input></Input>
+                        </Form.Item>
+                    ) : (
+                        <Form.Item
+                            label="User ID"
+                            name="userId"
+                            initialValue={voucher.userId}
+                            rules={[{ required: true }]}
+                            hasFeedback
+                        >
+                            <Input></Input>
+                        </Form.Item>
+                    )}
                     <Form.Item
-                        label="Price"
-                        name="price"
-                        initialValue={voucher.price}
+                        label="Price off percent"
+                        name="priceOffPercent"
+                        initialValue={voucher.priceOffPercent}
                         rules={[{ required: true }]}
                         hasFeedback
                     >
                         <InputNumber
                             min={0}
-                            addonAfter={'₫'}
+                            addonAfter={'%'}
                             formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             parser={(value) => value.replace(/$\s?|(,*)/g, '')}
                             style={{ width: '100%' }}

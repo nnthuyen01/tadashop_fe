@@ -71,13 +71,16 @@ function HeaderHome() {
     const handleShowHeaderCart = () => {
         setShowHeaderCart(true);
     };
+
     const handleHideHeaderCart = () => {
         setShowHeaderCart(false);
     };
+
     const [totalItem, setTotalItem] = useState(0);
     const quantityItem = (quantity) => {
         setTotalItem(quantity);
     };
+
     return (
         <>
             <header className="header-v3">

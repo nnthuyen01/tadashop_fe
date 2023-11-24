@@ -56,6 +56,10 @@ function Checkout() {
     const [cartProducts, setCartProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    const [discountPayment, setDiscountPayment] = useState(0);
+    const [totalPayment, setTotalPayment] = useState(0);
+
     useEffect(() => {
         axios
             .get(API_URL + 'cart')
@@ -67,6 +71,7 @@ function Checkout() {
                         return total + item.quantity * item.item.price;
                     }, 0);
                     setTotalPrice(total);
+
                     setLoading(false);
 
                     if (response.data.length === 0) {
@@ -105,17 +110,55 @@ function Checkout() {
     };
     const [voucherValue, setVoucherValue] = useState('');
     const [applyVoucher, setApplyVoucher] = useState(false);
+    const [applyVoucher2, setApplyVoucher2] = useState(false);
 
     const handleVoucherChange = (event) => {
         setVoucherValue(event.target.value);
+        setApplyVoucher2(false);
+        setApplyVoucher(false);
+        setDiscountPayment(0);
+        setTotalPayment(0);
     };
     const handleApplyVoucher = () => {
-        setCheckout((prevCheckout) => ({
-            ...prevCheckout,
-            discountCode: voucherValue,
-        }));
-        setApplyVoucher(true);
+        axios
+            .get(API_URL + 'voucher/user/code', { params: { discountCode: voucherValue } })
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log(response);
+
+                    setCheckout((prevCheckout) => ({
+                        ...prevCheckout,
+                        discountCode: voucherValue,
+                    }));
+                    setDiscountPayment(response.data.priceOffPercent);
+                    setTotalPayment(totalPrice - (totalPrice * response.data.priceOffPercent) / 100);
+                    setApplyVoucher(true);
+                }
+            })
+            .catch((error) => {
+                if (error.response) {
+                    const errorData = error.response.data;
+                    console.log(errorData);
+                    console.log(errorData.message);
+                    if (errorData.message === 'false') {
+                        setCheckout((prevCheckout) => ({
+                            ...prevCheckout,
+                            discountCode: '',
+                        }));
+                        setApplyVoucher2(true);
+                    }
+                } else {
+                    console.error('An error occurred:', error.message);
+                    // Xử lý lỗi không phải từ server response
+                }
+            });
+        // setCheckout((prevCheckout) => ({
+        //     ...prevCheckout,
+        //     discountCode: voucherValue,
+        // }));
+        // setApplyVoucher(true);
     };
+
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const handleCheckout = (info) => {
         if (info.differentReceiverName === '' && info.differentReceiverPhone === '' && info.deliveryAddress === '') {
@@ -153,6 +196,7 @@ function Checkout() {
             return;
         }
         console.log(info);
+
         if (info.paymentMethod === 'VNPAY') {
             axios
                 .post(API_URL + 'order', info)
@@ -218,28 +262,6 @@ function Checkout() {
                     swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
                 });
         }
-
-        // axios
-        //     .post(API_URL + 'order', info)
-        //     .then((response) => {
-        //         console.log(response);
-        //         if (response.status === 200) {
-        //             swal('Đặt hàng thành công!', {
-        //                 title: 'bạn đã thanh toán thành công',
-        //                 icon: 'success',
-        //             });
-        //             setPaymentSuccess(true);
-        //             navigate(`/checkout/${response.data.id}/thankyou`, { replace: true });
-        //         } else {
-        //             // Nếu có lỗi từ API, hiển thị thông báo lỗi
-        //             swal('Lỗi', response.data.message, 'error');
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         // Xử lý lỗi khi gửi yêu cầu
-        //         console.error('Lỗi khi thực hiện yêu cầu:', error);
-        //         swal('Lỗi', 'Có lỗi xảy ra khi đặt hàng', 'error');
-        //     });
     };
 
     return (
@@ -608,6 +630,11 @@ function Checkout() {
                                         Bạn đã áp dụng voucher: {voucherValue.toUpperCase()}
                                     </div>
                                 )}
+                                {applyVoucher2 && (
+                                    <div className="mtext-101" style={{ color: '#c70101' }}>
+                                        Voucher không có giá trị: {voucherValue.toUpperCase()}
+                                    </div>
+                                )}
                                 <div className="bor10 p-lr-40 p-t-30 p-b-40 m-t-20 m-lr-0-xl p-lr-15-sm">
                                     <h4 className="mtext-109 cl2 p-b-30">ĐƠN HÀNG</h4>
 
@@ -622,11 +649,15 @@ function Checkout() {
                                     </div>
                                     <div className="flex-w flex-t bor12 p-b-13">
                                         <div style={{ width: '40%' }}>
-                                            <span className="stext-110 cl2">Phí vận chuyển:</span>
+                                            <span className="stext-110 cl2">Giảm giá:</span>
                                         </div>
 
                                         <div style={{ width: '60%' }}>
-                                            <span className="mtext-110 ">-</span>
+                                            {discountPayment !== 0 ? (
+                                                <span className="mtext-110 ">{discountPayment} %</span>
+                                            ) : (
+                                                <span className="mtext-110 ">-</span>
+                                            )}
                                         </div>
                                     </div>
 
@@ -636,9 +667,15 @@ function Checkout() {
                                         </div>
 
                                         <div className="p-t-1" style={{ width: '60%' }}>
-                                            <span className="mtext-109 " style={{ color: '#e32124' }}>
-                                                {formatNumberWithCommas(totalPrice)}đ
-                                            </span>
+                                            {totalPayment !== 0 ? (
+                                                <span className="mtext-109 " style={{ color: '#e32124' }}>
+                                                    {formatNumberWithCommas(totalPayment)}đ
+                                                </span>
+                                            ) : (
+                                                <span className="mtext-109 " style={{ color: '#e32124' }}>
+                                                    {formatNumberWithCommas(totalPrice)}đ
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

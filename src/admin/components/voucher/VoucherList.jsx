@@ -10,8 +10,17 @@ class VoucherList extends Component {
             <Table dataSource={dataSource} size="small" rowKey="id" pagination={false}>
                 <Column title="ID" key="id" dataIndex="id" width={40} align="center"></Column>
                 <Column title="Code" key="code" dataIndex="code"></Column>
-                <Column title="Price" key="price" dataIndex="price"></Column>
 
+                <Column
+                    title="Price off percent"
+                    key="priceOffPercent"
+                    render={(_, record) => <>{record.priceOffPercent} %</>}
+                ></Column>
+                <Column
+                    title="Expiration time"
+                    key="expirationTime"
+                    render={(_, record) => <>{record.expirationTime}</>}
+                ></Column>
                 <Column
                     title="Status"
                     key="status"
@@ -29,6 +38,7 @@ class VoucherList extends Component {
                         return <Tag color={color}>{name}</Tag>;
                     }}
                 ></Column>
+
                 <Column
                     title="Action"
                     key="action"

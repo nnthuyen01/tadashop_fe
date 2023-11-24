@@ -20,7 +20,7 @@ class ListVouchers extends Component {
 
         this.state = {
             open: false,
-            voucher: { id: '', code: '', price: 0, status: 0 },
+            voucher: { id: '', userId: '', priceOffPercent: 0, status: 0 },
         };
     }
     componentDidMount = () => {

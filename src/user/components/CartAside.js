@@ -32,6 +32,23 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+    const handleDeleteItem = (idItem) => {
+        axios
+            .delete(API_URL + `cart/remove?productSizeId=${idItem}`)
+            .then((response) => {
+                // Xử lý phản hồi từ API nếu cần
+                console.log('API response: ', response);
+                if (response.status === 200) {
+                    const updatedCartProducts = item.filter((item) => item.item.size.id !== idItem);
+                    setItem(updatedCartProducts);
+                    quantityItem(updatedCartProducts.length);
+                }
+            })
+            .catch((error) => {
+                // Xử lý lỗi từ API
+                console.error('API error: ', error);
+            });
+    };
     return (
         <>
             <div className={`wrap-header-cart js-panel-cart ${showHeaderCart ? 'show-header-cart' : ''}`}>
@@ -60,7 +77,10 @@ function CartAside({ handleHideHeaderCart, showHeaderCart, quantityItem }) {
                                 <ul className="header-cart-wrapitem w-full">
                                     {item.map((item, index) => (
                                         <li key={index} className="header-cart-item flex-w flex-t m-b-12">
-                                            <div className="header-cart-item-img">
+                                            <div
+                                                className="header-cart-item-img"
+                                                onClick={() => handleDeleteItem(item.item.size.id)}
+                                            >
                                                 <img
                                                     src={API_URL + 'products/images/' + item.item.image.fileName}
                                                     loading="lazy"
