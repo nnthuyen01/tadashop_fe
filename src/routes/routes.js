@@ -38,6 +38,8 @@ import Thankyou from '~/user/pages/ThankYou';
 import PaymentFail from '~/user/pages/PaymentFail';
 import OrderDetail from '~/user/pages/OrderDetail';
 import Voucher from '~/user/pages/Profile/voucher';
+import ProductQuery from '~/user/pages/ProductQuery';
+import ProductLeague from '~/user/pages/ProductLeague';
 
 // Public routes
 const publicRoutes = [
@@ -57,6 +59,9 @@ const publicRoutes = [
     { path: config.routes.orderDetail, component: OrderDetail },
     { path: config.routes.thankyou, component: Thankyou },
     { path: config.routes.paymentFail, component: PaymentFail },
+
+    { path: config.routes.productQuery, component: ProductQuery },
+    { path: config.routes.productLeagues, component: ProductLeague },
 ];
 
 // Private routes

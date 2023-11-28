@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CartAside from '~/user/components/CartAside';
 import Sidebar from '~/user/components/Sidebar';
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
 
 function HeaderHome() {
     // header
@@ -35,6 +37,7 @@ function HeaderHome() {
             setIsFixed(true);
         }
     });
+    const [searchInputValue, setSearchInputValue] = useState('');
 
     const [isShowMenuMobile, setIsShowMenuMobile] = useState(false);
     const handleShowMenuMobile = () => {
@@ -50,10 +53,66 @@ function HeaderHome() {
 
     const hideModalSearch = () => {
         setShowModalS(false);
+        setSearchResult([]);
+        setSearchInputValue('');
     };
 
-    const handleModalSearchClick = (e) => {
+    const handleModalStopOutSearchClick = (e) => {
         e.stopPropagation();
+    };
+    const [searchResult, setSearchResult] = useState([]);
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    let lastSearchInput = '';
+    let timeoutId;
+
+    const handleChangeInputSearch = (e) => {
+        setSearchInputValue(e.target.value);
+    };
+
+    const callApi = () => {
+        const currentSearchInput = searchInputValue.trim();
+        if (currentSearchInput !== '' && currentSearchInput !== lastSearchInput) {
+            // Nếu giá trị nhập không trống và khác lần nhập trước đó, gọi API
+            const apiEndpoint = `${API_URL}products/list/queryName?query=${currentSearchInput}`;
+
+            axios
+                .get(apiEndpoint)
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log(response.data);
+                        setSearchResult(response.data);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Lỗi khi fetch dữ liệu từ API:', error);
+                });
+
+            // Cập nhật lần nhập cuối cùng
+            lastSearchInput = currentSearchInput;
+        } else if (currentSearchInput === '') setSearchResult([]);
+    };
+
+    useEffect(() => {
+        // Đặt lại hẹn giờ mới sau 1 giây khi người dùng dừng nhập liệu
+        timeoutId = setTimeout(() => {
+            callApi();
+        }, 1000);
+
+        // Hủy bỏ hẹn giờ nếu có
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [searchInputValue]);
+
+    const handleModalSearchClick = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        console.log({ searchInputValue });
+
+        navigate(`/search?q=${searchInputValue}`, { forceRefresh: true });
     };
     // sidebar
     const [showSidebar, setShowSidebar] = useState(false);
@@ -310,7 +369,7 @@ function HeaderHome() {
                     }  `}
                     onClick={hideModalSearch}
                 >
-                    <div className="container-search-header" onClick={handleModalSearchClick}>
+                    <div className="container-search-header" onClick={handleModalStopOutSearchClick}>
                         <button
                             className="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search"
                             onClick={hideModalSearch}
@@ -319,11 +378,42 @@ function HeaderHome() {
                         </button>
 
                         <form className="wrap-search-header flex-w p-l-15">
-                            <button className="flex-c-m trans-04">
+                            <button className="flex-c-m trans-04" onClick={handleModalSearchClick}>
                                 <i className="zmdi zmdi-search"></i>
                             </button>
-                            <input className="plh3" type="text" name="search" placeholder="Search..." />
+                            <input
+                                id="searchInput"
+                                className="plh3"
+                                type="text"
+                                name="search"
+                                placeholder="Nhập sản phẩm cần tìm..."
+                                value={searchInputValue}
+                                onChange={handleChangeInputSearch}
+                                autoComplete="off"
+                            />
                         </form>
+                        <div className="auto-suggest">
+                            {searchResult.slice(0, 5).map((item, index) => (
+                                <Link
+                                    to={`/product-detail/${item.name}/${item.id}`}
+                                    key={index}
+                                    className="suggest-item"
+                                >
+                                    <div className="suggest-item-image-wrap">
+                                        <img
+                                            src={API_URL + 'products/images/' + item.imageFileName}
+                                            loading="lazy"
+                                            alt={item.name}
+                                            className="suggest-item-image"
+                                        ></img>
+                                    </div>
+                                    <div className="suggest-item-title">
+                                        <span>{item.name}</span>
+                                        <span> {formatNumberWithCommas(item.priceAfterDiscount)}₫</span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </header>

@@ -2,17 +2,20 @@ import React, { useLayoutEffect, useState } from 'react';
 
 // modal product
 import 'magnific-popup/dist/jquery.magnific-popup.min';
-
+import { useParams } from 'react-router-dom';
 import 'select2';
 import HeaderPages from '~/user/components/HeaderPages';
-import ProductItem from '~/user/components/ProductItem';
-import ModalProduct from '~/user/components/ModalProduct';
 
-function Shop() {
+import ModalProduct from '~/user/components/ModalProduct';
+import ProductLeagues from '~/user/components/ProductLeagues';
+
+function ProductLeague() {
     useLayoutEffect(() => {
         // Scroll to the top of the page when the component is mounted
         window.scrollTo(0, 0);
     }, []);
+
+    const { league } = useParams();
 
     // Show Modal1 Product
     const [showModal, setShowModal] = useState(false);
@@ -39,7 +42,7 @@ function Shop() {
             <HeaderPages key={cartItemCount} />
 
             {/* <!-- Product --> */}
-            <ProductItem handleShowModal={handleShowModal} pagination={true} />
+            <ProductLeagues handleShowModal={handleShowModal} query={league} pagination={true} />
 
             {/* <!-- Modal1 --> */}
 
@@ -54,4 +57,4 @@ function Shop() {
     );
 }
 
-export default Shop;
+export default ProductLeague;

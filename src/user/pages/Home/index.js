@@ -51,7 +51,7 @@ function Home() {
             <Banners />
 
             {/* <!-- Product --> */}
-            <ProductItem handleShowModal={handleShowModal} title={true} pagination={true} />
+            <ProductItem handleShowModal={handleShowModal} title={true} loadmore={true} />
 
             {/* <!-- Modal1 --> */}
             {showModal && (

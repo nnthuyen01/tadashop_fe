@@ -587,6 +587,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     width: auto;
     max-width: 100%;
     position: relative;
+    top: -210px;
 }
 
 /*---------------------------------------------*/
@@ -605,7 +606,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .wrap-search-header {
     width: 960px;
     max-width: 100%;
-    height: 120px;
+    // height: 120px;
+    height: 90px;
     border: 2px solid #e6e6e6;
     background: #fff;
 }
@@ -634,6 +636,55 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     color: #6c7ae0;
 }
 
+.auto-suggest {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    top: 100%;
+    background: #fff;
+    border: solid 1px #e4e4e4;
+    // display: none;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+.suggest-item {
+    overflow: hidden;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+}
+.suggest-item-image-wrap {
+    float: left;
+    width: 48px;
+    margin-right: 5px;
+    height: 48px;
+    font-size: 0;
+    text-align: center;
+}
+.suggest-item-image {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+.suggest-item-title {
+    font-size: 14px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    width: calc(100% - 60px);
+}
+.suggest-item-title > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+.suggest-item-title span:last-child {
+    color: #999;
+}
 /*---------------------------------------------*/
 @media (max-width: 767px) {
     .wrap-search-header input,
@@ -1833,8 +1884,8 @@ button.mfp-close {
 
 .show-search:hover:after,
 .show-filter:hover:after {
-    background-color: #717fe0;
-    border-color: #717fe0;
+    background-color: #fd0;
+    border-color: #fd0;
 }
 
 /*---------------------------------------------*/

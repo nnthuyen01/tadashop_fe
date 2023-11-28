@@ -231,7 +231,15 @@ class ProductForm extends Component {
                                 rules={[{ required: true }]}
                                 hasFeedback
                             >
-                                <Select placeholder="Select Club" suffixIcon={<MdOutlineCategory />}>
+                                <Select
+                                    showSearch
+                                    placeholder="Select Club"
+                                    suffixIcon={<MdOutlineCategory />}
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
                                     {clubs &&
                                         clubs.map((item) => (
                                             <Select.Option value={item.id} key={'club' + item.id}>
@@ -240,6 +248,22 @@ class ProductForm extends Component {
                                         ))}
                                 </Select>
                             </Form.Item>
+                            {/* <Form.Item
+                                label="Club"
+                                name="clubId"
+                                initialValue={product.club.id}
+                                rules={[{ required: true }]}
+                                hasFeedback
+                            >
+                                <Select placeholder="Select Club" suffixIcon={<MdOutlineCategory />}>
+                                    {clubs &&
+                                        clubs.map((item) => (
+                                            <Select.Option value={item.id} key={'club' + item.id}>
+                                                {item.name}
+                                            </Select.Option>
+                                        ))}
+                                </Select>
+                            </Form.Item> */}
                             <Form.Item
                                 label="Brand"
                                 name="brandId"

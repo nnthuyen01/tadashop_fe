@@ -9,35 +9,47 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [sort, setSort] = useState('id');
+    const [currentPage, setCurrentPage] = useState(0); // Bắt đầu từ trang 0
+    const [totalPage, setTotalPage] = useState(0); // Bắt đầu từ trang 0
+    const itemsPerPage = 16;
+    const League = {
+        EPL: 'EPL',
+        Laliga: 'Laliga',
+        Bundesliga: 'Bundesliga',
+        SeriaA: 'SeriaA',
+        League1: 'League1',
+    };
     useEffect(() => {
+        fetchData();
+    }, [currentPage, sort]); // Fetch data when the currentPage changes
+
+    const fetchData = () => {
+        setLoading(true);
+
+        // Sử dụng API endpoint của bạn
+        const apiEndpoint = `${API_URL}products/find?query=&page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
+
         axios
-            .get(API_URL + 'products/list')
+            .get(apiEndpoint)
             .then((response) => {
-                // console.log(response);
                 if (response.status === 200) {
-                    setProducts(response.data);
+                    console.log(response.data);
+                    setProducts(response.data.content);
+                    setTotalPage(response.data.totalPages);
                     setLoading(false);
                 }
             })
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
+                setLoading(false);
             });
-    }, []); // [] nghĩa là useEffect chỉ chạy một lần khi thành phần được tạo
-
-    const handleRedirect = (name, id) => {
-        // navigate(`/product-detail/${product}/${id}`);
-        navigate(`/product-detail/${name}/${id}`);
     };
 
-    // const products = [
-    //     {
-    //         dataFilter: 'mu',
-    //         tag: 'New',
-    //         img: 'assets/images/AoMu1.jpg',
-    //         name: 'ÁO ĐẤU MANCHESTER UNITED SÂN NHÀ BẢN PLAYER - LOGO ÉP MÙA GIẢI 2023/2024',
-    //         price: '300,000₫',
-    //     },
-    // ];
+    const handleRedirect = (name, id) => {
+        navigate(`/product-detail/${name}/${id}`);
+    };
 
     // Product
     // filter
@@ -69,6 +81,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                 $filter.addEventListener('click', (event) => {
                     if (event.target.tagName === 'BUTTON') {
                         const filterValue = event.target.getAttribute('data-filter');
+
                         isotope.arrange({ filter: filterValue });
                     }
                 });
@@ -85,6 +98,11 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
             });
         }
     }, [loading]);
+
+    // Pagination click handler
+    const handlePaginationClick = (page) => {
+        setCurrentPage(page);
+    };
 
     // [ Filter / Search product ]
     const [showFilter, setShowFilter] = useState(false);
@@ -126,33 +144,36 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                     Tất cả sản phẩm
                                 </button>
 
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".mu">
-                                    Manchester United
-                                </button>
-
-                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".ac">
-                                    AC Milan
+                                <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".EPL">
+                                    Giải Ngoại Hạng Anh (EPL)
                                 </button>
 
                                 <button
                                     className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                                    data-filter=".atletico"
+                                    data-filter=".Laliga"
                                 >
-                                    Atletico Madrid
+                                    Giải Tây Ban Nha (Laliga)
                                 </button>
 
                                 <button
                                     className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                                    data-filter=".arsenal"
+                                    data-filter=".Bundesliga"
                                 >
-                                    Arsenal
+                                    Giải Đức (Bundesliga)
                                 </button>
 
                                 <button
                                     className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                                    data-filter=".barcelona"
+                                    data-filter=".SeriaA"
                                 >
-                                    Barcelona
+                                    Giải Ý (Seria A)
+                                </button>
+
+                                <button
+                                    className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+                                    data-filter=".League1"
+                                >
+                                    Giải Pháp (League 1)
                                 </button>
                             </div>
                         </div>
@@ -210,39 +231,63 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
 
                                     <ul>
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link
+                                                to="#"
+                                                className={`filter-link stext-106 trans-04 ${
+                                                    sort === 'id' ? 'filter-link-active' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setSort('id');
+                                                    setShowFilter(!showFilter);
+                                                }}
+                                            >
                                                 Mặc định
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        {/* <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
-                                                Popularity
-                                            </a>
-                                        </li> */}
-
-                                        {/* <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
-                                                Average rating
-                                            </a>
-                                        </li> */}
-
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04 filter-link-active">
+                                            <Link
+                                                to="#"
+                                                className={`filter-link stext-106 trans-04 ${
+                                                    sort === 'id,desc' ? 'filter-link-active' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setSort('id,desc');
+                                                    setShowFilter(!showFilter);
+                                                }}
+                                            >
                                                 Mới nhất
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link
+                                                to="#"
+                                                className={`filter-link stext-106 trans-04 ${
+                                                    sort === 'priceAfterDiscount,desc' ? 'filter-link-active' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setSort('priceAfterDiscount,desc');
+                                                    setShowFilter(!showFilter);
+                                                }}
+                                            >
                                                 Giá: cao đên thấp
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link
+                                                to="#"
+                                                className={`filter-link stext-106 trans-04 ${
+                                                    sort === 'priceAfterDiscount' ? 'filter-link-active' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setSort('priceAfterDiscount');
+                                                    setShowFilter(!showFilter);
+                                                }}
+                                            >
                                                 Giá: thấp đến cao
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -252,39 +297,39 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
 
                                     <ul>
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04 filter-link-active">
+                                            <Link to="#" className="filter-link stext-106 trans-04 filter-link-active">
                                                 All
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 0 vnđ - 100,000 vnđ
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 100,000 vnđ - 200,000 vnđ
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 200,000 vnđ - 300,000 vnđ
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 300,000 vnđ - 500,000 vnđ
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 500,000 vnđ+
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -298,9 +343,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 S
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
@@ -308,9 +353,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04 filter-link-active">
+                                            <Link to="#" className="filter-link stext-106 trans-04 filter-link-active">
                                                 M
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
@@ -318,9 +363,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 L
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
@@ -328,9 +373,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 XL
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
@@ -338,9 +383,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 XXL
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-6">
@@ -348,9 +393,9 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 <i className="zmdi zmdi-circle-o"></i>
                                             </span>
 
-                                            <a href="#" className="filter-link stext-106 trans-04">
+                                            <Link to="#" className="filter-link stext-106 trans-04">
                                                 XXXL
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -359,40 +404,40 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                     <div className="mtext-102 cl2 p-b-15">Giải đấu</div>
 
                                     <div className="flex-w p-t-4 m-r--5">
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/product-leagues/${League.EPL}`}
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
                                             Ngoại Hạng Anh (ANH)
-                                        </a>
+                                        </Link>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/product-leagues/${League.Laliga}`}
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
                                             La Liga (TÂY BAN NHA)
-                                        </a>
+                                        </Link>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/product-leagues/${League.Bundesliga}`}
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
                                             Bundesliga (ĐỨC)
-                                        </a>
+                                        </Link>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/product-leagues/${League.League1}`}
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
                                             Ligue 1 (Pháp)
-                                        </a>
+                                        </Link>
 
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/product-leagues/${League.SeriaA}`}
                                             className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
                                         >
                                             Serie A (Ý)
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -409,16 +454,14 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                 <div
                                     key={index}
                                     className={`col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${
-                                        item.dataFilter ? item.dataFilter : undefined
+                                        item.league ? item.league : undefined
                                     }`}
                                 >
-                                    {/* <!-- Block --> */}
                                     <div className="block2">
                                         <div
                                             className={`block2-pic hov-img0  ${item.discount ? 'label-discount' : ''}`}
                                             discount-label={item.discount ? `-${item.discount}%` : undefined}
                                         >
-                                            {/* <img src={item.img} alt="IMG-PRODUCT" /> */}
                                             <div
                                                 className={`${item.isFeatured === true ? 'label-new' : ''}`}
                                                 data-label={item.isFeatured === true ? 'HOT' : undefined}
@@ -430,7 +473,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 ></img>
 
                                                 <Link
-                                                    href="#"
+                                                    to="#"
                                                     className="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                                                     onClick={() => handleShowModal(item.id)}
                                                 >
@@ -443,7 +486,6 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             <div className="block2-txt-child1 flex-col-l ">
                                                 <div
                                                     onClick={() => handleRedirect(item.name, item.id)}
-                                                    // onClick={handleRedirect}
                                                     className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 product-name"
                                                     style={{ cursor: 'pointer', fontSize: '16px' }}
                                                 >
@@ -479,8 +521,8 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                             </div>
 
                                             <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a
-                                                    href="#"
+                                                <Link
+                                                    to="#"
                                                     className="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
                                                 >
                                                     <img
@@ -493,7 +535,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                         src="assets/images/icons/icon-heart-02.png"
                                                         alt="ICON"
                                                     />
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -505,23 +547,31 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                     {/* <!-- Pagination --> */}
                     {pagination === true && (
                         <div className="flex-c-m flex-w w-full p-t-38">
-                            <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-                                1
-                            </a>
-
-                            <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7">
-                                2
-                            </a>
+                            {Array.from({ length: totalPage }, (_, i) => (
+                                <Link
+                                    key={i}
+                                    to="#"
+                                    className={`flex-c-m how-pagination1 trans-04 m-all-7 ${
+                                        currentPage === i ? 'active-pagination1' : ''
+                                    }`}
+                                    onClick={() => handlePaginationClick(i)}
+                                >
+                                    {i + 1}
+                                </Link>
+                            ))}
                         </div>
                     )}
 
                     {/* <!-- Load more --> */}
                     {loadmore === true && (
                         <div className="flex-c-m flex-w w-full p-t-45">
-                            <a href="#" className="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                            <Link
+                                to="/shop"
+                                className="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"
+                            >
                                 {' '}
                                 Tải thêm{' '}
-                            </a>
+                            </Link>
                         </div>
                     )}
                 </div>

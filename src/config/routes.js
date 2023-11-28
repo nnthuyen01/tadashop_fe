@@ -15,5 +15,8 @@ const routes = {
     orderDetail: '/order-detail/:id',
     thankyou: '/checkout/:idOrder/thankyou',
     paymentFail: '/payment-fail',
+
+    productQuery: '/search',
+    productLeagues: '/product-leagues/:league',
 };
 export default routes;

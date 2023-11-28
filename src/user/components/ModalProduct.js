@@ -13,6 +13,7 @@ import { API_URL } from '~/config/constant';
 import { Link } from 'react-router-dom';
 
 function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
+    console.log(window.location.href);
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -192,7 +193,7 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
                 <div className="container">
                     <div className="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                         <button className="how-pos3 hov3 trans-04 js-hide-modal1">
-                            <img src="assets/images/icons/icon-close.png" alt="CLOSE" onClick={handleHideModal} />
+                            <img src="../assets/images/icons/icon-close.png" alt="CLOSE" onClick={handleHideModal} />
                         </button>
 
                         {loading ? (
