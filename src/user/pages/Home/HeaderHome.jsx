@@ -164,12 +164,9 @@ function HeaderHome() {
                                     </li>
 
                                     <li className="label1" data-label1="hot">
-                                        <Link to="/shop">Cửa hàng</Link>
+                                        <Link to="/shop">Sản Phẩm</Link>
                                     </li>
 
-                                    <li>
-                                        <Link to="/cart">Giỏ hàng</Link>
-                                    </li>
                                     <li>
                                         <Link to="/blog">Bài viết</Link>
                                     </li>
@@ -352,11 +349,7 @@ function HeaderHome() {
                             </li>
 
                             <li>
-                                <Link to="/cart">Giỏ hàng</Link>
-                            </li>
-
-                            <li>
-                                <Link to="/profile">Profile</Link>
+                                <Link to={`/profile/${localStorage.getItem('auth_name')}`}>Thông tin cá nhân</Link>
                             </li>
                         </ul>
                     </div>

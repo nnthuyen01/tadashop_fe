@@ -34,7 +34,7 @@ function Cart() {
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
-    }, []);
+    }, [cartProducts]);
     // console.log(cartProducts);
     // console.log(loading);
     function formatNumberWithCommas(number) {

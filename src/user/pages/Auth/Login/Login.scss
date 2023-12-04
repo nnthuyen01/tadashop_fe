@@ -159,6 +159,7 @@ body {
     color: #fff;
     font-size: 40px;
     margin-bottom: 15px;
+    font-family: Dosis-SemiBold;
 }
 
 .overlay .page p {
@@ -166,6 +167,7 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     font-size: 17px;
+    font-family: Dosis-Regular;
 }
 
 .btn {
@@ -173,6 +175,7 @@ body {
     outline: none;
     color: #fff;
     text-transform: uppercase;
+    font-family: Dosis-SemiBold;
     font-size: 15px;
     font-weight: 550;
     background-color: transparent;
@@ -189,10 +192,12 @@ body {
 .form h3 {
     color: #222;
     font-size: 40px;
+    font-family: Dosis-SemiBold;
 }
 
 .form span {
     color: #3a3838;
+    font-family: Dosis-Medium;
 }
 .headingForm {
     margin-bottom: 10px;
@@ -264,14 +269,14 @@ body {
 }
 
 #form_input1 .forgot {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 500;
     text-align: center;
 }
 #form_input1 .forgot a {
     color: #222;
     padding: 8px;
+    font-family: Dosis-Medium;
 }
 #form_input1 .forgot a:hover {
     color: #1e73ce;

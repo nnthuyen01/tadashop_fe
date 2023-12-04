@@ -143,10 +143,7 @@ function HeaderPages() {
                                     </li>
 
                                     <li className="label1" data-label1="hot">
-                                        <Link to="/shop">Cửa hàng</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/cart">Giỏ hàng</Link>
+                                        <Link to="/shop">Sản phẩm</Link>
                                     </li>
 
                                     <li>
@@ -278,14 +275,6 @@ function HeaderPages() {
                         >
                             <i className="zmdi zmdi-shopping-cart"></i>
                         </div>
-
-                        {/* <a
-                            href="#"
-                            className="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-                            data-notify="0"
-                        >
-                            <i className="zmdi zmdi-favorite-outline"></i>
-                        </a> */}
                     </div>
 
                     {/* <!-- Button show menu --> */}
@@ -333,11 +322,7 @@ function HeaderPages() {
                             </li>
 
                             <li>
-                                <Link to="/cart">Giỏ hàng</Link>
-                            </li>
-
-                            <li>
-                                <Link to="/profile">Profile</Link>
+                                <Link to={`/profile/${localStorage.getItem('auth_name')}`}>Thông tin cá nhân</Link>
                             </li>
                         </ul>
                     </div>

@@ -72,12 +72,12 @@ function Footer() {
                             <ul>
                                 <li className="p-b-10">
                                     <div className="stext-107 cl7 trans-04">Hotline</div>
-                                    <p style={{ fontWeight: 'bolder' }}>1900 201 201</p>
+                                    <p style={{ fontWeight: 'bolder', color: '#fd0' }}>1900 201 201</p>
                                 </li>
 
                                 <li className="p-b-10">
                                     <div className="stext-107 cl7 trans-04">Thứ Hai - Chủ Nhật</div>
-                                    <p style={{ fontWeight: 'bolder' }}>09:30 ~ 21:30</p>
+                                    <p style={{ fontWeight: 'bolder', color: '#fd0' }}>09:30 ~ 21:30</p>
                                 </li>
 
                                 <li className="p-b-10">
@@ -130,7 +130,11 @@ function Footer() {
                         </div>
 
                         <p className="stext-107 cl6 txt-center">
-                            <a href="https://colorlib.com" target="_blank">
+                            <a
+                                href="https://www.facebook.com/profile.php?id=61553976411130"
+                                target="_blank"
+                                style={{ color: '#fd0' }}
+                            >
                                 TADA STORE
                             </a>{' '}
                             <i className="fa fa-heart-o" aria-hidden="true"></i> Dress Like A Pro, Play Like A Champion!

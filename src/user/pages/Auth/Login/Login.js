@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Link, createRoutesFromElements, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.scss';
 
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'; // Import CSS của Tippy
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faHourglass2 } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert';
 import Loading from '../../Loading/loading';
 const Login = () => {
@@ -224,8 +224,8 @@ const Login = () => {
             // });
             setIsWarning7(true);
 
-            // setLoading(false);
-            // return;
+            setLoading(false);
+            return;
         }
 
         const data = {
@@ -513,8 +513,7 @@ const Login = () => {
                                 <span className="head">MẬT KHẨU</span>
                                 <div className="type">
                                     <Tooltip
-                                        title="Password must be 6-26 characters long and include at least one lowercase letter, 
-                                        one uppercase letter, one digit, and one special character."
+                                        title="Mật khẩu phải có độ dài từ 6 đến 26 ký tự và bao gồm ít nhất một chữ thường, một chữ hoa, một chữ số và một ký tự đặc biệt."
                                         open={!isPasswordValid && isTooltipVisible}
                                         position="right"
                                         arrow={true}
@@ -554,7 +553,7 @@ const Login = () => {
                                 <span className="head">NHẬP LẠI MẬT KHẨU</span>
                                 <div className="type">
                                     <Tooltip
-                                        title="Passwords do not match. Please enter matching passwords."
+                                        title="Mật khẩu không khớp. Vui lòng nhập mật khẩu giống nhau."
                                         open={isTooltipVisible2}
                                         position="right"
                                         trigger="manual"

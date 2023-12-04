@@ -13,7 +13,6 @@ import { API_URL } from '~/config/constant';
 import { Link } from 'react-router-dom';
 
 function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
-    console.log(window.location.href);
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -44,9 +43,9 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
     }
 
     // [ +/- num product ]*/
-    const [numProduct, setNumProduct] = useState(0);
+    const [numProduct, setNumProduct] = useState(1);
     const handleDecrease = () => {
-        if (numProduct > 0) {
+        if (numProduct > 1) {
             setNumProduct((prevNum) => prevNum - 1);
         }
     };
@@ -135,6 +134,7 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
             selectSize.select2({
                 minimumResultsForSearch: 20,
                 dropdownParent: selectSize.next('.dropDownSelect2'),
+                templateResult: formatOption,
             });
 
             // Clean up the plugin when the component unmounts
@@ -143,6 +143,21 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
             };
         }
     }, [loading]);
+    // Define the custom template function
+    function formatOption(option) {
+        // Check if it's the placeholder option
+        if (!option.id) {
+            return option.text; // Render the placeholder option as is
+        }
+
+        // Access the data attributes of the option
+        const size = $(option.element).data('size');
+        const quantity = $(option.element).data('quantity');
+
+        // Customize the rendering of each option
+        return $(`<div class="custom-option"><div>Size ${size}</div> <div>Kho: ${quantity}</div></div>`); // You can add your custom styles here
+    }
+
     // add cart
     const handleAddToCart = (nameProduct) => {
         const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
@@ -238,20 +253,23 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
 
                                                 <div className="size-204 respon6-next">
                                                     <div className="rs1-select2 bor8 bg0">
-                                                        <select
-                                                            ref={selectSizeRef}
-                                                            className="js-select2"
-                                                            name="size"
-                                                            defaultValue=""
-                                                        >
+                                                        <select ref={selectSizeRef} name="size" defaultValue="">
                                                             <option value="" disabled hidden>
                                                                 Chọn Size
                                                             </option>
-                                                            {product.sizes.map((size, index) => (
-                                                                <option key={index} value={size.id}>
-                                                                    Size {size.size}
-                                                                </option>
-                                                            ))}
+
+                                                            {product.sizes
+                                                                .filter((size) => size.quantity > 0) // Lọc các tùy chọn với quantity > 0
+                                                                .map((size, index) => (
+                                                                    <option
+                                                                        key={index}
+                                                                        value={size.id}
+                                                                        data-size={size.size}
+                                                                        data-quantity={size.quantity}
+                                                                    >
+                                                                        Size {size.size}
+                                                                    </option>
+                                                                ))}
                                                         </select>
                                                         <div className="dropDownSelect2"></div>
                                                     </div>
@@ -274,7 +292,10 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
                                                             type="number"
                                                             name="num-product"
                                                             value={numProduct}
-                                                            readOnly
+                                                            // readOnly
+                                                            onChange={(e) =>
+                                                                setNumProduct(parseInt(e.target.value) || 1)
+                                                            }
                                                         />
 
                                                         <div

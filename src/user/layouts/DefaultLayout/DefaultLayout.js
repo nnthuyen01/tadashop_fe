@@ -1,15 +1,16 @@
 import React, { Fragment } from 'react';
-import Header from '../components/Header/Header';
+
 import Footer from '../components/Footer/Footer';
 import ScrollToTopButton from '~/user/components/ScrollToTopButton';
 import FacebookMsg from '~/user/components/FacebookMsg';
+import DialogflowChat from '~/user/components/DialogflowChat';
 
 function DefaultLayout({ children }) {
     return (
         <Fragment>
-            {/* <Header /> */}
             {children}
-            <FacebookMsg />
+            {/* <FacebookMsg /> */}
+            <DialogflowChat />
             <ScrollToTopButton />
             <Footer />
         </Fragment>

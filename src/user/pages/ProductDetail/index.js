@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -8,7 +8,6 @@ import HeaderPages from '~/user/components/HeaderPages';
 import $ from 'jquery';
 import 'select2';
 import swal from 'sweetalert';
-import ModalProduct from '~/user/components/ModalProduct';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
@@ -17,9 +16,12 @@ import { Link, useNavigate } from 'react-router-dom';
 function ProductDetail() {
     const { id } = useParams();
 
+    const navigate = useNavigate();
     const [ProductDetail, setProductDetail] = useState([]);
     const [loading, setLoading] = useState(true);
     const [headerKey, setHeaderKey] = useState(0);
+    const [RelateProducts, setRelateProducts] = useState([]);
+
     useEffect(() => {
         axios
             .get(API_URL + 'product/detail/' + id)
@@ -41,16 +43,27 @@ function ProductDetail() {
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
-    }, []);
+        axios
+            .get(API_URL + 'products/list/relate/' + id)
+            .then((response) => {
+                // console.log(response);
+                if (response.status === 200) {
+                    setRelateProducts(response.data);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, [id]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         // Scroll to the top of the page when the component is mounted
         window.scrollTo(0, 0);
     }, []);
     // [ +/- num product ]*/
-    const [numProduct, setNumProduct] = useState(0);
+    const [numProduct, setNumProduct] = useState(1);
     const handleDecrease = () => {
-        if (numProduct > 0) {
+        if (numProduct > 1) {
             setNumProduct((prevNum) => prevNum - 1);
         }
     };
@@ -108,7 +121,7 @@ function ProductDetail() {
         dotsClass: 'slick3-dots',
         customPaging: function (index) {
             // var portrait = data[index].img; // Assuming you have data containing the images
-            var portrait = ProductDetail.images[index].fileName;
+            var portrait = ProductDetail.images[index]?.fileName;
             return (
                 <div className="wrap-slick3-dots">
                     <div className="slick3-dot-border">
@@ -142,6 +155,7 @@ function ProductDetail() {
             $(selectSizeRef.current).select2({
                 minimumResultsForSearch: 20,
                 dropdownParent: $(selectSizeRef.current).next('.dropDownSelect2'),
+                templateResult: formatOption,
             });
 
             // Clean up the plugin when the component unmounts
@@ -150,6 +164,22 @@ function ProductDetail() {
             };
         }
     }, [loading]);
+
+    // Define the custom template function
+    function formatOption(option) {
+        // Check if it's the placeholder option
+        if (!option.id) {
+            return option.text; // Render the placeholder option as is
+        }
+
+        // Access the data attributes of the option
+        const size = $(option.element).data('size');
+        const quantity = $(option.element).data('quantity');
+
+        // Customize the rendering of each option
+        return $(`<div class="custom-option"><div>Size ${size}</div> <div>Kho: ${quantity}</div></div>`); // You can add your custom styles here
+    }
+
     // add cart
     const handleAddToCart = (nameProduct) => {
         const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
@@ -189,50 +219,12 @@ function ProductDetail() {
             });
     };
 
-    // slick2
+    const handleClick = (name, id) => {
+        navigate(`/product-detail/${name}/${id}`);
+        window.scrollTo(0, 0);
+    };
 
-    const RelateProducts = [
-        {
-            img: '../../assets/images/AoMu1.jpg',
-            name: 'Esprit Ruffle Shirt',
-            price: '$16.64',
-        },
-        {
-            img: '../../assets/images/AoAC1.jpg',
-            name: 'Herschel supply',
-            price: '$35.31',
-        },
-        {
-            img: '../../assets/images/AoAC2.jpg',
-            name: 'Only Check Trouser',
-            price: '$25.50',
-        },
-        {
-            img: '../../assets/images/AoArs1.jpg',
-            name: 'Classic Trench Coat',
-            price: '$75.00',
-        },
-        {
-            img: '../../assets/images/AoArs2.jpg',
-            name: 'Front Pocket Jumper',
-            price: '$34.75',
-        },
-        {
-            img: '../../assets/images/AoArs3.jpg',
-            name: 'Vintage Inspired Classic',
-            price: '$93.20',
-        },
-        {
-            img: '../../assets/images/AoAston1.jpg',
-            name: 'Shirt in Stretch Cotton',
-            price: '$52.66',
-        },
-        {
-            img: '../../assets/images/AoAtletico1.jpg',
-            name: 'Pieces Metallic Printed',
-            price: '$18.96',
-        },
-    ];
+    // slick2
 
     const PrevArrowRL = ({ onClick, currentSlide, slideCount, ...props }) => (
         <button
@@ -300,20 +292,6 @@ function ProductDetail() {
         ],
     };
 
-    // Modal
-    // Show Modal1 Product
-    const [showModal, setShowModal] = useState(false);
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    const handleShowModal = () => {
-        setScrollPosition(window.scrollY);
-        setShowModal(true);
-    };
-
-    const handleHideModal = () => {
-        window.scrollTo(0, scrollPosition);
-        setShowModal(false);
-    };
     // tab
     const [activeTab, setActiveTab] = useState('description');
 
@@ -333,24 +311,24 @@ function ProductDetail() {
     }, [loading]);
 
     // rating
-    const [rated, setRated] = useState(0);
-    const [temp, setTemp] = useState(0);
+    // const [rated, setRated] = useState(0);
+    // const [temp, setTemp] = useState(0);
 
-    const handleMouseEnter = (index) => {
-        setTemp(index + 1);
-    };
+    // const handleMouseEnter = (index) => {
+    //     setTemp(index + 1);
+    // };
 
-    const handleMouseLeave = () => {
-        setTemp(0);
-    };
+    // const handleMouseLeave = () => {
+    //     setTemp(0);
+    // };
 
-    const handleClickRating = (index) => {
-        setRated(index + 1);
-    };
-    const handleChangeRating = (event) => {
-        const newRating = event.target.value;
-        // onRatingChange(newRating);
-    };
+    // const handleClickRating = (index) => {
+    //     setRated(index + 1);
+    // };
+    // const handleChangeRating = (event) => {
+    //     const newRating = event.target.value;
+    //     // onRatingChange(newRating);
+    // };
     return (
         <div style={{ backgroundColor: '#fff' }}>
             <HeaderPages key={headerKey} />
@@ -447,20 +425,22 @@ function ProductDetail() {
 
                                                 <div className="size-204 respon6-next">
                                                     <div className="rs1-select2 bor8 bg0">
-                                                        <select
-                                                            ref={selectSizeRef}
-                                                            className="js-select2"
-                                                            name="size"
-                                                            defaultValue=""
-                                                        >
+                                                        <select ref={selectSizeRef} name="size" defaultValue="">
                                                             <option value="" disabled hidden>
                                                                 Chọn Size
                                                             </option>
-                                                            {ProductDetail.sizes.map((size, index) => (
-                                                                <option key={index} value={size.id}>
-                                                                    Size {size.size}
-                                                                </option>
-                                                            ))}
+                                                            {ProductDetail.sizes
+                                                                .filter((size) => size.quantity > 0) // Lọc các tùy chọn với quantity > 0
+                                                                .map((size, index) => (
+                                                                    <option
+                                                                        key={index}
+                                                                        value={size.id}
+                                                                        data-size={size.size}
+                                                                        data-quantity={size.quantity}
+                                                                    >
+                                                                        Size {size.size}
+                                                                    </option>
+                                                                ))}
                                                         </select>
                                                         <div className="dropDownSelect2"></div>
                                                     </div>
@@ -483,7 +463,10 @@ function ProductDetail() {
                                                             type="number"
                                                             name="num-product"
                                                             value={numProduct}
-                                                            readOnly
+                                                            // readOnly
+                                                            onChange={(e) =>
+                                                                setNumProduct(parseInt(e.target.value) || 1)
+                                                            }
                                                         />
 
                                                         <div
@@ -592,7 +575,7 @@ function ProductDetail() {
                                             </div>
                                         </li>
 
-                                        <li className={`nav-item p-b-10 ${activeTab === 'reviews' ? 'active' : ''}`}>
+                                        {/* <li className={`nav-item p-b-10 ${activeTab === 'reviews' ? 'active' : ''}`}>
                                             <div
                                                 className={`nav-link ${activeTab === 'reviews' ? 'active' : ''}`}
                                                 data-toggle="tab"
@@ -601,7 +584,7 @@ function ProductDetail() {
                                             >
                                                 Reviews (1)
                                             </div>
-                                        </li>
+                                        </li> */}
                                     </ul>
 
                                     {/* <!-- Tab panes --> */}
@@ -665,8 +648,8 @@ function ProductDetail() {
                                         </div>
 
                                         {/* <!-- - --> */}
-                                        {/* <div className="tab-pane fade" id="reviews" role="tabpanel"> */}
-                                        <div
+
+                                        {/* <div
                                             className={`tab-pane fade ${activeTab === 'reviews' ? 'show active' : ''}`}
                                             id="reviews"
                                             role="tabpanel"
@@ -674,7 +657,7 @@ function ProductDetail() {
                                             <div className="row">
                                                 <div className="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                                     <div className="p-b-30 m-lr-15-sm">
-                                                        {/* <!-- Review --> */}
+                                                      
                                                         <div className="flex-w flex-t p-b-68">
                                                             <div className="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                                 <img
@@ -686,8 +669,8 @@ function ProductDetail() {
                                                             <div className="size-207">
                                                                 <div className="flex-w flex-sb-m p-b-17">
                                                                     <span className="mtext-107 cl2 p-r-20">
-                                                                        {' '}
-                                                                        Ariana Grande{' '}
+                                                                  
+                                                                        Ariana Grande
                                                                     </span>
 
                                                                     <span className="fs-18 cl11">
@@ -706,7 +689,7 @@ function ProductDetail() {
                                                             </div>
                                                         </div>
 
-                                                        {/* <!-- Add review --> */}
+                                                      Add review
                                                         <form className="w-full">
                                                             <h5 className="mtext-108 cl2 p-b-7">Add a review</h5>
 
@@ -717,8 +700,8 @@ function ProductDetail() {
 
                                                             <div className="flex-w flex-m p-t-50 p-b-23">
                                                                 <span className="stext-102 cl3 m-r-16">
-                                                                    {' '}
-                                                                    Your Rating{' '}
+                                                               
+                                                                    Your Rating
                                                                 </span>
 
                                                                 <span className="wrap-rating fs-18 cl11 pointer">
@@ -789,7 +772,7 @@ function ProductDetail() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -815,27 +798,26 @@ function ProductDetail() {
                                         <div key={index} className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                                             <div className="block2">
                                                 <div className="block2-pic hov-img0">
-                                                    <img src={item.img} alt="IMG-PRODUCT" />
-
-                                                    <a
-                                                        href="#"
-                                                        className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-                                                        onClick={handleShowModal}
-                                                    >
-                                                        Quick View
-                                                    </a>
+                                                    <img
+                                                        src={API_URL + 'products/images/' + item.imageFileName}
+                                                        alt="IMG-PRODUCT"
+                                                    />
                                                 </div>
 
                                                 <div className="block2-txt flex-w flex-t p-t-14">
                                                     <div className="block2-txt-child1 flex-col-l">
-                                                        <a
-                                                            href="product-detail.html"
+                                                        <div
+                                                            style={{ cursor: 'pointer', fontSize: '16px' }}
+                                                            onClick={() => handleClick(item.name, item.id)}
                                                             className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
                                                         >
                                                             {item.name}
-                                                        </a>
+                                                        </div>
 
-                                                        <span className="stext-105 cl3">{item.price} </span>
+                                                        <span className="stext-105 cl3" style={{ color: '#12A700' }}>
+                                                            {' '}
+                                                            {formatNumberWithCommas(item.priceAfterDiscount)}₫
+                                                        </span>
                                                     </div>
 
                                                     <div className="block2-txt-child2 flex-r p-t-3">
@@ -865,7 +847,6 @@ function ProductDetail() {
                     </section>
                 </>
             )}
-            {showModal && <ModalProduct handleHideModal={handleHideModal} />}
         </div>
     );
 }
