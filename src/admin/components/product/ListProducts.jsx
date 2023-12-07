@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ProductList from './ProductList';
-import { Button, Col, Form, Input, Row, Modal } from 'antd';
+import { Button, Col, Form, Input, Row, Modal, Pagination } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ContentHeader from '../common/ContentHeader';
 import withRouter from '../../helpers/withRouter';
 import { connect } from 'react-redux';
-import { getProducts, deleteProduct } from '../../redux/actions/productAction';
+import { getProducts, deleteProduct, getProductsPageable } from '../../redux/actions/productAction';
 class ListProducts extends Component {
     constructor(props) {
         super(props);
@@ -15,9 +15,40 @@ class ListProducts extends Component {
         };
     }
     componentDidMount = () => {
-        this.props.getProducts();
+        // this.props.getProducts();
+        const { pagination } = this.props;
+        const params = {
+            query: pagination.query,
+            size: pagination.size,
+            sort: pagination.sort,
+        };
+        this.props.getProductsPageable(params);
 
         console.log('this mount');
+    };
+
+    onChange = (pageNumber, pageSize) => {
+        const { pagination } = this.props;
+        const params = {
+            query: pagination.query,
+            page: pageNumber - 1,
+            size: pageSize,
+            sort: pagination.sort,
+        };
+        this.props.getProductsPageable(params);
+        // console.log(params.query);
+    };
+    handleSearch = (value) => {
+        console.log(value);
+
+        const { pagination } = this.props;
+        const params = {
+            query: value.query,
+            size: pagination.size,
+            sort: pagination.sort,
+        };
+
+        this.props.getProductsPageable(params);
     };
 
     handleNewProduct = () => {
@@ -44,7 +75,7 @@ class ListProducts extends Component {
     };
 
     render() {
-        const { products } = this.props;
+        const { products, pagination } = this.props;
         const { navigate } = this.props.router;
 
         return (
@@ -54,8 +85,7 @@ class ListProducts extends Component {
                 <Row style={{ marginBottom: 8 }}>
                     <Col md={18}>
                         <Form layout="inline" name="search" onFinish={this.handleSearch}>
-                            {/* <Form.Item name="query" initialValue={pagination.query}> */}
-                            <Form.Item name="query">
+                            <Form.Item name="query" initialValue={pagination.query}>
                                 <Input></Input>
                             </Form.Item>
                             <Button type="primary" htmlType="submit">
@@ -72,30 +102,31 @@ class ListProducts extends Component {
 
                 <ProductList onDeleteConfirm={this.onDeleteConfirm} products={products} />
 
-                {/* <Row style={{ marginTop: 8 }}>
-                <Col md={24} style={{ textAlign: 'right' }}>
-                  <Pagination
-                    defaultCurrent={pagination.page}
-                    defaultPageSize={pagination.size}
-                    total={pagination.totalElements}
-                    // onShowSizeChange={this.onShowSizeChange}
-                    onChange={this.onChange}
-                    showSizeChanger="true"
-                  ></Pagination>
-                </Col>
-              </Row> */}
+                <Row style={{ marginTop: 8 }}>
+                    <Col md={24} style={{ textAlign: 'right' }}>
+                        <Pagination
+                            defaultCurrent={pagination.page}
+                            defaultPageSize={pagination.size}
+                            total={pagination.totalElements}
+                            // onShowSizeChange={this.onShowSizeChange}
+                            onChange={this.onChange}
+                            showSizeChanger="true"
+                        ></Pagination>
+                    </Col>
+                </Row>
             </>
         );
     }
 }
 const mapStateToProps = (state) => ({
     products: state.productReducer.products,
-    // pagination: state.brandReducer.pagination,
+    pagination: state.productReducer.pagination,
 });
 
 const mapDispatchToProps = {
     getProducts,
     deleteProduct,
+    getProductsPageable,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListProducts));

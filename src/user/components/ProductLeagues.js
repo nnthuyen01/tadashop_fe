@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import logos from '~/assets/logo';
-function ProductLeagues({ handleShowModal, query, pagination }) {
+function ProductLeagues({ handleShowModal, query, index, pagination }) {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ function ProductLeagues({ handleShowModal, query, pagination }) {
     const [currentPage, setCurrentPage] = useState(0); // Bắt đầu từ trang 0
     const [totalPage, setTotalPage] = useState(0); // Bắt đầu từ trang 0
     const itemsPerPage = 16;
-    console.log(query);
+    // console.log(query);
     useEffect(() => {
         fetchData();
     }, [currentPage, query]); // Fetch data when the currentPage changes
@@ -26,7 +26,6 @@ function ProductLeagues({ handleShowModal, query, pagination }) {
             .get(apiEndpoint)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
                     setProducts(response.data.content);
                     setTotalPage(response.data.totalPages);
                     setLoading(false);
@@ -69,7 +68,7 @@ function ProductLeagues({ handleShowModal, query, pagination }) {
                     <div
                         className="logoLeague"
                         style={{
-                            backgroundImage: `url(${logos[query]})`,
+                            backgroundImage: `url(${logos[index]})`,
                             height: '100px',
                             backgroundSize: 'contain',
                             backgroundRepeat: 'no-repeat',
@@ -160,10 +159,7 @@ function ProductLeagues({ handleShowModal, query, pagination }) {
                                                 </div>
 
                                                 <div className="block2-txt-child2 flex-r p-t-3">
-                                                    <Link
-                                                        to="#"
-                                                        className="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
-                                                    >
+                                                    <Link to="#" className="btn-addwish-b2 dis-block pos-relative">
                                                         <img
                                                             className="icon-heart1 dis-block trans-04"
                                                             src="../assets/images/icons/icon-heart-01.png"

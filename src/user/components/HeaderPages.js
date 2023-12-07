@@ -269,9 +269,11 @@ function HeaderPages() {
                         </div>
 
                         <div
-                            className="icon-header-item cl0 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            className={`icon-header-item cl0 hov-cl1 trans-04 p-r-11 p-l-10 ${
+                                totalItem > 0 ? 'icon-header-noti' : ''
+                            } js-show-cart`}
+                            data-notify={totalItem}
                             onClick={handleShowHeaderCart}
-                            data-notify="2"
                         >
                             <i className="zmdi zmdi-shopping-cart"></i>
                         </div>
@@ -290,27 +292,13 @@ function HeaderPages() {
                     <div className="menu-mobile">
                         <ul className="main-menu-m">
                             <li>
-                                <Link to="/">Liên hệ</Link>
+                                <Link to="/">Trang chủ</Link>
                             </li>
 
                             <li>
                                 <Link to="/shop" className="label1 rs1" data-label1="hot">
-                                    Shop
+                                    Cửa hàng
                                 </Link>
-                                <ul className="sub-menu-m">
-                                    <li>
-                                        <a href="index.html">Homepage 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="home-02.html">Homepage 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="home-03.html">Homepage 3</a>
-                                    </li>
-                                </ul>
-                                <span className="arrow-main-menu-m">
-                                    <i className="fa fa-angle-right" aria-hidden="true"></i>
-                                </span>
                             </li>
 
                             <li>

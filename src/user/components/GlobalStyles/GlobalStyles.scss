@@ -1893,13 +1893,13 @@ button.mfp-close {
     width: 27%;
 }
 .filter-col2 {
-    width: 27%;
+    width: 20%;
 }
 .filter-col3 {
     width: 26%;
 }
 .filter-col4 {
-    width: 20%;
+    width: 100%;
 }
 
 /*---------------------------------------------*/
@@ -1916,6 +1916,7 @@ button.mfp-close {
 .filter-link-active {
     color: #ffe300;
     border-bottom: 1px solid #ffe300;
+    font-weight: 700;
 }
 
 @media (max-width: 767px) {
@@ -2236,13 +2237,13 @@ input.num-product::-webkit-inner-spin-button {
     opacity: 0;
 }
 
-.btn-addwish-b2:hover .icon-heart2 {
-    opacity: 1;
-}
+// .btn-addwish-b2:hover .icon-heart2 {
+//     opacity: 1;
+// }
 
-.btn-addwish-b2:hover .icon-heart1 {
-    opacity: 0;
-}
+// .btn-addwish-b2:hover .icon-heart1 {
+//     opacity: 0;
+// }
 
 .js-addedwish-b2 .icon-heart2 {
     opacity: 1;
@@ -2390,13 +2391,13 @@ input.num-product::-webkit-inner-spin-button {
 
 .stext-106 {
     font-family: Dosis-Regular;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.2;
 }
 
 .stext-107 {
     font-family: Dosis-Regular;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.923;
 }
 
@@ -2438,7 +2439,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .stext-114 {
-    font-family: Poppins-Italic;
+    font-family: Dosis-Italic;
     font-size: 15px;
     line-height: 1.666667;
 }
@@ -2479,7 +2480,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .mtext-102 {
     font-family: Dosis-SemiBold;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
 }
 

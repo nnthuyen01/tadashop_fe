@@ -104,9 +104,9 @@ function Contact() {
                         height="450"
                         title="address"
                         style={{ border: '0', width: '100%' }}
-                        allowfullscreen=""
+                        allowFullScreen=""
                         loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
+                        referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                 </div>
             </div>

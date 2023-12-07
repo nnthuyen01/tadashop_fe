@@ -1,6 +1,22 @@
-import React, { useState, useEffect, Fragment, useRef } from 'react';
-
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 function Footer() {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add logic here to handle the form submission (e.g., send the email)
+    };
+
+    const handleMailtoClick = () => {
+        // Get the email value from the input field
+        const emailInput = document.querySelector('.input1');
+        const email = emailInput.value;
+
+        // Create a mailto link with the email subject and body
+        const mailtoLink = `mailto:${email}?subject=Subscribe to Tadashop Asia Newsletter`;
+
+        // Open the user's email client
+        window.location.href = mailtoLink;
+    };
     return (
         /* <!-- Footer --> */
         <Fragment>
@@ -12,27 +28,27 @@ function Footer() {
 
                             <ul>
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="/shop" className="stext-107 cl7 hov-cl2 trans-04">
                                         Tất cả
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="/shop" className="stext-107 cl7 hov-cl2 trans-04">
                                         New Arrival
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="#" className="stext-107 cl7 hov-cl2 trans-04">
                                         Giải đấu
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="#" className="stext-107 cl7 hov-cl2 trans-04">
                                         Thương hiệu
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -42,26 +58,29 @@ function Footer() {
 
                             <ul>
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link
+                                        to={`/profile/${localStorage.getItem('auth_name')}`}
+                                        className="stext-107 cl7 hov-cl2 trans-04"
+                                    >
                                         Tài khoản
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="/about" className="stext-107 cl7 hov-cl2 trans-04">
                                         Chính sách vận chuyển
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="/contact" className="stext-107 cl7 hov-cl2 trans-04">
                                         Chính sách bảo hành
-                                    </a>
+                                    </Link>
                                 </li>
 
                                 <li className="p-b-10">
-                                    <a href="#" className="stext-107 cl7 hov-cl2 trans-04">
+                                    <Link to="#" className="stext-107 cl7 hov-cl2 trans-04">
                                         FAQs
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -82,7 +101,7 @@ function Footer() {
 
                                 <li className="p-b-10">
                                     <div className="stext-107 cl7 trans-04">Email liên hệ công việc</div>
-                                    <form>
+                                    {/* <form>
                                         <div className="wrap-input1 w-full p-b-4">
                                             <input
                                                 className="input1 bg-none plh1 stext-107 cl7"
@@ -98,6 +117,28 @@ function Footer() {
                                                 Gửi Mail
                                             </button>
                                         </div>
+                                    </form> */}
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="wrap-input1 w-full p-b-4">
+                                            <input
+                                                className="input1 bg-none plh1 stext-107 cl7"
+                                                type="text"
+                                                name="email"
+                                                placeholder="tadashopasia@gmail.com"
+                                            />
+                                            <div className="focus-input1 trans-04"></div>
+                                        </div>
+
+                                        <div className="p-t-18">
+                                            {/* Use the mailto link when the button is clicked */}
+                                            <Link
+                                                to="#"
+                                                className="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04"
+                                                onClick={handleMailtoClick}
+                                            >
+                                                Gửi Mail
+                                            </Link>
+                                        </div>
                                     </form>
                                 </li>
                             </ul>
@@ -109,17 +150,26 @@ function Footer() {
                                 01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh
                             </div>
                             <div className="p-t-27">
-                                <a href="#" className="fs-18 cl7 hov-cl2 trans-04 m-r-16">
+                                <Link
+                                    to="https://www.facebook.com/profile.php?id=61553976411130"
+                                    className="fs-18 cl7 hov-cl2 trans-04 m-r-16"
+                                >
                                     <i className="fa fa-facebook"></i>
-                                </a>
+                                </Link>
 
-                                <a href="#" className="fs-18 cl7 hov-cl2 trans-04 m-r-16">
+                                <Link
+                                    to="https://www.facebook.com/profile.php?id=61553976411130"
+                                    className="fs-18 cl7 hov-cl2 trans-04 m-r-16"
+                                >
                                     <i className="fa fa-instagram"></i>
-                                </a>
+                                </Link>
 
-                                <a href="#" className="fs-18 cl7 hov-cl2 trans-04 m-r-16">
+                                <Link
+                                    to="https://www.facebook.com/profile.php?id=61553976411130"
+                                    className="fs-18 cl7 hov-cl2 trans-04 m-r-16"
+                                >
                                     <i className="fa fa-youtube-play"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -130,13 +180,13 @@ function Footer() {
                         </div>
 
                         <p className="stext-107 cl6 txt-center">
-                            <a
-                                href="https://www.facebook.com/profile.php?id=61553976411130"
+                            <Link
+                                to="https://www.facebook.com/profile.php?id=61553976411130"
                                 target="_blank"
                                 style={{ color: '#fd0' }}
                             >
                                 TADA STORE
-                            </a>{' '}
+                            </Link>{' '}
                             <i className="fa fa-heart-o" aria-hidden="true"></i> Dress Like A Pro, Play Like A Champion!
                         </p>
 

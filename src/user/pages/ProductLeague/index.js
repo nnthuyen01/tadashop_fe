@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 // modal product
 import 'magnific-popup/dist/jquery.magnific-popup.min';
@@ -8,6 +8,8 @@ import HeaderPages from '~/user/components/HeaderPages';
 
 import ModalProduct from '~/user/components/ModalProduct';
 import ProductLeagues from '~/user/components/ProductLeagues';
+import axios from 'axios';
+import { API_URL } from '~/config/constant';
 
 function ProductLeague() {
     useLayoutEffect(() => {
@@ -16,7 +18,24 @@ function ProductLeague() {
     }, []);
 
     const { league } = useParams();
+    const [dataIndex, setDataIndex] = useState(null);
 
+    useEffect(() => {
+        axios
+            .get(API_URL + 'league')
+            .then((response) => {
+                if (response.status === 200) {
+                    const foundIndex = response.data.findIndex((item) => item.name === league);
+                    // foundIndex sẽ là index của phần tử trong mảng có data.name === league
+                    if (foundIndex !== -1) {
+                        setDataIndex(foundIndex);
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, [league]);
     // Show Modal1 Product
     const [showModal, setShowModal] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -42,7 +61,7 @@ function ProductLeague() {
             <HeaderPages key={cartItemCount} />
 
             {/* <!-- Product --> */}
-            <ProductLeagues handleShowModal={handleShowModal} query={league} pagination={true} />
+            <ProductLeagues handleShowModal={handleShowModal} query={league} index={dataIndex} pagination={true} />
 
             {/* <!-- Modal1 --> */}
 

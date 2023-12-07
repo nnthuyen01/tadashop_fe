@@ -6,6 +6,7 @@ import {
     PRODUCTS_SET,
     PRODUCT_DELETE,
     PRODUCT_SET,
+    PRODUCT_SET_PAGEABLE,
 } from './actionTypes';
 
 export const insertProduct = (product, navigate) => async (dispatch) => {
@@ -190,6 +191,56 @@ export const deleteProduct = (id) => async (dispatch) => {
             dispatch({
                 type: COMMON_MESSAGE_SET,
                 payload: response.data,
+            });
+        } else {
+            dispatch({
+                type: COMMON_ERROR_SET,
+                payload: response.message,
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: COMMON_ERROR_SET,
+            payload: error.response.data ? error.response.data.message : error.message,
+        });
+    }
+    dispatch({
+        type: COMMON_LOADING_SET,
+        payload: false,
+    });
+};
+
+export const getProductsPageable = (params) => async (dispatch) => {
+    const service = new ProductService();
+
+    try {
+        console.log('Get Products Pageable');
+        dispatch({
+            type: COMMON_LOADING_SET,
+            payload: true,
+        });
+
+        const response = await service.getProductsByName(params);
+
+        console.log(response);
+        if (response.status === 200) {
+            dispatch({
+                type: PRODUCTS_SET,
+                payload: response.data.content,
+            });
+
+            const { size, totalPages, totalElements, pageable } = response.data;
+            const pagination = {
+                size: size,
+                page: pageable.pageNumber,
+                query: params.query,
+                totalPages: totalPages,
+                totalElements: totalElements,
+                sort: 'id,desc',
+            };
+            dispatch({
+                type: PRODUCT_SET_PAGEABLE,
+                payload: pagination,
             });
         } else {
             dispatch({

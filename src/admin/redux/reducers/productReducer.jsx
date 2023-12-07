@@ -1,4 +1,4 @@
-import { PRODUCTS_SET, PRODUCT_DELETE, PRODUCT_SET } from '../actions/actionTypes';
+import { PRODUCTS_SET, PRODUCT_DELETE, PRODUCT_SET, PRODUCT_SET_PAGEABLE } from '../actions/actionTypes';
 
 const initialState = {
     product: {
@@ -12,6 +12,14 @@ const initialState = {
         // description: undefined,
     },
     products: [],
+    pagination: {
+        size: 10,
+        page: 0,
+        totalElements: 0,
+        query: '',
+        totalPages: 1,
+        sort: 'id,desc',
+    },
 };
 
 const productReducer = (state = initialState, { type, payload }) => {
@@ -22,6 +30,8 @@ const productReducer = (state = initialState, { type, payload }) => {
             return { ...state, products: payload };
         case PRODUCT_DELETE:
             return { ...state, products: state.products.filter((item) => item.id !== payload) };
+        case PRODUCT_SET_PAGEABLE:
+            return { ...state, pagination: payload };
         default:
             return state;
     }

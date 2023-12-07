@@ -63,7 +63,17 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoAC1.jpg')" }}
+                                    ></Link>
+                                </div>
+
+                                {/* <!-- item gallery sidebar --> */}
+                                <div className="wrap-item-gallery m-b-10">
+                                    <Link
+                                        className="item-gallery bg-img1"
+                                        to="/"
+                                        data-lightbox="gallery"
+                                        style={{ backgroundImage: "url('assets/images/AoMu2.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -83,7 +93,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoArs2.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -93,7 +103,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoAtletico1.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -103,7 +113,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoBayern2.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -113,7 +123,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoBarce1.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -123,7 +133,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoAC2.jpg')" }}
                                     ></Link>
                                 </div>
 
@@ -133,17 +143,7 @@ function Sidebar({ handleHideSidebar, showSidebar }) {
                                         className="item-gallery bg-img1"
                                         to="/"
                                         data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
-                                    ></Link>
-                                </div>
-
-                                {/* <!-- item gallery sidebar --> */}
-                                <div className="wrap-item-gallery m-b-10">
-                                    <Link
-                                        className="item-gallery bg-img1"
-                                        to="/"
-                                        data-lightbox="gallery"
-                                        style={{ backgroundImage: "url('assets/images/AoMu3.jpg')" }}
+                                        style={{ backgroundImage: "url('assets/images/AoAston1.jpg')" }}
                                     ></Link>
                                 </div>
                             </div>

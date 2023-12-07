@@ -286,18 +286,20 @@ function HeaderHome() {
                 <div className="wrap-header-mobile">
                     {/* <!-- Logo moblie -->		 */}
                     <div className="logo-mobile">
-                        <a href="index.html">
+                        <Link to="/">
                             <img src="assets/images/icons/Logo.png" alt="IMG-LOGO" />
-                        </a>
+                        </Link>
                     </div>
 
                     {/* <!-- Icon header --> */}
                     <div className="wrap-icon-header flex-w flex-r-m h-full m-r-15">
                         <div className="flex-c-m h-full p-r-5">
                             <div
-                                className="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+                                className={`icon-header-item cl0 hov-cl1 trans-04 p-lr-11 ${
+                                    totalItem > 0 ? 'icon-header-noti' : ''
+                                } js-show-cart`}
+                                data-notify={totalItem}
                                 onClick={handleShowHeaderCart}
-                                data-notify="2"
                             >
                                 <i className="zmdi zmdi-shopping-cart"></i>
                             </div>
@@ -324,7 +326,7 @@ function HeaderHome() {
                                 <Link to="/shop" className="label1 rs1" data-label1="hot">
                                     Cửa hàng
                                 </Link>
-                                <ul className="sub-menu-m">
+                                {/* <ul className="sub-menu-m">
                                     <li>
                                         <a href="index.html">Homepage 1</a>
                                     </li>
@@ -334,10 +336,10 @@ function HeaderHome() {
                                     <li>
                                         <a href="home-03.html">Homepage 3</a>
                                     </li>
-                                </ul>
-                                <span className="arrow-main-menu-m">
+                                </ul> */}
+                                {/* <span className="arrow-main-menu-m">
                                     <i className="fa fa-angle-right" aria-hidden="true"></i>
-                                </span>
+                                </span> */}
                             </li>
 
                             <li>

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment, useLayoutEffect } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
 import ProductItem from '~/user/components/ProductItem';
 import ModalProduct from '~/user/components/ModalProduct';
 import Banners from '~/user/components/Banners';
@@ -8,10 +7,8 @@ import SliderHome from '~/user/components/SliderHome';
 import HeaderHome from './HeaderHome';
 
 function Home() {
-    const navigate = useNavigate();
-
     ////////////////////////////////////////////////////////////////
-    useEffect(() => {
+    useLayoutEffect(() => {
         // Scroll to the top of the page when the component is mounted
         window.scrollTo(0, 0);
     }, []);
