@@ -14,8 +14,6 @@ import {
     MdOutlineInventory2,
     MdOutlineShoppingBag,
     MdOutlineViewList,
-    MdRequestPage,
-    MdSupervisorAccount,
     MdViewList,
     MdOutlineFormatSize,
     MdSportsSoccer,
@@ -187,26 +185,22 @@ const Dashboard = () => {
                             label: 'Orders',
                             onClick: () => navigate('/dashboard/order'),
                         },
+
                         {
                             key: '7',
-                            icon: <MdRequestPage />,
-                            label: 'Invoices',
-                        },
-                        {
-                            key: '8',
                             icon: <MdInsertChartOutlined />,
                             label: 'Statistics',
                             onClick: () => navigate('/dashboard/statistics'),
                         },
 
                         {
-                            key: '9',
-                            icon: <MdSupervisorAccount />,
+                            key: '8',
+                            icon: <MdManageAccounts />,
                             label: 'Accounts',
                             onClick: () => navigate('/dashboard/accounts'),
                         },
                         {
-                            key: '10',
+                            key: '9',
                             icon: <MdLogout />,
                             label: 'Logout',
                             onClick: () => {

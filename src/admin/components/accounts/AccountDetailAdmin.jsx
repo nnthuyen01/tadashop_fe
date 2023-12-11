@@ -53,7 +53,7 @@ class AccountDetailAdmin extends Component {
                             <Row gutter={10}>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Account ID"
                                         name="id"
                                         initialValue={account.id}
@@ -66,6 +66,7 @@ class AccountDetailAdmin extends Component {
                                     <Form.Item
                                         style={{
                                             fontStyle: 'italic',
+                                            fontWeight: '650',
                                         }}
                                         label="Main Image"
                                         name="image"
@@ -93,7 +94,7 @@ class AccountDetailAdmin extends Component {
                             <Row gutter={10}>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="First Name"
                                         name="firstname"
                                         initialValue={account.firstname}
@@ -103,7 +104,7 @@ class AccountDetailAdmin extends Component {
                                 </Col>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Last Name"
                                         name="lastname"
                                         initialValue={account.lastname}
@@ -115,7 +116,7 @@ class AccountDetailAdmin extends Component {
                             <Row gutter={10}>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Email"
                                         name="email"
                                         initialValue={account.email}
@@ -125,7 +126,7 @@ class AccountDetailAdmin extends Component {
                                 </Col>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Phone"
                                         name="phone"
                                         initialValue={account.phone}
@@ -137,7 +138,7 @@ class AccountDetailAdmin extends Component {
                             <Row gutter={10}>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Role"
                                         name="role"
                                         initialValue={account.role}
@@ -147,18 +148,18 @@ class AccountDetailAdmin extends Component {
                                 </Col>
                                 <Col md={12}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Enable"
                                         name="enable"
                                         initialValue={account.enable}
                                         valuePropName="checked"
                                     >
-                                        <Checkbox />
+                                        <Checkbox disabled />
                                     </Form.Item>
                                 </Col>
                             </Row>
                             <Form.Item
-                                style={{ fontStyle: 'italic' }}
+                                style={{ fontStyle: 'italic', fontWeight: '650' }}
                                 label="Amount Paid"
                                 name="amountPaid"
                                 initialValue={account.amountPaid}
@@ -166,60 +167,66 @@ class AccountDetailAdmin extends Component {
                                 <Input addonAfter={'₫'} readOnly></Input>
                             </Form.Item>
                             <Row>
-                                <Col md={12}>
+                                <Col md={24}>
                                     <Form.Item
-                                        style={{ fontStyle: 'italic' }}
+                                        style={{ fontStyle: 'italic', fontWeight: '650' }}
                                         label="Vouchers"
                                         name="vouchers"
                                         initialValue={account.vouchers?.voucher}
                                     >
-                                        <Space direction="horizontal">
-                                            {account.vouchers && Array.isArray(account.vouchers)
-                                                ? account.vouchers.map((voucher, index) => (
-                                                      <div
-                                                          key={index}
-                                                          style={{
-                                                              display: 'flex',
-                                                              alignItems: 'center',
-                                                              margin: '0px 10px',
-                                                              border: '2px solid rgb(217, 217, 217)',
-                                                              borderRadius: '5px',
-                                                          }}
-                                                      >
-                                                          <div
-                                                              style={{
-                                                                  padding: ' 0px 10px',
-                                                                  borderRight: '2px solid  rgb(217, 217, 217)',
-                                                                  fontWeight: '650',
-                                                              }}
-                                                          >
-                                                              {voucher.voucher}
-                                                          </div>
-                                                          <div style={{ padding: ' 0px 10px' }}>{voucher.quantity}</div>
-                                                      </div>
-                                                  ))
-                                                : null}
-                                            {/* <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    margin: '0px 10px',
-                                                    border: '2px solid rgb(217, 217, 217)',
-                                                    borderRadius: '5px',
-                                                }}
-                                            >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                flexWrap: 'wrap',
+                                                justifyContent: 'space-between',
+                                            }}
+                                        >
+                                            {account.vouchers &&
+                                            Array.isArray(account.vouchers) &&
+                                            account.vouchers.length !== 0 ? (
+                                                account.vouchers.map((voucher, index) => (
+                                                    <div
+                                                        key={index}
+                                                        style={{
+                                                            flex: '0 0 calc(33.33% - 20px)',
+                                                            margin: '0px 10px',
+                                                            marginBottom: '10px',
+                                                            border: '2px solid rgb(217, 217, 217)',
+                                                            borderRadius: '5px',
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                            alignItems: 'center',
+                                                            backgroundColor:
+                                                                voucher.status === 0 ? 'rgba(169, 169, 169, 0.5)' : '',
+                                                        }}
+                                                    >
+                                                        <div
+                                                            style={{
+                                                                padding: '10px',
+                                                                borderBottom: '2px solid rgb(217, 217, 217)',
+                                                                fontWeight: '650',
+                                                                width: '100%',
+                                                                textAlign: 'center',
+                                                            }}
+                                                        >
+                                                            <div>{voucher.code}</div>
+                                                            <div>{voucher.priceOffPercent}%</div>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
                                                 <div
                                                     style={{
-                                                        padding: ' 0px 10px',
-                                                        borderRight: '2px solid  rgb(217, 217, 217)',
-                                                        fontWeight: '650',
+                                                        color: '#555',
+                                                        fontWeight: '500',
+                                                        fontStyle: 'italic',
+                                                        marginTop: '10px',
                                                     }}
                                                 >
-                                                    VOUCHER1
+                                                    Không có voucher nào
                                                 </div>
-                                                <div style={{ padding: ' 0px 10px' }}>3500000</div>
-                                            </div> */}
-                                        </Space>
+                                            )}
+                                        </div>
                                     </Form.Item>
                                 </Col>
                             </Row>{' '}
