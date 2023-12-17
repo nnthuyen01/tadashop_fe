@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import images from '~/assets/images';
 function Footer() {
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -101,23 +102,7 @@ function Footer() {
 
                                 <li className="p-b-10">
                                     <div className="stext-107 cl7 trans-04">Email liên hệ công việc</div>
-                                    {/* <form>
-                                        <div className="wrap-input1 w-full p-b-4">
-                                            <input
-                                                className="input1 bg-none plh1 stext-107 cl7"
-                                                type="text"
-                                                name="email"
-                                                placeholder="tadashopasia@gmail.com"
-                                            />
-                                            <div className="focus-input1 trans-04"></div>
-                                        </div>
 
-                                        <div className="p-t-18">
-                                            <button className="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                                                Gửi Mail
-                                            </button>
-                                        </div>
-                                    </form> */}
                                     <form onSubmit={handleSubmit}>
                                         <div className="wrap-input1 w-full p-b-4">
                                             <input
@@ -205,7 +190,8 @@ function Footer() {
                                         width: 'auto',
                                         maxHeight: '80px',
                                     }}
-                                    src="assets/images/logoBoCongThuong.png"
+                                    // src="assets/images/logoBoCongThuong.png"
+                                    src={images.bocongthuong}
                                     alt="daThongBao"
                                 />
                             </div>

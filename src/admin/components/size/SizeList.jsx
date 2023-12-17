@@ -12,6 +12,7 @@ class SizeList extends Component {
                 <Column title="Size" key="size" dataIndex="size"></Column>
                 <Column title="Quantity" key="quantity" dataIndex="quantity"></Column>
                 <Column title="Id Product" key="productId" dataIndex="productId"></Column>
+                <Column title="Product Name" key="productName" dataIndex="productName"></Column>
 
                 <Column
                     title="Action"

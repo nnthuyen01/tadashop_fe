@@ -12,6 +12,7 @@ import {
     deleteVoucher,
     updateVoucher,
     getVouchersByCode,
+    getVouchersPageable,
 } from '../../redux/actions/voucherAction';
 
 class ListVouchers extends Component {
@@ -24,7 +25,15 @@ class ListVouchers extends Component {
         };
     }
     componentDidMount = () => {
-        this.props.getVouchers();
+        // this.props.getVouchers();
+
+        // console.log('this mount');
+        const { pagination } = this.props;
+        const params = {
+            query: pagination.query,
+            size: pagination.size,
+        };
+        this.props.getVouchersPageable(params);
 
         console.log('this mount');
     };
@@ -70,9 +79,10 @@ class ListVouchers extends Component {
         const params = {
             query: value.query,
             size: pagination.size,
+            sort: pagination.sort,
         };
 
-        this.props.getVouchersByCode(params);
+        this.props.getVouchersPageable(params);
     };
 
     onChange = (pageNumber, pageSize) => {
@@ -81,9 +91,9 @@ class ListVouchers extends Component {
             query: pagination.query,
             page: pageNumber - 1,
             size: pageSize,
+            sort: pagination.sort,
         };
-
-        this.props.getVouchersByCode(params);
+        this.props.getVouchersPageable(params);
     };
     render() {
         const { navigate } = this.props.router;
@@ -155,6 +165,7 @@ const mapDispatchToProps = {
     deleteVoucher,
     updateVoucher,
     getVouchersByCode,
+    getVouchersPageable,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListVouchers));

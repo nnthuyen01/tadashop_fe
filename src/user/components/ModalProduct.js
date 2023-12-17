@@ -10,9 +10,10 @@ import swal from 'sweetalert';
 
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
+    const navigate = useNavigate();
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -160,6 +161,21 @@ function ModalProduct({ handleHideModal, productId, onAddToCartSuccess }) {
 
     // add cart
     const handleAddToCart = (nameProduct) => {
+        const isAuthenticated = () => {
+            const token = localStorage.getItem('auth_token');
+            return !!token;
+        };
+
+        // Redirect to login if not authenticated
+        if (!isAuthenticated()) {
+            swal('Chưa đăng nhập', 'Vui lòng chọn đăng nhập trước khi thêm vào giỏ hàng', 'warning').then(() => {
+                // Chuyển hướng đến trang đăng nhập
+                navigate('/login', { replace: true });
+            });
+
+            return;
+        }
+
         const selectedSize = selectSizeRef.current.value; // Lấy giá trị size đã chọn
         if (!selectedSize) {
             swal('Lỗi', 'Vui lòng chọn size trước khi thêm vào giỏ hàng', 'error');

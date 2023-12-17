@@ -14,6 +14,7 @@ function HeaderHome() {
 
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
+        localStorage.removeItem('role');
         navigate('/');
     };
     const [isFixed, setIsFixed] = useState(false);
@@ -223,6 +224,9 @@ function HeaderHome() {
                                                             <Link to={`/profile/${localStorage.getItem('auth_name')}`}>
                                                                 Thông tin chung
                                                             </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to={'/order'}>Đơn hàng</Link>
                                                         </li>
                                                         <li>
                                                             <Link

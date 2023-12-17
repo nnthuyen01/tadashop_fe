@@ -8,6 +8,9 @@ export default class SizeService {
     getSizes = async () => {
         return await axios.get(API_URL + 'size/all');
     };
+    getSizesPageable = async (params) => {
+        return await axios.get(API_URL + 'size/allPageable', { params });
+    };
     deleteSize = async (id) => {
         return await axios.delete(API_URL + 'size/' + id);
     };

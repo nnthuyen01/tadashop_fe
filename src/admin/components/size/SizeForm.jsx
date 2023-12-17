@@ -9,7 +9,7 @@ class SizeForm extends Component {
         super(props);
 
         this.state = {
-            size: { id: '', quantity: '', size: '', productId: '' },
+            size: { id: '', quantity: '', size: '', productId: '', productName: '' },
             products: [],
         };
     }
@@ -88,7 +88,7 @@ class SizeForm extends Component {
                             <Select.Option value="L">L</Select.Option>
                             <Select.Option value="XL">XL</Select.Option>
                             <Select.Option value="2XL">2XL</Select.Option>
-                            <Select.Option value="3XL">3XL</Select.Option>
+                            {/* <Select.Option value="3XL">3XL</Select.Option> */}
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -113,7 +113,15 @@ class SizeForm extends Component {
                         rules={[{ required: true }]}
                         hasFeedback
                     >
-                        <Select placeholder="Select Club" suffixIcon={<MdOutlineCategory />}>
+                        <Select
+                            placeholder="Select Club"
+                            suffixIcon={<MdOutlineCategory />}
+                            showSearch
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                        >
                             {products &&
                                 products.map((item) => (
                                     <Select.Option value={item.id} key={'club' + item.id}>

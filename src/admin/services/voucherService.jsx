@@ -8,6 +8,9 @@ export default class VoucherService {
     getVouchers = async () => {
         return await axios.get(API_URL + 'vouchers');
     };
+    getVouchersPageable = async (params) => {
+        return await axios.get(API_URL + 'vouchersHaveUsername', { params });
+    };
     getVouchersByCode = async (params) => {
         return await axios.get(API_URL + 'vouchers/find', { params });
     };

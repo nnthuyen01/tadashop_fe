@@ -11,7 +11,7 @@ const initialState = {
     voucher: {},
     vouchers: [],
     pagination: {
-        size: 5,
+        size: 10,
         page: 0,
         totalElements: 0,
         query: '',

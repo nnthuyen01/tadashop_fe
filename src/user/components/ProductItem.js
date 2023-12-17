@@ -15,22 +15,45 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const [totalPage, setTotalPage] = useState(0); // Bắt đầu từ trang 0
     const itemsPerPage = 16;
 
-    const [sortBrands, setSortBrands] = useState(['Adidas', 'Puma', 'Nike']);
+    // const getDefaultBrands = () => [
+    //     { id: 1, name: 'Adidas', logo: '49c3b8ca-3913-42e0-bedb-b61ac05344c7.png' },
+    //     { id: 2, name: 'Nike', logo: 'e41d3b83-0952-4edf-8207-3264903159e6.png' },
+    //     { id: 3, name: 'Puma', logo: '4360ffcd-acbd-4962-8a12-ecd03e9659d0.png' },
+    // ];
+    const [defaultBrands, setDefaultBrands] = useState([]);
+    const [sortBrands, setSortBrands] = useState([]);
+
     const handleSortBrandToggle = (brand) => {
+        const brandIndex = sortBrands.findIndex((item) => item.name === brand.name);
+
         // Check if the brand is already in the array
-        if (sortBrands.includes(brand) && sortBrands.length === 3) {
-            setSortBrands(sortBrands.filter((item) => item === brand));
-        } else if (sortBrands.includes(brand) && sortBrands.length === 1) {
-            // If yes, remove it
-            setSortBrands(['Adidas', 'Puma', 'Nike']);
-        } else if (sortBrands.includes(brand)) {
-            // If yes, remove it
-            setSortBrands(sortBrands.filter((item) => item !== brand));
+        if (brandIndex !== -1 && sortBrands.length === 3) {
+            setSortBrands(sortBrands.filter((item) => item.name === brand.name));
+        } else if (brandIndex !== -1 && sortBrands.length === 1) {
+            setSortBrands(defaultBrands);
+        } else if (brandIndex !== -1) {
+            setSortBrands(sortBrands.filter((item) => item.name !== brand.name));
         } else {
-            // If no, add it
             setSortBrands([...sortBrands, brand]);
         }
     };
+    // console.log(sortBrands);
+    // const [sortBrands, setSortBrands] = useState(['Adidas', 'Puma', 'Nike']);
+    // const handleSortBrandToggle = (brand) => {
+    //     // Check if the brand is already in the array
+    //     if (sortBrands.includes(brand) && sortBrands.length === 3) {
+    //         setSortBrands(sortBrands.filter((item) => item === brand));
+    //     } else if (sortBrands.includes(brand) && sortBrands.length === 1) {
+    //         // If yes, remove it
+    //         setSortBrands(['Adidas', 'Puma', 'Nike']);
+    //     } else if (sortBrands.includes(brand)) {
+    //         // If yes, remove it
+    //         setSortBrands(sortBrands.filter((item) => item !== brand));
+    //     } else {
+    //         // If no, add it
+    //         setSortBrands([...sortBrands, brand]);
+    //     }
+    // };
 
     const [sortTypes, setSortTypes] = useState(['Home', 'Away', 'Third', 'Goalkeeper']);
 
@@ -105,25 +128,63 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
             .catch((error) => {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
+        axios
+            .get(API_URL + 'brand')
+            .then((response) => {
+                // console.log(response);
+                if (response.status === 200) {
+                    setDefaultBrands(response.data);
+                    setSortBrands(response.data);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
     }, []);
 
+    // const fetchData = () => {
+    //     setLoading(true);
+
+    //     // Sử dụng API endpoint của bạn
+    //     // const apiEndpoint = `${API_URL}products/find?query=&page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
+    //     const apiEndpoint = `${API_URL}products/listFilter?brand=${sortBrands.join(', ')}
+    //     &kitType=${sortTypes.join(', ')}
+    //     &gender=${sortSexs.join(', ')}
+    //     &minPrice=${minPrice}
+    //     &maxPrice=${maxPrice}
+    //     &page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
+
+    //     axios
+    //         .get(apiEndpoint)
+    //         .then((response) => {
+    //             if (response.status === 200) {
+    //                 // console.log(response.data);
+    //                 setProducts(response.data.content);
+    //                 setTotalPage(response.data.totalPages);
+    //                 setLoading(false);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error('Lỗi khi fetch dữ liệu từ API:', error);
+    //             setLoading(false);
+    //         });
+    // };
     const fetchData = () => {
         setLoading(true);
 
-        // Sử dụng API endpoint của bạn
-        // const apiEndpoint = `${API_URL}products/find?query=&page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
-        const apiEndpoint = `${API_URL}products/listFilter?brand=${sortBrands.join(', ')}
-        &kitType=${sortTypes.join(', ')}
-        &gender=${sortSexs.join(', ')}
-        &minPrice=${minPrice}
-        &maxPrice=${maxPrice}
-        &page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
+        const brandNames = sortBrands.map((brand) => brand.name).join(', ');
+
+        const apiEndpoint = `${API_URL}products/listFilter?brand=${brandNames}
+          &kitType=${sortTypes.join(', ')}
+          &gender=${sortSexs.join(', ')}
+          &minPrice=${minPrice}
+          &maxPrice=${maxPrice}
+          &page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
 
         axios
             .get(apiEndpoint)
             .then((response) => {
                 if (response.status === 200) {
-                    // console.log(response.data);
                     setProducts(response.data.content);
                     setTotalPage(response.data.totalPages);
                     setLoading(false);
@@ -134,7 +195,6 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                 setLoading(false);
             });
     };
-
     const handleRedirect = (name, id) => {
         navigate(`/product-detail/${name}/${id}`);
     };
@@ -323,7 +383,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                 <div className="filter-col2 p-r-15 p-b-27">
                                     <div className="mtext-102 cl2 p-b-15">Thương hiệu</div>
 
-                                    <ul>
+                                    {/* <ul>
                                         <li className="p-b-6">
                                             <Link
                                                 to="#"
@@ -385,6 +445,46 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
                                                 Puma
                                             </Link>
                                         </li>
+                                    </ul> */}
+
+                                    <ul>
+                                        <li className="p-b-6">
+                                            <Link
+                                                to="#"
+                                                className={`filter-link stext-106 trans-04 ${
+                                                    sortBrands.length === 3 ? 'filter-link-active' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setSortBrands(defaultBrands);
+                                                }}
+                                            >
+                                                All
+                                            </Link>
+                                        </li>
+
+                                        {defaultBrands.map((item, index) => (
+                                            <li key={index} className="p-b-6">
+                                                <img
+                                                    src={API_URL + 'brand/logo/' + item.logo}
+                                                    alt={item.name}
+                                                    style={{ height: '20px', marginRight: '5px' }}
+                                                />
+                                                <Link
+                                                    to="#"
+                                                    className={`filter-link stext-106 trans-04 ${
+                                                        sortBrands.some((brand) => brand.name === item.name) &&
+                                                        sortBrands.length !== 3
+                                                            ? 'filter-link-active'
+                                                            : ''
+                                                    }`}
+                                                    onClick={() => {
+                                                        handleSortBrandToggle(item);
+                                                    }}
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                                 <div className="filter-col2 p-r-15 p-b-27">

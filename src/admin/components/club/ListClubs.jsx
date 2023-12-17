@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import withRouter from '../../helpers/withRouter';
 
-import { Button, Modal, Skeleton, Space, Table, Tag } from 'antd';
+import { Button, Modal, Skeleton, Space, Table, Tag, Input } from 'antd';
 import ContentHeader from '../common/ContentHeader';
 import Column from 'antd/lib/table/Column';
-import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, SearchOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { getClubs, clearClubState, deleteClub } from '../../redux/actions/clubAction';
 
@@ -71,7 +71,30 @@ class ListClubs extends Component {
 
                 <Table dataSource={clubs} size="small" rowKey="id">
                     <Column title="Club ID" key="id" dataIndex="id" width={40} align="center"></Column>
-                    <Column title="Name" key="name" dataIndex="name" width={600}></Column>
+                    {/* <Column title="Name" key="name" dataIndex="name" width={600}></Column> */}
+                    <Column
+                        title="Name"
+                        key="name"
+                        dataIndex="name"
+                        filterDropdown={(props) => (
+                            <div style={{ padding: 8 }}>
+                                <Input
+                                    placeholder="Search name"
+                                    value={props.selectedKeys[0]}
+                                    onChange={(e) => props.setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                                    onPressEnter={() => props.confirm()}
+                                    style={{ width: 188, marginBottom: 8, display: 'block' }}
+                                />
+                            </div>
+                        )}
+                        onFilter={(value, record) => record.name.toLowerCase().includes(value.toLowerCase())}
+                        filterIcon={(filtered) => (
+                            <span style={{ color: filtered ? '#1890ff' : undefined }}>
+                                <SearchOutlined />
+                            </span>
+                        )}
+                        // ... (rest of your Column definition)
+                    />
                     <Column
                         title="League"
                         key="league"

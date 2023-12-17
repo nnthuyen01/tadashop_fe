@@ -11,6 +11,8 @@ import { ArrowDownOutlined, ArrowUpOutlined, RiseOutlined, StockOutlined } from 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DatePicker } from 'antd';
+
+const { RangePicker } = DatePicker;
 dayjs.extend(customParseFormat);
 
 /** Manually entering any of the following formats will perform date parsing */
@@ -79,13 +81,16 @@ function Statistics() {
             });
 
         const date = {
-            day: dayjs().date(),
-            month: dayjs().month() + 1,
-            year: dayjs().year(),
+            sday: dayjs().subtract(7, 'day').date(),
+            smonth: dayjs().subtract(7, 'day').month() + 1,
+            syear: dayjs().subtract(7, 'day').year(),
+            eday: dayjs().date(),
+            emonth: dayjs().month() + 1,
+            eyear: dayjs().year(),
         };
 
         axios
-            .get(API_URL + 'admin/order/count-order', { params: date })
+            .get(API_URL + 'admin/order/count-orderRange', { params: date })
             .then((response) => {
                 if (response.status === 200) {
                     setOrderByDate(response.data);
@@ -95,7 +100,7 @@ function Statistics() {
                 console.error('Lỗi khi fetch dữ liệu từ API:', error);
             });
         axios
-            .get(API_URL + 'admin/order/count-revenue', { params: date })
+            .get(API_URL + 'admin/order/count-revenueRange', { params: date })
             .then((response) => {
                 if (response.status === 200) {
                     setRevenueByDate(response.data);
@@ -132,20 +137,36 @@ function Statistics() {
             });
     }, []);
 
-    const handleDatePickerChange1 = async (date, dateString) => {
+    const handleDatePickerChange1 = async (dates, dateString) => {
         console.log('Selected date revenue:', dateString);
+        let day;
 
-        const day = {
-            day: date.date(),
-            month: date.month() + 1,
-            year: date.year(),
-        };
+        if (!dates) {
+            // Xử lý khi không có ngày được chọn (ví dụ: khi bấm vào icon close)
+            day = {
+                sday: 0,
+                smonth: 0,
+                syear: 0,
+                eday: 0,
+                emonth: 0,
+                eyear: 0,
+            };
+        } else {
+            day = {
+                sday: dayjs(dates[0]).date(),
+                smonth: dayjs(dates[0]).month() + 1,
+                syear: dayjs(dates[0]).year(),
+                eday: dayjs(dates[1]).date(),
+                emonth: dayjs(dates[1]).month() + 1,
+                eyear: dayjs(dates[1]).year(),
+            };
+        }
 
         console.log(day);
-
         try {
-            const response = await axios.get(API_URL + 'admin/order/count-order', { params: day });
+            const response = await axios.get(API_URL + 'admin/order/count-orderRange', { params: day });
 
+            console.log(response);
             if (response.status === 200) {
                 setOrderByDate(response.data);
             }
@@ -154,19 +175,34 @@ function Statistics() {
         }
     };
 
-    const handleDatePickerChange2 = async (date, dateString) => {
+    const handleDatePickerChange2 = async (dates, dateString) => {
         console.log('Selected date revenue:', dateString);
 
-        const day = {
-            day: date.date(),
-            month: date.month() + 1,
-            year: date.year(),
-        };
+        let day;
 
-        console.log(day);
+        if (!dates) {
+            // Xử lý khi không có ngày được chọn (ví dụ: khi bấm vào icon close)
+            day = {
+                sday: 0,
+                smonth: 0,
+                syear: 0,
+                eday: 0,
+                emonth: 0,
+                eyear: 0,
+            };
+        } else {
+            day = {
+                sday: dayjs(dates[0]).date(),
+                smonth: dayjs(dates[0]).month() + 1,
+                syear: dayjs(dates[0]).year(),
+                eday: dayjs(dates[1]).date(),
+                emonth: dayjs(dates[1]).month() + 1,
+                eyear: dayjs(dates[1]).year(),
+            };
+        }
 
         try {
-            const response = await axios.get(API_URL + 'admin/order/count-revenue', { params: day });
+            const response = await axios.get(API_URL + 'admin/order/count-revenueRange', { params: day });
 
             if (response.status === 200) {
                 setRevenueByDate(response.data);
@@ -215,21 +251,54 @@ function Statistics() {
         <div>
             <Row gutter={16}>
                 <Col span={8}>
-                    <Card>
-                        <Statistic title="Total user" value={statistic.quantityUser} />
+                    <Card
+                        style={{
+                            background: 'linear-gradient(158deg, rgba(40, 34, 70, 1) 0%, rgba(30, 47, 141, 1) 100%)',
+                        }}
+                    >
+                        <Statistic
+                            // title="Total user"
+                            title={<span style={{ fontSize: '14px', color: 'white' }}>Total user</span>}
+                            value={statistic.quantityUser}
+                            valueStyle={{
+                                color: 'white',
+                            }}
+                        />
                     </Card>
                 </Col>
                 <Col span={8}>
-                    <Card>
-                        <Statistic title="Total revenue" value={statistic.totalRevenue} suffix="₫" />
+                    <Card
+                        style={{
+                            background: 'linear-gradient(158deg, rgba(53, 138, 148, 1) 0%, rgba(91, 180, 96, 1) 100%)',
+                        }}
+                    >
+                        <Statistic
+                            title={<span style={{ fontSize: '14px', color: 'white' }}>Total revenue</span>}
+                            value={statistic.totalRevenue}
+                            suffix="₫"
+                            valueStyle={{
+                                color: 'white',
+                            }}
+                        />
                     </Card>
                 </Col>
                 <Col span={8}>
-                    <Card>
-                        <Statistic title="Total product" value={statistic.quantityProduct} />
+                    <Card
+                        style={{
+                            background: 'linear-gradient(158deg, rgba(40, 34, 70, 1) 0%, rgba(30, 47, 141, 1) 100%)',
+                        }}
+                    >
+                        <Statistic
+                            title={<span style={{ fontSize: '14px', color: 'white' }}>Total product</span>}
+                            value={statistic.quantityProduct}
+                            valueStyle={{
+                                color: 'white',
+                            }}
+                        />
                     </Card>
                 </Col>
             </Row>
+
             <Row gutter={16}>
                 <Col span={12}>
                     <Card bordered={false}>
@@ -240,13 +309,11 @@ function Statistics() {
                                     value={orderByDate}
                                     valueStyle={{ color: '#3f8600' }}
                                     prefix={<StockOutlined />}
-                                    // suffix="%"
                                 />
                             </Col>
                             <Col span={12}>
-                                <DatePicker
-                                    // defaultValue={dayjs('01/01/2015', dateFormatList[0])}
-                                    defaultValue={dayjs()}
+                                <RangePicker
+                                    defaultValue={[dayjs().subtract(7, 'day'), dayjs()]}
                                     format={dateFormatList}
                                     onChange={handleDatePickerChange1}
                                 />
@@ -261,15 +328,14 @@ function Statistics() {
                                 <Statistic
                                     title="Revenue By Date"
                                     value={revenueByDate}
-                                    // precision={2}
                                     valueStyle={{ color: '#3f8600' }}
                                     prefix={<StockOutlined />}
                                     suffix="₫"
                                 />
                             </Col>
                             <Col span={12}>
-                                <DatePicker
-                                    defaultValue={dayjs()}
+                                <RangePicker
+                                    defaultValue={[dayjs().subtract(7, 'day'), dayjs()]}
                                     format={dateFormatList}
                                     onChange={handleDatePickerChange2}
                                 />

@@ -21,7 +21,7 @@ function TokenExpirationChecker() {
                 // Token đã hết hạn, xóa nó và đăng xuất người dùng
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
-
+                localStorage.removeItem('role');
                 setIsTokenExpired(true);
                 setIsLoading(false);
 

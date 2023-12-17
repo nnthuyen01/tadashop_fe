@@ -20,6 +20,7 @@ function Profile() {
 
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
+        localStorage.removeItem('role');
         navigate('/');
     };
     useEffect(() => {
@@ -34,21 +35,31 @@ function Profile() {
     const [newPhone, setNewPhone] = useState('');
 
     useEffect(() => {
-        axios
-            .get(API_URL + 'user')
-            .then((response) => {
-                if (response.status === 200) {
-                    setUser(response.data);
-                    setLoading(false);
-                    setSelectedImage(response.data.avatar);
-                    // if (selectedImage != null) {
-                    //     setUser((prevUser) => ({ ...prevUser, avatar: selectedImage }));
-                    // }
-                }
-            })
-            .catch((error) => {
-                console.error('Lỗi khi fetch dữ liệu từ API:', error);
-            });
+        const isAuthenticated = () => {
+            const token = localStorage.getItem('auth_token');
+            return !!token;
+        };
+        // console.log(isAuthenticated());
+        // Redirect to login if not authenticated
+        if (!isAuthenticated()) {
+            navigate('/login', { replace: true });
+        } else {
+            axios
+                .get(API_URL + 'user')
+                .then((response) => {
+                    if (response.status === 200) {
+                        setUser(response.data);
+                        setLoading(false);
+                        setSelectedImage(response.data.avatar);
+                        // if (selectedImage != null) {
+                        //     setUser((prevUser) => ({ ...prevUser, avatar: selectedImage }));
+                        // }
+                    }
+                })
+                .catch((error) => {
+                    console.error('Lỗi khi fetch dữ liệu từ API:', error);
+                });
+        }
     }, []); // [] nghĩa là useEffect chỉ chạy một lần khi thành phần được tạo
     // console.log(user);
     // console.log('user.avatar :' + user.avatar);

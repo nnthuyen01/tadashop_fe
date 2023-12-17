@@ -7,6 +7,7 @@ import cardIcon from '~/assets/images/cardpayment.png';
 import codIcon from '~/assets/images/codicon.png';
 import vnpayIcon from '~/assets/images/vnpay.png';
 import voucher from '~/assets/images/voucher.png';
+import bocongthuong from '~/assets/images/logoBoCongThuong.png';
 
 const images = {
     logo,
@@ -16,6 +17,7 @@ const images = {
     codIcon,
     vnpayIcon,
     voucher,
+    bocongthuong,
 };
 
 export default images;

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Banners() {
     return (
         <>
@@ -9,8 +11,8 @@ function Banners() {
                             {/* <!-- Block1 --> */}
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner1.jpg" alt="IMG-BANNER" />
-                                <a
-                                    href="product.html"
+                                <Link
+                                    to={'/shop'}
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                     style={{ textDecoration: 'none' }}
                                 >
@@ -23,7 +25,7 @@ function Banners() {
                                     <div className="block1-txt-child2 p-b-4 trans-05">
                                         <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -32,8 +34,8 @@ function Banners() {
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner2.jpg" alt="IMG-BANNER" />
 
-                                <a
-                                    href="product.html"
+                                <Link
+                                    to={'/shop'}
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                     style={{ textDecoration: 'none' }}
                                 >
@@ -46,7 +48,7 @@ function Banners() {
                                     <div className="block1-txt-child2 p-b-4 trans-05">
                                         <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -55,8 +57,8 @@ function Banners() {
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner3.jpg" alt="IMG-BANNER" />
 
-                                <a
-                                    href="product.html"
+                                <Link
+                                    to={'/shop'}
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                     style={{ textDecoration: 'none' }}
                                 >
@@ -69,7 +71,7 @@ function Banners() {
                                     <div className="block1-txt-child2 p-b-4 trans-05">
                                         <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -78,8 +80,8 @@ function Banners() {
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner4.jpg" alt="IMG-BANNER" />
 
-                                <a
-                                    href="product.html"
+                                <Link
+                                    to={'/shop'}
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                     style={{ textDecoration: 'none' }}
                                 >
@@ -92,7 +94,7 @@ function Banners() {
                                     <div className="block1-txt-child2 p-b-4 trans-05">
                                         <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -101,8 +103,8 @@ function Banners() {
                             <div className="block1 wrap-pic-w">
                                 <img src="assets/images/banner5.jpg" alt="IMG-BANNER" />
 
-                                <a
-                                    href="product.html"
+                                <Link
+                                    to={'/shop'}
                                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                                     style={{ textDecoration: 'none' }}
                                 >
@@ -115,7 +117,7 @@ function Banners() {
                                     <div className="block1-txt-child2 p-b-4 trans-05">
                                         <div className="block1-link stext-101 cl0 trans-09">Mua Ngay</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

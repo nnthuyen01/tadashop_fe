@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useLayoutEffect } from 'react';
+import React, { useState, Fragment, useLayoutEffect, useEffect } from 'react';
 
 import ProductItem from '~/user/components/ProductItem';
 import ModalProduct from '~/user/components/ModalProduct';
@@ -7,19 +7,18 @@ import SliderHome from '~/user/components/SliderHome';
 import HeaderHome from './HeaderHome';
 
 function Home() {
+    const [key, setKey] = useState(0);
     ////////////////////////////////////////////////////////////////
-    useLayoutEffect(() => {
-        // Scroll to the top of the page when the component is mounted
-        window.scrollTo(0, 0);
-    }, []);
-
-    // Product
-
     // Show Modal1 Product
     const [showModal, setShowModal] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [selectedProductId, setSelectedProductId] = useState(null);
 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [key]);
+
+    // Product
     const handleShowModal = (productId) => {
         setScrollPosition(window.scrollY);
         setSelectedProductId(productId);
@@ -37,7 +36,11 @@ function Home() {
         // Update the cart item count or perform any other actions needed
         setCartItemCount((prevCount) => prevCount + 1);
     };
-
+    useEffect(() => {
+        // This effect runs when the component mounts or when key changes
+        // You may want to add additional conditions based on your app's logic
+        setKey((prevKey) => prevKey + 1);
+    }, []);
     return (
         <Fragment>
             <HeaderHome key={cartItemCount} />

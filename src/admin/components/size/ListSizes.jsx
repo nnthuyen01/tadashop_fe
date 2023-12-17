@@ -3,10 +3,10 @@ import ContentHeader from '../common/ContentHeader';
 import SizeList from './SizeList';
 import withRouter from '../../helpers/withRouter';
 import SizeForm from './SizeForm';
-import { Button, Col, Modal, Row } from 'antd';
+import { Button, Col, Modal, Row, Pagination, Form, Input } from 'antd';
 import { connect } from 'react-redux';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { insertSize, getSizes, deleteSize, updateSize } from '../../redux/actions/sizeAction';
+import { insertSize, getSizes, deleteSize, updateSize, getSizesPageable } from '../../redux/actions/sizeAction';
 
 class ListSizes extends Component {
     constructor(props) {
@@ -14,15 +14,33 @@ class ListSizes extends Component {
 
         this.state = {
             open: false,
-            size: { id: '', quantity: '', size: '', productId: '' },
+            size: { id: '', quantity: '', size: '', productId: '', productName: '' },
         };
     }
     componentDidMount = () => {
-        this.props.getSizes();
+        // this.props.getSizes();
+
+        // console.log('this mount');
+        const { pagination } = this.props;
+        const params = {
+            query: pagination.query,
+            size: pagination.size,
+        };
+        this.props.getSizesPageable(params);
 
         console.log('this mount');
     };
-
+    onChange = (pageNumber, pageSize) => {
+        const { pagination } = this.props;
+        const params = {
+            query: pagination.query,
+            page: pageNumber - 1,
+            size: pageSize,
+            sort: pagination.sort,
+        };
+        this.props.getSizesPageable(params);
+        // console.log(params.query);
+    };
     onCreate = (values) => {
         console.log(values);
 
@@ -32,6 +50,18 @@ class ListSizes extends Component {
             this.props.insertSize(values);
         }
         this.setState({ ...this.state, size: {}, open: false });
+    };
+    handleSearch = (value) => {
+        console.log(value);
+
+        const { pagination } = this.props;
+        const params = {
+            query: value.query,
+            size: pagination.size,
+            sort: pagination.sort,
+        };
+
+        this.props.getSizesPageable(params);
     };
 
     deleteSize = () => {
@@ -61,13 +91,13 @@ class ListSizes extends Component {
         const { navigate } = this.props.router;
         const { open } = this.state;
 
-        const { sizes } = this.props;
+        const { sizes, pagination } = this.props;
         return (
             <>
                 <ContentHeader navigate={navigate} title="List Sizes" className="site-page-header"></ContentHeader>
 
                 <Row style={{ marginBottom: 8 }}>
-                    {/* <Col md={18}>
+                    <Col md={18}>
                         <Form layout="inline" name="search" onFinish={this.handleSearch}>
                             <Form.Item name="query" initialValue={pagination.query}>
                                 <Input></Input>
@@ -76,7 +106,7 @@ class ListSizes extends Component {
                                 Search
                             </Button>
                         </Form>
-                    </Col> */}
+                    </Col>
                     <Col md={6}>
                         <Button
                             type="primary"
@@ -91,7 +121,7 @@ class ListSizes extends Component {
 
                 <SizeList dataSource={sizes} onDeleteConfirm={this.onDeleteConfirm} onEdit={this.onEdit} />
 
-                {/* <Row style={{ marginTop: 8 }}>
+                <Row style={{ marginTop: 8 }}>
                     <Col md={24} style={{ textAlign: 'right' }}>
                         <Pagination
                             defaultCurrent={pagination.page}
@@ -102,7 +132,7 @@ class ListSizes extends Component {
                             showSizeChanger="true"
                         ></Pagination>
                     </Col>
-                </Row> */}
+                </Row>
 
                 <SizeForm
                     size={this.state.size}
@@ -126,6 +156,7 @@ const mapDispatchToProps = {
     getSizes,
     deleteSize,
     updateSize,
+    getSizesPageable,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ListSizes));

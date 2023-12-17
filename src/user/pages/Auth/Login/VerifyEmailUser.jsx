@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import './VerifyEmailUser.scss'; // Import file CSS tùy chỉnh
@@ -110,6 +110,16 @@ const VerifyEmailUser = () => {
                             Xác thực
                         </button>
                     </form>
+                    <div
+                        style={{
+                            marginTop: '10px',
+                            display: 'flex',
+                            justifyContent: 'center', // Canh giữa theo chiều ngang
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Link to="/login">Quay lại</Link>
+                    </div>
                 </div>
             </div>
         </div>

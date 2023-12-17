@@ -2,6 +2,7 @@ import React from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 
 function SliderHome() {
     // silder
@@ -109,12 +110,12 @@ function SliderHome() {
                                         </div>
 
                                         <div className="layer-slick1 animated " data-appear="zoomIn" data-delay="1600">
-                                            <a
-                                                href="product.html"
+                                            <Link
+                                                to={'/shop'}
                                                 className="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04"
                                             >
                                                 Mua Ngay
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

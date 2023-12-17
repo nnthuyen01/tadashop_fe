@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
 import { NavLink, useNavigate } from 'react-router-dom';
 import 'react-tippy/dist/tippy.css'; // Import CSS của Tippy
-
+import { format } from 'date-fns';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
@@ -20,6 +20,7 @@ function Voucher() {
 
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
+        localStorage.removeItem('role');
         navigate('/');
     };
 
@@ -114,31 +115,37 @@ function Voucher() {
                                 {loading ? (
                                     <div style={{ textAlign: 'center' }}>Đang tải dữ liệu...</div>
                                 ) : (
-                                    vouchers.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            className="voucher"
-                                            style={{
-                                                marginBottom: '20px',
-                                                backgroundColor: item.status !== 1 ? '#a0b8b5' : '',
-                                            }}
-                                        >
-                                            <div className="voucher-name mtext-101">
-                                                Mã giảm giá: {item.priceOffPercent}
-                                            </div>
-                                            {item.status === 1 ? (
-                                                <div className="voucher-status stext-101">Có thể sử dụng</div>
-                                            ) : (
-                                                <div className="voucher-status stext-101" style={{ color: '#c70101' }}>
-                                                    Hết hạn
+                                    vouchers
+                                        .filter((item) => item.status === 1)
+                                        .map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className="voucher"
+                                                style={{
+                                                    marginBottom: '20px',
+                                                    backgroundColor: item.status !== 1 ? '#a0b8b5' : '',
+                                                }}
+                                            >
+                                                <div className="voucher-name mtext-101">
+                                                    Mã giảm giá: {item.priceOffPercent} %
                                                 </div>
-                                            )}
-                                            <div className="voucher-code">{item.code}</div>
-                                            <p className="voucher-expires stext-105">
-                                                Thời gian hết hạn: {item.expirationTime}
-                                            </p>
-                                        </div>
-                                    ))
+                                                {item.status === 1 ? (
+                                                    <div className="voucher-status stext-101">Có thể sử dụng</div>
+                                                ) : (
+                                                    <div
+                                                        className="voucher-status stext-101"
+                                                        style={{ color: '#c70101' }}
+                                                    >
+                                                        Hết hạn
+                                                    </div>
+                                                )}
+                                                <div className="voucher-code">{item.code}</div>
+                                                <p className="voucher-expires stext-105">
+                                                    Thời gian hết hạn:{' '}
+                                                    {format(new Date(item.expirationTime), 'HH:mm:ss dd/MM/yyyy')}
+                                                </p>
+                                            </div>
+                                        ))
                                 )}
                             </div>
                         </div>

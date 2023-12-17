@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import './ForgotPassword.scss'; // Import file CSS tùy chỉnh
@@ -67,6 +67,16 @@ function ForgotPassword() {
                             Tiếp tục
                         </button>
                     </form>
+                    <div
+                        style={{
+                            marginTop: '10px',
+                            display: 'flex',
+                            justifyContent: 'center', // Canh giữa theo chiều ngang
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Link to="/login">Quay lại</Link>
+                    </div>
                 </div>
             </div>
         </div>

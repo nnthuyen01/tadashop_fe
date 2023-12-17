@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
 import { Link, useNavigate } from 'react-router-dom';
 import './checkout.scss';
@@ -6,6 +6,7 @@ import images from '~/assets/images';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import swal from 'sweetalert';
+import { useLayoutEffect } from 'react';
 
 function Checkout() {
     const [deliveryOption, setDeliveryOption] = useState('direct');
@@ -60,11 +61,13 @@ function Checkout() {
     const [discountPayment, setDiscountPayment] = useState(0);
     const [totalPayment, setTotalPayment] = useState(0);
 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useEffect(() => {
         axios
             .get(API_URL + 'cart')
             .then((response) => {
-                console.log(response);
                 if (response.status === 200) {
                     setCartProducts(response.data);
                     const total = response.data.reduce((total, item) => {
@@ -108,12 +111,77 @@ function Checkout() {
         if (field === 'differentReceiverName') setIsCheckName(false);
         if (field === 'deliveryAddress') setIsCheckAddress(false);
     };
+
+    const [vouchers, setVouchers] = useState([]); // Dữ liệu của các voucher, có thể fetch từ API hoặc định nghĩa trước
+
+    // useEffect để fetch danh sách voucher khi component được mount
+    useEffect(() => {
+        axios
+            .get(API_URL + 'vouchers/user')
+            .then((response) => {
+                if (response.status === 200) {
+                    setVouchers(response.data);
+                    setLoading(false);
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+        axios
+            .get(API_URL + 'user')
+            .then((response) => {
+                if (response.status === 200) {
+                    setCheckout((prevCheckout) => ({
+                        ...prevCheckout,
+                        differentReceiverName: response.data.lastname + ' ' + response.data.firstname,
+                        differentReceiverPhone: response.data.phone,
+                    }));
+                }
+            })
+            .catch((error) => {
+                console.error('Lỗi khi fetch dữ liệu từ API:', error);
+            });
+    }, []);
+    const [showVoucherList, setShowVoucherList] = useState(false);
+    const voucherListRef = useRef(null);
+    // Hàm xử lý khi bấm vào input
+    const handleInputClick = () => {
+        // Hiển thị danh sách voucher khi bấm vào input
+        setShowVoucherList(true);
+    };
+    const handleClickOutside = (e) => {
+        if (voucherListRef.current && !voucherListRef.current.contains(e.target)) {
+            setShowVoucherList(false);
+        }
+    };
+    // Attach the click outside listener when the component mounts
+    React.useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        // Clean up the event listener when the component unmounts
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    // Hàm xử lý khi chọn một voucher từ danh sách
+    const handleVoucherSelect = (selectedVoucher) => {
+        // Xử lý logic khi chọn voucher, có thể gán giá trị vào state voucherValue
+        setVoucherValue(selectedVoucher);
+
+        // Ẩn danh sách voucher sau khi chọn
+        setShowVoucherList(false);
+
+        setApplyVoucher2(false);
+        setApplyVoucher(false);
+        setDiscountPayment(0);
+        setTotalPayment(0);
+    };
     const [voucherValue, setVoucherValue] = useState('');
     const [applyVoucher, setApplyVoucher] = useState(false);
     const [applyVoucher2, setApplyVoucher2] = useState(false);
 
     const handleVoucherChange = (event) => {
         setVoucherValue(event.target.value);
+        setShowVoucherList(false);
         setApplyVoucher2(false);
         setApplyVoucher(false);
         setDiscountPayment(0);
@@ -124,8 +192,6 @@ function Checkout() {
             .get(API_URL + 'voucher/user/code', { params: { discountCode: voucherValue } })
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response);
-
                     setCheckout((prevCheckout) => ({
                         ...prevCheckout,
                         discountCode: voucherValue,
@@ -152,13 +218,8 @@ function Checkout() {
                     // Xử lý lỗi không phải từ server response
                 }
             });
-        // setCheckout((prevCheckout) => ({
-        //     ...prevCheckout,
-        //     discountCode: voucherValue,
-        // }));
-        // setApplyVoucher(true);
     };
-
+    console.log(voucherValue);
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const handleCheckout = (info) => {
         if (info.differentReceiverName === '' && info.differentReceiverPhone === '' && info.deliveryAddress === '') {
@@ -544,7 +605,6 @@ function Checkout() {
                                                 </div>
                                                 <div
                                                     className="flex-c-m stext-101 cl0 size-119 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
-                                                    // onClick={() => console.log(checkout)}
                                                     onClick={() => handleCheckout(checkout)}
                                                 >
                                                     Thanh toán
@@ -608,7 +668,10 @@ function Checkout() {
                                         </tbody>
                                     )}
                                 </table>
-                                <div className="flex-w flex-m m-tb-5" style={{ justifyContent: 'space-between' }}>
+                                <div
+                                    className="flex-w flex-m m-tb-5"
+                                    style={{ position: 'relative', justifyContent: 'space-between' }}
+                                >
                                     <input
                                         className="stext-104 cl2 plh4 size-117 bor20 p-lr-20 m-tb-5"
                                         type="text"
@@ -616,9 +679,30 @@ function Checkout() {
                                         placeholder="Nhập mã Voucher"
                                         value={voucherValue}
                                         onChange={handleVoucherChange}
+                                        onClick={handleInputClick}
+                                        autoComplete="off"
                                     />
+                                    {showVoucherList && (
+                                        <div ref={voucherListRef} className="voucher-list">
+                                            {/* Hiển thị danh sách voucher */}
+                                            {vouchers
+                                                .filter((item) => item.status === 1)
+                                                .map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="voucher-item"
+                                                        onClick={() => handleVoucherSelect(item.code)}
+                                                    >
+                                                        {item.code}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    )}
 
                                     <div
+                                        style={{
+                                            height: '38px',
+                                        }}
                                         className="flex-c-m stext-101 cl2 size-118 bg8 hov-btn3 bor20 p-lr-15 trans-04 pointer m-tb-5"
                                         onClick={handleApplyVoucher}
                                     >

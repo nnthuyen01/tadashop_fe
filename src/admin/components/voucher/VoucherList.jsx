@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Space, Table, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import Column from 'antd/lib/table/Column';
+import { format } from 'date-fns';
 
 class VoucherList extends Component {
     render() {
@@ -16,11 +17,14 @@ class VoucherList extends Component {
                     key="priceOffPercent"
                     render={(_, record) => <>{record.priceOffPercent} %</>}
                 ></Column>
+                <Column title="Username" key="username" dataIndex="username"></Column>
+                <Column title="ID User" key="userId" dataIndex="userId"></Column>
                 <Column
                     title="Expiration time"
                     key="expirationTime"
-                    render={(_, record) => <>{record.expirationTime}</>}
+                    render={(_, record) => <> {format(new Date(record.expirationTime), 'HH:mm:ss dd/MM/yyyy')}</>}
                 ></Column>
+
                 <Column
                     title="Status"
                     key="status"
@@ -30,7 +34,7 @@ class VoucherList extends Component {
                     render={(_, record) => {
                         let color = 'volcano';
                         let name = 'In-active';
-                        console.log(record);
+
                         if (record.status === 1) {
                             color = 'green';
                             name = 'Active';

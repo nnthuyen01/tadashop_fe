@@ -261,3 +261,52 @@ export const deleteVoucher = (id) => async (dispatch) => {
         payload: false,
     });
 };
+
+export const getVouchersPageable = (params) => async (dispatch) => {
+    const service = new VoucherService();
+
+    try {
+        console.log('Get Vouchers Pageable');
+        dispatch({
+            type: COMMON_LOADING_SET,
+            payload: true,
+        });
+
+        const response = await service.getVouchersPageable(params);
+
+        console.log(response);
+        if (response.status === 200) {
+            dispatch({
+                type: VOUCHERS_SET,
+                payload: response.data.content,
+            });
+
+            const { size, totalPages, totalElements, pageable } = response.data;
+            const pagination = {
+                size: size,
+                page: pageable.pageNumber,
+                query: params.query,
+                totalPages: totalPages,
+                totalElements: totalElements,
+            };
+            dispatch({
+                type: VOUCHER_SET_PAGEABLE,
+                payload: pagination,
+            });
+        } else {
+            dispatch({
+                type: COMMON_ERROR_SET,
+                payload: response.message,
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: COMMON_ERROR_SET,
+            payload: error.response.data ? error.response.data.message : error.message,
+        });
+    }
+    dispatch({
+        type: COMMON_LOADING_SET,
+        payload: false,
+    });
+};

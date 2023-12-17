@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import images from '~/assets/images';
+import { format } from 'date-fns';
 
 function OrderDetail() {
     const { id } = useParams();
@@ -16,7 +17,7 @@ function OrderDetail() {
         axios
             .get(API_URL + 'orderDetail/' + id)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.status === 200) {
                     setOrderDetail(response.data);
 
@@ -67,7 +68,7 @@ function OrderDetail() {
                                                     className="mtext-109"
                                                     style={{ color: '#fff', textAlign: 'center' }}
                                                 >
-                                                    Order Detail
+                                                    Chi tiết đơn hàng
                                                 </h5>
                                             </div>
                                             <div className="card-body p-4">
@@ -96,19 +97,19 @@ function OrderDetail() {
                                                 </div>
                                                 <div className="d-flex justify-content-between pt-2 mb-4">
                                                     <p className="mtext-102 mb-0">
-                                                        Receiver:{' '}
+                                                        Người nhận:{' '}
                                                         <span style={{ color: '#6c757d' }}>
                                                             {orderDetail.order?.receiverName}
                                                         </span>
                                                     </p>
                                                     <p className="mtext-102 mb-0">
-                                                        Phone:{' '}
+                                                        Số điện thoại:{' '}
                                                         <span style={{ color: '#6c757d' }}>
                                                             {orderDetail.order?.receiverPhone}
                                                         </span>
                                                     </p>
                                                     <p className="mtext-102 mb-0">
-                                                        Account:{' '}
+                                                        Tài khoản:{' '}
                                                         <span style={{ color: '#6c757d' }}>
                                                             {orderDetail.order?.orderUser?.username}
                                                         </span>
@@ -116,7 +117,7 @@ function OrderDetail() {
                                                 </div>
                                                 <div className="d-flex justify-content-between pt-2 mb-4">
                                                     <p className="mtext-102 mb-0">
-                                                        Address:{' '}
+                                                        Địa chỉ:{' '}
                                                         <span style={{ color: '#6c757d' }}>
                                                             {orderDetail.order?.deliveryAddress}
                                                         </span>
@@ -150,7 +151,7 @@ function OrderDetail() {
 
                                                                 <div className="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                     <p className="stext-115 mb-0  ">
-                                                                        Quantity: {item.quantity}
+                                                                        Số lượng: {item.quantity}
                                                                     </p>
                                                                 </div>
                                                                 <div className="col-md-2 text-center d-flex justify-content-center align-items-center">
@@ -167,12 +168,12 @@ function OrderDetail() {
                                                     ))}
                                                 </div>
                                                 <div className="d-flex justify-content-between pt-2">
-                                                    <p className="mtext-102 mb-0">Invoice information</p>
+                                                    <p className="mtext-102 mb-0">Thông tin hóa đơn</p>
                                                     <p className="stext-115 mb-0">
                                                         <span className="mtext-102 me-4">
                                                             {orderDetail.order?.totalPrice !== undefined && (
                                                                 <>
-                                                                    Total amount:{' '}
+                                                                    Tổng giá sản phẩm:{' '}
                                                                     {formatNumberWithCommas(
                                                                         orderDetail.order.totalPrice,
                                                                     )}
@@ -184,15 +185,12 @@ function OrderDetail() {
                                                 </div>
 
                                                 <div className="d-flex justify-content-between pt-2">
-                                                    <p className="stext-115 mb-0">
-                                                        ID:
-                                                        {orderDetail.order?.id}
-                                                    </p>
+                                                    <p className="stext-115 mb-0">ID: {orderDetail.order?.id}</p>
                                                     <p className="stext-115 mb-0">
                                                         <span className="mtext-102 me-4">
                                                             {orderDetail.order?.totalPrice !== undefined && (
                                                                 <>
-                                                                    Discount:{' '}
+                                                                    Giảm giá:{' '}
                                                                     {formatNumberWithCommas(orderDetail.order.priceOff)}
                                                                     đ
                                                                 </>
@@ -203,8 +201,11 @@ function OrderDetail() {
 
                                                 <div className="d-flex justify-content-between">
                                                     <p className="stext-115 mb-0">
-                                                        Date:
-                                                        {orderDetail.order?.createTime}
+                                                        Ngày tạo:{' '}
+                                                        {format(
+                                                            new Date(orderDetail.order?.createTime),
+                                                            'dd/MM/yyyy HH:mm:ss',
+                                                        )}
                                                     </p>
                                                 </div>
                                             </div>
@@ -217,10 +218,10 @@ function OrderDetail() {
                                                 }}
                                             >
                                                 <h5 className="d-flex align-items-center justify-content-end text-white  mb-0">
-                                                    Total payment:
+                                                    Tổng tiền:
                                                     <span className="text-uppercase">
                                                         {orderDetail.order?.totalPrice !== undefined && (
-                                                            <>{formatNumberWithCommas(orderDetail.order.totalPrice)}</>
+                                                            <> {formatNumberWithCommas(orderDetail.order.totalPrice)}</>
                                                         )}
                                                     </span>
                                                     đ<span className="h2 mb-0 ms-2"></span>

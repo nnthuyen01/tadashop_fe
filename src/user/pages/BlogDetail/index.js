@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import HeaderPages from '~/user/components/HeaderPages';
 
 function BlogDetail() {
@@ -342,194 +343,85 @@ function BlogDetail() {
                                 </div>
 
                                 <div className="p-t-55">
-                                    <h4 className="mtext-112 cl2 p-b-33">Categories</h4>
+                                    <h4 className="mtext-112 cl2 p-b-33">Giải đấu</h4>
 
                                     <ul>
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Fashion
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Ngoại hạng anh
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Beauty
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Laliga
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Street Style
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Bundesliga
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Life Style
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Seria A
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                DIY & Crafts
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                League 1
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="p-t-65">
-                                    <h4 className="mtext-112 cl2 p-b-33">Featured Products</h4>
+                                    <h4 className="mtext-112 cl2 p-b-33">Sản phẩm đặc trưng</h4>
 
                                     <ul>
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/product-min-01.jpg" alt="PRODUCT" />
-                                            </a>
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    White Shirt With Pleat Detail Back
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$19.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
                                         </li>
 
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/product-min-02.jpg" alt="PRODUCT" />
-                                            </a>
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    Converse All Star Hi Black Canvas
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$39.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
                                         </li>
 
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-                                                <img src="assets/images/product-min-03.jpg" alt="PRODUCT" />
-                                            </a>
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                                <img src="assets/images/min-01.jpg" alt="PRODUCT" />
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    Nixon Porter Leather Watch In Tan
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$17.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div className="p-t-55">
-                                    <h4 className="mtext-112 cl2 p-b-20">Archive</h4>
-
-                                    <ul>
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>July 2018</span>
-
-                                                <span>(9)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>June 2018</span>
-
-                                                <span>(39)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>May 2018</span>
-
-                                                <span>(29)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>April 2018</span>
-
-                                                <span>(35)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>March 2018</span>
-
-                                                <span>(22)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>February 2018</span>
-
-                                                <span>(32)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>January 2018</span>
-
-                                                <span>(21)</span>
-                                            </a>
-                                        </li>
-
-                                        <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
-                                                <span>December 2017</span>
-
-                                                <span>(26)</span>
-                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -538,40 +430,25 @@ function BlogDetail() {
                                     <h4 className="mtext-112 cl2 p-b-27">Tags</h4>
 
                                     <div className="flex-w m-r--5">
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Fashion
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thể thao
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Lifestyle
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thời trang
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Denim
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Phong cách
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Streetstyle
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Vô địch
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Crafts
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thoải mái
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

@@ -19,6 +19,7 @@ const Login = () => {
         }
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
+        localStorage.removeItem('role');
         navigate('/login');
     };
     const [loading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ const Login = () => {
             if (response.status === 200) {
                 localStorage.setItem('auth_token', response.data.access_token);
                 localStorage.setItem('auth_name', response.data.username);
+                localStorage.setItem('role', response.data.role);
                 if (response.data.role === 'ADMIN') {
                     navigate('/dashboard');
                 } else {
@@ -601,6 +603,9 @@ const Login = () => {
                         <button className="btn btnSign-in" onClick={handleToggleForm}>
                             Đăng Ký <i className="bi bi-arrow-right"></i>
                         </button>
+                        <Link to="/" className="backhome">
+                            Quay lại
+                        </Link>
                     </div>
 
                     <div className="page page_signUp">
@@ -610,6 +615,9 @@ const Login = () => {
                         <button className="btn btnSign-up" onClick={handleToggleForm}>
                             <i className="bi bi-arrow-left"></i> Đăng Nhập
                         </button>
+                        <Link to="/" className="backhome">
+                            Quay lại
+                        </Link>
                     </div>
                 </div>
             </div>

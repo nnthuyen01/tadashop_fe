@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import './VerifyForgotPassword.scss'; // Import file CSS tùy chỉnh
@@ -274,6 +274,16 @@ function VerifyForgotPassword() {
                             Xác nhận
                         </button>
                     </form>
+                    <div
+                        style={{
+                            marginTop: '10px',
+                            display: 'flex',
+                            justifyContent: 'center', // Canh giữa theo chiều ngang
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Link to="/forgotPassword">Quay lại</Link>
+                    </div>
                 </div>
             </div>
         </div>

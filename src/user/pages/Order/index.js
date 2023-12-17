@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
 
 import axios from 'axios';
@@ -8,26 +8,44 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Table, Tag } from 'antd';
 
 import Column from 'antd/lib/table/Column';
+import { format } from 'date-fns';
 
 function Order() {
     const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [bool, setBool] = useState(true);
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useEffect(() => {
-        axios
-            .get(API_URL + 'orderUser/orders')
-            .then((response) => {
-                console.log(response);
-                if (response.status === 200) {
-                    setOrders(response.data);
+        const isAuthenticated = () => {
+            const token = localStorage.getItem('auth_token');
+            return !!token;
+        };
+        console.log(isAuthenticated());
+        // Redirect to login if not authenticated
+        if (!isAuthenticated()) {
+            navigate('/login', { replace: true });
+        } else {
+            axios
+                .get(API_URL + 'orderUser/orders')
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        setOrders(response.data);
 
-                    setLoading(false);
-                }
-            })
-            .catch((error) => {
-                console.error('Lỗi khi fetch dữ liệu từ API:', error);
-            });
+                        setLoading(false);
+                    }
+                })
+                .catch((error) => {
+                    if (error.response.data.message === 'Order Not Found') {
+                        setLoading(false);
+                        setBool(false);
+                    }
+                    console.error('Lỗi khi fetch dữ liệu từ API:', error);
+                });
+        }
     }, []);
     function formatNumberWithCommas(number) {
         if (number !== undefined && number !== null) {
@@ -95,49 +113,72 @@ function Order() {
                         {loading ? (
                             <div style={{ textAlign: 'center' }}>Đang tải dữ liệu...</div>
                         ) : (
-                            <Table
-                                dataSource={orders}
-                                size="small"
-                                rowKey="id"
-                                pagination={false}
-                                style={{ margin: 'auto', maxWidth: '96%' }}
-                                onRow={rowProps}
-                            >
-                                <Column title="ID" key="id" dataIndex="id" width={40} align="center"></Column>
+                            <>
+                                {!bool && orders.length === 0 ? (
+                                    <div style={{ textAlign: 'center' }}>Bạn không có đơn hàng nào.</div>
+                                ) : (
+                                    <Table
+                                        dataSource={orders}
+                                        size="small"
+                                        rowKey="id"
+                                        pagination={false}
+                                        style={{ margin: 'auto', maxWidth: '96%' }}
+                                        onRow={rowProps}
+                                    >
+                                        <Column title="ID" key="id" dataIndex="id" width={40} align="center"></Column>
 
-                                <Column
-                                    title="Username"
-                                    key="username"
-                                    render={(_, record) => <span>{record.orderUser?.username}</span>}
-                                ></Column>
-                                <Column title="Người nhận" key="receiverName" dataIndex="receiverName"></Column>
-                                <Column title="Số điện thoại" key="receiverPhone" dataIndex="receiverPhone"></Column>
-                                <Column title="Địa chỉ" key="deliveryAddress" dataIndex="deliveryAddress"></Column>
+                                        <Column
+                                            title="Username"
+                                            key="username"
+                                            render={(_, record) => <span>{record.orderUser?.username}</span>}
+                                        ></Column>
+                                        <Column title="Người nhận" key="receiverName" dataIndex="receiverName"></Column>
+                                        <Column
+                                            title="Số điện thoại"
+                                            key="receiverPhone"
+                                            dataIndex="receiverPhone"
+                                        ></Column>
+                                        <Column
+                                            title="Địa chỉ"
+                                            key="deliveryAddress"
+                                            dataIndex="deliveryAddress"
+                                        ></Column>
 
-                                <Column title="Create Time" key="createTime" dataIndex="createTime"></Column>
-                                <Column
-                                    title="Tổng tiền"
-                                    key="totalPrice"
-                                    render={(_, record) => <span>{formatNumberWithCommas(record.totalPrice)}đ</span>}
-                                ></Column>
+                                        <Column
+                                            title="Thời gian tạo"
+                                            key="createTime"
+                                            dataIndex="createTime"
+                                            render={(text, record) => (
+                                                <span>{format(new Date(text), 'dd/MM/yyyy HH:mm:ss')}</span>
+                                            )}
+                                        ></Column>
+                                        <Column
+                                            title="Tổng tiền"
+                                            key="totalPrice"
+                                            render={(_, record) => (
+                                                <span>{formatNumberWithCommas(record.totalPrice)}đ</span>
+                                            )}
+                                        ></Column>
 
-                                <Column
-                                    title="State"
-                                    key="state"
-                                    render={(_, record) => (
-                                        <Tag
-                                            style={{
-                                                fontWeight: '700',
-                                                color: record.state === 'Paid' ? 'green' : 'navy',
-                                                backgroundColor: record.state === 'Paid' ? 'yellow' : '',
-                                            }}
-                                        >
-                                            {' '}
-                                            {record.state}
-                                        </Tag>
-                                    )}
-                                ></Column>
-                            </Table>
+                                        <Column
+                                            title="Trạng thái"
+                                            key="state"
+                                            render={(_, record) => (
+                                                <Tag
+                                                    style={{
+                                                        fontWeight: '700',
+                                                        color: record.state === 'Paid' ? 'green' : 'navy',
+                                                        backgroundColor: record.state === 'Paid' ? 'yellow' : '',
+                                                    }}
+                                                >
+                                                    {' '}
+                                                    {record.state}
+                                                </Tag>
+                                            )}
+                                        ></Column>
+                                    </Table>
+                                )}
+                            </>
                         )}
                     </div>
                 </div>

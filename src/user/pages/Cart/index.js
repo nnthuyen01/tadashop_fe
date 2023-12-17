@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import HeaderPages from '~/user/components/HeaderPages';
 import $ from 'jquery';
 import 'select2';
@@ -13,30 +13,42 @@ function Cart() {
     const [loading, setLoading] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
     const [headerKey, setHeaderKey] = useState(0); // Biến trạng thái để cập nhật HeaderPages
+    const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
+
     useEffect(() => {
         // Scroll to the top of the page when the component is mounted
         window.scrollTo(0, 0);
     }, []);
+
     useEffect(() => {
-        axios
-            .get(API_URL + 'cart')
-            .then((response) => {
-                // console.log(response);
-                if (response.status === 200) {
-                    setCartProducts(response.data);
-                    const total = response.data.reduce((total, item) => {
-                        return total + item.quantity * item.item.price;
-                    }, 0);
-                    setTotalPrice(total);
-                    setLoading(false);
-                }
-            })
-            .catch((error) => {
-                console.error('Lỗi khi fetch dữ liệu từ API:', error);
-            });
-    }, [cartProducts]);
+        const isAuthenticated = () => {
+            const token = localStorage.getItem('auth_token');
+            return !!token;
+        };
+        console.log(isAuthenticated());
+        // Redirect to login if not authenticated
+        if (!isAuthenticated()) {
+            navigate('/login', { replace: true });
+        } else {
+            axios
+                .get(API_URL + 'cart')
+                .then((response) => {
+                    // console.log(response);
+                    if (response.status === 200) {
+                        setCartProducts(response.data);
+                        const total = response.data.reduce((total, item) => {
+                            return total + item.quantity * item.item.price;
+                        }, 0);
+                        setTotalPrice(total);
+                        setLoading(false);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Lỗi khi fetch dữ liệu từ API:', error);
+                });
+        }
+    }, [fetchDataTrigger]);
     // console.log(cartProducts);
-    // console.log(loading);
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
@@ -65,6 +77,7 @@ function Cart() {
                                             // Cập nhật lại số lượng sản phẩm
 
                                             setHeaderKey(headerKey + 1);
+                                            setFetchDataTrigger((prevTrigger) => prevTrigger + 1);
                                             return { ...updatedProduct, quantity: newQuantity };
                                         } else {
                                             return updatedProduct;
@@ -111,7 +124,7 @@ function Cart() {
                                         if (updatedIndex === index) {
                                             // Cập nhật lại số lượng của sản phẩm
                                             setHeaderKey(headerKey + 1);
-
+                                            setFetchDataTrigger((prevTrigger) => prevTrigger + 1);
                                             return { ...updatedProduct, quantity: newQuantity };
                                         } else {
                                             return updatedProduct;
@@ -133,7 +146,7 @@ function Cart() {
                                         if (updatedIndex === index) {
                                             // Cập nhật lại số lượng của sản phẩm
                                             setHeaderKey(headerKey + 1);
-
+                                            setFetchDataTrigger((prevTrigger) => prevTrigger + 1);
                                             return { ...updatedProduct, quantity: newQuantity - 1 };
                                         } else {
                                             return updatedProduct;
@@ -163,6 +176,7 @@ function Cart() {
                     const updatedCartProducts = cartProducts.filter((item) => item.item.size.id !== idItem);
                     setCartProducts(updatedCartProducts);
                     setHeaderKey(headerKey + 1);
+                    setFetchDataTrigger((prevTrigger) => prevTrigger + 1);
                 }
             })
             .catch((error) => {

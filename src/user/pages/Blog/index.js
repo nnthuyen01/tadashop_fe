@@ -89,14 +89,16 @@ function Blog() {
                                     <div className="p-t-32">
                                         <h4 className="p-b-15">
                                             <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                The Great Big List of Men’s Gifts for the Holidays
+                                                Top 10 Cầu Thủ Mặc Áo Bóng Đá Đẹp Nhất Năm
                                             </Link>
                                         </h4>
 
                                         <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
+                                            Bạn có bao giờ tự hỏi ai là những cầu thủ mặc áo bóng đá đẹp nhất năm? Áo
+                                            bóng đá không chỉ là một bộ trang phục thể thao, mà còn là biểu tượng của sự
+                                            đam mê và niềm tự hào của mỗi cầu thủ. Trong bài viết này, chúng ta sẽ khám
+                                            phá về những cầu thủ có phong cách mặc áo bóng đá độc đáo và ấn tượng nhất.
+                                            Hãy cùng tìm hiểu nhé!
                                         </p>
 
                                         <div className="flex-w flex-sb-m p-t-18">
@@ -137,14 +139,16 @@ function Blog() {
                                     <div className="p-t-32">
                                         <h4 className="p-b-15">
                                             <Link to="/blogDetail" className="ltext-108 cl2 hov-cl1 trans-04">
-                                                5 Winter-to-Spring Fashion Trends to Try Now
+                                                Top 10 Cầu Thủ Mặc Áo Bóng Đá Đẹp Nhất Năm
                                             </Link>
                                         </h4>
 
                                         <p className="stext-117 cl6">
-                                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                            inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu
-                                            varius
+                                            Bạn có bao giờ tự hỏi ai là những cầu thủ mặc áo bóng đá đẹp nhất năm? Áo
+                                            bóng đá không chỉ là một bộ trang phục thể thao, mà còn là biểu tượng của sự
+                                            đam mê và niềm tự hào của mỗi cầu thủ. Trong bài viết này, chúng ta sẽ khám
+                                            phá về những cầu thủ có phong cách mặc áo bóng đá độc đáo và ấn tượng nhất.
+                                            Hãy cùng tìm hiểu nhé!
                                         </p>
 
                                         <div className="flex-w flex-sb-m p-t-18">
@@ -155,7 +159,7 @@ function Blog() {
                                                 </span>
 
                                                 <span>
-                                                    Fashion, Couple
+                                                    Soccer
                                                     <span className="cl12 m-l-4 m-r-6">|</span>
                                                 </span>
                                             </span>
@@ -167,20 +171,6 @@ function Blog() {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* <!-- Pagination --> */}
-                                {/* <div className="flex-l-m flex-w w-full p-t-10 m-lr--7">
-                                    <a
-                                        href="#"
-                                        className="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"
-                                    >
-                                        1
-                                    </a>
-
-                                    <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7">
-                                        2
-                                    </a>
-                                </div> */}
                             </div>
                         </div>
 
@@ -200,236 +190,182 @@ function Blog() {
                                 </div>
 
                                 <div className="p-t-55">
-                                    <h4 className="mtext-112 cl2 p-b-33">Categories</h4>
+                                    <h4 className="mtext-112 cl2 p-b-33">Giải đấu</h4>
 
                                     <ul>
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Fashion
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Ngoại hạng anh
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Beauty
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Laliga
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Street Style
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Bundesliga
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                Life Style
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                Seria A
+                                            </Link>
                                         </li>
 
                                         <li className="bor18">
-                                            <a
-                                                href="#"
-                                                className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"
-                                            >
-                                                DIY & Crafts
-                                            </a>
+                                            <Link className="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                                League 1
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div className="p-t-65">
-                                    <h4 className="mtext-112 cl2 p-b-33">Featured Products</h4>
+                                    <h4 className="mtext-112 cl2 p-b-33">Sản phẩm đặc trưng</h4>
 
                                     <ul>
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
                                                 <img src="assets/images/min-01.jpg" alt="PRODUCT" />
-                                            </a>
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    White Shirt With Pleat Detail Back
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$19.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
                                         </li>
 
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
                                                 <img src="assets/images/min-01.jpg" alt="PRODUCT" />
-                                            </a>
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    Converse All Star Hi Black Canvas
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$39.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
                                         </li>
 
                                         <li className="flex-w flex-t p-b-30">
-                                            <a href="#" className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+                                            <Link className="wrao-pic-w size-214 hov-ovelay1 m-r-20">
                                                 <img src="assets/images/min-01.jpg" alt="PRODUCT" />
-                                            </a>
+                                            </Link>
 
                                             <div className="size-215 flex-col-t p-t-8">
-                                                <a href="#" className="stext-116 cl8 hov-cl1 trans-04">
-                                                    Nixon Porter Leather Watch In Tan
-                                                </a>
+                                                <Link className="stext-116 cl8 hov-cl1 trans-04">
+                                                    Áo Manchester United
+                                                </Link>
 
-                                                <span className="stext-116 cl6 p-t-20">$17.00</span>
+                                                <span className="stext-116 cl6 p-t-20">300.000 vnđ</span>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div className="p-t-55">
+                                {/* <div className="p-t-55">
                                     <h4 className="mtext-112 cl2 p-b-20">Archive</h4>
 
                                     <ul>
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>July 2018</span>
 
                                                 <span>(9)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>June 2018</span>
 
                                                 <span>(39)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>May 2018</span>
 
                                                 <span>(29)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>April 2018</span>
 
                                                 <span>(35)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>March 2018</span>
 
                                                 <span>(22)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>February 2018</span>
 
                                                 <span>(32)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>January 2018</span>
 
                                                 <span>(21)</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className="p-b-7">
-                                            <a
-                                                href="#"
-                                                className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2"
-                                            >
+                                            <Link className="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
                                                 <span>December 2017</span>
 
                                                 <span>(26)</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
 
                                 <div className="p-t-50">
                                     <h4 className="mtext-112 cl2 p-b-27">Tags</h4>
 
                                     <div className="flex-w m-r--5">
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Fashion
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thể thao
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Lifestyle
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thời trang
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Denim
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Phong cách
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Streetstyle
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Vô địch
+                                        </Link>
 
-                                        <a
-                                            href="#"
-                                            className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
-                                        >
-                                            Crafts
-                                        </a>
+                                        <Link className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                            Thoải mái
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

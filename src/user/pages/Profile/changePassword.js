@@ -107,6 +107,7 @@ function ChangePassword() {
 
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
+        localStorage.removeItem('role');
         navigate('/');
     };
 

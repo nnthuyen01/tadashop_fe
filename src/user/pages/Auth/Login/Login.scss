@@ -188,7 +188,23 @@ body {
 .btn:hover {
     background-color: #aa0000;
 }
+.backhome {
+    display: inline-block;
+    outline: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: Dosis-SemiBold;
+    font-size: 15px;
+    font-weight: 550;
+    background-color: transparent;
+    margin: 12px 45px;
+    padding: 0 15px;
 
+    cursor: pointer;
+}
+.backhome:hover {
+    color: yellowgreen;
+}
 .form h3 {
     color: #222;
     font-size: 40px;
