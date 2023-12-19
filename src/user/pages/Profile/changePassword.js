@@ -108,6 +108,10 @@ function ChangePassword() {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
         localStorage.removeItem('role');
+        swal('đăng xuất thành công !', {
+            title: 'Thành công',
+            icon: 'success',
+        });
         navigate('/');
     };
 

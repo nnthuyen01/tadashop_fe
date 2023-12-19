@@ -111,7 +111,7 @@ class OrderList extends Component {
                     )}
                 ></Column>
 
-                <Column
+                {/* <Column
                     title="Action"
                     key="action"
                     width={150}
@@ -122,7 +122,7 @@ class OrderList extends Component {
                                 <EditOutlined style={{ marginRight: 8 }} /> Edit State
                             </Button>
 
-                            <Tooltip placement="top" title="View Product Detail" color="green">
+                            <Tooltip placement="top" title="View Order Detail" color="green">
                                 <Button
                                     key={record.key}
                                     type="link"
@@ -134,6 +134,42 @@ class OrderList extends Component {
                             </Tooltip>
                         </Space>
                     )}
+                ></Column> */}
+
+                <Column
+                    title="Action"
+                    key="action"
+                    width={150}
+                    align="center"
+                    render={(_, record) => {
+                        const isEditDisabled = record.state === 'Paid';
+
+                        return (
+                            <Space size="middle">
+                                <Button
+                                    key={record.key}
+                                    type="primary"
+                                    size="small"
+                                    onClick={() => onEdit(record)}
+                                    disabled={isEditDisabled}
+                                    style={isEditDisabled ? { opacity: 0.5 } : {}}
+                                >
+                                    <EditOutlined style={{ marginRight: 8 }} /> Edit State
+                                </Button>
+
+                                <Tooltip placement="top" title="View Order Detail" color="green">
+                                    <Button
+                                        key={record.key}
+                                        type="link"
+                                        size="small"
+                                        onClick={() => navigate('/dashboard/order/view/' + record.id)}
+                                    >
+                                        <MdPreview color="#52c41a" size={24} />
+                                    </Button>
+                                </Tooltip>
+                            </Space>
+                        );
+                    }}
                 ></Column>
             </Table>
         );

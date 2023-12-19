@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
+import images from '~/assets/images';
 
 class HomeAdmin extends Component {
     render() {
         return (
-            <img
-                style={{
-                    display: 'block',
-                    // height: 'auto',
-                    // width: '100%',
-                    height: '75vh',
-                    margin: '0 auto',
-                    border: '2px solid #ccc',
-                    boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
-                }}
-                src="https://mega.com.vn/media/news/0206_hinh-nen-MU-may-tinh35.jpg"
-                alt="anhtam"
-            />
+            <div>
+                <h2
+                    style={{
+                        fontSize: '27px',
+                        color: '#001529',
+                        marginBottom: '20px',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                    }}
+                >
+                    Welcome to the admin page
+                </h2>
+                <img
+                    src={images.board}
+                    alt="Animated_Image"
+                    style={{
+                        display: 'block',
+                        maxWidth: '100%',
+                        margin: '0 auto',
+                    }}
+                />
+            </div>
         );
     }
 }

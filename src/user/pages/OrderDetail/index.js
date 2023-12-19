@@ -79,6 +79,8 @@ function OrderDetail() {
                                                             color:
                                                                 orderDetail.order?.state === 'Paid'
                                                                     ? 'green'
+                                                                    : orderDetail.order?.state === 'Cancel'
+                                                                    ? 'red'
                                                                     : '#001529',
                                                             backgroundColor:
                                                                 orderDetail.order?.state === 'Paid' ? 'yellow' : '',

@@ -167,7 +167,12 @@ function Order() {
                                                 <Tag
                                                     style={{
                                                         fontWeight: '700',
-                                                        color: record.state === 'Paid' ? 'green' : 'navy',
+                                                        color:
+                                                            record.state === 'Paid'
+                                                                ? 'green'
+                                                                : record.state === 'Cancel'
+                                                                ? 'red'
+                                                                : 'navy',
                                                         backgroundColor: record.state === 'Paid' ? 'yellow' : '',
                                                     }}
                                                 >

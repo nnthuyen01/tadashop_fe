@@ -20,6 +20,10 @@ const Login = () => {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
         localStorage.removeItem('role');
+        swal('đăng xuất thành công !', {
+            title: 'Thành công',
+            icon: 'success',
+        });
         navigate('/login');
     };
     const [loading, setLoading] = useState(false);

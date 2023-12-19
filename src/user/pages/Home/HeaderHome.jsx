@@ -4,6 +4,7 @@ import CartAside from '~/user/components/CartAside';
 import Sidebar from '~/user/components/Sidebar';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
+import swal from 'sweetalert';
 
 function HeaderHome() {
     // header
@@ -15,6 +16,10 @@ function HeaderHome() {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
         localStorage.removeItem('role');
+        swal('đăng xuất thành công !', {
+            title: 'Thành công',
+            icon: 'success',
+        });
         navigate('/');
     };
     const [isFixed, setIsFixed] = useState(false);

@@ -90,9 +90,11 @@ class OrderDetailAdmin extends Component {
                                                 >
                                                     {order.order?.state}
                                                 </p>
-                                                <button className="btn btn-success btn-sm" onClick={this.onEdit}>
-                                                    Update order status
-                                                </button>
+                                                {order.order?.state !== 'Paid' && (
+                                                    <button className="btn btn-success btn-sm" onClick={this.onEdit}>
+                                                        Update order status
+                                                    </button>
+                                                )}
                                             </div>
                                             <div className="d-flex justify-content-between pt-2 mb-4">
                                                 <p className="mtext-102 mb-0">

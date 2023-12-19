@@ -8,6 +8,7 @@ import codIcon from '~/assets/images/codicon.png';
 import vnpayIcon from '~/assets/images/vnpay.png';
 import voucher from '~/assets/images/voucher.png';
 import bocongthuong from '~/assets/images/logoBoCongThuong.png';
+import board from '~/assets/images/Strategy_Board.gif';
 
 const images = {
     logo,
@@ -18,6 +19,7 @@ const images = {
     vnpayIcon,
     voucher,
     bocongthuong,
+    board,
 };
 
 export default images;
