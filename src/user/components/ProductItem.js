@@ -13,7 +13,7 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const [sort, setSort] = useState('id');
     const [currentPage, setCurrentPage] = useState(0); // Bắt đầu từ trang 0
     const [totalPage, setTotalPage] = useState(0); // Bắt đầu từ trang 0
-    const itemsPerPage = 16;
+    const itemsPerPage = 20;
 
     // const getDefaultBrands = () => [
     //     { id: 1, name: 'Adidas', logo: '49c3b8ca-3913-42e0-bedb-b61ac05344c7.png' },

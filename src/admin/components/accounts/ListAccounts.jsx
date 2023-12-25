@@ -3,7 +3,7 @@ import ContentHeader from '../common/ContentHeader';
 import AccountList from './AccountList';
 import withRouter from '../../helpers/withRouter';
 
-import { Button, Col, Form, Input, Modal, Pagination, Row } from 'antd';
+import { Button, Col, Form, Input, Modal, Pagination, Row, Skeleton } from 'antd';
 import { connect } from 'react-redux';
 import { CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import {
@@ -99,7 +99,20 @@ class ListAccounts extends Component {
         const { navigate } = this.props.router;
         const { open } = this.state;
 
-        const { accounts, pagination } = this.props;
+        const { accounts, pagination, isLoading } = this.props;
+        if (isLoading) {
+            return (
+                <>
+                    <ContentHeader
+                        navigate={navigate}
+                        title="List Accounts"
+                        className="site-page-header"
+                    ></ContentHeader>
+
+                    <Skeleton active />
+                </>
+            );
+        }
         return (
             <>
                 <ContentHeader navigate={navigate} title="List Accounts" className="site-page-header"></ContentHeader>
@@ -126,7 +139,7 @@ class ListAccounts extends Component {
                 <Row style={{ marginTop: 8 }}>
                     <Col md={24} style={{ textAlign: 'right' }}>
                         <Pagination
-                            defaultCurrent={pagination.page}
+                            defaultCurrent={pagination.page + 1}
                             defaultPageSize={pagination.size}
                             total={pagination.totalElements}
                             // onShowSizeChange={this.onShowSizeChange}
@@ -142,6 +155,7 @@ class ListAccounts extends Component {
 const mapStateToProps = (state) => ({
     accounts: state.accountReducer.accounts,
     pagination: state.accountReducer.pagination,
+    isLoading: state.commonReducer.isLoading,
 });
 
 const mapDispatchToProps = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContentHeader from '../common/ContentHeader';
 import OrderList from './OrderList';
 import withRouter from '../../helpers/withRouter';
-import { Button, Col, Form, Input, Pagination, Row } from 'antd';
+import { Button, Col, Form, Input, Pagination, Row, Skeleton } from 'antd';
 import { connect } from 'react-redux';
 
 import { getOrdersPageable, getOrders, updateOrder } from '../../redux/actions/orderAction';
@@ -54,7 +54,17 @@ class ListOrders extends Component {
         const { navigate } = this.props.router;
         const { open } = this.state;
 
-        const { orders, pagination } = this.props;
+        const { orders, pagination, isLoading } = this.props;
+
+        if (isLoading) {
+            return (
+                <>
+                    <ContentHeader navigate={navigate} title="List Orders" className="site-page-header"></ContentHeader>
+
+                    <Skeleton active />
+                </>
+            );
+        }
         return (
             <>
                 <ContentHeader navigate={navigate} title="List Orders" className="site-page-header"></ContentHeader>
@@ -78,7 +88,7 @@ class ListOrders extends Component {
                 <Row style={{ marginTop: 8 }}>
                     <Col md={24} style={{ textAlign: 'right' }}>
                         <Pagination
-                            defaultCurrent={pagination.page}
+                            defaultCurrent={pagination.page + 1}
                             defaultPageSize={pagination.size}
                             total={pagination.totalElements}
                             onChange={this.onChange}
@@ -102,6 +112,7 @@ class ListOrders extends Component {
 const mapStateToProps = (state) => ({
     orders: state.orderReducer.orders,
     pagination: state.orderReducer.pagination,
+    isLoading: state.commonReducer.isLoading,
 });
 
 const mapDispatchToProps = {
