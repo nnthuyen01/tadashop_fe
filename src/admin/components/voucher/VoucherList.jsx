@@ -17,8 +17,22 @@ class VoucherList extends Component {
                     key="priceOffPercent"
                     render={(_, record) => <>{record.priceOffPercent} %</>}
                 ></Column>
-                <Column title="Username" key="username" dataIndex="username"></Column>
-                <Column title="ID User" key="userId" dataIndex="userId"></Column>
+                <Column
+                    title="Username"
+                    key="username"
+                    dataIndex="username"
+                    render={(text, record) => (
+                        <>{record.username === 'admin' ? <Tag color="blue">All User</Tag> : record.username}</>
+                    )}
+                ></Column>
+                <Column
+                    title="ID User"
+                    key="userId"
+                    dataIndex="userId"
+                    render={(text, record) => (
+                        <>{record.userId === 1 ? <Tag color="blue">All User</Tag> : record.userId}</>
+                    )}
+                ></Column>
                 <Column
                     title="Expiration time"
                     key="expirationTime"

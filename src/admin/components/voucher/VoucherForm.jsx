@@ -1,6 +1,5 @@
-import { Divider, Form, Input, Modal, InputNumber, Select } from 'antd';
+import { Divider, Form, Input, Modal, InputNumber, Select, Radio } from 'antd';
 import React, { Component, createRef } from 'react';
-import VoucherService from '../../services/voucherService';
 
 class VoucherForm extends Component {
     form = createRef();
@@ -8,13 +7,19 @@ class VoucherForm extends Component {
         super(props);
 
         this.state = {
-            voucher: { id: '', userId: '', priceOffPercent: 0, status: 0 },
+            voucher1: { id: '', userId: '', priceOffPercent: 0, status: 0 },
         };
     }
-
+    handleIndividualRadioChange = (e) => {
+        this.setState({ voucher1: { userId: '' } });
+    };
+    handleAllRadioChange = (e) => {
+        this.setState({ voucher1: { userId: e.target.value === '1' ? 1 : '' } });
+    };
     render() {
         const { open, onCreate, onCancel } = this.props;
         const { voucher } = this.props;
+        const { voucher1 } = this.state;
         let title = 'Create a new voucher';
         let okText = 'Create';
         if (voucher.id) {
@@ -40,6 +45,17 @@ class VoucherForm extends Component {
                             console.log('Validate Failed:', info);
                         });
                 }}
+                // onOk={() => {
+                //     this.form.current
+                //         .validateFields()
+                //         .then((values) => {
+                //             this.form.current.resetFields();
+                //             console.log('Values:', values);
+                //         })
+                //         .catch((info) => {
+                //             console.log('Validate Failed:', info);
+                //         });
+                // }}
             >
                 <Form
                     ref={this.form}
@@ -49,29 +65,10 @@ class VoucherForm extends Component {
                     key={'f' + voucher.id + voucher.code + voucher.priceOffPercent}
                 >
                     <Form.Item label="Voucher ID" name="id" initialValue={voucher.id}>
-                        <Input readOnly></Input>
+                        <Input readOnly disabled></Input>
                     </Form.Item>
-                    {/* <Form.Item
-                        label="Code"
-                        name="code"
-                        initialValue={voucher.code}
-                        rules={[{ required: true, min: 3 }]}
-                        hasFeedback
-                    >
-                        <Input></Input>
-                    </Form.Item> */}
 
                     {voucher.id ? (
-                        <Form.Item
-                            label="ID"
-                            name="Id"
-                            initialValue={voucher.id}
-                            rules={[{ required: true }]}
-                            hasFeedback
-                        >
-                            <Input></Input>
-                        </Form.Item>
-                    ) : (
                         <Form.Item
                             label="User ID"
                             name="userId"
@@ -79,8 +76,31 @@ class VoucherForm extends Component {
                             rules={[{ required: true }]}
                             hasFeedback
                         >
-                            <Input></Input>
+                            <Input disabled></Input>
                         </Form.Item>
+                    ) : (
+                        <>
+                            <Form.Item label="Option" name="userId">
+                                <Radio.Group>
+                                    <Radio value="" onChange={(e) => this.handleIndividualRadioChange(e)}>
+                                        Individual
+                                    </Radio>
+                                    <Radio value="1" onChange={(e) => this.handleAllRadioChange(e)}>
+                                        All User
+                                    </Radio>
+                                </Radio.Group>
+                            </Form.Item>
+
+                            <Form.Item
+                                label="User ID"
+                                name="userId"
+                                initialValue={voucher1.userId}
+                                rules={[{ required: true }]}
+                                hasFeedback
+                            >
+                                <Input disabled={voucher1.userId === 1} />
+                            </Form.Item>
+                        </>
                     )}
                     <Form.Item
                         label="Price off percent"

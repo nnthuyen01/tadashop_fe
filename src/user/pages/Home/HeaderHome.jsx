@@ -5,6 +5,8 @@ import Sidebar from '~/user/components/Sidebar';
 import axios from 'axios';
 import { API_URL } from '~/config/constant';
 import swal from 'sweetalert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function HeaderHome() {
     // header
@@ -16,9 +18,13 @@ function HeaderHome() {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_name');
         localStorage.removeItem('role');
-        swal('đăng xuất thành công !', {
-            title: 'Thành công',
-            icon: 'success',
+        // swal('đăng xuất thành công !', {
+        //     title: 'Thành công',
+        //     icon: 'success',
+        // });
+        toast.success('Đăng xuất thành công!', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000, // Display the toast for 2 seconds
         });
         navigate('/');
     };

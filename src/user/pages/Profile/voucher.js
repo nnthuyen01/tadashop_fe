@@ -115,7 +115,7 @@ function Voucher() {
                         </div>
                         <div className="grid__column-9">
                             <div className="tit-row ltext-102">Mã giảm giá</div>
-                            <div className="user-info">
+                            <div className="user-voucher">
                                 {loading ? (
                                     <div style={{ textAlign: 'center' }}>Đang tải dữ liệu...</div>
                                 ) : (

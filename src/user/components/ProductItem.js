@@ -15,11 +15,6 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const [totalPage, setTotalPage] = useState(0); // Bắt đầu từ trang 0
     const itemsPerPage = 20;
 
-    // const getDefaultBrands = () => [
-    //     { id: 1, name: 'Adidas', logo: '49c3b8ca-3913-42e0-bedb-b61ac05344c7.png' },
-    //     { id: 2, name: 'Nike', logo: 'e41d3b83-0952-4edf-8207-3264903159e6.png' },
-    //     { id: 3, name: 'Puma', logo: '4360ffcd-acbd-4962-8a12-ecd03e9659d0.png' },
-    // ];
     const [defaultBrands, setDefaultBrands] = useState([]);
     const [sortBrands, setSortBrands] = useState([]);
 
@@ -142,33 +137,6 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
             });
     }, []);
 
-    // const fetchData = () => {
-    //     setLoading(true);
-
-    //     // Sử dụng API endpoint của bạn
-    //     // const apiEndpoint = `${API_URL}products/find?query=&page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
-    //     const apiEndpoint = `${API_URL}products/listFilter?brand=${sortBrands.join(', ')}
-    //     &kitType=${sortTypes.join(', ')}
-    //     &gender=${sortSexs.join(', ')}
-    //     &minPrice=${minPrice}
-    //     &maxPrice=${maxPrice}
-    //     &page=${currentPage}&size=${itemsPerPage}&sort=${sort}`;
-
-    //     axios
-    //         .get(apiEndpoint)
-    //         .then((response) => {
-    //             if (response.status === 200) {
-    //                 // console.log(response.data);
-    //                 setProducts(response.data.content);
-    //                 setTotalPage(response.data.totalPages);
-    //                 setLoading(false);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error('Lỗi khi fetch dữ liệu từ API:', error);
-    //             setLoading(false);
-    //         });
-    // };
     const fetchData = () => {
         setLoading(true);
 
@@ -204,47 +172,93 @@ function ProductItem({ handleShowModal, title, loadmore, pagination }) {
     const topeContainerRef = useRef(null);
     const filterRef = useRef(null);
     const isotopeButtonRef = useRef(null);
-
     useEffect(() => {
         if (!loading) {
             const $topeContainer = topeContainerRef.current;
             const $filter = filterRef.current;
             const $isotopeButton = isotopeButtonRef.current;
 
-            // Wait for all images inside $topeContainer to be loaded
-            imagesLoaded($topeContainer, () => {
-                // Init Isotope
-                const isotope = new Isotope($topeContainer, {
-                    itemSelector: '.isotope-item',
-                    layoutMode: 'fitRows',
-                    percentPosition: true,
-                    animationEngine: 'best-available',
-                    masonry: {
-                        columnWidth: '.isotope-item',
-                    },
-                });
+            // Delay execution by 0.5 seconds
+            const delay = 500; // 0.5 seconds
+            const timeoutId = setTimeout(() => {
+                // Wait for all images inside $topeContainer to be loaded
+                imagesLoaded($topeContainer, () => {
+                    // Init Isotope
+                    const isotope = new Isotope($topeContainer, {
+                        itemSelector: '.isotope-item',
+                        layoutMode: 'fitRows',
+                        percentPosition: true,
+                        animationEngine: 'best-available',
+                        masonry: {
+                            columnWidth: '.isotope-item',
+                        },
+                    });
 
-                // Filter items on button click
-                $filter.addEventListener('click', (event) => {
-                    if (event.target.tagName === 'BUTTON') {
-                        const filterValue = event.target.getAttribute('data-filter');
+                    // Filter items on button click
+                    $filter.addEventListener('click', (event) => {
+                        if (event.target.tagName === 'BUTTON') {
+                            const filterValue = event.target.getAttribute('data-filter');
+                            isotope.arrange({ filter: filterValue });
+                        }
+                    });
 
-                        isotope.arrange({ filter: filterValue });
-                    }
-                });
-
-                // Add click event listener to each isotope button
-                $isotopeButton.querySelectorAll('button').forEach((button) => {
-                    button.addEventListener('click', () => {
-                        $isotopeButton.querySelectorAll('button').forEach((btn) => {
-                            btn.classList.remove('how-active1');
+                    // Add click event listener to each isotope button
+                    $isotopeButton.querySelectorAll('button').forEach((button) => {
+                        button.addEventListener('click', () => {
+                            $isotopeButton.querySelectorAll('button').forEach((btn) => {
+                                btn.classList.remove('how-active1');
+                            });
+                            button.classList.add('how-active1');
                         });
-                        button.classList.add('how-active1');
                     });
                 });
-            });
+            }, delay);
+
+            // Clear the timeout on component unmount or dependency change
+            return () => clearTimeout(timeoutId);
         }
     }, [loading]);
+
+    // useEffect(() => {
+    //     if (!loading) {
+    //         const $topeContainer = topeContainerRef.current;
+    //         const $filter = filterRef.current;
+    //         const $isotopeButton = isotopeButtonRef.current;
+
+    //         // Wait for all images inside $topeContainer to be loaded
+    //         imagesLoaded($topeContainer, () => {
+    //             // Init Isotope
+    //             const isotope = new Isotope($topeContainer, {
+    //                 itemSelector: '.isotope-item',
+    //                 layoutMode: 'fitRows',
+    //                 percentPosition: true,
+    //                 animationEngine: 'best-available',
+    //                 masonry: {
+    //                     columnWidth: '.isotope-item',
+    //                 },
+    //             });
+
+    //             // Filter items on button click
+    //             $filter.addEventListener('click', (event) => {
+    //                 if (event.target.tagName === 'BUTTON') {
+    //                     const filterValue = event.target.getAttribute('data-filter');
+
+    //                     isotope.arrange({ filter: filterValue });
+    //                 }
+    //             });
+
+    //             // Add click event listener to each isotope button
+    //             $isotopeButton.querySelectorAll('button').forEach((button) => {
+    //                 button.addEventListener('click', () => {
+    //                     $isotopeButton.querySelectorAll('button').forEach((btn) => {
+    //                         btn.classList.remove('how-active1');
+    //                     });
+    //                     button.classList.add('how-active1');
+    //                 });
+    //             });
+    //         });
+    //     }
+    // }, [loading]);
 
     // Pagination click handler
     const handlePaginationClick = (page) => {
