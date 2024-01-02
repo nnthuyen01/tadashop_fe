@@ -73,7 +73,7 @@ class AccountList extends Component {
                                     <UnlockOutlined style={{ marginRight: 8 }} /> Enable
                                 </Button>
                             )}
-                            <Tooltip placement="top" title="View Product Detail" color="blue">
+                            <Tooltip placement="top" title="View Account Detail" color="blue">
                                 <Button
                                     key={record.key}
                                     type="primary"
