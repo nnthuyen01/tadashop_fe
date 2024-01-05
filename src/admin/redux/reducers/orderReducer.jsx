@@ -15,7 +15,7 @@ const initialState = {
         size: 5,
         page: 0,
         totalElements: 0,
-        query: '',
+        username: '',
         totalPages: 1,
     },
 };

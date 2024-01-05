@@ -71,7 +71,7 @@ export const getOrdersPageable = (params) => async (dispatch) => {
             const pagination = {
                 size: size,
                 page: pageable.pageNumber,
-                query: params.query,
+                username: params.username,
                 totalPages: totalPages,
                 totalElements: totalElements,
             };
@@ -133,7 +133,7 @@ export const getOrderById = (id) => async (dispatch) => {
     });
 };
 
-export const updateOrder = (order) => async (dispatch) => {
+export const updateOrder = (order, paginationQ) => async (dispatch) => {
     const service = new OrderService();
 
     try {
@@ -146,10 +146,8 @@ export const updateOrder = (order) => async (dispatch) => {
 
         const { id } = order;
         const response = await service.updateOrder(id, order);
-        const params = {
-            size: 5,
-        };
-        const response1 = await service.getOrdersPageable(params);
+
+        const response1 = await service.getOrdersPageable(paginationQ);
         const response2 = await service.getOrder(id);
 
         if (response.status === 200) {
@@ -169,7 +167,7 @@ export const updateOrder = (order) => async (dispatch) => {
             const pagination = {
                 size: size,
                 page: pageable.pageNumber,
-                query: params.query,
+                username: paginationQ.username,
                 totalPages: totalPages,
                 totalElements: totalElements,
             };

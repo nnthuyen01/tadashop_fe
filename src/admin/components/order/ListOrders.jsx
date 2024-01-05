@@ -20,6 +20,7 @@ class ListOrders extends Component {
     componentDidMount = () => {
         const { pagination } = this.props;
         const params = {
+            username: pagination.username,
             size: pagination.size,
         };
 
@@ -33,9 +34,10 @@ class ListOrders extends Component {
     };
     onUpdate = (values) => {
         console.log(values);
-
+        const { pagination } = this.props;
+        console.log(pagination);
         if (values.id) {
-            this.props.updateOrder(values);
+            this.props.updateOrder(values, pagination);
         }
         this.setState({ ...this.state, order: {}, open: false });
     };
@@ -43,9 +45,20 @@ class ListOrders extends Component {
     onChange = (pageNumber, pageSize) => {
         const { pagination } = this.props;
         const params = {
-            query: pagination.query,
+            username: pagination.username,
             page: pageNumber - 1,
             size: pageSize,
+        };
+
+        this.props.getOrdersPageable(params);
+    };
+    handleSearch = (value) => {
+        console.log(value);
+
+        const { pagination } = this.props;
+        const params = {
+            username: value.username,
+            size: pagination.size,
         };
 
         this.props.getOrdersPageable(params);
@@ -72,7 +85,7 @@ class ListOrders extends Component {
                 <Row style={{ marginBottom: 8 }}>
                     <Col md={18}>
                         <Form layout="inline" name="search" onFinish={this.handleSearch}>
-                            <Form.Item name="query" initialValue={pagination.query}>
+                            <Form.Item name="username" initialValue={pagination.username}>
                                 <Input></Input>
                             </Form.Item>
                             <Button type="primary" htmlType="submit">

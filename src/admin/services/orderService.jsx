@@ -5,8 +5,11 @@ export default class OrderService {
     getOrders = async () => {
         return await axios.get(API_URL + 'admin/orders');
     };
+    // getOrdersPageable = async (params) => {
+    //     return await axios.get(API_URL + 'admin/orders/page', { params });
+    // };
     getOrdersPageable = async (params) => {
-        return await axios.get(API_URL + 'admin/orders/page', { params });
+        return await axios.get(API_URL + 'admin/ordersUsername/page', { params });
     };
     getOrder = async (id) => {
         return await axios.get(API_URL + 'orderDetail/' + id);
